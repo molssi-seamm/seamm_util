@@ -1,5 +1,5 @@
 Welcome to MolSSI Util's documentation!
-======================================
+=======================================
 
 Contents:
 
