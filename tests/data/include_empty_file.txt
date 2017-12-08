@@ -1,0 +1,4 @@
+file_end line 1
+file_end line 2
+file_end line 3
+include empty_file.txt

@@ -1,0 +1,2 @@
+file_include1 line1
+include file_end.txt

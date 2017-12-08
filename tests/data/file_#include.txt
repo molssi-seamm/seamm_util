@@ -1,0 +1,4 @@
+file_middle line 1
+file_middle line 2
+#include file1.txt
+file_middle line 3
