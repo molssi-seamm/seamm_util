@@ -171,3 +171,23 @@ def test_different_include():
         for line in fd:
             assert line.strip() == data[i]
             i += 1
+
+
+def test_push():
+    """Testing that the default 'include' works
+    """
+    datapath = os.path.join(os.path.dirname(__file__), 'data')
+    filepath = os.path.join(datapath, 'file_middle.txt.gz')
+    data = [
+        'file_middle line 1', 'file_middle line 2', 'file1 line 1',
+        'file1 line 2', 'file1 line 3', 'file1 line 4', 'file_middle line 3',
+        'file1 line 4', 'file_middle line 3'
+    ]
+
+    i = 0
+    with molssi_util.Open(filepath, 'r', include='include') as fd:
+        for line in fd:
+            assert line.strip() == data[i]
+            i += 1
+            if i == 7:
+                fd.push(2)

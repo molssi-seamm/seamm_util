@@ -2,6 +2,7 @@
 """Context manager for extending file reading to handle include's"""
 
 import bz2
+import collections
 import gzip
 import logging
 import os
@@ -10,8 +11,26 @@ import os.path
 module_logger = logging.getLogger(__name__)
 
 
+def splitext(filename):
+    """
+    Get the extension of a file, ignoring .gz or .bz2 on the end
+
+    Args:
+        filename ('str'): the name, including any path, of the file
+    """
+    name, ext = os.path.splitext(filename)
+    if ext in ('.gz', '.bz2'):
+        name, ext = os.path.splitext(name)
+    return ext
+
+
 class Open(object):
-    def __init__(self, filename, mode='r', logger=None, include=None):
+    def __init__(self,
+                 filename,
+                 mode='r',
+                 logger=None,
+                 include=None,
+                 history=10):
         """Open a file, automatically handling 'include'
 
         Args:
@@ -20,6 +39,7 @@ class Open(object):
                 read-only.
             logger (obj, optional): The logging object to use
             include ('str', optional): The keyword that triggers an include
+            history (integer, optional): Length of history to keep
         """
         if not isinstance(filename, str):
             raise RuntimeError("Filename must be a string path")
@@ -31,6 +51,10 @@ class Open(object):
             self.logger = module_logger
         self.logger.debug('Test if debug level logging does anything')
         self.include = include
+        self._history = history
+        self._depth = -1
+
+        self._deque = collections.deque(maxlen=history)
 
         self._total_lines = 0
         self._linenos = []
@@ -68,6 +92,12 @@ class Open(object):
         """Iterator to get the next line
         """
         self.logger.debug("__next__")
+
+        if self._depth >= 0:
+            line = self._deque[self._depth]
+            self._depth -= 1
+            return line
+
         line = self._next()
         words = line.split()
         if self.include and len(words) > 0 and words[0] == self.include:
@@ -85,6 +115,7 @@ class Open(object):
             line = self.__next__()
         self.logger.debug(line)
 
+        self._deque.appendleft(line)
         return line
 
     def __iter__(self):
@@ -124,11 +155,23 @@ class Open(object):
     def total_lines(self):
         return self._total_lines
 
+    @property
+    def depth(self):
+        return self._depth
+
+    def push(self, n=1):
+        """
+        push the n last lines back onto the device (virtually)
+        """
+        if self._depth + n > len(self._deque):
+            raise RuntimeError("Exceeded the currently available history")
+        self._depth += n
+
     def stack(self):
         """Provide the traceback of the included files
         """
         result = []
-        for i in range(len(self._paths)-1, 0, -1):
+        for i in range(len(self._paths) - 1, 0, -1):
             path = self._paths[i]
             filename = self._files[i]
             filepath = os.path.join(path, filename)
@@ -180,9 +223,9 @@ class Open(object):
             raise RuntimeError("Filename must be a string to open")
         name, ext = os.path.splitext(filename.strip().lower())
         if ext == '.bz2':
-            fd = bz2.open(filename, self.mode+'t')
+            fd = bz2.open(filename, self.mode + 't')
         elif ext == '.gz':
-            fd = gzip.open(filename, self.mode+'t')
+            fd = gzip.open(filename, self.mode + 't')
         else:
             fd = open(filename, self.mode)
         return fd
