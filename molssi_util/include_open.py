@@ -49,7 +49,6 @@ class Open(object):
             self.logger = logger
         else:
             self.logger = module_logger
-        self.logger.debug('Test if debug level logging does anything')
         self.include = include
         self._history = history
         self._depth = -1
@@ -64,7 +63,7 @@ class Open(object):
         self._cwd = None
 
     def __enter__(self):
-        """Handle the enter even for the context manager by opening the file
+        """Handle the enter event for the context manager by opening the file
         """
         self.logger.debug('in __enter__')
         self._cwd = os.getcwd()
@@ -76,7 +75,7 @@ class Open(object):
 
         self._fds.append(self._open(filepath))
 
-        self.logger.debug('   opened self._filename')
+        self.logger.debug('   opened {}'.format(self._filename))
         return self
 
     def __exit__(self, *args, **kwargs):
@@ -91,7 +90,7 @@ class Open(object):
     def __next__(self):
         """Iterator to get the next line
         """
-        self.logger.debug("__next__")
+        self.logger.log(0, "__next__")
 
         if self._depth >= 0:
             line = self._deque[self._depth]
@@ -113,7 +112,7 @@ class Open(object):
 
             self.logger.debug('   opened it')
             line = self.__next__()
-        self.logger.debug(line)
+        self.logger.log(0, line)
 
         self._deque.appendleft(line)
         return line
@@ -121,7 +120,7 @@ class Open(object):
     def __iter__(self):
         """Need to be an iterator
         """
-        self.logger.debug("__iter__")
+        self.logger.log(0, "__iter__")
         return self
 
     def __getattr__(self, attr):
