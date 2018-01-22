@@ -23,7 +23,7 @@ but often it is not possible to line up the labels nicely for a clean,
 tabular style.
 """
 
-from chemflowchart import units, Q_  # nopep8
+from molssi_workflow import units, Q_  # nopep8
 import logging
 import Pmw
 import tkinter as tk

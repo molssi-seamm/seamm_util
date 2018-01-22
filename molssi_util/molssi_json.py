@@ -15,7 +15,7 @@ http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsond
 """
 
 try:
-    from chemflowchart import units, Q_  # nopep8
+    from molssi_workflow import units, Q_  # nopep8
 except:
     print('Importing pint directly')
     import pint

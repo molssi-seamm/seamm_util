@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Functions for handling MDL molfiles"""
 
-import chemflowchart
+import molssi_workflow
 import logging
 import molssi_util.molfile
 import pprint
@@ -17,7 +17,7 @@ def from_molssi(structure):
     mol3 = molssi_util.molfile.from_molssi(structure)
     logger.debug('molfile:\n' + mol3)
 
-    local = chemflowchart.ExecLocal()
+    local = molssi_workflow.ExecLocal()
     result = local.run(cmd=['obabel', '-imol', '-osmi', '-xh'],
                        input_data=mol3)
 
