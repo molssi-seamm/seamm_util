@@ -15,16 +15,15 @@ http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsond
 """
 
 try:
-    from molssi_workflow import units, Q_  # nopep8
+    from molssi_workflow import units, Q_, units_class  # nopep8
 except:
     print('Importing pint directly')
     import pint
     units = pint.UnitRegistry()
     Q_ = units.Quantity
+    units_class = units('1 km').__class__
 import datetime
 import json
-
-units_class = units('1 km').__class__
 
 
 class JSONEncoder(json.JSONEncoder):
