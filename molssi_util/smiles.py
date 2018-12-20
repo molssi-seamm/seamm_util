@@ -21,6 +21,7 @@ def from_molssi(structure):
     result = local.run(cmd=['obabel', '-imol', '-osmi', '-xh'],
                        input_data=mol3)
 
+    logger.debug('Result from obabel')
     logger.debug(pprint.pformat(result))
 
     if int(result['stderr'].split()[0]) == 0:
