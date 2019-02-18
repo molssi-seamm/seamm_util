@@ -23,7 +23,7 @@ but often it is not possible to line up the labels nicely for a clean,
 tabular style.
 """
 
-from molssi_workflow import units, Q_  # nopep8
+from molssi_workflow import units, Q_, units_class  # nopep8
 import logging
 import Pmw
 import tkinter as tk
@@ -162,34 +162,48 @@ class UnitEntry(tk.Frame):
         if value is None:
             return
 
-        self.entry.insert(0, value.magnitude)
+        # the value may have units or be a plain value
+        if isinstance(value, units_class):
+            self.entry.insert(0, value.magnitude)
 
-        dimensionality = value.dimensionality
-        current_units = self.units.cget('values')
-        if len(current_units) > 0:
-            for unit in current_units:
-                if Q_(unit).dimensionality != dimensionality:
-                    self.units.configure(values=[])
-                    current_units = []
-                    break
+            dimensionality = value.dimensionality
+            current_units = self.units.cget('values')
+            if len(current_units) > 0:
+                for unit in current_units:
+                    if Q_(unit).dimensionality != dimensionality:
+                        self.units.configure(values=[])
+                        current_units = []
+                        break
 
-        if len(current_units) == 0:
-            self.set_units(default_units[str(dimensionality)])
-        self.units.set(
-            '{0.units:~}'.format(value).replace(' ', '')
-        )
+            if len(current_units) == 0:
+                self.set_units(default_units[str(dimensionality)])
+                self.units.set(
+                    '{0.units:~}'.format(value).replace(' ', '')
+                )
+        else:
+            self.entry.insert(0, value)
+            self.set_units('all')
+            self.units.set('')
 
     def get(self):
         """return the current value with units"""
         magnitude = float(self.entry.get())
         unit = self.units.get()
-        return Q_(magnitude, unit)
+        if unit == '':
+            return magnitude
+        else:
+            return Q_(magnitude, unit)
 
     def set_units(self, values=None):
         # logger.debug('set_units: ' + str(values))
         if values is None:
             dimensionality = str(self.get().dimensionality)
             self.units.config(values=default_units[dimensionality])
+        elif values == 'all':
+            tmp = ['']
+            for key in default_units:
+                tmp += default_units[key]
+            self.units.config(values=tmp)
         else:
             self.units.config(values=values)
 

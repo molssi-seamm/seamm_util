@@ -7,9 +7,10 @@ import time
 logger = logging.getLogger(__name__)
 
 integer_bond_order = {'single': 1, 'double': 2, 'triple': 3}
+string_bond_order = ['', 'single', 'double', 'triple']
 
 
-def from_molssi(structure):
+def from_molssi(structure, description='****', comment=''):
     """Transform a MolSSI structure to MDL mol file, version 3"""
     lines = []
 
@@ -21,11 +22,14 @@ def from_molssi(structure):
     n3d = 0
     is_chiral = 0  # may need to think about this later.
 
-    lines.append('')
+    lines.append(description)
     date_time = time.strftime('%m%d%y%H%M')
 
     lines.append('PS' + 'MolSSIWF' + date_time + '3D')
-    lines.append('Generated from a MolSSI structure in a workflow')
+    if comment == '':
+        lines.append('Generated from a MolSSI structure in a workflow')
+    else:
+        lines.append(comment)
     lines.append('  0  0  0     0  0            999 V3000')
 
     lines.append('M  V30 BEGIN CTAB')
@@ -49,3 +53,86 @@ def from_molssi(structure):
     lines.append('M  END')
 
     return '\n'.join(lines)
+
+
+def to_molssi(data):
+    """Transform from a MDL mol file, version 3 to a MolSSI structure"""
+
+    n_molecules = 0
+    lines = data.splitlines()
+
+    lineno = 0
+    # description = lines[lineno].strip()
+    lineno += 1
+    # header
+    lineno += 1
+    # comment
+    lineno += 1
+    if lines[lineno].split()[6] != 'V3000':
+        raise RuntimeError(
+            "molfile:to_molssi -- the file is not version 3: '" +
+            lines[lineno] + "'"
+        )
+    lineno += 1
+    while lineno < len(lines):
+        line = lines[lineno]
+        lineno += 1
+
+        if 'M  V30 BEGIN CTAB' in line:
+            n_molecules += 1
+            atoms = {}
+            atoms['elements'] = []
+            atoms['coordinates'] = []
+            bonds = []
+        elif 'M  V30 COUNTS' in line:
+            junk1, junk2, junk3, natoms, nbonds, nsgroups, n3d, is_chiral = \
+                line.split()
+
+            natoms = int(natoms)
+            nbonds = int(nbonds)
+            nsgroups = int(nsgroups)
+            n3d = int(n3d)
+            is_chiral = bool(is_chiral)
+
+            line = lines[lineno]
+            lineno += 1
+            if 'M  V30 BEGIN ATOM' in line:
+                last = lineno + natoms
+                while lineno < last:
+                    line = lines[lineno]
+                    lineno += 1
+                    junk1, junk2, i, symbol, x, y, z, q = line.split()
+                    atoms['coordinates'].append((float(x), float(y), float(z)))
+                    atoms['elements'].append(symbol)
+            line = lines[lineno]
+            lineno += 1
+            if 'M  V30 END ATOM' not in line:
+                raise RuntimeError("Missing end of atoms: '" + line + "'")
+            line = lines[lineno]
+            lineno += 1
+            if 'M  V30 BEGIN BOND' in line:
+                last = lineno + nbonds
+                while lineno < last:
+                    line = lines[lineno]
+                    lineno += 1
+                    junk1, junk2, i, bond_order, iatom, jatom = line.split()
+                    bonds.append(
+                        (int(iatom), int(jatom),
+                         string_bond_order[int(bond_order)])
+                    )
+                line = lines[lineno]
+                lineno += 1
+                if 'M  V30 END BOND' not in line:
+                    raise RuntimeError("Missing end of bonds: '" + line + "'")
+            elif nbonds > 0:
+                raise RuntimeError("Missing bonds: '" + line + "'")
+
+    structure = {
+        'atoms': atoms,
+        'bonds': bonds
+    }
+
+    return structure
+
+
+
