@@ -14,14 +14,20 @@ Adapted from
 http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode
 """
 
-try:
-    from molssi_workflow import units, Q_, units_class  # nopep8
-except:
-    print('Importing pint directly')
-    import pint
-    units = pint.UnitRegistry()
-    Q_ = units.Quantity
-    units_class = units('1 km').__class__
+from molssi_workflow import units, Q_, units_class  # nopep8
+
+# Need something like this if using outside the MolSSI Framework, but it
+# causes nasty side effects if the order of imports is wrong, so leave it
+# throwing an error.
+
+# try:
+#     from molssi_workflow import units, Q_, units_class  # nopep8
+# except:
+#     print('Importing pint directly')
+#     import pint
+#     units = pint.UnitRegistry()
+#     Q_ = units.Quantity
+#     units_class = units('1 km').__class__
 import datetime
 import json
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Functions for handling MDL molfiles"""
 
-import molssi_workflow
 import logging
+import molssi_workflow  # Due to handling of units, should be before util
 import molssi_util.molfile
 import pprint
 import re
