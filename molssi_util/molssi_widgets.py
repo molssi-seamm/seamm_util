@@ -176,7 +176,8 @@ class UnitEntry(tk.Frame):
                         break
 
             if len(current_units) == 0:
-                self.set_units(default_units[str(dimensionality)])
+                # self.set_units([''].extend(default_units[str(dimensionality)]))
+                self.set_units([*default_units[str(dimensionality)], ''])
                 self.units.set(
                     '{0.units:~}'.format(value).replace(' ', '')
                 )
@@ -225,6 +226,7 @@ class UnitEntry(tk.Frame):
             else:
                 raise RuntimeError("Unknown option '{}'".format(k))
 
+
 if __name__ == '__main__':
     # Create demo in root window for testing.
     class Example(object):
@@ -245,12 +247,15 @@ if __name__ == '__main__':
             self.unit_entry.set(Q_('13.6', 'g/cm**3'))
             self.unit_entry.pack(side="top", fill="both", expand=True)
 
-            def execute(self, result):
-                print(result)
-                print('{:~P}'.format(self.unit_entry.get()))
-                if result not in ('Apply', 'Help'):
-                    self.dialog.deactivate(result)
-                    root.destroy()
+        def execute(self, result):
+            value = self.unit_entry.get()
+            if isinstance(value, units_class):
+                print('{:~P}'.format(value))
+            else:
+                print(value)
+            if result not in ('Apply', 'Help'):
+                self.dialog.deactivate(result)
+                root.destroy()
 
     root = tk.Tk()
     Pmw.initialise(root)
