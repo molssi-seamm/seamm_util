@@ -9,12 +9,11 @@ deserialize the contents.
 """
 
 import bz2
-import collections.abc
 import gzip
-import json
-import logger
+import logging
 import os.path
-import pprint
+
+logger = logging.getLogger(__name__)
 
 
 class File():
