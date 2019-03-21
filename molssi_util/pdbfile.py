@@ -279,7 +279,7 @@ def to_molssi(data):
             occupancy = 0.0 if tmp == '' else float(tmp)
             tmp = line[60:66].strip()
             tempfactor = 0.0 if tmp == '' else float(tmp)
-            element = line[76:78].strip()
+            element = line[75:78].strip()
             tmp = line[78:80].strip()
             charge = 0.0 if tmp == '' else float(tmp)
 
