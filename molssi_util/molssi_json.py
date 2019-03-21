@@ -14,20 +14,22 @@ Adapted from
 http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode
 """
 
-from molssi_workflow import units, Q_, units_class  # nopep8
+import molssi_workflow
+from molssi_workflow import ureg, Q_, units_class  # nopep8
+# from molssi_workflow import Parameter, Parameters
 
 # Need something like this if using outside the MolSSI Framework, but it
 # causes nasty side effects if the order of imports is wrong, so leave it
 # throwing an error.
 
 # try:
-#     from molssi_workflow import units, Q_, units_class  # nopep8
+#     from molssi_workflow import ureg, Q_, units_class  # nopep8
 # except:
 #     print('Importing pint directly')
 #     import pint
-#     units = pint.UnitRegistry()
-#     Q_ = units.Quantity
-#     units_class = units('1 km').__class__
+#     ureg = pint.UnitRegistry()
+#     Q_ = ureg.Quantity
+#     units_class = ureg('1 km').__class__
 import datetime
 import json
 
@@ -63,6 +65,19 @@ class JSONEncoder(json.JSONEncoder):
                 'seconds': obj.seconds,
                 'microseconds': obj.microseconds,
             }
+        elif (isinstance(obj, molssi_workflow.Parameter) or
+              isinstance(obj, molssi_workflow.Parameters)):
+
+            #  Populate the dictionary with object meta data
+            obj_dict = {
+                "__class__": obj.__class__.__name__,
+                "__module__": obj.__module__
+            }
+  
+            #  Populate the dictionary with object properties
+            obj_dict.update(obj.to_dict())
+  
+            return obj_dict
         else:
             return json.JSONEncoder.default(self, obj)
 
@@ -77,24 +92,49 @@ class JSONDecoder(json.JSONDecoder):
         super().__init__(object_hook=self.dict_to_object)
 
     def dict_to_object(self, d):
-        if '__type__' not in d:
-            return d
+        if '__type__' in d:
+            type = d.pop('__type__')
+            if type == 'pint_units':
+                return Q_.from_tuple(d['data'])
+            elif type == 'datetime':
+                return datetime.datetime(**d)
+            elif type == 'timedelta':
+                return datetime.timedelta(**d)
+            else:
+                # Oops... better put this back together.
+                d['__type__'] = type
 
-        type = d.pop('__type__')
-        if type == 'pint_units':
-            return Q_.from_tuple(d['data'])
-        elif type == 'datetime':
-            return datetime.datetime(**d)
-        elif type == 'timedelta':
-            return datetime.timedelta(**d)
-        else:
-            # Oops... better put this back together.
-            d['__type__'] = type
-            return d
+        if '__class__' in d:
+            class_name = d.pop("__class__")
+        
+            if class_name in 'Parameter':
+                # Get the module name from the dict and import it
+                module_name = d.pop("__module__")
+                module = __import__(module_name)
+        
+                # Get the class from the module
+                class_ = getattr(module, class_name)
+        
+                # Use dictionary unpacking to initialize the object
+                return class_(d)
+            elif 'Parameters' in class_name:
+                # Get the module name from the dict and import it
+                module_name = d.pop("__module__")
+                module = __import__(module_name)
+        
+                # Get the class from the module
+                class_ = getattr(module, class_name)
+        
+                # Use dictionary unpacking to initialize the object
+                return class_(d)
+            else:
+                d['__init__class__'] = class_name
+
+        return d
 
 
 if __name__ == '__main__':
-    acel = units('9.8 m/s**2')
+    acel = ureg('9.8 m/s**2')
     print(acel)
     print(acel.__class__)
     print(units_class)
