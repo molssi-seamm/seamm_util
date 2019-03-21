@@ -10,5 +10,6 @@ from molssi_util.include_open import Open  # nopep8
 from molssi_util.include_open import splitext  # nopep8
 from molssi_util.molssi_json import JSONDecoder  # nopep8
 from molssi_util.molssi_json import JSONEncoder  # nopep8
-import molssi_util.variable_names  # nopep8
 import molssi_util.molfile  # nopep8
+import molssi_util.printing  # nopep8
+import molssi_util.variable_names  # nopep8
