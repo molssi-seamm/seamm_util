@@ -41,6 +41,7 @@ default_units = {
     '[temperature]': ['K', 'degC', 'degF', 'degR'],
     '[mass] / [length] ** 3': ['g/mL', 'kg/L', 'kg/m**3', 'g/mol/Å**3'],  # nopep8
     '[time]': ['fs', 'ps', 'ns', 'us', 'ms', 's'],
+    '[length] ** 2 * [mass] / [substance] / [time] ** 2': ['kcal/mol', 'kJ/mol'],  # nopep8
     '[length] * [mass] / [substance] / [time] ** 2': ['kcal/mol/Å', 'kJ/mol/Å', 'eV/Å'],  # nopep8
     '[length] * [mass] / [time] ** 2': ['kcal/mol/Å', 'kJ/mol/Å', 'eV/Å'],  # nopep8
     '[length] / [time] ** 2': ['m/s**2', 'ft/s**2', 'Å/fs**2'],
