@@ -126,7 +126,7 @@ class JSONDecoder(json.JSONDecoder):
                 class_ = getattr(module, class_name)
         
                 # Use dictionary unpacking to initialize the object
-                return class_(d)
+                return class_(data=d)
             else:
                 d['__init__class__'] = class_name
 
