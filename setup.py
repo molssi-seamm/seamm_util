@@ -17,13 +17,6 @@ requirements = [
     'logging',
     'pprint',
 ]
-#     'tkinter' -- seems not to work!
-#     'molssi_workflow',
-#     'keyword',
-#     'json',
-#     'gzip',
-#     'collections',
-#     'bz2',
 
 setup_requirements = [
     'pytest-runner',
