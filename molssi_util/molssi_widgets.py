@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""A collection of compound Tk/ttk widgets for the MolSSI workflow framework.
+"""A collection of compound Tk/ttk widgets for the MolSSI flowchart framework.
 
 The goal of these widgets is twofold: to make it easier for developers
 to implement dialogs with compound widgets, and to naturally
@@ -23,8 +23,8 @@ but often it is not possible to line up the labels nicely for a clean,
 tabular style.
 """
 
-# from molssi_workflow import ureg
-from molssi_workflow import Q_, units_class  # nopep8
+# from seamm import ureg
+from seamm import Q_, units_class  # nopep8
 import logging
 import Pmw
 import tkinter as tk

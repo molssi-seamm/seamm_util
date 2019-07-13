@@ -14,16 +14,16 @@ Adapted from
 http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode
 """
 
-import molssi_workflow
-from molssi_workflow import ureg, Q_, units_class  # nopep8
-# from molssi_workflow import Parameter, Parameters
+import seamm
+from seamm import ureg, Q_, units_class  # nopep8
+# from seamm import Parameter, Parameters
 
 # Need something like this if using outside the MolSSI Framework, but it
 # causes nasty side effects if the order of imports is wrong, so leave it
 # throwing an error.
 
 # try:
-#     from molssi_workflow import ureg, Q_, units_class  # nopep8
+#     from seamm import ureg, Q_, units_class  # nopep8
 # except:
 #     print('Importing pint directly')
 #     import pint
@@ -65,8 +65,8 @@ class JSONEncoder(json.JSONEncoder):
                 'seconds': obj.seconds,
                 'microseconds': obj.microseconds,
             }
-        elif (isinstance(obj, molssi_workflow.Parameter) or
-              isinstance(obj, molssi_workflow.Parameters)):
+        elif (isinstance(obj, seamm.Parameter) or
+              isinstance(obj, seamm.Parameters)):
 
             #  Populate the dictionary with object meta data
             obj_dict = {

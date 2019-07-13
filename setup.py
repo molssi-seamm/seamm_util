@@ -19,7 +19,7 @@ requirements = [
 ]
 
 setup_requirements = [
-    'pytest-runner',
+    # tmp pws'pytest-runner',
     # TODO(paulsaxe): put setup requirements (distutils extensions, etc.) here
 ]
 
