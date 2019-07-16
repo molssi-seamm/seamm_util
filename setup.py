@@ -19,7 +19,7 @@ requirements = [
 ]
 
 setup_requirements = [
-    # tmp pws'pytest-runner',
+    'pytest-runner',
     # TODO(paulsaxe): put setup requirements (distutils extensions, etc.) here
 ]
 
@@ -29,27 +29,25 @@ test_requirements = [
 ]
 
 setup(
-    name='molssi_util',
+    name='seamm_util',
     version='0.1.0',
     description="Utility classes and functions",
     long_description=readme + '\n\n' + history,
     author="Paul Saxe",
     author_email='psaxe@molssi.org',
-    url='https://github.com/paulsaxe/molssi_util',
-    packages=find_packages(include=['molssi_util']),
+    url='https://github.com/molssi-seamm/seamm_util',
+    packages=find_packages(include=['seamm_util']),
     include_package_data=True,
     install_requires=requirements,
     license="BSD license",
     zip_safe=False,
-    keywords='molssi_util',
+    keywords='seamm_util',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',

@@ -2,22 +2,22 @@
 """Functions for handling MDL molfiles"""
 
 import logging
-import molssi_workflow  # Due to handling of units, should be before util
-import molssi_util.molfile
+import seamm  # Due to handling of units, should be before util
+import seamm_util.molfile
 import pprint
 import re
 
 logger = logging.getLogger(__name__)
 
 
-def from_molssi(structure):
-    """Convert a MolSSI structure to SMILES"""
+def from_seamm(structure):
+    """Convert a SEAMM structure to SMILES"""
     # obabel play/ethanol.mol -osmi -xh
 
-    mol3 = molssi_util.molfile.from_molssi(structure)
+    mol3 = seamm_util.molfile.from_seamm(structure)
     logger.debug('molfile:\n' + mol3)
 
-    local = molssi_workflow.ExecLocal()
+    local = seamm.ExecLocal()
     result = local.run(cmd=['obabel', '-imol', '-osmi', '-xh'],
                        input_data=mol3)
 

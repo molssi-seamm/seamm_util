@@ -2,12 +2,12 @@
 as datetimes and timedeltas
 
 To encode:
-    import molssi_util
-    dump = json.dumps(<variable>, cls=molssi_util.JSONEncoder)
+    import seamm_util
+    dump = json.dumps(<variable>, cls=seamm_util.JSONEncoder)
 
 and to decode:
-    import molssi_util
-    decoder = molssi_util.JSONDecoder()
+    import seamm_util
+    decoder = seamm_util.JSONDecoder()
     <variable> = decoder.decode(dump)
 
 Adapted from
@@ -18,7 +18,7 @@ import seamm
 from seamm import ureg, Q_, units_class  # nopep8
 # from seamm import Parameter, Parameters
 
-# Need something like this if using outside the MolSSI Framework, but it
+# Need something like this if using outside the Seamm Framework, but it
 # causes nasty side effects if the order of imports is wrong, so leave it
 # throwing an error.
 
@@ -38,7 +38,7 @@ class JSONEncoder(json.JSONEncoder):
     """ 
     Encodes a python object, where pint Quantities, datetime and
     timedelta objects are converted into objects that can be decoded
-    using the molssi_util.JSONDecoder.
+    using the seamm_util.JSONDecoder.
 
     Adapted from
     http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecoder.html  # nopep8
@@ -85,7 +85,7 @@ class JSONEncoder(json.JSONEncoder):
 class JSONDecoder(json.JSONDecoder):
     """Decodes a json string, where pint Quantities, datetime and
     timedelta objects were converted into objects using the
-    molssi_util.JSONEncoder, back into a python object.
+    seamm_util.JSONEncoder, back into a python object.
     """
 
     def __init__(self):
