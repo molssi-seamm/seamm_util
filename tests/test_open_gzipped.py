@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Tests for `molssi_util` package."""
+"""Tests for `seamm_util` package."""
 
-import molssi_util
+import seamm_util
 import os
 import os.path
 
@@ -15,7 +15,7 @@ def test_open_1file():
     data = ['file1 line 1', 'file1 line 2', 'file1 line 3', 'file1 line 4']
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -32,7 +32,7 @@ def test_open_2files():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -49,7 +49,7 @@ def test_open_2files_at_end():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -65,7 +65,7 @@ def test_lines():
 
     num = [1, 2, 1, 2, 3, 4, 4]
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert fd.lineno == num[i]
             i += 1
@@ -79,7 +79,7 @@ def test_total_lines():
     datapath = os.path.join(os.path.dirname(__file__), 'data')
     filepath = os.path.join(datapath, 'file_middle.txt.gz')
 
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             pass
         assert fd.total_lines == 8
@@ -97,7 +97,7 @@ def test_nested_includes():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -111,7 +111,7 @@ def test_include_empty_file():
     data = ['file_end line 1', 'file_end line 2', 'file_end line 3']
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -129,7 +129,7 @@ def test_blank_lines():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line[0:-1] == data[i]
             i += 1
@@ -144,7 +144,7 @@ def test_stack():
     data = ['data/file1.txt.gz:2', 'data/file_end.txt.gz:4']
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             i += 1
             if i == 6:
@@ -167,7 +167,7 @@ def test_different_include():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='#include') as fd:
+    with seamm_util.Open(filepath, 'r', include='#include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1
@@ -185,7 +185,7 @@ def test_push():
     ]
 
     i = 0
-    with molssi_util.Open(filepath, 'r', include='include') as fd:
+    with seamm_util.Open(filepath, 'r', include='include') as fd:
         for line in fd:
             assert line.strip() == data[i]
             i += 1

@@ -27,7 +27,7 @@ def from_molssi(structure, description='****', comment=''):
 
     lines.append('PS' + 'MolSSIWF' + date_time + '3D')
     if comment == '':
-        lines.append('Generated from a MolSSI structure in a workflow')
+        lines.append('Generated from a MolSSI structure in a flowchart')
     else:
         lines.append(comment)
     lines.append('  0  0  0     0  0            999 V3000')

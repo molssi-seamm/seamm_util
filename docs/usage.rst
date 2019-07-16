@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use MolSSI Util in a project::
+To use SEAMM Util in a project::
 
-    import molssi_util
+    import seamm_util
