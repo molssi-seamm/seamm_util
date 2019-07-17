@@ -25,8 +25,8 @@ def from_seamm(structure):
     logger.debug(pprint.pformat(result))
 
     if int(result['stderr'].split()[0]) == 0:
-        raise RuntimeError('There was an error creating the SMILES:\n'
-                           + result['stderr'])
+        raise RuntimeError('There was an error creating the SMILES:\n' +
+                           result['stderr'])
 
     logger.debug('***SMILES from obabel')
     logger.debug(result['stdout'])

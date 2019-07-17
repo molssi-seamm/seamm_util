@@ -43,7 +43,6 @@ class JSONEncoder(json.JSONEncoder):
     Adapted from
     http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecoder.html  # nopep8
     """
-
     def default(self, obj):
         if isinstance(obj, units_class):
             return {'__type__': 'pint_units', 'data': obj.to_tuple()}
@@ -65,18 +64,18 @@ class JSONEncoder(json.JSONEncoder):
                 'seconds': obj.seconds,
                 'microseconds': obj.microseconds,
             }
-        elif (isinstance(obj, seamm.Parameter) or
-              isinstance(obj, seamm.Parameters)):
+        elif (isinstance(obj, seamm.Parameter)
+              or isinstance(obj, seamm.Parameters)):
 
             #  Populate the dictionary with object meta data
             obj_dict = {
                 "__class__": obj.__class__.__name__,
                 "__module__": obj.__module__
             }
-  
+
             #  Populate the dictionary with object properties
             obj_dict.update(obj.to_dict())
-  
+
             return obj_dict
         else:
             return json.JSONEncoder.default(self, obj)
@@ -87,7 +86,6 @@ class JSONDecoder(json.JSONDecoder):
     timedelta objects were converted into objects using the
     seamm_util.JSONEncoder, back into a python object.
     """
-
     def __init__(self):
         super().__init__(object_hook=self.dict_to_object)
 
@@ -106,25 +104,25 @@ class JSONDecoder(json.JSONDecoder):
 
         if '__class__' in d:
             class_name = d.pop("__class__")
-        
+
             if class_name in 'Parameter':
                 # Get the module name from the dict and import it
                 module_name = d.pop("__module__")
                 module = __import__(module_name)
-        
+
                 # Get the class from the module
                 class_ = getattr(module, class_name)
-        
+
                 # Use dictionary unpacking to initialize the object
                 return class_(d)
             elif 'Parameters' in class_name:
                 # Get the module name from the dict and import it
                 module_name = d.pop("__module__")
                 module = __import__(module_name)
-        
+
                 # Get the class from the module
                 class_ = getattr(module, class_name)
-        
+
                 # Use dictionary unpacking to initialize the object
                 return class_(data=d)
             else:

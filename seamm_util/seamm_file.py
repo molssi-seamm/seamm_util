@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """A class for wrapping output from the MolSSI Framework and plugins.
 Initially it is a thin wrapper around a dictionary to store the output,
 using JSON to serialize and deserialize the data.
@@ -17,10 +16,13 @@ logger = logging.getLogger(__name__)
 
 
 class File():
-
-    def __init__(self, filename, mode,
-                 compression=None, organization='MolSSI',
-                 filetype=None, version=None):
+    def __init__(self,
+                 filename,
+                 mode,
+                 compression=None,
+                 organization='MolSSI',
+                 filetype=None,
+                 version=None):
         self.filename = filename
         self.mode = mode
 
@@ -38,7 +40,7 @@ class File():
                     line = next(fd)
                 except:
                     raise Error("problem reading header line!")
-                
+
                 fd.close()
 
                 if line[0] == '!' and len(line.split()) == 3:
@@ -57,8 +59,8 @@ class File():
         # Determine the type of the file
         if compression is not None:
             if compression not in ('text', 'bz2', 'gzip'):
-                raise ValueError("Invalid compression: '{}'"
-                                 .format(compression))
+                raise ValueError(
+                    "Invalid compression: '{}'".format(compression))
         else:
             extension = os.path.splitext(self.filename)[1].strip().lower()
             if extension == '.bz2':
@@ -95,12 +97,9 @@ class File():
 
         if line[0] == '!' and len(line.split()) == 3:
             organization, filetype, version = line[1:].split()
-            logger.info(
-                "reading '{}', a {} file from {}, version {}".format(
-                    self.filename, filetype, organization, version))
+            logger.info("reading '{}', a {} file from {}, version {}".format(
+                self.filename, filetype, organization, version))
         else:
             raise RuntimeError(
-                "reading '{}', expected a header line but got\n\t'{}'".
-                format(self.filename, line))
-        
-
+                "reading '{}', expected a header line but got\n\t'{}'".format(
+                    self.filename, line))

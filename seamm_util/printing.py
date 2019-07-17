@@ -39,26 +39,26 @@ except ImportError:
 # at user-defined levels.
 #
 
-JOB       = 50
+JOB = 50
 IMPORTANT = 40
-TERSE     = 30
-NORMAL    = 20
-VERBOSE   = 10
-ALL       =  0
+TERSE = 30
+NORMAL = 20
+VERBOSE = 10
+ALL = 0
 
 _levelNames = {
-    JOB         : 'JOB',
-    IMPORTANT   : 'IMPORTANT',
-    TERSE       : 'TERSE',
-    NORMAL      : 'NORMAL',
-    VERBOSE     : 'VERBOSE',
-    ALL         : 'ALL',
-    'JOB'       : JOB,
-    'IMPORTANT' : IMPORTANT,
-    'TERSE'     : TERSE,
-    'NORMAL'    : NORMAL,
-    'VERBOSE'   : VERBOSE,
-    'ALL'       : ALL,
+    JOB: 'JOB',
+    IMPORTANT: 'IMPORTANT',
+    TERSE: 'TERSE',
+    NORMAL: 'NORMAL',
+    VERBOSE: 'VERBOSE',
+    ALL: 'ALL',
+    'JOB': JOB,
+    'IMPORTANT': IMPORTANT,
+    'TERSE': TERSE,
+    'NORMAL': NORMAL,
+    'VERBOSE': VERBOSE,
+    'ALL': ALL,
 }
 
 
@@ -79,11 +79,12 @@ def addLevelName(lvl, levelName):
     to text during message formatting.
     """
     _acquireLock()
-    try:    # unlikely to cause an exception, but you never know...
+    try:  # unlikely to cause an exception, but you never know...
         _levelNames[lvl] = levelName
         _levelNames[levelName] = lvl
     finally:
         _releaseLock()
+
 
 #---------------------------------------------------------------------------
 #   Thread-related stuff
@@ -120,6 +121,7 @@ def _releaseLock():
     if _lock:
         _lock.release()
 
+
 #---------------------------------------------------------------------------
 #   Manager classes and functions
 #---------------------------------------------------------------------------
@@ -143,6 +145,7 @@ class PlaceHolder(object):
         """
         if aprinter not in self.printers:
             self.printers.append(aprinter)
+
 
 #
 #   Determine which class to use when instantiating printers.
@@ -248,11 +251,10 @@ class Printer(logging.Filterer):
     """Provide controlled printing for plugins for the MolSSI
     Framework.
     """
-
     def __init__(self, name, level=ALL):
         """Create the Printer object
         """
-        
+
         if name == 'print_root':
             self.logger = logging.getLogger(name)
         else:
@@ -294,11 +296,11 @@ class Printer(logging.Filterer):
     @property
     def disabled(self):
         return self.logger.disabled
-    
+
     @disabled.setter
     def disabled(self, value):
         self.logger.disabled = value
-    
+
     def setLevel(self, lvl):
         """
         Set the printing level of this printer.
@@ -459,8 +461,6 @@ print_root = RootPrinter(NORMAL)
 Printer.print_root = print_root
 Printer.manager = Manager(Printer.print_root)
 
-
-
 #---------------------------------------------------------------------------
 # Configuration classes and functions
 #---------------------------------------------------------------------------
@@ -570,7 +570,9 @@ def fileConfig(fname):
                             target = cp.get(sectname, "target")
                         else:
                             target = ""
-                        if len(target):  # the target handler may not be loaded yet, so keep for later...
+                        if len(
+                                target
+                        ):  # the target handler may not be loaded yet, so keep for later...
                             fixups.append((h, target))
                     handlers[hand] = h
                 # now all handlers are loaded, fixup inter-handler references...
@@ -776,13 +778,15 @@ class FormattedText(object):
     where the start of each arrow is aligned to the left (not indented as in
     this string).
     """
-    
-    def __init__(
-            self, text,
-            dedent=True, indent='', indent_all=False,
-            wrap=True, line_length=80,
-            *args, **kwargs
-    ):
+    def __init__(self,
+                 text,
+                 dedent=True,
+                 indent='',
+                 indent_all=False,
+                 wrap=True,
+                 line_length=80,
+                 *args,
+                 **kwargs):
         """
         Handle the text <text>, which usually from either a simple string
         or a triple-quoted string.
@@ -832,8 +836,7 @@ class FormattedText(object):
                             '\n'.join(buffer),
                             self.line_length,
                             initial_indent=self.indent,
-                            subsequent_indent=self.indent
-                        )
+                            subsequent_indent=self.indent)
                         wrapped_text += '\n'
                         buffer = []
                     if line.strip() == '':
@@ -846,13 +849,11 @@ class FormattedText(object):
                 if line.strip() != '' and line[0] == ' ':
                     wrapped_text += self.indent + line + '\n'
             if len(buffer) > 0:
-                wrapped_text += textwrap.fill(
-                    '\n'.join(buffer),
-                    self.line_length,
-                    initial_indent=self.indent,
-                    subsequent_indent=self.indent
-                )
-            
+                wrapped_text += textwrap.fill('\n'.join(buffer),
+                                              self.line_length,
+                                              initial_indent=self.indent,
+                                              subsequent_indent=self.indent)
+
             return wrapped_text
         else:
             if self.indent_all:

@@ -28,9 +28,10 @@ def from_molssi(structure):
     for element, xyz in zip(atoms['elements'], atoms['coordinates']):
         count += 1
         x, y, z = xyz
-        lines.append('ATOM  {:5d} {:>2s}   UNL A   1    '.format(
-            count, element) + '{:8.3f}{:8.3f}{:8.3f}'.format(x, y, z) +
-                     '  1.00  0.00         {:>2s}'.format(element))
+        lines.append(
+            'ATOM  {:5d} {:>2s}   UNL A   1    '.format(count, element) +
+            '{:8.3f}{:8.3f}{:8.3f}'.format(x, y, z) +
+            '  1.00  0.00         {:>2s}'.format(element))
 
     # bonds
     connections = [[]] * (natoms + 1)
@@ -316,8 +317,8 @@ def to_molssi(data):
         for i in range(1, natoms + 1):
             for j in connections[i]:
                 if i not in connections[j]:
-                    logger.warning(
-                        'Bond {}-{} not found in PDB file'.format(j, i))
+                    logger.warning('Bond {}-{} not found in PDB file'.format(
+                        j, i))
                     # put in the bond since we won't see its partner!
                     if i > j:
                         bonds.append((j, i, 0))

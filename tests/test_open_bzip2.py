@@ -150,8 +150,7 @@ def test_stack():
             if i == 6:
                 stack = []
                 for line in fd.stack():
-                    stack.append(
-                        os.path.relpath(line, cwd))
+                    stack.append(os.path.relpath(line, cwd))
                 assert stack == data
                 break
 

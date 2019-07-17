@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """The setup script."""
 
 from setuptools import setup, find_packages
@@ -14,7 +13,6 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     'Pmw',
     'datetime',
-    'logging',
     'pprint',
 ]
 
