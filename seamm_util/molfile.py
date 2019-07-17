@@ -10,8 +10,8 @@ integer_bond_order = {'single': 1, 'double': 2, 'triple': 3}
 string_bond_order = ['', 'single', 'double', 'triple']
 
 
-def from_molssi(structure, description='****', comment=''):
-    """Transform a MolSSI structure to MDL mol file, version 3"""
+def from_seamm(structure, description='****', comment=''):
+    """Transform a Seamm structure to MDL mol file, version 3"""
     lines = []
 
     atoms = structure['atoms']
@@ -25,9 +25,9 @@ def from_molssi(structure, description='****', comment=''):
     lines.append(description)
     date_time = time.strftime('%m%d%y%H%M')
 
-    lines.append('PS' + 'MolSSIWF' + date_time + '3D')
+    lines.append('PS' + 'SEAMM_WF' + date_time + '3D')
     if comment == '':
-        lines.append('Generated from a MolSSI structure in a flowchart')
+        lines.append('Generated from a SEAMM structure in a flowchart')
     else:
         lines.append(comment)
     lines.append('  0  0  0     0  0            999 V3000')
@@ -55,8 +55,8 @@ def from_molssi(structure, description='****', comment=''):
     return '\n'.join(lines)
 
 
-def to_molssi(data):
-    """Transform from a MDL mol file, version 3 to a MolSSI structure"""
+def to_seamm(data):
+    """Transform from a MDL mol file, version 3 to a SEAMM structure"""
 
     n_molecules = 0
     lines = data.splitlines()
@@ -70,7 +70,7 @@ def to_molssi(data):
     lineno += 1
     if lines[lineno].split()[6] != 'V3000':
         raise RuntimeError(
-            "molfile:to_molssi -- the file is not version 3: '" +
+            "molfile:to_seamm -- the file is not version 3: '" +
             lines[lineno] + "'"
         )
     lineno += 1
