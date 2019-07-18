@@ -8,10 +8,10 @@ SEAMM Util
         :target: https://pypi.python.org/pypi/seamm_util
 
 .. image:: https://travis-ci.com/molssi-seamm/seamm_util.svg?branch=master
-        :target: https://travis-ci.com/molssi-seamm/seamm_util
+        :target: https://travis-ci.com/seamm-seamm/seamm_util
 
-.. image:: https://readthedocs.org/projects/molssi-util/badge/?version=latest
-        :target: https://molssi-util.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/seamm-util/badge/?version=latest
+        :target: https://seamm-util.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/molssi-seamm/seamm_util/shield.svg
