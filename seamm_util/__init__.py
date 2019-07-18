@@ -4,7 +4,7 @@
 
 __author__ = """Paul Saxe"""
 __email__ = 'psaxe@molssi.org'
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 from seamm_util.units import ureg, Q_, units_class  # noqa: F401
 from seamm_util.include_open import Open  # noqa: F401
