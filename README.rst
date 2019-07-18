@@ -18,8 +18,8 @@ SEAMM Util
      :target: https://pyup.io/repos/github/molssi-seamm/seamm_util/
      :alt: Updates
 
-.. image:: https://codecov.io/gh/molssi-seamm/seamm-util/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/molssi-seamm/seamm-util
+.. image:: https://codecov.io/gh/molssi-seamm/seamm_util/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/molssi-seamm/seamm_util
 
 
 Utility classes and functions that support other SEAMM tools
