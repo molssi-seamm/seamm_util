@@ -206,7 +206,7 @@ class Open(object):
             if len(self._fds) <= 0:
                 raise StopIteration()
             return self._next()
-        except:
+        except:  # noqa: E722
             raise
         self._linenos[-1] += 1
         self._total_lines += 1

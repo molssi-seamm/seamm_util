@@ -156,7 +156,7 @@ def to_molssi(data):
     17 - 21        Integer        serial       Serial  number of bonded atom
     22 - 26        Integer        serial       Serial number of bonded atom
     27 - 31        Integer        serial       Serial number of bonded atom
-    """  # nopep8
+    """  # noqa: E501
 
     # Initialize the structure
     structure = {}
@@ -266,23 +266,23 @@ def to_molssi(data):
         elif key == 'MODEL':
             last = key
         elif key == 'ATOM' or key == 'HETATM':
-            serial = int(line[6:11])
+            serial = int(line[6:11])  # noqa: F841
             name = line[12:16].strip()
-            altloc = line[16]
-            resname = line[17:20].strip()
-            chainid = line[21]
-            resseq = int(line[22:26])
-            icode = line[26]
+            altloc = line[16]  # noqa: F841
+            resname = line[17:20].strip()  # noqa: F841
+            chainid = line[21]  # noqa: F841
+            resseq = int(line[22:26])  # noqa: F841
+            icode = line[26]  # noqa: F841
             x = float(line[30:38])
             y = float(line[38:46])
             z = float(line[46:54])
             tmp = line[54:60].strip()
-            occupancy = 0.0 if tmp == '' else float(tmp)
+            occupancy = 0.0 if tmp == '' else float(tmp)  # noqa: F841
             tmp = line[60:66].strip()
-            tempfactor = 0.0 if tmp == '' else float(tmp)
+            tempfactor = 0.0 if tmp == '' else float(tmp)  # noqa: F841
             element = line[75:78].strip()
             tmp = line[78:80].strip()
-            charge = 0.0 if tmp == '' else float(tmp)
+            charge = 0.0 if tmp == '' else float(tmp)  # noqa: F841
 
             names.append(name)
             elements.append(element)
@@ -308,7 +308,7 @@ def to_molssi(data):
         elif key == 'MASTER':
             last = key
         elif key == 'END':
-            last = key
+            last = key  # noqa: F841
             break
         else:
             raise RuntimeError('Illegal line in PDB file\n\t' + line)

@@ -14,36 +14,23 @@ Adapted from
 http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode
 """
 
-import seamm
-from seamm import ureg, Q_, units_class  # nopep8
-# from seamm import Parameter, Parameters
-
-# Need something like this if using outside the Seamm Framework, but it
-# causes nasty side effects if the order of imports is wrong, so leave it
-# throwing an error.
-
-# try:
-#     from seamm import ureg, Q_, units_class  # nopep8
-# except:
-#     print('Importing pint directly')
-#     import pint
-#     ureg = pint.UnitRegistry()
-#     Q_ = ureg.Quantity
-#     units_class = ureg('1 km').__class__
+from seamm_util import ureg, Q_, units_class  # nopep8
 import datetime
 import json
 
 
 class JSONEncoder(json.JSONEncoder):
-    """ 
+    """
     Encodes a python object, where pint Quantities, datetime and
     timedelta objects are converted into objects that can be decoded
     using the seamm_util.JSONDecoder.
 
     Adapted from
-    http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecoder.html  # nopep8
+    http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecoder.html  # noqa: E501
     """
     def default(self, obj):
+        import seamm
+
         if isinstance(obj, units_class):
             return {'__type__': 'pint_units', 'data': obj.to_tuple()}
         elif isinstance(obj, datetime.datetime):

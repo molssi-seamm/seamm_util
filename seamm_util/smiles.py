@@ -31,13 +31,13 @@ def from_seamm(structure):
     logger.debug('***SMILES from obabel')
     logger.debug(result['stdout'])
 
-    pat3 = re.compile('H3\]')
-    pat2 = re.compile('H2\]')
-    pat1 = re.compile('(?P<c1>[^[])H\]')
+    pat3 = re.compile('H3\]')  # noqa: W605
+    pat2 = re.compile('H2\]')  # noqa: W605
+    pat1 = re.compile('(?P<c1>[^[])H\]')  # noqa: W605
 
     smiles = pat3.sub(']([H])([H])([H])', result['stdout'])
     smiles = pat2.sub(']([H])([H])', smiles)
-    smiles = pat1.sub('\g<c1>]([H])', smiles)
+    smiles = pat1.sub('\g<c1>]([H])', smiles)  # noqa: W605
 
     logger.debug(smiles)
 

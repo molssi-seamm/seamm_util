@@ -18,8 +18,10 @@ up, which is NORMAL by default, is placed in the local stage log. Optionally,
 output from a cutoff level and up is also written to the standard output.
 """
 
+import inspect
 import logging
-import pprint
+import os
+import pprint  # noqa: F401
 import sys
 import textwrap
 try:
@@ -28,9 +30,9 @@ try:
 except ImportError:
     thread = None
 
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #   Level related stuff
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #
 # Default levels and level names, these can be replaced with any positive set
 # of values having corresponding names. There is a pseudo-level, ALL, which
@@ -65,8 +67,8 @@ _levelNames = {
 def getLevelName(lvl):
     """
     Return the textual representation of printing level 'lvl'. If the level is
-    one of the predefined levels (JOB, IMPORTANT, TERSE, NORMAL, VERBOSE) then you
-    get the corresponding string. If you have associated levels with names
+    one of the predefined levels (JOB, IMPORTANT, TERSE, NORMAL, VERBOSE) then
+    you get the corresponding string. If you have associated levels with names
     using addLevelName then the name you have associated with 'lvl' is
     returned. Otherwise, the string "Level %s" % lvl is returned.
     """
@@ -86,9 +88,9 @@ def addLevelName(lvl, levelName):
         _releaseLock()
 
 
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #   Thread-related stuff
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 #
 # _lock is used to serialize access to shared data structures in this module.
@@ -122,9 +124,9 @@ def _releaseLock():
         _lock.release()
 
 
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #   Manager classes and functions
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 
 class PlaceHolder(object):
@@ -135,7 +137,8 @@ class PlaceHolder(object):
     """
     def __init__(self, aprinter):
         """
-        Initialize with the specified printer being a child of this placeholder.
+        Initialize with the specified printer being a child of this
+        placeholder.
         """
         self.printers = [aprinter]
 
@@ -372,8 +375,8 @@ class Printer(logging.Filterer):
             sfn = inspect.getsourcefile(frame)
             if sfn:
                 sfn = os.path.normcase(sfn)
-            if sfn != _srcfile:
-                #print frame.f_code.co_code
+            if sfn != _srcfile:  # noqa: F821
+                # print frame.f_code.co_code
                 lineno = inspect.getlineno(frame)
                 rv = (sfn, lineno)
                 break
@@ -461,9 +464,9 @@ print_root = RootPrinter(NORMAL)
 Printer.print_root = print_root
 Printer.manager = Manager(Printer.print_root)
 
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Configuration classes and functions
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 BASIC_FORMAT = "{message:s}"
 
@@ -570,12 +573,12 @@ def fileConfig(fname):
                             target = cp.get(sectname, "target")
                         else:
                             target = ""
-                        if len(
-                                target
-                        ):  # the target handler may not be loaded yet, so keep for later...
+                        if len(target
+                               ):  # the target handler may not be loaded yet,
+                            # so keep for later...
                             fixups.append((h, target))
                     handlers[hand] = h
-                # now all handlers are loaded, fixup inter-handler references...
+                # now all handlers are loaded, fixup inter-handler references..
                 for fixup in fixups:
                     h = fixup[0]
                     t = fixup[1]
@@ -639,7 +642,7 @@ def fileConfig(fname):
 
             for log in existing:
                 print_root.manager.printerDict[log].disabled = 1
-        except:
+        except:  # noqa: E722
             import traceback
             ei = sys.exc_info()
             traceback.print_exception(ei[0], ei[1], ei[2], None, sys.stderr)
@@ -648,10 +651,10 @@ def fileConfig(fname):
         _releaseLock()
 
 
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Utility functions at module level.
 # Basically delegate everything to the root printer.
-#---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 
 def getPrinter(name=None):
@@ -761,7 +764,7 @@ class FormattedText(object):
         print(ft)
     -----------------------------------------------------------------------
     Will print the following:
-    
+
         --->This is the first line. And the second. And a very, very, very,
         --->very, very, very, very, very, very, very, very, very long line.
         --->And i = '1' and j = '2' followed by a line break
@@ -777,7 +780,8 @@ class FormattedText(object):
 
     where the start of each arrow is aligned to the left (not indented as in
     this string).
-    """
+    """  # noqa: E501
+
     def __init__(self,
                  text,
                  dedent=True,

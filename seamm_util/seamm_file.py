@@ -38,8 +38,8 @@ class File():
                 fd = self.__enter__()
                 try:
                     line = next(fd)
-                except:
-                    raise Error("problem reading header line!")
+                except:  # noqa: E722
+                    raise RuntimeError("problem reading header line!")
 
                 fd.close()
 
