@@ -8,7 +8,7 @@ SEAMM Util
         :target: https://pypi.python.org/pypi/seamm_util
 
 .. image:: https://travis-ci.org/molssi-seamm/seamm_util.svg?branch=master
-        :target: https://travis-ci.org/seamm-seamm/seamm_util
+        :target: https://travis-ci.org/molssi-seamm/seamm_util
 
 .. image:: https://readthedocs.org/projects/seamm-util/badge/?version=latest
         :target: https://seamm-util.readthedocs.io/en/latest/?badge=latest
