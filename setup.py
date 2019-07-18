@@ -33,7 +33,7 @@ setup(
     description="Utility classes and functions",
     long_description=readme + '\n\n' + history,
     author="Paul Saxe",
-    author_email='psaxe@molssi.org',
+    author_email='seamm@molssi.org',
     url='https://github.com/molssi-seamm/seamm_util',
     packages=find_packages(include=['seamm_util']),
     include_package_data=True,
