@@ -7,7 +7,7 @@ SEAMM Util
 .. image:: https://img.shields.io/pypi/v/seamm_util.svg
         :target: https://pypi.python.org/pypi/seamm_util
 
-.. image:: https://img.shields.io/travis/molssi-seamm/seamm_util.svg
+.. image:: https://travis-ci.com/molssi-seamm/seamm_util.svg?branch=master
         :target: https://travis-ci.com/molssi-seamm/seamm_util
 
 .. image:: https://readthedocs.org/projects/molssi-util/badge/?version=latest
