@@ -135,6 +135,7 @@ class PlaceHolder(object):
     the place of nodes for which no printers have been defined [FIXME add
     example].
     """
+
     def __init__(self, aprinter):
         """
         Initialize with the specified printer being a child of this
@@ -166,8 +167,9 @@ def setPrinterClass(klass):
         if not isinstance(klass, object):
             raise TypeError("setPrinterClass is expecting a class")
         if not issubclass(klass, Printer):
-            raise TypeError("printer not derived from printer.Printer: " +
-                            klass.__name__)
+            raise TypeError(
+                "printer not derived from printer.Printer: " + klass.__name__
+            )
     global _printerClass
     _printerClass = klass
 
@@ -177,6 +179,7 @@ class Manager(object):
     There is [under normal circumstances] just one Manager instance, which
     holds the hierarchy of printers.
     """
+
     def __init__(self, print_root):
         """
         Initialize the manager with the root node of the printer hierarchy.
@@ -254,6 +257,7 @@ class Printer(logging.Filterer):
     """Provide controlled printing for plugins for the MolSSI
     Framework.
     """
+
     def __init__(self, name, level=ALL):
         """Create the Printer object
         """
@@ -447,6 +451,7 @@ class RootPrinter(Printer):
     it must have a printing level and there is only one instance of it in
     the hierarchy.
     """
+
     def __init__(self, lvl):
         """
         Initialize the printer with the name "print_root".
@@ -573,8 +578,9 @@ def fileConfig(fname):
                             target = cp.get(sectname, "target")
                         else:
                             target = ""
-                        if len(target
-                               ):  # the target handler may not be loaded yet,
+                        if len(
+                            target
+                        ):  # the target handler may not be loaded yet,
                             # so keep for later...
                             fixups.append((h, target))
                     handlers[hand] = h
@@ -782,15 +788,17 @@ class FormattedText(object):
     this string).
     """  # noqa: E501
 
-    def __init__(self,
-                 text,
-                 dedent=True,
-                 indent='',
-                 indent_all=False,
-                 wrap=True,
-                 line_length=80,
-                 *args,
-                 **kwargs):
+    def __init__(
+        self,
+        text,
+        dedent=True,
+        indent='',
+        indent_all=False,
+        wrap=True,
+        line_length=80,
+        *args,
+        **kwargs
+    ):
         """
         Handle the text <text>, which usually from either a simple string
         or a triple-quoted string.
@@ -840,7 +848,8 @@ class FormattedText(object):
                             '\n'.join(buffer),
                             self.line_length,
                             initial_indent=self.indent,
-                            subsequent_indent=self.indent)
+                            subsequent_indent=self.indent
+                        )
                         wrapped_text += '\n'
                         buffer = []
                     if line.strip() == '':
@@ -853,10 +862,12 @@ class FormattedText(object):
                 if line.strip() != '' and line[0] == ' ':
                     wrapped_text += self.indent + line + '\n'
             if len(buffer) > 0:
-                wrapped_text += textwrap.fill('\n'.join(buffer),
-                                              self.line_length,
-                                              initial_indent=self.indent,
-                                              subsequent_indent=self.indent)
+                wrapped_text += textwrap.fill(
+                    '\n'.join(buffer),
+                    self.line_length,
+                    initial_indent=self.indent,
+                    subsequent_indent=self.indent
+                )
 
             return wrapped_text
         else:

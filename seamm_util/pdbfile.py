@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Functions for handling PDB files"""
 
 import logging
@@ -31,7 +32,8 @@ def from_molssi(structure):
         lines.append(
             'ATOM  {:5d} {:>2s}   UNL A   1    '.format(count, element) +
             '{:8.3f}{:8.3f}{:8.3f}'.format(x, y, z) +
-            '  1.00  0.00         {:>2s}'.format(element))
+            '  1.00  0.00         {:>2s}'.format(element)
+        )
 
     # bonds
     connections = [[]] * (natoms + 1)
@@ -42,8 +44,10 @@ def from_molssi(structure):
     for i in range(1, natoms + 1):
         lines.append('CONECT{:5d}'.format(i) + ''.join(connections[i]))
 
-    lines.append('MASTER        0    0    0    0    0    0    0    0'
-                 '{:5d}    0{:5d}'.format(natoms, natoms))
+    lines.append(
+        'MASTER        0    0    0    0    0    0    0    0'
+        '{:5d}    0{:5d}'.format(natoms, natoms)
+    )
     lines.append('END')
 
     return '\n'.join(lines)
@@ -317,8 +321,9 @@ def to_molssi(data):
         for i in range(1, natoms + 1):
             for j in connections[i]:
                 if i not in connections[j]:
-                    logger.warning('Bond {}-{} not found in PDB file'.format(
-                        j, i))
+                    logger.warning(
+                        'Bond {}-{} not found in PDB file'.format(j, i)
+                    )
                     # put in the bond since we won't see its partner!
                     if i > j:
                         bonds.append((j, i, 0))

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Functions for handling MDL molfiles"""
 
 import logging
@@ -18,15 +19,17 @@ def from_seamm(structure):
     logger.debug('molfile:\n' + mol3)
 
     local = seamm.ExecLocal()
-    result = local.run(cmd=['obabel', '-imol', '-osmi', '-xh'],
-                       input_data=mol3)
+    result = local.run(
+        cmd=['obabel', '-imol', '-osmi', '-xh'], input_data=mol3
+    )
 
     logger.debug('Result from obabel')
     logger.debug(pprint.pformat(result))
 
     if int(result['stderr'].split()[0]) == 0:
-        raise RuntimeError('There was an error creating the SMILES:\n' +
-                           result['stderr'])
+        raise RuntimeError(
+            'There was an error creating the SMILES:\n' + result['stderr']
+        )
 
     logger.debug('***SMILES from obabel')
     logger.debug(result['stdout'])

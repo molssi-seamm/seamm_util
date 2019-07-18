@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Functions for handling MDL molfiles"""
 
 import logging
@@ -33,9 +34,11 @@ def from_seamm(structure, description='****', comment=''):
     lines.append('  0  0  0     0  0            999 V3000')
 
     lines.append('M  V30 BEGIN CTAB')
-    lines.append('M  V30 COUNTS {} {} {} {} {}'.format(natoms, nbonds,
-                                                       nsgroups, n3d,
-                                                       is_chiral))
+    lines.append(
+        'M  V30 COUNTS {} {} {} {} {}'.format(
+            natoms, nbonds, nsgroups, n3d, is_chiral
+        )
+    )
     lines.append('M  V30 BEGIN ATOM')
     count = 0
     for element, xyz in zip(atoms['elements'], atoms['coordinates']):
@@ -47,8 +50,11 @@ def from_seamm(structure, description='****', comment=''):
     count = 0
     for i, j, bond_order in bonds:
         count += 1
-        lines.append('M  V30 {} {} {} {}'.format(
-            count, integer_bond_order[bond_order], i, j))
+        lines.append(
+            'M  V30 {} {} {} {}'.format(
+                count, integer_bond_order[bond_order], i, j
+            )
+        )
     lines.append('M  V30 END BOND')
     lines.append('M  V30 END CTAB')
     lines.append('M  END')
@@ -70,8 +76,10 @@ def to_seamm(data):
     # comment
     lineno += 1
     if lines[lineno].split()[6] != 'V3000':
-        raise RuntimeError("molfile:to_seamm -- the file is not version 3: '" +
-                           lines[lineno] + "'")
+        raise RuntimeError(
+            "molfile:to_seamm -- the file is not version 3: '" +
+            lines[lineno] + "'"
+        )
     lineno += 1
     while lineno < len(lines):
         line = lines[lineno]
@@ -115,8 +123,12 @@ def to_seamm(data):
                     line = lines[lineno]
                     lineno += 1
                     junk1, junk2, i, bond_order, iatom, jatom = line.split()
-                    bonds.append((int(iatom), int(jatom),
-                                  string_bond_order[int(bond_order)]))
+                    bonds.append(
+                        (
+                            int(iatom), int(jatom),
+                            string_bond_order[int(bond_order)]
+                        )
+                    )
                 line = lines[lineno]
                 lineno += 1
                 if 'M  V30 END BOND' not in line:

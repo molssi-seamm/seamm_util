@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Context manager for extending file reading to handle include's"""
 
 import bz2
@@ -25,12 +26,10 @@ def splitext(filename):
 
 
 class Open(object):
-    def __init__(self,
-                 filename,
-                 mode='r',
-                 logger=None,
-                 include=None,
-                 history=10):
+
+    def __init__(
+        self, filename, mode='r', logger=None, include=None, history=10
+    ):
         """Open a file, automatically handling 'include'
 
         Args:

@@ -28,6 +28,7 @@ class JSONEncoder(json.JSONEncoder):
     Adapted from
     http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecoder.html  # noqa: E501
     """
+
     def default(self, obj):
         import seamm
 
@@ -51,8 +52,10 @@ class JSONEncoder(json.JSONEncoder):
                 'seconds': obj.seconds,
                 'microseconds': obj.microseconds,
             }
-        elif (isinstance(obj, seamm.Parameter)
-              or isinstance(obj, seamm.Parameters)):
+        elif (
+            isinstance(obj, seamm.Parameter) or
+            isinstance(obj, seamm.Parameters)
+        ):
 
             #  Populate the dictionary with object meta data
             obj_dict = {
@@ -73,6 +76,7 @@ class JSONDecoder(json.JSONDecoder):
     timedelta objects were converted into objects using the
     seamm_util.JSONEncoder, back into a python object.
     """
+
     def __init__(self):
         super().__init__(object_hook=self.dict_to_object)
 

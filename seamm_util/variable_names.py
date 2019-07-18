@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Utility routines to help with variable names for scripts"""
 
 from keyword import iskeyword
@@ -24,7 +25,8 @@ def clean(raw_name):
 
     # should be valid, but check once more
     if not is_valid(name):
-        raise RuntimeError('Variable name {} (from {}) is not valid!'.format(
-            name, raw_name))
+        raise RuntimeError(
+            'Variable name {} (from {}) is not valid!'.format(name, raw_name)
+        )
 
     return name

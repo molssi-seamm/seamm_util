@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """A class for wrapping output from the MolSSI Framework and plugins.
 Initially it is a thin wrapper around a dictionary to store the output,
 using JSON to serialize and deserialize the data.
@@ -16,6 +17,7 @@ import pprint
 
 
 class Output(collections.abc.MutableMapping):
+
     def __init__(self, filename=None, **kwargs):
         """Create the Output object
 

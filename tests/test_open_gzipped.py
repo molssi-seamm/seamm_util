@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """Tests for `seamm_util` package."""
 
 import seamm_util

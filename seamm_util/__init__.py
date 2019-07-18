@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Top-level package for SEAMM Util."""
 
 __author__ = """Paul Saxe"""

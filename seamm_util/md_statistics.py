@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Helpful routine using the underlying Python functions
 in 'statistics' and 'statsmodels' to handle common needs
 in molecular modeling
@@ -12,11 +13,9 @@ import statsmodels.tsa.stattools as stattools
 logger = logging.getLogger(__name__)
 
 
-def analyze_autocorrelation(y,
-                            interval=1,
-                            nlags=64,
-                            method='zr',
-                            use_confidence=False):
+def analyze_autocorrelation(
+    y, interval=1, nlags=64, method='zr', use_confidence=False
+):
     """Find the statistical inefficiency, correlation time and other useful
     parameters given the time sequence of values 'y'.
 
@@ -69,11 +68,9 @@ def analyze_autocorrelation(y,
     while True:
         logger.debug('   nlags = {}'.format(nlags))
 
-        acf, confidence = stattools.acf(y,
-                                        nlags=nlags,
-                                        alpha=0.05,
-                                        fft=nlags > 16,
-                                        unbiased=False)
+        acf, confidence = stattools.acf(
+            y, nlags=nlags, alpha=0.05, fft=nlags > 16, unbiased=False
+        )
 
         # remove the first items, which are 1 by definition
         acf = acf[1:]
@@ -108,7 +105,8 @@ def analyze_autocorrelation(y,
             if nlags == n - 1:
                 raise RuntimeError(
                     'analyze_autocorrelation: Serious error! '
-                    'Did not find negative autocorrelation value.')
+                    'Did not find negative autocorrelation value.'
+                )
             nlags *= 2
             if nlags >= n:
                 nlags = n - 1
@@ -173,19 +171,20 @@ if __name__ == "__main__":
         t0 = time.time()
         r1 = analyze_autocorrelation(y, method='zr', nlags=4)
         t1 = time.time()
-        r2 = analyze_autocorrelation(y,
-                                     method='zr',
-                                     nlags=4,
-                                     use_confidence=True)
+        r2 = analyze_autocorrelation(
+            y, method='zr', nlags=4, use_confidence=True
+        )
         t2 = time.time()
 
         print('{:>20s} = {:7.3f} {:7.3f}'.format('time', t1 - t0, t2 - t1))
-        print('{:>20s} = {} {}'.format('nlags', len(r1['acf']),
-                                       len(r2['acf'])))
+        print(
+            '{:>20s} = {} {}'.format('nlags', len(r1['acf']), len(r2['acf']))
+        )
         for key in r1:
             if key not in ['acf', 'confidence_interval']:
-                print('{:>20s} = {:7.1f} {:7.1f}'.format(
-                    key, r1[key], r2[key]))
+                print(
+                    '{:>20s} = {:7.1f} {:7.1f}'.format(key, r1[key], r2[key])
+                )
 
         ave = statistics.mean(y)
         stdev = statistics.stdev(y)
