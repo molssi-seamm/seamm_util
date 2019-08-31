@@ -12,9 +12,8 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'datetime',
     'pint',
-    'pprint',
+    'statsmodels'
 ]
 
 setup_requirements = [
