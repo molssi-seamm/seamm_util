@@ -22,10 +22,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [
-    'pint',
-    'statsmodels'
-]
+requirements = ['pint', 'statsmodels']
 
 setup(
     name='seamm_util',
@@ -55,19 +52,14 @@ setup(
     # Required packages, pulls from pip if needed; do not use for Conda
     # deployment
     install_requires=requirements,
-
     test_suite='tests',
 
     # Valid platforms your code works on, adjust to your flavor
-    platforms=['Linux',
-               'Mac OS-X',
-               'Unix',
-               'Windows'],
+    platforms=['Linux', 'Mac OS-X', 'Unix', 'Windows'],
 
     # Manual control if final package is compressible or not, set False to
     # prevent the .egg from being made
     # zip_safe=False,
-
     keywords='seamm_util',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
