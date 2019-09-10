@@ -2,15 +2,11 @@
 
 """Functions for handling executables"""
 
-import configargparse
 import logging
 import os
 import os.path
-import pprint
-import seamm_util
 
 logger = logging.getLogger(__name__)
-
 
 # from configargparse.py
 _COMMAND_LINE_SOURCE_KEY = "command_line"
@@ -137,17 +133,17 @@ def check_executable(executable, key=None, parser=None):
             else:
                 # Shouln't get here, but if we do, just print what we know.
                 source = (
-                    source_key_to_display_value_map[source[0]]
-                    % tuple(source[1:])
+                    source_key_to_display_value_map[source[0]] %
+                    tuple(source[1:])
                 )
                 print(source)
                 for tkey, (action, value) in settings.items():
                     if tkey:
-                        print("  %-19s%s\n" % (tkey+":", value))
+                        print("  %-19s%s\n" % (tkey + ":", value))
                     else:
                         if isinstance(value, str):
                             print("  %s\n" % value)
                         elif isinstance(value, list):
                             print("  %s\n" % ' '.join(value))
-    
+
     raise FileNotFoundError(msg)
