@@ -1,0 +1,25 @@
+name: test
+
+channels:
+  - default
+
+dependencies:
+    # Base depends
+  - python
+  - pip
+  - configargparse
+  - statsmodels
+
+    # Testing
+  - coverage
+  - flake8
+  - pytest
+  - pytest-cov
+  - pytest-runner
+
+  # Pip-only installs
+  - pip:
+    - pint
+      # Testing
+    - yapf
+

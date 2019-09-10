@@ -1,34 +1,98 @@
 language: python
-dist: xenial
-python:
-- 3.7
-- 3.6
-- 3.5
-deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  skip_existing: true
-  on:
-    python: 3.6
-    repo: molssi-seamm/seamm_util
-    tags: true
-  user: seamm
-  password:
-    secure: dMONRr7xRx09LOnKUteCa3CY8aGy8XrLX4oAka70RqmycrdZk1fLO3Ykz1Hzw4psREoXWQjmU5C0UTXAfSgpO3PrZPxYHU7+Pnyfjy8gE8ssVHUv19dXlFazxZG0vfjDiKq5FLiIx96Va2OnNDrcL5RfP3MXHamwqJkds8+w+nF0BEQ5Oa/WODAGIBYLYv08rpyBk9tYDX5uMliABgnraalHgPpoVVJEdOBIlpTgKUP2CCd+iaJQquHwJka3BEQ/PbGbQq0Rh5uWfNLEKZHQ53LPpqfTLhF9sR1ewXCQaFHIupDcmIGjavogk05lIcTgti7gF++Lv9xHZeakQF90d/jphhRu9DM2rS84MESm/LhgfqYJRk3P/6XrSUx4zxNV54cKOwdttGBUU+Ei102Rmh9f62Loc2uMNsGVes+kOshX2P9qiqUlGpV1Y8zbOuipscMFIJTnKHOkN2pLctNm+Qewa9VZjnC4ZVa39ssmmseEfJG906CfsCARVQ7Wf/uEIAn0nr07j6im4fql3fOEdKoAeUDvjX/o2K4lUR85ikbKFiiaz9XeyXmLbtgZC5/FIhgCA5dJtjgTrpsuYnEcACz++28+vWZKdYX89ohhD5mgZBVtc6XiXtD9oQp3bbgUAbmitRNI3ewBszVX6FQ7DC4czZsmDYOfyVt5NoR+8DA=
+
+before_install:
+    # Additional info about the build
+  - uname -a
+  - df -h
+  - ulimit -a
+
+    # Install the Python environment
+  - source devtools/travis-ci/before_install.sh
+  - python -V
+
+install:
+    # Create test environment for package
+  - python devtools/scripts/create_conda_env.py -n=test -p=$PYTHON_VER devtools/conda-envs/test_env.yaml
+    # Activate the test environment
+  - conda activate test
+    # Build and install package
+    #- python setup.py develop --no-deps
+  - pip install -e .
+    # Print details of the environment
+  - conda list
+  - pip freeze
+
 matrix:
   fast_finish: true
+
+notifications:
+    email: false
+
 stages:
-- lint
-- check
-- test
-install:
-- pip install -U tox-travis
-- pip install -U codecov
+  - lint
+  - test
+  - deploy
+
 jobs:
   include:
-  - stage: lint
-    script: tox -e lint
-    python: '3.6'
-script: tox -e coverage
-after_success:
-- codecov -e TOX_ENV
+    - stage: lint
+      name: "Check formatting of code for PEP-8"
+      os: linux
+      language: generic
+      env: PYTHON_VER=3.7
+      script:
+        - flake8 seamm_util tests
+        - yapf --diff --recursive  seamm_util tests
+
+    - stage: test
+      name: "Tests on MacOS Python 3.6"
+      script:
+        - pytest -v tests/
+      os: osx
+      language: generic
+      env: PYTHON_VER=3.6
+
+    - stage: test
+      name: "Tests on MacOS Python 3.7"
+      script:
+        - pytest -v tests/
+      os: osx
+      language: generic
+      env: PYTHON_VER=3.7
+
+    - stage: test
+      name: "Tests on Linux Python 3.6"
+      script:
+        - pytest -v tests/
+      os: linux
+      language: generic  # No need to set Python version since its conda
+      env: PYTHON_VER=3.6
+
+    - stage: test
+      name: "Tests and coverage on Linux Python 3.7"
+      script:
+        - pytest -v --cov=seamm_util tests/
+      after_success:
+        - codecov
+      os: linux
+      language: generic
+      env: PYTHON_VER=3.7
+
+    - stage: deploy
+      name: "Deploy to PyPi"
+      if: tag IS present
+      dist: xenial
+      python: 3.7
+      script: skip
+      deploy:
+        provider: pypi
+        distributions: sdist bdist_wheel
+        skip_existing: true
+        on:
+          condition: $PYTHON_VER = 3.7
+          condition: $TRAVIS_OS_NAME = linux
+          repo: molssi-seamm/seamm_util
+          tags: true
+        user: seamm
+        password:
+          secure: dMONRr7xRx09LOnKUteCa3CY8aGy8XrLX4oAka70RqmycrdZk1fLO3Ykz1Hzw4psREoXWQjmU5C0UTXAfSgpO3PrZPxYHU7+Pnyfjy8gE8ssVHUv19dXlFazxZG0vfjDiKq5FLiIx96Va2OnNDrcL5RfP3MXHamwqJkds8+w+nF0BEQ5Oa/WODAGIBYLYv08rpyBk9tYDX5uMliABgnraalHgPpoVVJEdOBIlpTgKUP2CCd+iaJQquHwJka3BEQ/PbGbQq0Rh5uWfNLEKZHQ53LPpqfTLhF9sR1ewXCQaFHIupDcmIGjavogk05lIcTgti7gF++Lv9xHZeakQF90d/jphhRu9DM2rS84MESm/LhgfqYJRk3P/6XrSUx4zxNV54cKOwdttGBUU+Ei102Rmh9f62Loc2uMNsGVes+kOshX2P9qiqUlGpV1Y8zbOuipscMFIJTnKHOkN2pLctNm+Qewa9VZjnC4ZVa39ssmmseEfJG906CfsCARVQ7Wf/uEIAn0nr07j6im4fql3fOEdKoAeUDvjX/o2K4lUR85ikbKFiiaz9XeyXmLbtgZC5/FIhgCA5dJtjgTrpsuYnEcACz++28+vWZKdYX89ohhD5mgZBVtc6XiXtD9oQp3bbgUAbmitRNI3ewBszVX6FQ7DC4czZsmDYOfyVt5NoR+8DA=
