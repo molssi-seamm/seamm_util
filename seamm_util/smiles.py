@@ -2,11 +2,16 @@
 
 """Functions for handling MDL molfiles"""
 
+import configargparse
 import logging
+import os.path
 import seamm  # Due to handling of units, should be before util
+import seamm_util
 import seamm_util.molfile
 import pprint
 import re
+
+obabel_exe = None
 
 logger = logging.getLogger(__name__)
 
@@ -15,12 +20,49 @@ def from_seamm(structure):
     """Convert a SEAMM structure to SMILES"""
     # obabel play/ethanol.mol -osmi -xh
 
+    # If we don't know where the obabel executable is, find it!
+    global obabel_exe
+    if obabel_exe is None:
+        # Argument/config parsing
+        parser = configargparse.ArgParser(
+            auto_env_var_prefix='',
+            default_config_files=[
+                '/etc/seamm/openbabel.ini',
+                '/etc/seamm/seamm.ini',
+                '~/.seamm/openbabel.ini',
+                '~/.seamm/seamm.ini',
+            ]
+        )
+
+        parser.add_argument(
+            '--seamm-configfile',
+            is_config_file=True,
+            default=None,
+            help='a configuration file to override others'
+        )
+
+        # Options for OpenBabel
+        parser.add_argument(
+            '--openbabel-path',
+            default='',
+            help='the path to the OpenBabel executables'
+        )
+
+        o, unknown = parser.parse_known_args()
+
+        obabel_exe = os.path.join(o.openbabel_path, 'obabel')
+
+        seamm_util.check_executable(
+            obabel_exe, key='--openbabel-path', parser=parser
+        )
+
+    # Continue on
     mol3 = seamm_util.molfile.from_seamm(structure)
     logger.debug('molfile:\n' + mol3)
 
     local = seamm.ExecLocal()
     result = local.run(
-        cmd=['obabel', '-imol', '-osmi', '-xh'], input_data=mol3
+        cmd=[obabel_exe, '-imol', '-osmi', '-xh'], input_data=mol3
     )
 
     logger.debug('Result from obabel')
