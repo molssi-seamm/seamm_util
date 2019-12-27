@@ -108,7 +108,7 @@ def to_seamm(data):
                 while lineno < last:
                     line = lines[lineno]
                     lineno += 1
-                    junk1, junk2, i, symbol, x, y, z, q = line.split()
+                    junk1, junk2, i, symbol, x, y, z, q = line.split()[0:8]
                     atoms['coordinates'].append((float(x), float(y), float(z)))
                     atoms['elements'].append(symbol)
             line = lines[lineno]
