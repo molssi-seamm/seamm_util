@@ -793,6 +793,7 @@ class FormattedText(object):
         text,
         dedent=True,
         indent='',
+        indent_initial=True,
         indent_all=False,
         wrap=True,
         line_length=80,
@@ -810,6 +811,9 @@ class FormattedText(object):
 
         <indent_all> indicates that empty line of those containing only white
         space also be indented. By the default the are not.
+
+        <indent_initial> indicates that the first line shoud be indented.
+        defaults to True.
 
         <wrap> asks that lines of text not starting with a blank be wrapped
         at <line_length>.
@@ -829,25 +833,45 @@ class FormattedText(object):
         self.kwargs = kwargs
         self.dedent = dedent
         self.indent = indent
+        self.indent_initial = indent_initial
         self.indent_all = indent_all
         self.wrap = wrap
         self.line_length = line_length
 
     def __str__(self):
+        """Turn into a formatted, wrapped string as requested.
+
+        NB. If there are no extra args or kwargs, don't format the
+        string. This avoids problems with strings that have, e.g.
+        braces internally.
+        """
         if self.dedent:
-            text = textwrap.dedent(self.text.format(*self.args, **self.kwargs))
+            if len(self.args) == 0 and len(self.kwargs) == 0:
+                text = textwrap.dedent(self.text)
+            else:
+                text = textwrap.dedent(
+                    self.text.format(*self.args, **self.kwargs)
+                )
         else:
-            text = self.text.format(*self.args, **self.kwargs)
+            if len(self.args) == 0 and len(self.kwargs) == 0:
+                text = self.text
+            else:
+                text = self.text.format(*self.args, **self.kwargs)
+
         if self.wrap:
             wrapped_text = ''
             buffer = []
+            if not self.indent_initial:
+                initial_indent = ''
+            else:
+                initial_indent = self.indent
             for line in text.splitlines():
                 if line.strip() == '' or line[0] == ' ':
                     if len(buffer) > 0:
                         wrapped_text += textwrap.fill(
                             '\n'.join(buffer),
                             self.line_length,
-                            initial_indent=self.indent,
+                            initial_indent=initial_indent,
                             subsequent_indent=self.indent
                         )
                         wrapped_text += '\n'
@@ -865,7 +889,7 @@ class FormattedText(object):
                 wrapped_text += textwrap.fill(
                     '\n'.join(buffer),
                     self.line_length,
-                    initial_indent=self.indent,
+                    initial_indent=initial_indent,
                     subsequent_indent=self.indent
                 )
 
