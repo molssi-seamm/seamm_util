@@ -62,7 +62,7 @@ def from_seamm(structure, description='****', comment=''):
     return '\n'.join(lines)
 
 
-def to_seamm(data):
+def to_seamm(data, extras=dict()):
     """Transform from a MDL mol file, version 3 to a SEAMM structure"""
 
     n_molecules = 0
@@ -137,5 +137,12 @@ def to_seamm(data):
                 raise RuntimeError("Missing bonds: '" + line + "'")
 
     structure = {'atoms': atoms, 'bonds': bonds}
+
+    if len(extras) > 0:
+        structure['extras'] = {}
+        for k, v in extras.items():
+            value = structure['extras'][k] = v["value"]
+            if value is not None:
+                structure['extras'][k] = v["value"]
 
     return structure
