@@ -97,9 +97,10 @@ def to_seamm(data, extras=dict()):
 
             natoms = int(natoms)
             nbonds = int(nbonds)
-            nsgroups = int(nsgroups)
-            n3d = int(n3d)
-            is_chiral = bool(is_chiral)
+            # not used, yet.
+            # nsgroups = int(nsgroups)
+            # n3d = int(n3d)
+            # is_chiral = bool(is_chiral)
 
             line = lines[lineno]
             lineno += 1

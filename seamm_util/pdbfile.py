@@ -175,7 +175,6 @@ def to_molssi(data):
 
     connections = None
 
-    last = ''
     if isinstance(data, list):
         lines = data
     else:
@@ -184,91 +183,91 @@ def to_molssi(data):
     for line in lines:
         key = line[0:6].rstrip()
         if key == 'HEADER':
-            last = key
+            pass
         elif key == 'OBSLTE':
-            last = key
+            pass
         elif key == 'TITLE':
-            last = key
+            pass
         elif key == 'SPLIT':
-            last = key
+            pass
         elif key == 'CAVEAT':
-            last = key
+            pass
         elif key == 'COMPND':
-            last = key
+            pass
         elif key == 'SOURCE':
-            last = key
+            pass
         elif key == 'KEYWDS':
-            last = key
+            pass
         elif key == 'EXPDTA':
-            last = key
+            pass
         elif key == 'NUMMDL':
-            last = key
+            pass
         elif key == 'MDLTYPE':
-            last = key
+            pass
         elif key == 'AUTHOR':
-            last = key
+            pass
         elif key == 'REVDAT':
-            last = key
+            pass
         elif key == 'SPRSDE':
-            last = key
+            pass
         elif key == 'JRNL':
-            last = key
+            pass
         elif key == 'REMARK':
-            last = key
+            pass
         elif key == 'DBREF':
-            last = key
+            pass
         elif key == 'DBREF1':
-            last = key
+            pass
         elif key == 'DBREF2':
-            last = key
+            pass
         elif key == 'SEQADV':
-            last = key
+            pass
         elif key == 'SEQRES':
-            last = key
+            pass
         elif key == 'MODRES':
-            last = key
+            pass
         elif key == 'HET':
-            last = key
+            pass
         elif key == 'HETNAM':
-            last = key
+            pass
         elif key == 'HETSYN':
-            last = key
+            pass
         elif key == 'FORMUL':
-            last = key
+            pass
         elif key == 'HELIX':
-            last = key
+            pass
         elif key == 'SHEET':
-            last = key
+            pass
         elif key == 'SSBOND':
-            last = key
+            pass
         elif key == 'LINK':
-            last = key
+            pass
         elif key == 'CISPEP':
-            last = key
+            pass
         elif key == 'SITE':
-            last = key
+            pass
         elif key == 'CRYST1':
-            last = key
+            pass
         elif key == 'ORIGX1':
-            last = key
+            pass
         elif key == 'ORIGX2':
-            last = key
+            pass
         elif key == 'ORIGX3':
-            last = key
+            pass
         elif key == 'SCALE1':
-            last = key
+            pass
         elif key == 'SCALE2':
-            last = key
+            pass
         elif key == 'SCALE3':
-            last = key
+            pass
         elif key == 'MTRIX1':
-            last = key
+            pass
         elif key == 'MTRIX2':
-            last = key
+            pass
         elif key == 'MTRIX3':
-            last = key
+            pass
         elif key == 'MODEL':
-            last = key
+            pass
         elif key == 'ATOM' or key == 'HETATM':
             serial = int(line[6:11])  # noqa: F841
             name = line[12:16].strip()
@@ -292,13 +291,13 @@ def to_molssi(data):
             elements.append(element)
             coordinates.append((x, y, z))
 
-            last = key
+            pass
         elif key == 'ANISOU':
-            last = key
+            pass
         elif key == 'TER':
-            last = key
+            pass
         elif key == 'ENDMDL':
-            last = key
+            pass
         elif key == 'CONECT':
             if connections is None:
                 natoms = len(elements)
@@ -308,11 +307,11 @@ def to_molssi(data):
             for tmp in line[11:31].split():
                 if tmp.trim() != '':
                     connections[atom].append(int(tmp))
-            last = key
+            pass
         elif key == 'MASTER':
-            last = key
+            pass
         elif key == 'END':
-            last = key  # noqa: F841
+            pass
             break
         else:
             raise RuntimeError('Illegal line in PDB file\n\t' + line)
