@@ -262,7 +262,7 @@ class Printer(logging.Filterer):
         """Create the Printer object
         """
 
-        super.__init__()
+        super.__init__(self)
 
         if name == 'print_root':
             self.logger = logging.getLogger(name)
