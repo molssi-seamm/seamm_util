@@ -1,6 +1,6 @@
 certifi==2019.6.16
 ConfigArgParse==0.14.0
-numpy==1.17.2
+numpy==1.18.1
 pandas==0.25.1
 patsy==0.5.1
 Pint==0.9
