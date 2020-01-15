@@ -12,8 +12,8 @@ units_class = ureg('1 km').__class__
 
 _d = pint.Context('chemistry')
 _d.add_transformation(
-    '[mass]/[substance]', '[mass]',
-    lambda ureg, x: x * (ureg.mol / ureg.avogadro_number)
+    '[mass]/[substance]', '[mass]', lambda ureg, x: x *
+    (ureg.mol / ureg.avogadro_number)
 )
 ureg.add_context(_d)
 ureg.enable_contexts('chemistry')
