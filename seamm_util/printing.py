@@ -21,7 +21,6 @@ output from a cutoff level and up is also written to the standard output.
 import inspect
 import logging
 import os
-import pprint  # noqa: F401
 import sys
 import textwrap
 try:
@@ -650,7 +649,7 @@ def fileConfig(fname):
 
             for log in existing:
                 print_root.manager.printerDict[log].disabled = 1
-        except:  # noqa: E722
+        except Exception:  # noqa: E722
             import traceback
             ei = sys.exc_info()
             traceback.print_exception(ei[0], ei[1], ei[2], None, sys.stderr)

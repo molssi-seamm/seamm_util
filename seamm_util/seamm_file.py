@@ -47,8 +47,8 @@ class File():
 
                 fd.close()
 
-                if line[0] == '!' and len(line.split()) == 3:
-                    organization, filetype, version = line[1:].split()
+                # if line[0] == '!' and len(line.split()) == 3:
+                #     organization, filetype, version = line[1:].split()
             else:
                 logger.warning(
                     "reading '{}', expected a header line but got\n\t'{}'"

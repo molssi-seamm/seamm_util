@@ -269,29 +269,27 @@ def to_molssi(data):
         elif key == 'MODEL':
             pass
         elif key == 'ATOM' or key == 'HETATM':
-            serial = int(line[6:11])  # noqa: F841
+            # serial = int(line[6:11])  # noqa: F841
             name = line[12:16].strip()
-            altloc = line[16]  # noqa: F841
-            resname = line[17:20].strip()  # noqa: F841
-            chainid = line[21]  # noqa: F841
-            resseq = int(line[22:26])  # noqa: F841
-            icode = line[26]  # noqa: F841
+            # altloc = line[16]  # noqa: F841
+            # resname = line[17:20].strip()  # noqa: F841
+            # chainid = line[21]  # noqa: F841
+            # resseq = int(line[22:26])  # noqa: F841
+            # icode = line[26]  # noqa: F841
             x = float(line[30:38])
             y = float(line[38:46])
             z = float(line[46:54])
-            tmp = line[54:60].strip()
-            occupancy = 0.0 if tmp == '' else float(tmp)  # noqa: F841
-            tmp = line[60:66].strip()
-            tempfactor = 0.0 if tmp == '' else float(tmp)  # noqa: F841
+            # tmp = line[54:60].strip()
+            # occupancy = 0.0 if tmp == '' else float(tmp)  # noqa: F841
+            # tmp = line[60:66].strip()
+            # tempfactor = 0.0 if tmp == '' else float(tmp)  # noqa: F841
             element = line[75:78].strip()
-            tmp = line[78:80].strip()
-            charge = 0.0 if tmp == '' else float(tmp)  # noqa: F841
+            # tmp = line[78:80].strip()
+            # charge = 0.0 if tmp == '' else float(tmp)  # noqa: F841
 
             names.append(name)
             elements.append(element)
             coordinates.append((x, y, z))
-
-            pass
         elif key == 'ANISOU':
             pass
         elif key == 'TER':
@@ -307,11 +305,9 @@ def to_molssi(data):
             for tmp in line[11:31].split():
                 if tmp.trim() != '':
                     connections[atom].append(int(tmp))
-            pass
         elif key == 'MASTER':
             pass
         elif key == 'END':
-            pass
             break
         else:
             raise RuntimeError('Illegal line in PDB file\n\t' + line)
