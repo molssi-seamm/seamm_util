@@ -1,4 +1,6 @@
 language: python
+script: pytest
+os: linux
 
 before_install:
     # Additional info about the build
@@ -22,9 +24,6 @@ install:
   - conda list
   - pip freeze
 
-matrix:
-  fast_finish: true
-
 notifications:
     email: false
 
@@ -34,6 +33,7 @@ stages:
   - deploy
 
 jobs:
+  fast_finish: true
   include:
     - stage: lint
       name: "Check formatting of code for PEP-8"
@@ -81,6 +81,7 @@ jobs:
     - stage: deploy
       name: "Deploy to PyPi"
       if: tag IS present
+      os: linux
       dist: xenial
       python: 3.7
       script: skip
@@ -93,6 +94,6 @@ jobs:
           condition: $TRAVIS_OS_NAME = linux
           repo: molssi-seamm/seamm_util
           tags: true
-        user: seamm
+        username: seamm
         password:
           secure: dMONRr7xRx09LOnKUteCa3CY8aGy8XrLX4oAka70RqmycrdZk1fLO3Ykz1Hzw4psREoXWQjmU5C0UTXAfSgpO3PrZPxYHU7+Pnyfjy8gE8ssVHUv19dXlFazxZG0vfjDiKq5FLiIx96Va2OnNDrcL5RfP3MXHamwqJkds8+w+nF0BEQ5Oa/WODAGIBYLYv08rpyBk9tYDX5uMliABgnraalHgPpoVVJEdOBIlpTgKUP2CCd+iaJQquHwJka3BEQ/PbGbQq0Rh5uWfNLEKZHQ53LPpqfTLhF9sR1ewXCQaFHIupDcmIGjavogk05lIcTgti7gF++Lv9xHZeakQF90d/jphhRu9DM2rS84MESm/LhgfqYJRk3P/6XrSUx4zxNV54cKOwdttGBUU+Ei102Rmh9f62Loc2uMNsGVes+kOshX2P9qiqUlGpV1Y8zbOuipscMFIJTnKHOkN2pLctNm+Qewa9VZjnC4ZVa39ssmmseEfJG906CfsCARVQ7Wf/uEIAn0nr07j6im4fql3fOEdKoAeUDvjX/o2K4lUR85ikbKFiiaz9XeyXmLbtgZC5/FIhgCA5dJtjgTrpsuYnEcACz++28+vWZKdYX89ohhD5mgZBVtc6XiXtD9oQp3bbgUAbmitRNI3ewBszVX6FQ7DC4czZsmDYOfyVt5NoR+8DA=
