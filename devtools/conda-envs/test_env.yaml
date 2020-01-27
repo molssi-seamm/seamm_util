@@ -20,6 +20,8 @@ dependencies:
   # Pip-only installs
   - pip:
     - pint
+
       # Testing
+    - codecov
     - yapf
 
