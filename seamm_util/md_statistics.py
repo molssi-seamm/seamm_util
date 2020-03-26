@@ -63,7 +63,6 @@ def analyze_autocorrelation(
 
     if nlags >= n:
         nlags = n - 1
-        print('nlags = n - 1 = {}'.format(nlags))
 
     while True:
         logger.debug('   nlags = {}'.format(nlags))
