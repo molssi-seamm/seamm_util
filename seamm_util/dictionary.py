@@ -18,12 +18,12 @@ class Dictionary(collections.abc.MutableMapping):
     'ordered' specifying the use of an ordered dictionary.
     """
 
-    def fromkeys(*args, **kwargs):
+    def fromkeys(iterable, value=None):
         """Create a new Dictionary with keys from iterable and values set to
         value.
         """
         result = Dictionary()
-        Dictionary.data.fromkeys(*args, **kwargs)
+        result.data = dict.fromkeys(iterable, value)
         return result
 
     def __init__(self, *args, ordered=False, **kwargs):
