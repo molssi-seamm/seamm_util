@@ -13,6 +13,7 @@ dependencies:
     # Testing
   - coverage
   - flake8
+  - jinja2
   - pytest
   - pytest-cov
   - pytest-runner
