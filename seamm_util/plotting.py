@@ -238,7 +238,7 @@ class Figure(Dictionary):
                                     )
                         else:
                             break
-            
+
     def dump(self, filename):
         """Write the filled in template to disk as <filename>.
 
