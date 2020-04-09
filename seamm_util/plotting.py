@@ -33,7 +33,7 @@ class Figure(Dictionary):
         Keyword arguments:
         """
 
-        super().__init__(**kwargs)
+        super().__init__(*args, **kwargs)
 
         self._jinja_env = jinja_env
         self._template = template
@@ -69,7 +69,7 @@ class Figure(Dictionary):
             Returns the value associated with the key, or the default.
         """
 
-        return self.data.get(key, default=default)
+        return self.data.get(key, default)
 
     def add_plot(self, name, **kwargs):
         """Create a new plot and return it.
@@ -150,7 +150,9 @@ class Figure(Dictionary):
         """
 
         grid = self._grid
+        plots = grid['plots'] = []
         # First, check that the layout is valid
+        last = ''
         for row_spec in args:
             column = 0
             for key in row_spec.split():
@@ -160,22 +162,23 @@ class Figure(Dictionary):
                             "'-' cannot be the first item in a row: '{}'"
                             .format(row_spec)
                         )
-                    last = key
                 else:
                     if key == '-' and (last == '^' or last == 'x'):
                         raise RuntimeError(
-                            "'-' cannot follow 'x' or '-': '{}'"
+                            "'-' cannot follow 'x' or '^': '{}'"
                             .format(row_spec)
                         )
+                last = key
                 if key in '-^x':
                     pass
                 else:
-                    if key in grid['plots']:
+                    if key in plots:
                         raise RuntimeError(
-                            "Plot '{}' is already used: '{}'".format(
+                            r"Plot '{}' is already used: '{}'".format(
                                 key, row_spec
                             )
                         )
+                    plots.append(key)
                 column += 1
 
         # Now process the entire specification
@@ -190,6 +193,52 @@ class Figure(Dictionary):
             if column > grid['ncolumns']:
                 grid['ncolumns'] = column
 
+        # Get row and column spans for the plots, checking that the input
+        # is valid
+
+        nrows = grid['nrows']
+        ncolumns = grid['ncolumns']
+        plots = grid['plots'] = []
+        for row in range(nrows):
+            for column in range(ncolumns):
+                name = layout[(row, column)]
+                if name not in '-^x':
+                    plot = self.get_plot(name)
+                    plot.row = row
+                    plot.column = column
+                    plot.column_span = 1
+
+                    plots.append(plot)
+
+                    # Walk to the right looking for cells with '-'
+                    for tmp in range(column + 1, ncolumns):
+                        if layout[(row, tmp)] == '-':
+                            plot.column_span += 1
+                        else:
+                            break
+                    plot.row_span = 1
+                    for tmp in range(row + 1, nrows):
+                        # Walk down looking for cell with '^'
+                        if layout[(tmp, column)] == '^':
+                            plot.row_span += 1
+
+                            # If the plot spans columns and rows, all the
+                            # cells in the extra rows must be '^'.
+                            # Check this!
+                            for col in range(
+                                column + 1, column + plot.column_span
+                            ):
+                                if layout[(tmp, col)] != '^':
+                                    val = layout[(tmp, col)]
+                                    raise RuntimeError(
+                                        (
+                                            "The cell at {},{} should be a"
+                                            " '^', not '{}'"
+                                        ).format(tmp, col, val)
+                                    )
+                        else:
+                            break
+            
     def dump(self, filename):
         """Write the filled in template to disk as <filename>.
 
@@ -240,51 +289,9 @@ class Figure(Dictionary):
                 plot.column = 0
                 nrows += 1
         else:
-            # Get row and column spans for the plots, checking that the input
-            # is valid
-
             nrows = grid['nrows']
             ncolumns = grid['ncolumns']
-            layout = grid['layout']
-            for row in range(nrows):
-                for column in range(ncolumns):
-                    name = layout[(row, column)]
-                    if name not in '-^x':
-                        plot = self.get_plot(name)
-                        plot.row = row
-                        plot.column = column
-                        plot.column_span = 1
-
-                        plots.append(plot)
-
-                        # Walk to the right looking for cells with '-'
-                        for tmp in range(column + 1, ncolumns):
-                            if layout[(row, tmp)] == '-':
-                                plot.column_span += 1
-                            else:
-                                break
-                        plot.row_span = 1
-                        for tmp in range(row + 1, nrows):
-                            # Walk down looking for cell with '^'
-                            if layout[(tmp, column)] == '^':
-                                plot.row_span += 1
-
-                                # If the plot spans columns and rows, all the
-                                # cells in the extra rows must be '^'.
-                                # Check this!
-                                for col in range(
-                                    column + 1, column + plot['column_span']
-                                ):
-                                    if layout[(tmp, col)] != '^':
-                                        val = layout[(tmp, col)]
-                                        raise RuntimeError(
-                                            (
-                                                "The cell at {},{} should be a"
-                                                " '^', not '{}'"
-                                            ).format(tmp, col, val)
-                                        )
-                            else:
-                                break
+            plots = grid['plots']
 
         # Work out where the plots (or really their axes) go
         padx = 0.1
