@@ -3,8 +3,9 @@
 
 """Tests for `seamm_util` package, plotting module."""
 
-from seamm_util import Figure
 import pytest
+from seamm_util import Figure
+import sys
 
 
 def test_create():
@@ -50,14 +51,20 @@ def test_str():
     """Testing that we can get a str representation."""
     fig = Figure(ordered=True)
     fig.update(a=1, b=2, c=3)
-    assert str(fig) == "{'a': 1, 'b': 2, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert str(fig) == "{'a': 1, 'b': 2, 'c': 3}"
+    else:
+        assert str(fig) == "OrderedDict([('a', 1), ('b', 2), ('c', 3)])"
 
 
 def test_repr():
     """Testing that we can get an official representation."""
     fig = Figure(ordered=True)
     fig.update(a=1, b=2, c=3)
-    assert repr(fig) == "{'a': 1, 'b': 2, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert repr(fig) == "{'a': 1, 'b': 2, 'c': 3}"
+    else:
+        assert repr(fig) == "OrderedDict([('a', 1), ('b', 2), ('c', 3)])"
 
 
 def test_fromkeys():
@@ -74,7 +81,10 @@ def test_copy():
     e = fig.copy()
     fig['b'] = 10
 
-    assert repr(e) == "{'a': 1, 'b': 10, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert str(e) == "{'a': 1, 'b': 10, 'c': 3}"
+    else:
+        assert str(e) == "OrderedDict([('a', 1), ('b', 10), ('c', 3)])"
 
 
 def test_template_attribute():

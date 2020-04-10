@@ -4,6 +4,7 @@
 """Tests for `seamm_util` package, Dictionary module."""
 
 from seamm_util import Dictionary
+import sys
 
 
 def test_create():
@@ -49,14 +50,20 @@ def test_str():
     """Testing that we can get a str representation."""
     d = Dictionary(ordered=True)
     d.update(a=1, b=2, c=3)
-    assert str(d) == "{'a': 1, 'b': 2, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert str(d) == "{'a': 1, 'b': 2, 'c': 3}"
+    else:
+        assert str(d) == "OrderedDict([('a', 1), ('b', 2), ('c', 3)])"
 
 
 def test_repr():
     """Testing that we can get an official representation."""
     d = Dictionary(ordered=True)
     d.update(a=1, b=2, c=3)
-    assert repr(d) == "{'a': 1, 'b': 2, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert repr(d) == "{'a': 1, 'b': 2, 'c': 3}"
+    else:
+        assert repr(d) == "OrderedDict([('a', 1), ('b', 2), ('c', 3)])"
 
 
 def test_fromkeys():
@@ -73,4 +80,7 @@ def test_copy():
     e = d.copy()
     d['b'] = 10
 
-    assert repr(e) == "{'a': 1, 'b': 10, 'c': 3}"
+    if sys.version_info >= (3, 7):
+        assert repr(e) == "{'a': 1, 'b': 10, 'c': 3}"
+    else:
+        assert repr(e) == "OrderedDict([('a', 1), ('b', 10), ('c', 3)])"
