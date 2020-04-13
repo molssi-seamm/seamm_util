@@ -50,27 +50,6 @@ class Figure(Dictionary):
     def template(self, value):
         self._template = value
 
-    def get(self, key, default=''):
-        """Return the value for key if key is in the dictionary, else
-        default. If default is not given, it defaults to an empty
-        string, so that this method never raises a KeyError.
-
-        Parameters
-        ----------
-        key : str
-            The key to fetch.
-        default : any value, optional
-            The value to return if the key is not in the data. Defaults to an
-            empty string.
-
-        Returns
-        -------
-        any
-            Returns the value associated with the key, or the default.
-        """
-
-        return self.data.get(key, default)
-
     def add_plot(self, name, **kwargs):
         """Create a new plot and return it.
 
@@ -521,27 +500,6 @@ class Trace(Dictionary):
         self.x_axis = x_axis
         self.y_axis = y_axis
         self.z_axis = z_axis
-
-    def get(self, key, default=''):
-        """Return the value for key if key is in the dictionary, else
-        default. If default is not given, it defaults to an empty
-        string, so that this method never raises a KeyError.
-
-        Parameters
-        ----------
-        key : str
-            The key to fetch.
-        default : any value, optional
-            The value to return if the key is not in the data. Defaults to an
-            empty string.
-
-        Returns
-        -------
-        any
-            Returns the value associated with the key, or the default.
-        """
-
-        return self.data.get(key, default=default)
 
     def to_dict(self):
         """Return a dictionary representing the trace.
