@@ -113,7 +113,7 @@ def test_get_default():
     """Test that we 'get' the default for a missing element."""
     fig = Figure({'a': 1, 'b': 2, 'c': 3})
 
-    assert fig.get('missing') == ''
+    assert fig.get('missing') is None
 
 
 def test_get_default_value():
