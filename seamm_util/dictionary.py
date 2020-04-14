@@ -18,12 +18,12 @@ class Dictionary(collections.abc.MutableMapping):
     'ordered' specifying the use of an ordered dictionary.
     """
 
-    @staticmethod
-    def fromkeys(iterable, value=None):
+    @classmethod
+    def fromkeys(cls, iterable, value=None):
         """Create a new Dictionary with keys from iterable and values set to
         value.
         """
-        result = Dictionary()
+        result = cls()
         result.data = dict.fromkeys(iterable, value)
         return result
 
