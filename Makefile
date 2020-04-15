@@ -51,12 +51,18 @@ lint: ## check style with yapf
 	flake8 seamm_util tests
 	yapf --diff --recursive seamm_util tests
 
+lint-tests: ## check style with yapf
+	flake8 tests
+	yapf --diff --recursive tests
+
 flake: ## check the style with flake8
 	flake8 setup.py seamm_util tests
 
 format: ## reformat with with yapf and isort
 	yapf --recursive --in-place seamm_util tests
-	#isort --recursive --atomic setup.py seamm_util tests
+
+format-tests: ## reformat with with yapf and isort
+	yapf --recursive --in-place tests
 
 test: ## run tests quickly with the default Python
 	py.test
