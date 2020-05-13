@@ -20,6 +20,7 @@ from seamm_util.plotting import Figure  # noqa: F401
 import seamm_util.printing  # noqa: F401
 # import seamm_util.md_statistics  # noqa: F401
 import seamm_util.variable_names  # noqa: F401
+import seamm_util.water_models  # noqa: F401
 
 # Handle versioneer
 from ._version import get_versions
