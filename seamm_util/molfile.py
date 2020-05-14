@@ -41,10 +41,24 @@ def from_seamm(structure, description='****', comment=''):
     )
     lines.append('M  V30 BEGIN ATOM')
     count = 0
-    for element, xyz in zip(atoms['elements'], atoms['coordinates']):
-        count += 1
-        x, y, z = xyz
-        lines.append('M  V30 {} {} {} {} {} 0'.format(count, element, x, y, z))
+    if 'formal charges' in atoms:
+        for element, xyz, chg in zip(
+            atoms['elements'], atoms['coordinates'], atoms['formal charges']
+        ):
+            count += 1
+            x, y, z = xyz
+            lines.append(
+                'M  V30 {} {} {} {} {} 0 CHG={}'.format(
+                    count, element, x, y, z, chg
+                )
+            )
+    else:
+        for element, xyz in zip(atoms['elements'], atoms['coordinates']):
+            count += 1
+            x, y, z = xyz
+            lines.append(
+                'M  V30 {} {} {} {} {} 0'.format(count, element, x, y, z)
+            )
     lines.append('M  V30 END ATOM')
     lines.append('M  V30 BEGIN BOND')
     count = 0
@@ -90,6 +104,7 @@ def to_seamm(data, extras=dict()):
             atoms = {}
             atoms['elements'] = []
             atoms['coordinates'] = []
+            atoms['formal charges'] = []
             bonds = []
         elif 'M  V30 COUNTS' in line:
             junk1, junk2, junk3, natoms, nbonds, nsgroups, n3d, is_chiral = \
@@ -109,9 +124,15 @@ def to_seamm(data, extras=dict()):
                 while lineno < last:
                     line = lines[lineno]
                     lineno += 1
-                    junk1, junk2, i, symbol, x, y, z, q = line.split()[0:8]
+                    i, symbol, x, y, z, q = line.split()[2:8]
                     atoms['coordinates'].append((float(x), float(y), float(z)))
                     atoms['elements'].append(symbol)
+                    if 'CHG=' in line:
+                        for tmp in line.split()[8:]:
+                            if 'CHG=' in tmp:
+                                atoms['formal charges'].append(int(tmp[4:]))
+                    else:
+                        atoms['formal charges'].append(0)
             line = lines[lineno]
             lineno += 1
             if 'M  V30 END ATOM' not in line:
@@ -145,5 +166,13 @@ def to_seamm(data, extras=dict()):
             value = structure['extras'][k] = v["value"]
             if value is not None:
                 structure['extras'][k] = v["value"]
+
+    # If there are no formal charges, remove them
+    have_charges = False
+    for charge in atoms['formal charges']:
+        if charge != 0:
+            have_charges = True
+    if not have_charges:
+        del atoms['formal charges']
 
     return structure
