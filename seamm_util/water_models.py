@@ -148,6 +148,33 @@ class SPC_E(Water):
         """
         return ['o_spc/e', 'h_spc/e', 'h_spc/e']
 
+    def reference(self):
+        ris = """
+            TY  - JOUR
+            T1  - The missing term in effective pair potentials
+            AU  - Berendsen, H. J. C.
+            AU  - Grigera, J. R.
+            AU  - Straatsma, T. P.
+            Y1  - 1987/11/01
+            PY  - 1987
+            DA  - 1987/11/01
+            N1  - doi: 10.1021/j100308a038
+            DO  - 10.1021/j100308a038
+            T2  - The Journal of Physical Chemistry
+            JF  - The Journal of Physical Chemistry
+            JO  - J. Phys. Chem.
+            SP  - 6269
+            EP  - 6271
+            VL  - 91
+            IS  - 24
+            PB  - American Chemical Society
+            SN  - 0022-3654
+            M3  - doi: 10.1021/j100308a038
+            UR  - https://doi.org/10.1021/j100308a038
+            ER  -
+        """
+        return ris
+
 
 class TIP3P(Water):
 
