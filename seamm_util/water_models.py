@@ -103,12 +103,17 @@ class Water(object):
                     'names': ['O', 'H1', 'H2'],
                     'elements': ['O', 'H', 'H'],
                     'coordinates': list(self.coordinates()),
+                    'charges':
+                        {
+                            '*': [self.qO, self.qH, self.qH]
+                        },
+                    'formal charges': [0, 0, 0],
                     'atom_types':
                         {
                             '*': self.atom_types()
                         }
                 },
-            'bonds': [(0, 1, 'single'), (0, 2, 'single')],
+            'bonds': [(1, 2, 'single'), (1, 3, 'single')],
             'units':
                 {
                     'coordinates': 'angstrom'
