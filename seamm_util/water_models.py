@@ -46,6 +46,62 @@ class Water(object):
             .format(model_name)
         )
 
+    @staticmethod
+    def find_waters(system):
+        """Find the water molecules in the given system.
+
+        At the moment, the atoms are 0-based, but the bonds are given using
+        1-based atom numbers!
+
+        Parameters
+        ----------
+        system : System object
+
+        Returns
+        -------
+
+        """
+        elements = system['atoms']['elements']
+        n_atoms = len(elements)
+
+        # List the bonds, ordering the two atoms.
+        bonds = []
+        for i, j, order in system['bonds']:
+            i -= 1
+            j -= 1
+            if i < j:
+                bonds.append((i, j))
+            else:
+                bonds.append((j, i))
+
+        # atoms bonded to each atom i
+        bonded_to = []
+        for i in range(n_atoms):
+            bonded_to.append([])
+        for i, j in bonds:
+            bonded_to[i].append(j)
+            bonded_to[j].append(i)
+
+        n_bonds = []
+        for i in range(n_atoms):
+            bonded_to[i].sort()
+            n_bonds.append(len(bonded_to[i]))
+
+        # Now find water molecules by looking for an O attached to two H's
+        waters = []
+        for i in range(n_atoms):
+            if elements[i] == 'O' and n_bonds[i] == 2:
+                h1, h2 = bonded_to[i]
+                if (
+                    elements[h1] == 'H' and n_bonds[h1] == 1 and
+                    elements[h2] == 'H' and n_bonds[h2] == 1
+                ):
+                    if h1 < h1:
+                        waters.append((i, h1, h2))
+                    else:
+                        waters.append((i, h2, h1))
+        return waters
+
     @property
     def mass(self):
         return mendeleev.element('O').mass + 2 * mendeleev.element('H').mass
