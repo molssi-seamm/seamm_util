@@ -605,7 +605,36 @@ if __name__ == "__main__":  # pragma: no cover
 
     # import pprint
 
+    a, b, c, alpha, beta, gamma = system['cell']
+    XYZ = system['atoms']['coordinates']
+    tmp = []
+    for xyz in XYZ[0:6]:
+        x, y, z = xyz
+        x += a
+        tmp.append((x, y, z))
+    for xyz in XYZ[6:12]:
+        x, y, z = xyz
+        x -= a
+        tmp.append((x, y, z))
+    for xyz in XYZ[12:18]:
+        x, y, z = xyz
+        x -= 2 * a
+        y += b
+        tmp.append((x, y, z))
+    for xyz in XYZ[18:24]:
+        x, y, z = xyz
+        x -= a
+        y -= b
+        z += 3 * c
+        tmp.append((x, y, z))
+    for xyz in XYZ[24:]:
+        tmp.append(xyz)
+
+    system['atoms']['coordinates'] = tmp
+
     result = to_mmcif(system)
+    with open('final.mmcif', 'w') as fd:
+        print(result, file=fd)
     print(result)
 
     # pprint.pprint(to_frac(system))
