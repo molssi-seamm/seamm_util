@@ -158,7 +158,7 @@ def to_seamm(data, extras=dict()):
             elif nbonds > 0:
                 raise RuntimeError("Missing bonds: '" + line + "'")
 
-    structure = {'atoms': atoms, 'bonds': bonds}
+    structure = {'periodicity': 0, 'atoms': atoms, 'bonds': bonds}
 
     if len(extras) > 0:
         structure['extras'] = {}
