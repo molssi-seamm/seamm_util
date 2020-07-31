@@ -1,2 +1,3 @@
 setup.py
 seamm_util/_version.py
+seamm_util/elemental_data.py

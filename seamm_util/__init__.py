@@ -8,6 +8,7 @@ Utility functions for the SEAMM environment.
 # Bring up the classes so that they appear to be directly in
 # the packmol_step package.
 
+from seamm_util.elemental_data import element_data  # noqa: F401
 from seamm_util.check_executable import check_executable  # noqa: F401
 from seamm_util.dictionary import Dictionary  # noqa: F401
 from seamm_util.units import ureg, Q_, units_class  # noqa: F401
