@@ -250,7 +250,7 @@ def to_mmcif(system):
         xa, ya, za = xyza
         x, y, z = xyz
         lines.append(
-            f'MOL1 {name} {element} {xa:.3f} {ya:3f} {za:.3f} '
+            f'MOL1 {name} {element} {xa:.3f} {ya:.3f} {za:.3f} '
             f'{x:.3f} {y:.3f} {z:.3f} HET 1'
         )
 
