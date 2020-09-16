@@ -7,7 +7,6 @@ import logging
 import os.path
 import seamm  # Due to handling of units, should be before util
 import seamm_util
-import seamm_util.molfile
 import pprint
 import re
 
@@ -16,8 +15,8 @@ obabel_exe = None
 logger = logging.getLogger(__name__)
 
 
-def from_seamm(structure):
-    """Convert a SEAMM structure to SMILES"""
+def from_seamm(system):
+    """Convert a SEAMM system to SMILES"""
     # obabel play/ethanol.mol -osmi -xh
 
     # If we don't know where the obabel executable is, find it!
@@ -57,7 +56,7 @@ def from_seamm(structure):
         )
 
     # Continue on
-    mol3 = seamm_util.molfile.from_seamm(structure)
+    mol3 = system.to_molfile_text()
     logger.debug('molfile:\n' + mol3)
 
     local = seamm.ExecLocal()

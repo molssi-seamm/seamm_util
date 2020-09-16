@@ -16,12 +16,9 @@ from seamm_util.include_open import Open  # noqa: F401
 from seamm_util.include_open import splitext  # noqa: F401
 from seamm_util.seamm_json import JSONDecoder  # noqa: F401
 from seamm_util.seamm_json import JSONEncoder  # noqa: F401
-from seamm_util.cif import to_cif  # noqa: F401
-from seamm_util.cif import to_mmcif  # noqa: F401
-import seamm_util.molfile  # noqa: F401
+import seamm_util.smiles
 from seamm_util.plotting import Figure  # noqa: F401
 import seamm_util.printing  # noqa: F401
-# import seamm_util.md_statistics  # noqa: F401
 import seamm_util.variable_names  # noqa: F401
 import seamm_util.water_models  # noqa: F401
 
