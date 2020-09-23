@@ -2,15 +2,19 @@ name: test
 
 channels:
   - default
+  - conda-forge
 
 dependencies:
-    # Base depends
+  # Base depends
   - python
   - pip
   - configargparse
   - statsmodels
 
-    # Testing
+  # SEAMM requirements
+  - openbabel  # for molsystem
+
+  # Testing
   - coverage
   - flake8
   - jinja2
@@ -21,6 +25,7 @@ dependencies:
   # Pip-only installs
   - pip:
     - mendeleev
+    - molsystem>=2020.9.23
     - pint
 
       # Testing
