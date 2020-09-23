@@ -1,6 +1,7 @@
 certifi==2020.4.5.1
 ConfigArgParse==1.1
 numpy==1.18.1
+molsystem==2020.9.23
 pandas==1.0.3
 patsy==0.5.1
 Pint==0.11
