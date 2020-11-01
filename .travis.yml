@@ -82,8 +82,7 @@ jobs:
       name: "Deploy to PyPi"
       if: tag IS present
       os: linux
-      dist: xenial
-      python: 3.8
+      env: PYTHON_VER=3.8
       script: skip
       deploy:
         provider: pypi
