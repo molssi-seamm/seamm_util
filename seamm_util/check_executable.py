@@ -15,7 +15,7 @@ _CONFIG_FILE_SOURCE_KEY = "config_file"
 _DEFAULTS_SOURCE_KEY = "defaults"
 
 
-def check_executable(executable, key=None, parser=None):
+def check_executable(executable):
     """Check that an executable exists.
 
     Check that an executable exists and is executable. If no path is
@@ -29,12 +29,6 @@ def check_executable(executable, key=None, parser=None):
         executable -- required positional parameter giving the name of
             the executable as a string. It can be a simple name or contain
             a path to the executable.
-
-        key -- string giving the command-line option used in
-            generating the path. These normally start with two dashes,
-            e.g. --openbabel-path. (optional)
-
-        parser -- the ConfigArgParser used to parse the options. (optional)
 
     Returns:
         The string for the path to the executable. If it was found on the path,
@@ -85,65 +79,5 @@ def check_executable(executable, key=None, parser=None):
                 )
         else:
             msg = "The executable '{}' does not exist!\n".format(executable)
-
-    if key is not None and parser is not None:
-        source_key_to_display_value_map = {
-            _COMMAND_LINE_SOURCE_KEY: "Command Line Args: ",
-            _ENV_VAR_SOURCE_KEY: "Environment Variables:\n",
-            _CONFIG_FILE_SOURCE_KEY: "Config File (%s):\n",
-            _DEFAULTS_SOURCE_KEY: "Defaults:\n"
-        }
-        for source, settings in parser._source_to_settings.items():
-            source = source.split("|")
-            if source[0] == _COMMAND_LINE_SOURCE_KEY:
-                junk, values = settings['']
-                if key in values:
-                    msg += (
-                        "The path came from the key '{}', which was "
-                        'set on the command-line.'
-                    ).format(key)
-                    break
-            elif source[0] == _ENV_VAR_SOURCE_KEY:
-                env_var = parser._option_string_actions[key].env_var
-                if env_var:
-                    if env_var in settings:
-                        msg += (
-                            "The path came from the environment variable "
-                            "'{}', whose value is '{}'"
-                        ).format(env_var, settings[env_var][1])
-                        break
-            elif source[0] == _CONFIG_FILE_SOURCE_KEY:
-                for tmp_key, (action, value) in settings.items():
-                    if action:
-                        if key in action.option_strings:
-                            msg += (
-                                "The path came from the configuration "
-                                "file '{}', key '{}', whose value is '{}'"
-                            ).format(source[1], key, value)
-                            break
-            elif source[0] == _DEFAULTS_SOURCE_KEY:
-                for tmp_key, (action, value) in settings.items():
-                    if action:
-                        if key in action.option_strings:
-                            msg += (
-                                "The path came from the default "
-                                "for the option '{}', which is '{}'"
-                            ).format(key, value)
-                            break
-            else:
-                # Shouln't get here, but if we do, just print what we know.
-                source = (
-                    source_key_to_display_value_map[source[0]] %
-                    tuple(source[1:])
-                )
-                print(source)
-                for tkey, (action, value) in settings.items():
-                    if tkey:
-                        print("  %-19s%s\n" % (tkey + ":", value))
-                    else:
-                        if isinstance(value, str):
-                            print("  %s\n" % value)
-                        elif isinstance(value, list):
-                            print("  %s\n" % ' '.join(value))
 
     raise FileNotFoundError(msg)
