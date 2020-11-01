@@ -8,12 +8,6 @@ import os.path
 
 logger = logging.getLogger(__name__)
 
-# from configargparse.py
-_COMMAND_LINE_SOURCE_KEY = "command_line"
-_ENV_VAR_SOURCE_KEY = "environment_variables"
-_CONFIG_FILE_SOURCE_KEY = "config_file"
-_DEFAULTS_SOURCE_KEY = "defaults"
-
 
 def check_executable(executable):
     """Check that an executable exists.
