@@ -142,7 +142,10 @@ def test_stack():
     cwd = os.path.dirname(__file__)
     datapath = os.path.join(cwd, 'data')
     filepath = os.path.join(datapath, 'file_include1.txt.gz')
-    data = ['data/file1.txt.gz:2', 'data/file_end.txt.gz:4']
+    data = [
+        os.path.normcase('data/file1.txt.gz:2'),
+        os.path.normcase('data/file_end.txt.gz:4')
+    ]
 
     i = 0
     with seamm_util.Open(filepath, 'r', include='include') as fd:
