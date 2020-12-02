@@ -64,8 +64,8 @@ jobs:
       shell: bash -l {0}
 
       run: |
-        flake8 dftbplus_step tests
-        yapf --diff --recursive dftblus_step tests
+        flake8 seamm_util tests
+        yapf --diff --recursive seamm_util tests
       
   test:
     name: Test ${{ matrix.os }} Py${{ matrix.python-version }}
@@ -112,7 +112,7 @@ jobs:
       shell: bash -l {0}
 
       run: |
-        pytest -v --cov=dftbplus_step --cov-report=xml --color=yes tests/
+        pytest -v --cov=seamm_util --cov-report=xml --color=yes tests/
 
     - name: CodeCov
       uses: codecov/codecov-action@v1
