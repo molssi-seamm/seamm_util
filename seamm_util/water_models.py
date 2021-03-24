@@ -3,7 +3,8 @@
 """Various water models."""
 
 import math
-import mendeleev
+
+import seamm_util
 
 
 class Water(object):
@@ -104,7 +105,10 @@ class Water(object):
 
     @property
     def mass(self):
-        return mendeleev.element('O').mass + 2 * mendeleev.element('H').mass
+        mass_oxygen = seamm_util.element_data['O']['atomic weight']
+        mass_hydrogen = seamm_util.element_data['H']['atomic weight']
+
+        return mass_oxygen + 2 * mass_hydrogen
 
     def coordinates(self):
         """A standard set of coordinates in Angstrom
