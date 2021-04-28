@@ -31,7 +31,7 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, project_root)
 
-import seamm_util
+import seamm_util  # noqa: E402
 
 # -- General configuration ---------------------------------------------
 
@@ -41,7 +41,10 @@ import seamm_util
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-    'sphinx.ext.napoleon', 'sphinx.ext.autodoc', 'sphinx.ext.viewcode'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,7 +54,7 @@ templates_path = ['_templates']
 source_suffix = '.rst'
 
 # The encoding of source files.
-#source_encoding = 'utf-8-sig'
+# source_encoding = 'utf-8-sig'
 
 # The master toctree document.
 master_doc = 'index'
@@ -113,7 +116,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
@@ -146,6 +149,12 @@ html_theme = 'default'
 # "default.css".
 html_static_path = ['_static']
 
+# These paths are either relative to html_static_path
+# or fully qualified paths (eg. https://...)
+html_css_files = [
+    'css/custom.css',
+]
+
 # If not '', a 'Last updated on:' timestamp is inserted at every page
 # bottom, using the given strftime format.
 # html_last_updated_fmt = '%b %d, %Y'
@@ -175,11 +184,11 @@ html_static_path = ['_static']
 
 # If true, "Created using Sphinx" is shown in the HTML footer.
 # Default is True.
-# html_show_sphinx = True
+html_show_sphinx = False
 
 # If true, "(C) Copyright ..." is shown in the HTML footer.
 # Default is True.
-# html_show_copyright = True
+html_show_copyright = False
 
 # If true, an OpenSearch description file will be output, and all pages
 # will contain a <link> tag referring to it.  The value of this option
@@ -217,7 +226,7 @@ latex_documents = [
 
 # The name of an image file (relative to this directory) to place at
 # the top of the title page.
-#latex_logo = None
+# latex_logo = None
 
 # For "manual" documents, if this is true, then toplevel headings
 # are parts, not chapters.

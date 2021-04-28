@@ -8,19 +8,18 @@ dependencies:
   # Base depends
   - python
   - pip
-  - configargparse
   - statsmodels
 
   # SEAMM requirements
   - openbabel  # for molsystem
 
   # Testing
-  - coverage
+  - black
+  - codecov
   - flake8
   - jinja2
   - pytest
   - pytest-cov
-  - pytest-runner
 
   # Pip-only installs
   - pip:
@@ -28,7 +27,11 @@ dependencies:
     - molsystem>=2020.9.23
     - pint
 
-      # Testing
-    - codecov
+    # Testing
     - yapf
 
+    # Documentation
+    - rinohtype
+    - pygments
+    - sphinx-rtd-theme
+    - pystemmer
