@@ -64,8 +64,8 @@ jobs:
       shell: bash -l {0}
 
       run: |
+        black --check --diff seamm_util tests
         flake8 seamm_util tests
-        yapf --diff --recursive seamm_util tests
       
   test:
     name: Test ${{ matrix.os }} Py${{ matrix.python-version }}

@@ -1,14 +1,15 @@
 name: test
 
 channels:
-  - default
   - conda-forge
+  - default
 
 dependencies:
   # Base depends
   - python
   - pip
   - statsmodels
+  - pint
 
   # SEAMM requirements
   - openbabel  # for molsystem
@@ -21,17 +22,14 @@ dependencies:
   - pytest
   - pytest-cov
 
+  # Documentation
+  - pygments
+
   # Pip-only installs
   - pip:
-    - mendeleev
     - molsystem>=2020.9.23
-    - pint
-
-    # Testing
-    - yapf
 
     # Documentation
     - rinohtype
-    - pygments
     - sphinx-rtd-theme
     - pystemmer
