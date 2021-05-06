@@ -1,3 +1,2 @@
-mendeleev==0.6.0
 Pint==0.16.1
 statsmodels==0.12.0

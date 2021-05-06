@@ -1,3 +1,2 @@
-mendeleev
 pint
 statsmodels
