@@ -13,9 +13,7 @@ import statsmodels.tsa.stattools as stattools
 logger = logging.getLogger(__name__)
 
 
-def analyze_autocorrelation(
-    y, interval=1, nlags=64, method='zr', use_confidence=False
-):
+def analyze_autocorrelation(y, interval=1, nlags=64, method="zr", use_confidence=False):
     """Find the statistical inefficiency, correlation time and other useful
     parameters given the time sequence of values 'y'.
 
@@ -59,13 +57,13 @@ def analyze_autocorrelation(
     # Find the autocorrelation time...
     n = len(y)
 
-    logger.debug('analyze_autocorrelation for a vector of length {}'.format(n))
+    logger.debug("analyze_autocorrelation for a vector of length {}".format(n))
 
     if nlags >= n:
         nlags = n - 1
 
     while True:
-        logger.debug('   nlags = {}'.format(nlags))
+        logger.debug("   nlags = {}".format(nlags))
 
         acf, confidence = stattools.acf(
             y, nlags=nlags, alpha=0.05, fft=nlags > 16, unbiased=False
@@ -103,16 +101,16 @@ def analyze_autocorrelation(
         else:
             if nlags == n - 1:
                 raise RuntimeError(
-                    'analyze_autocorrelation: Serious error! '
-                    'Did not find negative autocorrelation value.'
+                    "analyze_autocorrelation: Serious error! "
+                    "Did not find negative autocorrelation value."
                 )
             nlags *= 2
             if nlags >= n:
                 nlags = n - 1
 
-    logger.debug('   n_c = {}'.format(n_c))
+    logger.debug("   n_c = {}".format(n_c))
 
-    if method == 'zr':
+    if method == "zr":
         # Use the approach of Zięba and Ramza
         n_eff = (n - 2 * n_c - 1 + n_c * (n_c + 1) / n) / (1 + 2 * sum_acf)
         inefficiency = n / n_eff
@@ -129,22 +127,21 @@ def analyze_autocorrelation(
     tau = n_tau * interval
 
     result = {
-        'n': n,
-        'n_effective': n_eff,
-        'n_c': n_c,
-        'n_tau': n_tau,
-        'tau': tau,
-        'inefficiency': inefficiency,
-        'acf': acf,
-        'confidence_interval': confidence
+        "n": n,
+        "n_effective": n_eff,
+        "n_c": n_c,
+        "n_tau": n_tau,
+        "tau": tau,
+        "inefficiency": inefficiency,
+        "acf": acf,
+        "confidence_interval": confidence,
     }
 
     return result
 
 
 def ar1(n=1000, a=10.0, b=0.2, sigma=0.5, seed=None):
-    """Generate an AR(1) series of length n
-    """
+    """Generate an AR(1) series of length n"""
     r = random.Random()
     r.seed(seed)
 
@@ -158,7 +155,7 @@ def ar1(n=1000, a=10.0, b=0.2, sigma=0.5, seed=None):
 
 
 if __name__ == "__main__":
-    print('in end section')
+    print("in end section")
     import time
 
     print()
@@ -168,26 +165,20 @@ if __name__ == "__main__":
     for n in (15, 60, 240, 512, 1024, 2048, 10000, 100000):
         y = ar1(n, a=a, b=b, seed=52)
         t0 = time.time()
-        r1 = analyze_autocorrelation(y, method='zr', nlags=4)
+        r1 = analyze_autocorrelation(y, method="zr", nlags=4)
         t1 = time.time()
-        r2 = analyze_autocorrelation(
-            y, method='zr', nlags=4, use_confidence=True
-        )
+        r2 = analyze_autocorrelation(y, method="zr", nlags=4, use_confidence=True)
         t2 = time.time()
 
-        print('{:>20s} = {:7.3f} {:7.3f}'.format('time', t1 - t0, t2 - t1))
-        print(
-            '{:>20s} = {} {}'.format('nlags', len(r1['acf']), len(r2['acf']))
-        )
+        print("{:>20s} = {:7.3f} {:7.3f}".format("time", t1 - t0, t2 - t1))
+        print("{:>20s} = {} {}".format("nlags", len(r1["acf"]), len(r2["acf"])))
         for key in r1:
-            if key not in ['acf', 'confidence_interval']:
-                print(
-                    '{:>20s} = {:7.1f} {:7.1f}'.format(key, r1[key], r2[key])
-                )
+            if key not in ["acf", "confidence_interval"]:
+                print("{:>20s} = {:7.1f} {:7.1f}".format(key, r1[key], r2[key]))
 
         ave = statistics.mean(y)
         stdev = statistics.stdev(y)
-        print('                mean = {:9.3f}'.format(a / (1 - b)))
-        print('                 ave = {:9.3f}'.format(ave))
-        print('               stdev = {:9.3f}'.format(stdev))
+        print("                mean = {:9.3f}".format(a / (1 - b)))
+        print("                 ave = {:9.3f}".format(ave))
+        print("               stdev = {:9.3f}".format(stdev))
         print()

@@ -23,6 +23,7 @@ import logging
 import os
 import sys
 import textwrap
+
 try:
     import thread
     import threading
@@ -48,18 +49,18 @@ VERBOSE = 10
 ALL = 0
 
 _levelNames = {
-    JOB: 'JOB',
-    IMPORTANT: 'IMPORTANT',
-    TERSE: 'TERSE',
-    NORMAL: 'NORMAL',
-    VERBOSE: 'VERBOSE',
-    ALL: 'ALL',
-    'JOB': JOB,
-    'IMPORTANT': IMPORTANT,
-    'TERSE': TERSE,
-    'NORMAL': NORMAL,
-    'VERBOSE': VERBOSE,
-    'ALL': ALL,
+    JOB: "JOB",
+    IMPORTANT: "IMPORTANT",
+    TERSE: "TERSE",
+    NORMAL: "NORMAL",
+    VERBOSE: "VERBOSE",
+    ALL: "ALL",
+    "JOB": JOB,
+    "IMPORTANT": IMPORTANT,
+    "TERSE": TERSE,
+    "NORMAL": NORMAL,
+    "VERBOSE": VERBOSE,
+    "ALL": ALL,
 }
 
 
@@ -258,15 +259,14 @@ class Printer(logging.Filterer):
     """
 
     def __init__(self, name, level=ALL):
-        """Create the Printer object
-        """
+        """Create the Printer object"""
 
         super().__init__()
 
-        if name == 'print_root':
+        if name == "print_root":
             self.logger = logging.getLogger(name)
         else:
-            self.logger = logging.getLogger('print_root.' + name)
+            self.logger = logging.getLogger("print_root." + name)
         self.logger.setLevel(level)
 
     @property
@@ -485,7 +485,7 @@ def basicConfig():
     """
     if len(print_root.handlers) == 0:
         hdlr = logging.StreamHandler()
-        fmt = logging.Formatter(BASIC_FORMAT, style='{')
+        fmt = logging.Formatter(BASIC_FORMAT, style="{")
         hdlr.setFormatter(fmt)
         print_root.addHandler(hdlr)
 
@@ -508,7 +508,7 @@ def fileConfig(fname):
     import ConfigParser
 
     cp = ConfigParser.ConfigParser()
-    if hasattr(cp, 'readfp') and hasattr(fname, 'read'):
+    if hasattr(cp, "readfp") and hasattr(fname, "read"):
         cp.readfp(fname)
     else:
         cp.read(fname)
@@ -579,9 +579,7 @@ def fileConfig(fname):
                             target = cp.get(sectname, "target")
                         else:
                             target = ""
-                        if len(
-                            target
-                        ):  # the target handler may not be loaded yet,
+                        if len(target):  # the target handler may not be loaded yet,
                             # so keep for later...
                             fixups.append((h, target))
                     handlers[hand] = h
@@ -651,6 +649,7 @@ def fileConfig(fname):
                 print_root.manager.printerDict[log].disabled = 1
         except Exception:  # noqa: E722
             import traceback
+
             ei = sys.exc_info()
             traceback.print_exception(ei[0], ei[1], ei[2], None, sys.stderr)
             del ei
@@ -793,7 +792,7 @@ class FormattedText(object):
         self,
         text,
         dedent=True,
-        indent='',
+        indent="",
         indent_initial=True,
         indent_all=False,
         wrap=True,
@@ -850,9 +849,7 @@ class FormattedText(object):
             if len(self.args) == 0 and len(self.kwargs) == 0:
                 text = textwrap.dedent(self.text)
             else:
-                text = textwrap.dedent(
-                    self.text.format(*self.args, **self.kwargs)
-                )
+                text = textwrap.dedent(self.text.format(*self.args, **self.kwargs))
         else:
             if len(self.args) == 0 and len(self.kwargs) == 0:
                 text = self.text
@@ -860,38 +857,38 @@ class FormattedText(object):
                 text = self.text.format(*self.args, **self.kwargs)
 
         if self.wrap:
-            wrapped_text = ''
+            wrapped_text = ""
             buffer = []
             if not self.indent_initial:
-                initial_indent = ''
+                initial_indent = ""
             else:
                 initial_indent = self.indent
             for line in text.splitlines():
-                if line.strip() == '' or line[0] == ' ':
+                if line.strip() == "" or line[0] == " ":
                     if len(buffer) > 0:
                         wrapped_text += textwrap.fill(
-                            '\n'.join(buffer),
+                            "\n".join(buffer),
                             self.line_length,
                             initial_indent=initial_indent,
-                            subsequent_indent=self.indent
+                            subsequent_indent=self.indent,
                         )
-                        wrapped_text += '\n'
+                        wrapped_text += "\n"
                         buffer = []
-                    if line.strip() == '':
+                    if line.strip() == "":
                         if self.indent_all:
-                            wrapped_text += self.indent + '\n'
+                            wrapped_text += self.indent + "\n"
                         else:
-                            wrapped_text += '\n'
-                elif line.strip() != '' and line[0] != ' ':
+                            wrapped_text += "\n"
+                elif line.strip() != "" and line[0] != " ":
                     buffer.append(line)
-                if line.strip() != '' and line[0] == ' ':
-                    wrapped_text += self.indent + line + '\n'
+                if line.strip() != "" and line[0] == " ":
+                    wrapped_text += self.indent + line + "\n"
             if len(buffer) > 0:
                 wrapped_text += textwrap.fill(
-                    '\n'.join(buffer),
+                    "\n".join(buffer),
                     self.line_length,
                     initial_indent=initial_indent,
-                    subsequent_indent=self.indent
+                    subsequent_indent=self.indent,
                 )
 
             return wrapped_text

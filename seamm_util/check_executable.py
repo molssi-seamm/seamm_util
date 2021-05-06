@@ -36,7 +36,7 @@ def check_executable(executable):
             file or the default.
     """
 
-    if os.path.dirname(executable) == '':
+    if os.path.dirname(executable) == "":
         # A simple name without a directory part was given, so see if the
         # executable exists in the path.
         path = os.get_exec_path()
@@ -48,28 +48,24 @@ def check_executable(executable):
                     return exe
                 else:
                     exes.append(exe)
-        msg = (
-            "The executable '{}' was not found in the path:\n\t"
-            .format(executable)
-        )
-        msg += '\n\t'.join(path)
-        msg += '\n'
+        msg = "The executable '{}' was not found in the path:\n\t".format(executable)
+        msg += "\n\t".join(path)
+        msg += "\n"
         if len(exes) > 0:
             msg += (
-                'However, the following files were found, but were not '
-                'executable:\n\t'
+                "However, the following files were found, but were not "
+                "executable:\n\t"
             )
-            msg += '\n\t'.join(exes)
-            msg += '\n'
+            msg += "\n\t".join(exes)
+            msg += "\n"
     else:
         #  A path before the executable name was given, so try as is
         if os.path.isfile(executable):
             if os.access(executable, os.X_OK):
                 return executable
             else:
-                msg = (
-                    "The executable '{}' exists, but is not executable!\n"
-                    .format(executable)
+                msg = "The executable '{}' exists, but is not executable!\n".format(
+                    executable
                 )
         else:
             msg = "The executable '{}' does not exist!\n".format(executable)

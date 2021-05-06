@@ -43,8 +43,7 @@ class Water(object):
             return TIP3P()
 
         raise ValueError(
-            "Water model '{}' not implemented or recognized."
-            .format(model_name)
+            "Water model '{}' not implemented or recognized.".format(model_name)
         )
 
     @staticmethod
@@ -62,12 +61,12 @@ class Water(object):
         -------
 
         """
-        elements = system['atoms']['elements']
+        elements = system["atoms"]["elements"]
         n_atoms = len(elements)
 
         # List the bonds, ordering the two atoms.
         bonds = []
-        for i, j, order in system['bonds']:
+        for i, j, order in system["bonds"]:
             i -= 1
             j -= 1
             if i < j:
@@ -91,11 +90,13 @@ class Water(object):
         # Now find water molecules by looking for an O attached to two H's
         waters = []
         for i in range(n_atoms):
-            if elements[i] == 'O' and n_bonds[i] == 2:
+            if elements[i] == "O" and n_bonds[i] == 2:
                 h1, h2 = bonded_to[i]
                 if (
-                    elements[h1] == 'H' and n_bonds[h1] == 1 and
-                    elements[h2] == 'H' and n_bonds[h2] == 1
+                    elements[h1] == "H"
+                    and n_bonds[h1] == 1
+                    and elements[h2] == "H"
+                    and n_bonds[h2] == 1
                 ):
                     if h1 < h1:
                         waters.append((i, h1, h2))
@@ -105,8 +106,8 @@ class Water(object):
 
     @property
     def mass(self):
-        mass_oxygen = seamm_util.element_data['O']['atomic weight']
-        mass_hydrogen = seamm_util.element_data['H']['atomic weight']
+        mass_oxygen = seamm_util.element_data["O"]["atomic weight"]
+        mass_hydrogen = seamm_util.element_data["H"]["atomic weight"]
 
         return mass_oxygen + 2 * mass_hydrogen
 
@@ -139,12 +140,12 @@ class Water(object):
         z = self.r0 * math.cos(math.radians(self.theta0 / 2))
 
         string = (
-            'COMPND      Water\n'
-            'HETATM    1  O           1       0.000   0.000   0.000  1.00  0.00\n'  # noqa: E501
-            'HETATM    2  H           1       {x:.3f}   0.000   {z:.3f}  1.00  0.00\n'  # noqa: E501
-            'HETATM    3  H           1      -{x:.3f}   0.000   {z:.3f}  1.00  0.00\n'  # noqa: E501
-            'TER       4              1 \n'
-            'END'
+            "COMPND      Water\n"
+            "HETATM    1  O           1       0.000   0.000   0.000  1.00  0.00\n"  # noqa: E501
+            "HETATM    2  H           1       {x:.3f}   0.000   {z:.3f}  1.00  0.00\n"  # noqa: E501
+            "HETATM    3  H           1      -{x:.3f}   0.000   {z:.3f}  1.00  0.00\n"  # noqa: E501
+            "TER       4              1 \n"
+            "END"
         )
 
         return string.format(x=x, z=z)
@@ -157,33 +158,22 @@ class Water(object):
         system : SEAMM system
         """
         system = {
-            'periodicity': 0,
-            'atoms':
-                {
-                    'names': ['O', 'H1', 'H2'],
-                    'elements': ['O', 'H', 'H'],
-                    'coordinates': list(self.coordinates()),
-                    'charges':
-                        {
-                            '*': [self.qO, self.qH, self.qH]
-                        },
-                    'formal charges': [0, 0, 0],
-                    'atom_types':
-                        {
-                            '*': self.atom_types()
-                        }
-                },
-            'bonds': [(1, 2, 'single'), (1, 3, 'single')],
-            'units':
-                {
-                    'coordinates': 'angstrom'
-                }
+            "periodicity": 0,
+            "atoms": {
+                "names": ["O", "H1", "H2"],
+                "elements": ["O", "H", "H"],
+                "coordinates": list(self.coordinates()),
+                "charges": {"*": [self.qO, self.qH, self.qH]},
+                "formal charges": [0, 0, 0],
+                "atom_types": {"*": self.atom_types()},
+            },
+            "bonds": [(1, 2, "single"), (1, 3, "single")],
+            "units": {"coordinates": "angstrom"},
         }  # yapf: disable
         return system
 
 
 class SPC(Water):
-
     def __init__(self):
         super().__init__(1.0, 109.47, -0.82, 0.41)
 
@@ -195,11 +185,10 @@ class SPC(Water):
         types : str[3]
             3-vector of atom types
         """
-        return ['o_spc', 'h_spc', 'h_spc']
+        return ["o_spc", "h_spc", "h_spc"]
 
 
 class SPC_E(Water):
-
     def __init__(self):
         super().__init__(1.0, 109.47, -0.8476, 0.4238)
 
@@ -211,7 +200,7 @@ class SPC_E(Water):
         types : str[3]
             3-vector of atom types
         """
-        return ['o_spc/e', 'h_spc/e', 'h_spc/e']
+        return ["o_spc/e", "h_spc/e", "h_spc/e"]
 
     def reference(self):
         ris = """
@@ -242,7 +231,6 @@ class SPC_E(Water):
 
 
 class TIP3P(Water):
-
     def __init__(self):
         super().__init__(0.9572, 104.52, -0.834, 0.417)
 
@@ -254,4 +242,4 @@ class TIP3P(Water):
         types : str[3]
             3-vector of atom types
         """
-        return ['o_tip3p', 'h_tip3p', 'h_tip3p']
+        return ["o_tip3p", "h_tip3p", "h_tip3p"]

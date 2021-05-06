@@ -33,34 +33,31 @@ class JSONEncoder(json.JSONEncoder):
         import seamm
 
         if isinstance(obj, units_class):
-            return {'__type__': 'pint_units', 'data': obj.to_tuple()}
+            return {"__type__": "pint_units", "data": obj.to_tuple()}
         elif isinstance(obj, datetime.datetime):
             return {
-                '__type__': 'datetime',
-                'year': obj.year,
-                'month': obj.month,
-                'day': obj.day,
-                'hour': obj.hour,
-                'minute': obj.minute,
-                'second': obj.second,
-                'microsecond': obj.microsecond,
+                "__type__": "datetime",
+                "year": obj.year,
+                "month": obj.month,
+                "day": obj.day,
+                "hour": obj.hour,
+                "minute": obj.minute,
+                "second": obj.second,
+                "microsecond": obj.microsecond,
             }
         elif isinstance(obj, datetime.timedelta):
             return {
-                '__type__': 'timedelta',
-                'days': obj.days,
-                'seconds': obj.seconds,
-                'microseconds': obj.microseconds,
+                "__type__": "timedelta",
+                "days": obj.days,
+                "seconds": obj.seconds,
+                "microseconds": obj.microseconds,
             }
-        elif (
-            isinstance(obj, seamm.Parameter) or
-            isinstance(obj, seamm.Parameters)
-        ):
+        elif isinstance(obj, seamm.Parameter) or isinstance(obj, seamm.Parameters):
 
             #  Populate the dictionary with object meta data
             obj_dict = {
                 "__class__": obj.__class__.__name__,
-                "__module__": obj.__module__
+                "__module__": obj.__module__,
             }
 
             #  Populate the dictionary with object properties
@@ -81,22 +78,22 @@ class JSONDecoder(json.JSONDecoder):
         super().__init__(object_hook=self.dict_to_object)
 
     def dict_to_object(self, d):
-        if '__type__' in d:
-            type = d.pop('__type__')
-            if type == 'pint_units':
-                return Q_.from_tuple(d['data'])
-            elif type == 'datetime':
+        if "__type__" in d:
+            type = d.pop("__type__")
+            if type == "pint_units":
+                return Q_.from_tuple(d["data"])
+            elif type == "datetime":
                 return datetime.datetime(**d)
-            elif type == 'timedelta':
+            elif type == "timedelta":
                 return datetime.timedelta(**d)
             else:
                 # Oops... better put this back together.
-                d['__type__'] = type
+                d["__type__"] = type
 
-        if '__class__' in d:
+        if "__class__" in d:
             class_name = d.pop("__class__")
 
-            if class_name in 'Parameter':
+            if class_name in "Parameter":
                 # Get the module name from the dict and import it
                 module_name = d.pop("__module__")
                 module = __import__(module_name)
@@ -106,7 +103,7 @@ class JSONDecoder(json.JSONDecoder):
 
                 # Use dictionary unpacking to initialize the object
                 return class_(d)
-            elif 'Parameters' in class_name:
+            elif "Parameters" in class_name:
                 # Get the module name from the dict and import it
                 module_name = d.pop("__module__")
                 module = __import__(module_name)
@@ -117,13 +114,13 @@ class JSONDecoder(json.JSONDecoder):
                 # Use dictionary unpacking to initialize the object
                 return class_(data=d)
             else:
-                d['__init__class__'] = class_name
+                d["__init__class__"] = class_name
 
         return d
 
 
-if __name__ == '__main__':
-    acel = ureg('9.8 m/s**2')
+if __name__ == "__main__":
+    acel = ureg("9.8 m/s**2")
     print(acel)
     print(acel.__class__)
     print(units_class)
@@ -132,7 +129,7 @@ if __name__ == '__main__':
     print(t)
     print(t.__class__)
 
-    dct = {'acel': acel, 'time': t}
+    dct = {"acel": acel, "time": t}
 
     dump = json.dumps(dct, cls=JSONEncoder)
     print()
@@ -143,7 +140,7 @@ if __name__ == '__main__':
     t2 = decoder.decode(dump)
     print(t2)
     print()
-    print(t2['acel'])
-    print(t2['acel'].__class__)
-    print(t2['time'])
-    print(t2['time'].__class__)
+    print(t2["acel"])
+    print(t2["acel"].__class__)
+    print(t2["time"])
+    print(t2["time"].__class__)

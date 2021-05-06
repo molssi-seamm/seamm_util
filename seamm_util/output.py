@@ -17,7 +17,6 @@ import pprint
 
 
 class Output(collections.abc.MutableMapping):
-
     def __init__(self, filename=None, **kwargs):
         """Create the Output object
 
@@ -95,15 +94,14 @@ class Output(collections.abc.MutableMapping):
         return self._data.copy()
 
     def _open(self):
-        """Open self.filename, using compression according to its extension,
-        """
+        """Open self.filename, using compression according to its extension,"""
 
         extension = os.path.splitext(self.filename)[1].strip().lower()
-        if extension == '.bz2':
-            fd = bz2.open(self.filename, 'rt')
-        elif extension == '.gz':
-            fd = gzip.open(self.filename, 'rt')
+        if extension == ".bz2":
+            fd = bz2.open(self.filename, "rt")
+        elif extension == ".gz":
+            fd = gzip.open(self.filename, "rt")
         else:
-            fd = open(self.filename, 'r')
+            fd = open(self.filename, "r")
 
         return fd

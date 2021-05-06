@@ -24,8 +24,7 @@ import json
 
 
 class Figure(Dictionary):
-    """Holds one or more subplots and controls the layout.
-    """
+    """Holds one or more subplots and controls the layout."""
 
     def __init__(self, *args, jinja_env=None, template=None, **kwargs):
         """Initialize a figure.
@@ -39,7 +38,7 @@ class Figure(Dictionary):
         self._template = template
         self._plots = Dictionary(ordered=True)
 
-        self._grid = {'nrows': 0, 'ncolumns': 0, 'plots': {}, 'layout': {}}
+        self._grid = {"nrows": 0, "ncolumns": 0, "plots": {}, "layout": {}}
 
     @property
     def template(self):
@@ -129,59 +128,57 @@ class Figure(Dictionary):
         """
 
         grid = self._grid
-        plots = grid['plots'] = []
+        plots = grid["plots"] = []
         # First, check that the layout is valid
-        last = ''
+        last = ""
         for row_spec in args:
             column = 0
             for key in row_spec.split():
                 if column == 0:
-                    if key == '-':
+                    if key == "-":
                         raise RuntimeError(
-                            "'-' cannot be the first item in a row: '{}'"
-                            .format(row_spec)
+                            "'-' cannot be the first item in a row: '{}'".format(
+                                row_spec
+                            )
                         )
                 else:
-                    if key == '-' and (last == '^' or last == 'x'):
+                    if key == "-" and (last == "^" or last == "x"):
                         raise RuntimeError(
-                            "'-' cannot follow 'x' or '^': '{}'"
-                            .format(row_spec)
+                            "'-' cannot follow 'x' or '^': '{}'".format(row_spec)
                         )
                 last = key
-                if key in '-^x':
+                if key in "-^x":
                     pass
                 else:
                     if key in plots:
                         raise RuntimeError(
-                            r"Plot '{}' is already used: '{}'".format(
-                                key, row_spec
-                            )
+                            r"Plot '{}' is already used: '{}'".format(key, row_spec)
                         )
                     plots.append(key)
                 column += 1
 
         # Now process the entire specification
-        layout = grid['layout']
+        layout = grid["layout"]
         for row_spec in args:
-            row = grid['nrows']
-            grid['nrows'] += 1
+            row = grid["nrows"]
+            grid["nrows"] += 1
             column = 0
             for key in row_spec.split():
                 layout[(row, column)] = key
                 column += 1
-            if column > grid['ncolumns']:
-                grid['ncolumns'] = column
+            if column > grid["ncolumns"]:
+                grid["ncolumns"] = column
 
         # Get row and column spans for the plots, checking that the input
         # is valid
 
-        nrows = grid['nrows']
-        ncolumns = grid['ncolumns']
-        plots = grid['plots'] = []
+        nrows = grid["nrows"]
+        ncolumns = grid["ncolumns"]
+        plots = grid["plots"] = []
         for row in range(nrows):
             for column in range(ncolumns):
                 name = layout[(row, column)]
-                if name not in '-^x':
+                if name not in "-^x":
                     plot = self.get_plot(name)
                     plot.row = row
                     plot.column = column
@@ -191,23 +188,21 @@ class Figure(Dictionary):
 
                     # Walk to the right looking for cells with '-'
                     for tmp in range(column + 1, ncolumns):
-                        if layout[(row, tmp)] == '-':
+                        if layout[(row, tmp)] == "-":
                             plot.column_span += 1
                         else:
                             break
                     plot.row_span = 1
                     for tmp in range(row + 1, nrows):
                         # Walk down looking for cell with '^'
-                        if layout[(tmp, column)] == '^':
+                        if layout[(tmp, column)] == "^":
                             plot.row_span += 1
 
                             # If the plot spans columns and rows, all the
                             # cells in the extra rows must be '^'.
                             # Check this!
-                            for col in range(
-                                column + 1, column + plot.column_span
-                            ):
-                                if layout[(tmp, col)] != '^':
+                            for col in range(column + 1, column + plot.column_span):
+                                if layout[(tmp, col)] != "^":
                                     val = layout[(tmp, col)]
                                     raise RuntimeError(
                                         (
@@ -232,7 +227,7 @@ class Figure(Dictionary):
         """
 
         text = self.dumps()
-        with open(filename, 'w') as fd:
+        with open(filename, "w") as fd:
             fd.write(text)
 
     def dumps(self):
@@ -248,15 +243,15 @@ class Figure(Dictionary):
         """
         # Ensure that the jsonify filter is available in Jinja
 
-        if 'jsonify' not in self._jinja_env.filters:
-            self._jinja_env.filters['jsonify'] = json.dumps
+        if "jsonify" not in self._jinja_env.filters:
+            self._jinja_env.filters["jsonify"] = json.dumps
 
         # Get the layout (or create a default if there isn't one)
         # In the process get a list of the plots...
         plots = []
         grid = self._grid
 
-        if len(grid['layout']) == 0:
+        if len(grid["layout"]) == 0:
             # Set up the default layout of a vertical column of subplots
             nrows = 0
             ncolumns = 1
@@ -268,9 +263,9 @@ class Figure(Dictionary):
                 plot.column = 0
                 nrows += 1
         else:
-            nrows = grid['nrows']
-            ncolumns = grid['ncolumns']
-            plots = grid['plots']
+            nrows = grid["nrows"]
+            ncolumns = grid["ncolumns"]
+            plots = grid["plots"]
 
         # Work out where the plots (or really their axes) go
         padx = 0.1
@@ -308,15 +303,15 @@ class Figure(Dictionary):
                 xyz = axis.direction
                 axis.update(
                     {
-                        'number': axis_number,
-                        'name': xyz + 'axis' + str(axis_number),
-                        'short_name': xyz + str(axis_number)
+                        "number": axis_number,
+                        "name": xyz + "axis" + str(axis_number),
+                        "short_name": xyz + str(axis_number),
                     }
                 )
-                if xyz == 'x':
-                    axis.update({'start': plot.left, 'stop': plot.right})
-                elif xyz == 'y':
-                    axis.update({'start': plot.bottom, 'stop': plot.top})
+                if xyz == "x":
+                    axis.update({"start": plot.left, "stop": plot.right})
+                elif xyz == "y":
+                    axis.update({"start": plot.bottom, "stop": plot.top})
                 axis_number += 1
 
         # Sort out any anchors between axes and get the data
@@ -324,9 +319,9 @@ class Figure(Dictionary):
         for plot in plots:
             for axis in plot.axes:
                 if axis.anchor is None:
-                    axis.update(anchor='free')
+                    axis.update(anchor="free")
                 else:
-                    axis.update(anchor=axis.anchor['short_name'])
+                    axis.update(anchor=axis.anchor["short_name"])
 
                 axes.append(axis.to_dict())
 
@@ -335,18 +330,18 @@ class Figure(Dictionary):
         for plot in plots:
             for trace in plot.values():
                 if trace.x_axis is not None:
-                    trace.update(xaxis=trace.x_axis['short_name'])
+                    trace.update(xaxis=trace.x_axis["short_name"])
                 if trace.y_axis is not None:
-                    trace.update(yaxis=trace.y_axis['short_name'])
+                    trace.update(yaxis=trace.y_axis["short_name"])
                 if trace.z_axis is not None:
-                    trace.update(zaxis=trace.z_axis['short_name'])
+                    trace.update(zaxis=trace.z_axis["short_name"])
 
                 traces.append(trace.to_dict())
 
         # Assemble all the data and pass to Jinja
         tmp = dict(self)
-        tmp['traces'] = traces
-        tmp['axes'] = axes
+        tmp["traces"] = traces
+        tmp["axes"] = axes
 
         template = self._jinja_env.get_template(self.template)
         result = template.render(tmp)
@@ -371,7 +366,7 @@ class Plot(Dictionary):
         row=0,
         column=0,
         column_span=1,
-        row_span=1
+        row_span=1,
     ):
         """Initialize a plot, optionally with data.
 
@@ -460,10 +455,10 @@ class Axis(Dictionary):
 
         self.anchor = anchor
         self.direction = direction
-        self['label'] = ''
-        self['number'] = None
-        self['start'] = 0.0
-        self['stop'] = 1.0
+        self["label"] = ""
+        self["number"] = None
+        self["start"] = 0.0
+        self["stop"] = 1.0
 
         self.update(*args, **kwargs)
 

@@ -16,34 +16,34 @@ def test_create():
 def test_set_get_item():
     """Testing setting and then getting an item."""
     d = Dictionary()
-    d['a'] = 53
-    assert d['a'] == 53
+    d["a"] = 53
+    assert d["a"] == 53
 
 
 def test_len():
     """Testing getting the length of a dictionary."""
     d = Dictionary()
-    d['a'] = 53
+    d["a"] = 53
     assert len(d) == 1
 
 
 def test_del_item():
     """Testing that we can delete an item."""
     d = Dictionary()
-    d['a'] = 53
-    del d['a']
+    d["a"] = 53
+    del d["a"]
     assert len(d) == 0
 
 
 def test_iter():
     """Testing that we can iterate over a Dictionary."""
     d = Dictionary(ordered=True)
-    d.update({'a': 1, 'b': 2, 'c': 3})
+    d.update({"a": 1, "b": 2, "c": 3})
     keys = []
     for key in d:
         keys.append(key)
 
-    assert keys == ['a', 'b', 'c']
+    assert keys == ["a", "b", "c"]
 
 
 def test_str():
@@ -68,7 +68,7 @@ def test_repr():
 
 def test_fromkeys():
     """Test the class method fromkeys."""
-    d = Dictionary.fromkeys(['a', 'b', 'c'], 1)
+    d = Dictionary.fromkeys(["a", "b", "c"], 1)
     assert repr(d) == "{'a': 1, 'b': 1, 'c': 1}"
 
 
@@ -78,7 +78,7 @@ def test_copy():
     d.update(a=1, b=2, c=3)
 
     e = d.copy()
-    d['b'] = 10
+    d["b"] = 10
 
     if sys.version_info >= (3, 7):
         assert repr(e) == "{'a': 1, 'b': 10, 'c': 3}"
