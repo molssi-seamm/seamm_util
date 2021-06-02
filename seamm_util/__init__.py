@@ -6,8 +6,10 @@ Utility functions for the SEAMM environment.
 """
 
 # Bring up the classes so that they appear to be directly in
-# the packmol_step package.
+# the seamm_util package.
 
+from seamm_util.argument_parser import getParser  # noqa: F401
+from seamm_util.argument_parser import seamm_parser  # noqa: F401
 from seamm_util.elemental_data import element_data  # noqa: F401
 from seamm_util.check_executable import check_executable  # noqa: F401
 from seamm_util.dictionary import Dictionary  # noqa: F401
