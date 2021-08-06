@@ -4,6 +4,7 @@
 
 """
 
+from pathlib import Path
 import pprint
 import requests
 
@@ -34,7 +35,7 @@ class Record(object):
     metadata : dict()
         The metadata for updating the record.
     """
-    
+
     def __init__(self, data, token):
         self.data = data
         self.token = token
@@ -204,7 +205,6 @@ class Record(object):
         if keyword not in self.keywords:
             self.metadata["keywords"].append(keyword)
 
-
     def download_file(self, filename, path):
         """Download a file to a local copy.
 
@@ -215,7 +215,7 @@ class Record(object):
         path : pathlib.Path
             The path to download the file to. Can be a directory in which case
             the filename is used in that directory.
-        
+
         Returns
         -------
         pathlib.Path
@@ -234,7 +234,7 @@ class Record(object):
 
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         for data in self.data["files"]:
@@ -248,7 +248,7 @@ class Record(object):
                         f"\n\n{pprint.pformat(response.json())}"
                     )
 
-                with open(out_path, 'wb') as fd:
+                with open(out_path, "wb") as fd:
                     for chunk in response.iter_content(chunk_size=128):
                         fd.write(chunk)
 
@@ -275,7 +275,7 @@ class Record(object):
         ----------
         filename : str
             The name of the file.
-        
+
         Returns
         -------
         str or byte
@@ -285,7 +285,7 @@ class Record(object):
 
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         for data in self.data["files"]:
@@ -304,7 +304,7 @@ class Record(object):
 
     def publish(self):
         """Publish the record on Zenodo.
-        
+
         This registers the DOI, and after this the files cannot be changed.
         Any new metadata is uploaded before publishing.
         """
@@ -340,7 +340,7 @@ class Record(object):
 
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         for index, data in enumerate(self.data["files"]):
@@ -378,13 +378,12 @@ class Record(object):
         url = self.data["links"]["self"]
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         data = {"metadata": self.metadata}
-        data = json.dumps(data)
 
-        response = requests.put(url, data=data, headers=headers)
+        response = requests.put(url, json=data, headers=headers)
 
         if response.status_code != 200:
             raise RuntimeError(
@@ -408,7 +407,7 @@ class Zenodo(object):
         """Create a new record object for uploading a new version to Zenodo."""
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         url = self.base_url + f"/deposit/depositions/{_id}/actions/newversion"
@@ -440,7 +439,7 @@ class Zenodo(object):
         """Create a new record object for uploading to Zenodo."""
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         url = self.base_url + "/deposit/depositions"
@@ -461,7 +460,7 @@ class Zenodo(object):
         url = self.base_url + f"/deposit/depositions/{_id}"
         headers = {
             "Authorization": f"Bearer {self.token}",
-            "Content-Type":  "application/json",
+            "Content-Type": "application/json",
         }
 
         response = requests.get(url, json={}, headers=headers)
