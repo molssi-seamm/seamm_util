@@ -4,6 +4,9 @@
 
 """
 
+import collections.abc
+import copy
+import configparser
 from pathlib import Path
 import pprint
 import requests
@@ -23,7 +26,7 @@ upload_types = {
 }
 
 
-class Record(object):
+class Record(collections.abc.Mapping):
     """A class for handling uploading a record to Zenodo.
 
     Attributes
@@ -41,15 +44,56 @@ class Record(object):
         self.token = token
         self.metadata = {}
 
+    # Provide dict like access to the widgets to make
+    # the code cleaner
+
+    def __getitem__(self, key):
+        """Allow [] access to the widgets!"""
+        return self.data[key]
+
+    def __iter__(self):
+        """Allow iteration over the object"""
+        return iter(self.data)
+
+    def __len__(self):
+        """The len() command"""
+        return len(self.data)
+
+    def __str__(self):
+        return pprint.pformat(self.data)
+
+    @property
+    def authors(self):
+        """Synonym for creators"""
+        return self.creators
+
+    @authors.setter
+    def authors(self, value):
+        self.creators = value
+
+    @property
+    def conceptdoi(self):
+        """The generic concept DOI."""
+        if "conceptdoi" in self.data:
+            return self.data["conceptdoi"]
+        else:
+            return None
+
     @property
     def creators(self):
         """The creators for the record."""
         if "creators" not in self.metadata:
             if "creators" in self.data["metadata"]:
-                self.metadata["creators"] = [*self.data["metadata"]["creators"]]
+                self.metadata["creators"] = copy.deepcopy(
+                    self.data["metadata"]["creators"]
+                )
             else:
                 self.metadata["creators"] = []
         return self.metadata["creators"]
+
+    @creators.setter
+    def creators(self, value):
+        self.metadata["creators"] = copy.deepcopy(value)
 
     @property
     def description(self):
@@ -68,7 +112,7 @@ class Record(object):
     @property
     def doi(self):
         """The (prereserved) DOI."""
-        if "doi" in self.data:
+        if "doi" in self.data and self.data["doi"] != "":
             return self.data["doi"]
         else:
             return self.data["metadata"]["prereserve_doi"]["doi"]
@@ -88,10 +132,16 @@ class Record(object):
         """The keywords for the record."""
         if "keywords" not in self.metadata:
             if "keywords" in self.data["metadata"]:
-                self.metadata["keywords"] = [*self.data["metadata"]["keywords"]]
+                self.metadata["keywords"] = copy.deepcopy(
+                    self.data["metadata"]["keywords"]
+                )
             else:
                 self.metadata["keywords"] = []
         return self.metadata["keywords"]
+
+    @keywords.setter
+    def keywords(self, value):
+        self.metadata["keywords"] = copy.deepcopy(value)
 
     @property
     def submitted(self):
@@ -131,14 +181,14 @@ class Record(object):
 
     @upload_type.setter
     def upload_type(self, value):
-        if value not in Record.upload_types:
+        if value not in upload_types:
             raise ValueError(
                 f"upload_type '{value}' must be one of "
-                f"{', '.join(Record.upload_types.keys())}"
+                f"{', '.join(upload_types.keys())}"
             )
         self.metadata["upload_type"] = value
 
-    def add_creator(self, name, affiliation=None, orcid=None):
+    def add_creator(self, name, affiliation=None, orcid=None, ignore_duplicates=False):
         """Add a creator (author) to the record.
 
         Parameters
@@ -149,14 +199,20 @@ class Record(object):
             The creators affiliation (University, company,...)
         orcid : str, optional
             The ORCID id of the creator.
+        ignore_duplicates : bool = False
+            Silently ignore duplicate records.
         """
         # Already exists?
         for creator in self.creators:
             if "orcid" in creator and orcid is None:
                 if creator["orcid"] == orcid:
+                    if ignore_duplicates:
+                        return
                     raise RuntimeError(f"Duplicate entry for creator: {name}")
             elif creator["name"] == name:
-                raise RuntimeError(f"Duplicate entry for creator: {name}")
+                if ignore_duplicates:
+                    return
+            raise RuntimeError(f"Duplicate entry for creator: {name}")
 
         creator = {"name": name}
         if affiliation is not None:
@@ -165,12 +221,12 @@ class Record(object):
             creator["orcid"] = orcid
         self.metadata["creators"].append(creator)
 
-    def add_file(self, path, binary=False):
+    def add_file(self, path, contents=None, binary=False):
         """Add the given file to the record.
 
         Parameters
         ----------
-        path : pathlib.Path
+        path : str or pathlib.Path
             The path to the file to upload.
         binary : bool = False
             Whether to open as a binary file.
@@ -178,11 +234,17 @@ class Record(object):
         if self.submitted:
             raise RuntimeError("Files cannot be added to a submitted record.")
 
+        if isinstance(path, str):
+            path = Path(path).expanduser()
+
         url = self.data["links"]["bucket"] + "/" + path.name
         headers = {"Authorization": f"Bearer {self.token}"}
-        mode = "rb" if binary else "r"
-        with open(path, mode) as fd:
-            response = requests.put(url, data=fd, headers=headers)
+        if contents is None:
+            mode = "rb" if binary else "r"
+            with open(path, mode) as fd:
+                response = requests.put(url, data=fd, headers=headers)
+        else:
+            response = requests.put(url, data=contents, headers=headers)
 
         if response.status_code != 200:
             raise RuntimeError(
@@ -289,8 +351,8 @@ class Record(object):
         }
 
         for data in self.data["files"]:
-            if data["filename"] == filename:
-                url = data["links"]["download"]
+            if data["key"] == filename:
+                url = data["links"]["self"]
                 response = requests.get(url, headers=headers)
 
                 if response.status_code != 200:
@@ -396,12 +458,53 @@ class Record(object):
 
 
 class Zenodo(object):
-    def __init__(self, token, use_sandbox=False):
+    def __init__(self, token=None, configfile="~/.zenodorc", use_sandbox=False):
         if use_sandbox:
             self.base_url = "https://sandbox.zenodo.org/api"
         else:
             self.base_url = "https://zenodo.org/api"
-        self.token = token
+
+        self._token = token
+        self.configfile = configfile
+        self.use_sandbox = use_sandbox
+
+    @property
+    def token(self):
+        """The appropriate token for Zenodo."""
+        path = Path(self.configfile).expanduser()
+        if not path.exists:
+            raise RuntimeError(
+                f"You need a {self.configurationfile} file to publish to Zenodo. "
+                "See the documentation for more details."
+            )
+
+        config = configparser.ConfigParser()
+        config.read(path)
+
+        if self.use_sandbox:
+            if "SANDBOX" not in config:
+                raise RuntimeError(
+                    f"There is no [SANDBOX] section in {self.configfile}."
+                )
+            if "token" not in config["SANDBOX"]:
+                raise RuntimeError(
+                    "There is no 'token' in the [SANDBOX] section of "
+                    f"{self.configfile}."
+                )
+            token = config["SANDBOX"]["token"]
+        else:
+            if "ZENODO" not in config:
+                raise RuntimeError(
+                    f"There is no [ZENODO] section in {self.configfile}."
+                )
+            if "token" not in config["ZENODO"]:
+                raise RuntimeError(
+                    "There is no 'token' in the [ZENODO] section of "
+                    f"{self.configfile}."
+                )
+            token = config["ZENODO"]["token"]
+
+        return token
 
     def add_version(self, _id):
         """Create a new record object for uploading a new version to Zenodo."""
@@ -455,9 +558,29 @@ class Zenodo(object):
 
         return Record(result, self.token)
 
+    def get_deposit_record(self, _id):
+        """Get an existing deposit record object from Zenodo."""
+        url = self.base_url + f"/deposit/depositions/{_id}"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
+        }
+
+        response = requests.get(url, json={}, headers=headers)
+
+        if response.status_code != 200:
+            raise RuntimeError(
+                f"Error in get_deposit_record: code = {response.status_code}"
+                f"\n\n{pprint.pformat(response.json())}"
+            )
+
+        result = response.json()
+
+        return Record(result, self.token)
+
     def get_record(self, _id):
         """Get an existing record object from Zenodo."""
-        url = self.base_url + f"/deposit/depositions/{_id}"
+        url = self.base_url + f"/api/records/{_id}"
         headers = {
             "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
@@ -475,7 +598,17 @@ class Zenodo(object):
 
         return Record(result, self.token)
 
-    def search(self, communities=None, keywords=None, size=100, page=1):
+    def search(
+        self,
+        authors=None,
+        communities=None,
+        keywords=None,
+        title=None,
+        description=None,
+        all_versions=False,
+        size=25,
+        page=1,
+    ):
         """Search for records in Zenodo."""
         url = self.base_url + "/records"
         headers = {"Authorization": f"Bearer {self.token}"}
@@ -484,6 +617,9 @@ class Zenodo(object):
             "size": size,
             "page": page,
         }
+        if all_versions:
+            payload["all_versions"] = 1
+
         q = []
         if communities is not None:
             for community in communities:
@@ -514,8 +650,7 @@ class Zenodo(object):
             for record in hits["hits"]:
                 records.append(Record(record, self.token))
 
-            print(f"Found {len(records)} ({n_hits}) records")
-            for record in records:
-                print(f"\t{record['id']}: {record['metadata']['title']}")
+            # for record in records:
+            #     print(f"\t{record['id']}: {record['metadata']['title']}")
 
-        return records
+        return n_hits, records
