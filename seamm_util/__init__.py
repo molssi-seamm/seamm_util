@@ -22,6 +22,8 @@ from seamm_util.plotting import Figure  # noqa: F401
 import seamm_util.printing  # noqa: F401
 import seamm_util.variable_names  # noqa: F401
 import seamm_util.water_models  # noqa: F401
+import seamm_util.zenodo  # noqa: F401
+from seamm_util.zenodo import Zenodo  # noqa: F401
 
 # Handle versioneer
 from ._version import get_versions
