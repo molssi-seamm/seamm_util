@@ -7,10 +7,12 @@
 import collections.abc
 import copy
 import configparser
+import logging
 from pathlib import Path
 import pprint
 import requests
 
+logger = logging.getLogger(__name__)
 
 upload_types = {
     "publication": "Publication",
@@ -601,6 +603,7 @@ class Zenodo(object):
     def search(
         self,
         authors=None,
+        query="",
         communities=None,
         keywords=None,
         title=None,
@@ -610,7 +613,7 @@ class Zenodo(object):
         page=1,
     ):
         """Search for records in Zenodo."""
-        url = self.base_url + "/records"
+        url = self.base_url + "/records/"
         headers = {"Authorization": f"Bearer {self.token}"}
 
         payload = {
@@ -620,17 +623,17 @@ class Zenodo(object):
         if all_versions:
             payload["all_versions"] = 1
 
-        q = []
         if communities is not None:
             for community in communities:
-                q.append(f'+communities:"{community}"')
+                query += f' AND +communities:"{community}"'
 
         if keywords is not None:
             for keyword in keywords:
-                q.append(f'+keywords:"{keyword}"')
+                query += f' AND +keywords:"{keyword}"'
 
-        if len(q) > 0:
-            payload["q"] = " ".join(q)
+        payload["q"] = query
+
+        logger.debug("Payload for query request:\n" + pprint.pformat(payload))
 
         response = requests.get(url, headers=headers, params=payload)
 
@@ -645,12 +648,16 @@ class Zenodo(object):
         records = []
         if "hits" in result:
             hits = result["hits"]
-
             n_hits = hits["total"]
+
+            logger.debug(f"{n_hits=}")
+
             for record in hits["hits"]:
                 records.append(Record(record, self.token))
 
-            # for record in records:
-            #     print(f"\t{record['id']}: {record['metadata']['title']}")
+            for record in records:
+                logger.debug(f"\t{record['id']}: {record['metadata']['title']}")
+        else:
+            logger.debug("Query returned no hits!")
 
         return n_hits, records
