@@ -613,6 +613,20 @@ def seamm_parser(name="SEAMM"):
 
     parser.add_argument(
         "SEAMM",
+        "--database",
+        group="job options",
+        default="seamm.db",
+        help="The database for this job.",
+    )
+    parser.add_argument(
+        "SEAMM",
+        "--read-only",
+        group="job options",
+        action="store_true",
+        help="Whether to open the database as read-only.",
+    )
+    parser.add_argument(
+        "SEAMM",
         "--standalone",
         group="job options",
         action="store_true",
