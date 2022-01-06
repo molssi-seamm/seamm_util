@@ -297,9 +297,10 @@ class Record(collections.abc.Mapping):
             out_path = path
 
         headers = {
-            "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
         }
+        if self.token is not None:
+            headers["Authorization"] = f"Bearer {self.token}"
 
         for data in self.data["files"]:
             if data["filename"] == filename:
@@ -348,9 +349,10 @@ class Record(collections.abc.Mapping):
             raise RuntimeError("There are no files in the record.")
 
         headers = {
-            "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json",
         }
+        if self.token is not None:
+            headers["Authorization"] = f"Bearer {self.token}"
 
         for data in self.data["files"]:
             if data["key"] == filename:
@@ -466,7 +468,6 @@ class Zenodo(object):
         else:
             self.base_url = "https://zenodo.org/api"
 
-        self._token = token
         self.configfile = configfile
         self.use_sandbox = use_sandbox
 
@@ -563,12 +564,17 @@ class Zenodo(object):
     def get_deposit_record(self, _id):
         """Get an existing deposit record object from Zenodo."""
         url = self.base_url + f"/deposit/depositions/{_id}"
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-            "Content-Type": "application/json",
-        }
-
-        response = requests.get(url, json={}, headers=headers)
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.token}",
+                "Content-Type": "application/json",
+            }
+        except Exception:
+            token = None
+            response = requests.get(url, json={})
+        else:
+            token = self.token
+            response = requests.get(url, json={}, headers=headers)
 
         if response.status_code != 200:
             raise RuntimeError(
@@ -578,17 +584,20 @@ class Zenodo(object):
 
         result = response.json()
 
-        return Record(result, self.token)
+        return Record(result, token)
 
     def get_record(self, _id):
         """Get an existing record object from Zenodo."""
         url = self.base_url + f"/api/records/{_id}"
-        headers = {
-            "Authorization": f"Bearer {self.token}",
-            "Content-Type": "application/json",
-        }
-
-        response = requests.get(url, json={}, headers=headers)
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.token}",
+                "Content-Type": "application/json",
+            }
+        except Exception:
+            response = requests.get(url, json={})
+        else:
+            response = requests.get(url, json={}, headers=headers)
 
         if response.status_code != 200:
             raise RuntimeError(
@@ -598,7 +607,7 @@ class Zenodo(object):
 
         result = response.json()
 
-        return Record(result, self.token)
+        return Record(result, None)
 
     def search(
         self,
@@ -614,7 +623,6 @@ class Zenodo(object):
     ):
         """Search for records in Zenodo."""
         url = self.base_url + "/records/"
-        headers = {"Authorization": f"Bearer {self.token}"}
 
         payload = {
             "size": size,
@@ -635,7 +643,14 @@ class Zenodo(object):
 
         logger.debug("Payload for query request:\n" + pprint.pformat(payload))
 
-        response = requests.get(url, headers=headers, params=payload)
+        try:
+            headers = {
+                "Authorization": f"Bearer {self.token}",
+            }
+        except Exception:
+            response = requests.get(url, params=payload)
+        else:
+            response = requests.get(url, headers=headers, params=payload)
 
         if response.status_code != 200:
             raise RuntimeError(
@@ -653,7 +668,7 @@ class Zenodo(object):
             logger.debug(f"{n_hits=}")
 
             for record in hits["hits"]:
-                records.append(Record(record, self.token))
+                records.append(Record(record, None))
 
             for record in records:
                 logger.debug(f"\t{record['id']}: {record['metadata']['title']}")
