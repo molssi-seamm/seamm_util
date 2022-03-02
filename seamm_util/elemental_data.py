@@ -9,6 +9,12 @@ element_data = {
         "element": "hydrogen",
         "atomic weight": 1.008,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 0.4,
+        "density_source": "Guess",
+        "electron configuration": "1s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "He": {
         "atomic number": 2,
@@ -16,6 +22,12 @@ element_data = {
         "element": "helium",
         "atomic weight": 4.0026,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 0.4,
+        "density_source": "Guess",
+        "electron configuration": "1s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Li": {
         "atomic number": 3,
@@ -23,6 +35,14 @@ element_data = {
         "element": "lithium",
         "atomic weight": 6.967499999999999,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 0.534,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[He] 2s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Be": {
         "atomic number": 4,
@@ -30,6 +50,14 @@ element_data = {
         "element": "beryllium",
         "atomic weight": 9.0122,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.85,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[He] 2s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "B": {
         "atomic number": 5,
@@ -37,6 +65,14 @@ element_data = {
         "element": "boron",
         "atomic weight": 10.8135,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.34,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[He] 2s2 2p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "C": {
         "atomic number": 6,
@@ -44,6 +80,14 @@ element_data = {
         "element": "carbon",
         "atomic weight": 12.0105,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 3.513,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[He] 2s2 2p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "N": {
         "atomic number": 7,
@@ -51,6 +95,12 @@ element_data = {
         "element": "nitrogen",
         "atomic weight": 14.007,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.0,
+        "density_source": "Guess",
+        "electron configuration": "[He] 2s2 2p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "O": {
         "atomic number": 8,
@@ -58,6 +108,12 @@ element_data = {
         "element": "oxygen",
         "atomic weight": 15.999500000000001,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.0,
+        "density_source": "Guess",
+        "electron configuration": "[He] 2s2 2p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "F": {
         "atomic number": 9,
@@ -65,6 +121,12 @@ element_data = {
         "element": "fluorine",
         "atomic weight": 18.998,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.0,
+        "density_source": "Guess",
+        "electron configuration": "[He] 2s2 2p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ne": {
         "atomic number": 10,
@@ -72,6 +134,12 @@ element_data = {
         "element": "neon",
         "atomic weight": 20.18,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.0,
+        "density_source": "Guess",
+        "electron configuration": "[He] 2s2 2p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Na": {
         "atomic number": 11,
@@ -79,6 +147,14 @@ element_data = {
         "element": "sodium",
         "atomic weight": 22.99,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 0.968,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Mg": {
         "atomic number": 12,
@@ -86,6 +162,14 @@ element_data = {
         "element": "magnesium",
         "atomic weight": 24.3055,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.738,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Al": {
         "atomic number": 13,
@@ -93,6 +177,14 @@ element_data = {
         "element": "aluminium",
         "atomic weight": 26.982,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.70,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s2 3p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Si": {
         "atomic number": 14,
@@ -100,6 +192,14 @@ element_data = {
         "element": "silicon",
         "atomic weight": 28.085,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.33,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s2 3p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "P": {
         "atomic number": 15,
@@ -107,6 +207,14 @@ element_data = {
         "element": "phosphorus",
         "atomic weight": 30.974,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.69,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s2 3p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "S": {
         "atomic number": 16,
@@ -114,6 +222,14 @@ element_data = {
         "element": "sulfur",
         "atomic weight": 32.067499999999995,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.08,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ne] 3s2 3p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cl": {
         "atomic number": 17,
@@ -121,6 +237,12 @@ element_data = {
         "element": "chlorine",
         "atomic weight": 35.451499999999996,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.0,
+        "density_source": "Guess",
+        "electron configuration": "[Ne] 3s2 3p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ar": {
         "atomic number": 18,
@@ -128,6 +250,12 @@ element_data = {
         "element": "argon",
         "atomic weight": 39.8775,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.0,
+        "density_source": "Guess",
+        "electron configuration": "[Ne] 3s2 3p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "K": {
         "atomic number": 19,
@@ -135,6 +263,14 @@ element_data = {
         "element": "potassium",
         "atomic weight": 39.098,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 0.89,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 4s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ca": {
         "atomic number": 20,
@@ -142,6 +278,14 @@ element_data = {
         "element": "calcium",
         "atomic weight": 40.078,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.55,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sc": {
         "atomic number": 21,
@@ -149,6 +293,14 @@ element_data = {
         "element": "scandium",
         "atomic weight": 44.956,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.985,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d1 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ti": {
         "atomic number": 22,
@@ -156,6 +308,14 @@ element_data = {
         "element": "titanium",
         "atomic weight": 47.867,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 4.506,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d2 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "V": {
         "atomic number": 23,
@@ -163,6 +323,14 @@ element_data = {
         "element": "vanadium",
         "atomic weight": 50.942,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.11,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d3 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cr": {
         "atomic number": 24,
@@ -170,6 +338,14 @@ element_data = {
         "element": "chromium",
         "atomic weight": 51.996,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.15,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d5 4s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Mn": {
         "atomic number": 25,
@@ -177,6 +353,14 @@ element_data = {
         "element": "manganese",
         "atomic weight": 54.938,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.21,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d5 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Fe": {
         "atomic number": 26,
@@ -184,6 +368,14 @@ element_data = {
         "element": "iron",
         "atomic weight": 55.845,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.86,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d6 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Co": {
         "atomic number": 27,
@@ -191,6 +383,14 @@ element_data = {
         "element": "cobalt",
         "atomic weight": 58.933,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.90,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d7 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ni": {
         "atomic number": 28,
@@ -198,6 +398,14 @@ element_data = {
         "element": "nickel",
         "atomic weight": 58.693,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.908,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d8 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cu": {
         "atomic number": 29,
@@ -205,6 +413,14 @@ element_data = {
         "element": "copper",
         "atomic weight": 63.546,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.96,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Zn": {
         "atomic number": 30,
@@ -212,6 +428,14 @@ element_data = {
         "element": "zinc",
         "atomic weight": 65.38,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.14,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ga": {
         "atomic number": 31,
@@ -219,6 +443,14 @@ element_data = {
         "element": "gallium",
         "atomic weight": 69.723,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 5.91,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s2 4p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ge": {
         "atomic number": 32,
@@ -226,6 +458,14 @@ element_data = {
         "element": "germanium",
         "atomic weight": 72.63,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 5.323,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s2 4p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "As": {
         "atomic number": 33,
@@ -233,6 +473,14 @@ element_data = {
         "element": "arsenic",
         "atomic weight": 74.922,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 5.727,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s2 4p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Se": {
         "atomic number": 34,
@@ -240,6 +488,14 @@ element_data = {
         "element": "selenium",
         "atomic weight": 78.971,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 4.81,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Ar] 3d10 4s2 4p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Br": {
         "atomic number": 35,
@@ -247,6 +503,12 @@ element_data = {
         "element": "bromine",
         "atomic weight": 79.904,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.0,
+        "density_source": "Guess",
+        "electron configuration": "[Ar] 3d10 4s2 4p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Kr": {
         "atomic number": 36,
@@ -254,6 +516,12 @@ element_data = {
         "element": "krypton",
         "atomic weight": 83.798,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.0,
+        "density_source": "Guess",
+        "electron configuration": "[Ar] 3d10 4s2 4p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Rb": {
         "atomic number": 37,
@@ -261,6 +529,14 @@ element_data = {
         "element": "rubidium",
         "atomic weight": 85.468,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.532,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sr": {
         "atomic number": 38,
@@ -268,6 +544,14 @@ element_data = {
         "element": "strontium",
         "atomic weight": 87.62,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 2.64,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 5s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Y": {
         "atomic number": 39,
@@ -275,6 +559,14 @@ element_data = {
         "element": "yttrium",
         "atomic weight": 88.906,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 4.472,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d1 5s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Zr": {
         "atomic number": 40,
@@ -282,6 +574,14 @@ element_data = {
         "element": "zirconium",
         "atomic weight": 91.224,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.52,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d2 5s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Nb": {
         "atomic number": 41,
@@ -289,6 +589,14 @@ element_data = {
         "element": "niobium",
         "atomic weight": 92.906,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.57,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d4 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Mo": {
         "atomic number": 42,
@@ -296,6 +604,14 @@ element_data = {
         "element": "molybdenum",
         "atomic weight": 95.95,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 10.28,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d5 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Tc": {
         "atomic number": 43,
@@ -303,6 +619,14 @@ element_data = {
         "element": "technetium",
         "atomic weight": 96.906,
         "source": "webelements  30 July 2020",
+        "density": 11.0,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d5 5s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ru": {
         "atomic number": 44,
@@ -310,6 +634,14 @@ element_data = {
         "element": "ruthenium",
         "atomic weight": 101.07,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 12.45,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d7 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Rh": {
         "atomic number": 45,
@@ -317,6 +649,14 @@ element_data = {
         "element": "rhodium",
         "atomic weight": 102.91,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 12.41,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d8 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pd": {
         "atomic number": 46,
@@ -324,6 +664,14 @@ element_data = {
         "element": "palladium",
         "atomic weight": 106.42,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 12.023,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ag": {
         "atomic number": 47,
@@ -331,6 +679,14 @@ element_data = {
         "element": "silver",
         "atomic weight": 107.87,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 10.49,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cd": {
         "atomic number": 48,
@@ -338,6 +694,14 @@ element_data = {
         "element": "cadmium",
         "atomic weight": 112.41,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.65,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "In": {
         "atomic number": 49,
@@ -345,6 +709,14 @@ element_data = {
         "element": "indium",
         "atomic weight": 114.82,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.31,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2 5p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sn": {
         "atomic number": 50,
@@ -352,6 +724,14 @@ element_data = {
         "element": "tin",
         "atomic weight": 118.71,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.265,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2 5p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sb": {
         "atomic number": 51,
@@ -359,6 +739,14 @@ element_data = {
         "element": "antimony",
         "atomic weight": 121.76,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.697,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2 5p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Te": {
         "atomic number": 52,
@@ -366,6 +754,14 @@ element_data = {
         "element": "tellurium",
         "atomic weight": 127.6,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.24,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2 5p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "I": {
         "atomic number": 53,
@@ -373,6 +769,14 @@ element_data = {
         "element": "iodine",
         "atomic weight": 126.9,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 4.933,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Kr] 4d10 5s2 5p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Xe": {
         "atomic number": 54,
@@ -380,6 +784,12 @@ element_data = {
         "element": "xenon",
         "atomic weight": 131.29,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 4.0,
+        "density_source": "Guess",
+        "electron configuration": "[Kr] 4d10 5s2 5p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cs": {
         "atomic number": 55,
@@ -387,6 +797,14 @@ element_data = {
         "element": "caesium",
         "atomic weight": 132.91,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 1.93,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 6s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ba": {
         "atomic number": 56,
@@ -394,6 +812,14 @@ element_data = {
         "element": "barium",
         "atomic weight": 137.33,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 3.51,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "La": {
         "atomic number": 57,
@@ -401,6 +827,14 @@ element_data = {
         "element": "lanthanum",
         "atomic weight": 138.91,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.162,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 5d1 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ce": {
         "atomic number": 58,
@@ -408,6 +842,14 @@ element_data = {
         "element": "cerium",
         "atomic weight": 140.12,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.770,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f1 5d1 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pr": {
         "atomic number": 59,
@@ -415,6 +857,14 @@ element_data = {
         "element": "praseodymium",
         "atomic weight": 140.91,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.77,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f3 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Nd": {
         "atomic number": 60,
@@ -422,6 +872,14 @@ element_data = {
         "element": "neodymium",
         "atomic weight": 144.24,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.01,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f4 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pm": {
         "atomic number": 61,
@@ -429,6 +887,14 @@ element_data = {
         "element": "promethium",
         "atomic weight": 144.91,
         "source": "webelements  30 July 2020",
+        "density": 7.26,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f5 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sm": {
         "atomic number": 62,
@@ -436,6 +902,14 @@ element_data = {
         "element": "samarium",
         "atomic weight": 150.36,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.52,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f6 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Eu": {
         "atomic number": 63,
@@ -443,6 +917,14 @@ element_data = {
         "element": "europium",
         "atomic weight": 151.96,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 5.244,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f7 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Gd": {
         "atomic number": 64,
@@ -450,6 +932,14 @@ element_data = {
         "element": "gadolinium",
         "atomic weight": 157.25,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 7.90,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f7 5d1 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Tb": {
         "atomic number": 65,
@@ -457,6 +947,14 @@ element_data = {
         "element": "terbium",
         "atomic weight": 158.93,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.23,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f9 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Dy": {
         "atomic number": 66,
@@ -464,6 +962,14 @@ element_data = {
         "element": "dysprosium",
         "atomic weight": 162.5,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.540,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f10 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ho": {
         "atomic number": 67,
@@ -471,6 +977,14 @@ element_data = {
         "element": "holmium",
         "atomic weight": 164.93,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 8.79,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f11 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Er": {
         "atomic number": 68,
@@ -478,6 +992,14 @@ element_data = {
         "element": "erbium",
         "atomic weight": 167.26,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 9.066,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f12 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Tm": {
         "atomic number": 69,
@@ -485,6 +1007,14 @@ element_data = {
         "element": "thulium",
         "atomic weight": 168.93,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 9.32,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f13 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Yb": {
         "atomic number": 70,
@@ -492,6 +1022,14 @@ element_data = {
         "element": "ytterbium",
         "atomic weight": 173.05,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 6.90,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Lu": {
         "atomic number": 71,
@@ -499,6 +1037,14 @@ element_data = {
         "element": "lutetium",
         "atomic weight": 174.97,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 9.841,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d1 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Hf": {
         "atomic number": 72,
@@ -506,6 +1052,14 @@ element_data = {
         "element": "hafnium",
         "atomic weight": 178.49,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 13.31,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d2 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ta": {
         "atomic number": 73,
@@ -513,6 +1067,14 @@ element_data = {
         "element": "tantalum",
         "atomic weight": 180.95,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 16.69,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d3 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "W": {
         "atomic number": 74,
@@ -520,6 +1082,14 @@ element_data = {
         "element": "tungsten",
         "atomic weight": 183.84,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 19.25,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d4 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Re": {
         "atomic number": 75,
@@ -527,6 +1097,14 @@ element_data = {
         "element": "rhenium",
         "atomic weight": 186.21,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 21.02,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d5 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Os": {
         "atomic number": 76,
@@ -534,6 +1112,14 @@ element_data = {
         "element": "osmium",
         "atomic weight": 190.23,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 22.59,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d6 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ir": {
         "atomic number": 77,
@@ -541,6 +1127,14 @@ element_data = {
         "element": "iridium",
         "atomic weight": 192.22,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 22.56,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d7 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pt": {
         "atomic number": 78,
@@ -548,6 +1142,14 @@ element_data = {
         "element": "platinum",
         "atomic weight": 195.08,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 21.45,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d9 6s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Au": {
         "atomic number": 79,
@@ -555,6 +1157,14 @@ element_data = {
         "element": "gold",
         "atomic weight": 196.97,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 19.3,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Hg": {
         "atomic number": 80,
@@ -562,6 +1172,14 @@ element_data = {
         "element": "mercury",
         "atomic weight": 200.59,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 13.534,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Tl": {
         "atomic number": 81,
@@ -569,6 +1187,14 @@ element_data = {
         "element": "thallium",
         "atomic weight": 204.385,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 11.85,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pb": {
         "atomic number": 82,
@@ -576,6 +1202,14 @@ element_data = {
         "element": "lead",
         "atomic weight": 207.2,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 11.34,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Bi": {
         "atomic number": 83,
@@ -583,6 +1217,14 @@ element_data = {
         "element": "bismuth",
         "atomic weight": 208.98,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 9.78,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Po": {
         "atomic number": 84,
@@ -590,6 +1232,14 @@ element_data = {
         "element": "polonium",
         "atomic weight": 208.98,
         "source": "webelements  30 July 2020",
+        "density": 9.196,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "At": {
         "atomic number": 85,
@@ -597,6 +1247,12 @@ element_data = {
         "element": "astatine",
         "atomic weight": 209.99,
         "source": "webelements  30 July 2020",
+        "density": 7.0,
+        "density_source": "https://www.chemicool.com/elements/astatine.html",
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Rn": {
         "atomic number": 86,
@@ -604,6 +1260,12 @@ element_data = {
         "element": "radon",
         "atomic weight": 222.02,
         "source": "webelements  30 July 2020",
+        "density": 4.4,
+        "density_source": "https://www.thoughtco.com/radon-facts-606584",
+        "electron configuration": "[Xe] 4f14 5d10 6s2 6p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Fr": {
         "atomic number": 87,
@@ -611,6 +1273,14 @@ element_data = {
         "element": "francium",
         "atomic weight": 223.02,
         "source": "webelements  30 July 2020",
+        "density": 1.87,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 7s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ra": {
         "atomic number": 88,
@@ -618,6 +1288,14 @@ element_data = {
         "element": "radium",
         "atomic weight": 226.03,
         "source": "webelements  30 July 2020",
+        "density": 5.5,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ac": {
         "atomic number": 89,
@@ -625,6 +1303,14 @@ element_data = {
         "element": "actinium",
         "atomic weight": 227.03,
         "source": "webelements  30 July 2020",
+        "density": 10.0,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 6d1 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Th": {
         "atomic number": 90,
@@ -632,6 +1318,14 @@ element_data = {
         "element": "thorium",
         "atomic weight": 232.04,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 11.7,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 6d2 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pa": {
         "atomic number": 91,
@@ -639,6 +1333,14 @@ element_data = {
         "element": "protactinium",
         "atomic weight": 231.04,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 15.37,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f2 6d1 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "U": {
         "atomic number": 92,
@@ -646,6 +1348,14 @@ element_data = {
         "element": "uranium",
         "atomic weight": 238.03,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
+        "density": 19.1,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f3 6d1 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Np": {
         "atomic number": 93,
@@ -653,6 +1363,14 @@ element_data = {
         "element": "neptunium",
         "atomic weight": 237.05,
         "source": "webelements  30 July 2020",
+        "density": 20.2,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f4 6d1 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Pu": {
         "atomic number": 94,
@@ -660,6 +1378,14 @@ element_data = {
         "element": "plutonium",
         "atomic weight": 244.06,
         "source": "webelements  30 July 2020",
+        "density": 19.816,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f6 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Am": {
         "atomic number": 95,
@@ -667,6 +1393,14 @@ element_data = {
         "element": "americium",
         "atomic weight": 243.06,
         "source": "webelements  30 July 2020",
+        "density": 12.0,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f7 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cm": {
         "atomic number": 96,
@@ -674,6 +1408,14 @@ element_data = {
         "element": "curium",
         "atomic weight": 247.07,
         "source": "webelements  30 July 2020",
+        "density": 13.51,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f7 6d1 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Bk": {
         "atomic number": 97,
@@ -681,6 +1423,14 @@ element_data = {
         "element": "berkelium",
         "atomic weight": 247.07,
         "source": "webelements  30 July 2020",
+        "density": 14.78,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f9 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cf": {
         "atomic number": 98,
@@ -688,6 +1438,14 @@ element_data = {
         "element": "californium",
         "atomic weight": 251.08,
         "source": "webelements  30 July 2020",
+        "density": 15.1,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f10 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Es": {
         "atomic number": 99,
@@ -695,6 +1453,14 @@ element_data = {
         "element": "einsteinium",
         "atomic weight": 252.08,
         "source": "webelements  30 July 2020",
+        "density": 8.84,
+        "density_source": (
+            "https://en.wikipedia.org/wiki/Densities_of_the_elements_(data_page)"
+        ),
+        "electron configuration": "[Rn] 5f11 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Fm": {
         "atomic number": 100,
@@ -702,6 +1468,12 @@ element_data = {
         "element": "fermium",
         "atomic weight": 257.10,
         "source": "webelements  30 July 2020",
+        "density": 9.7,
+        "density_source": "https://en.wikipedia.org/wiki/Fermium",
+        "electron configuration": "[Rn] 5f12 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Md": {
         "atomic number": 101,
@@ -709,6 +1481,12 @@ element_data = {
         "element": "mendelevium",
         "atomic weight": 258.10,
         "source": "webelements  30 July 2020",
+        "density": 10.3,
+        "density_source": "https://en.wikipedia.org/wiki/Mendelevium",
+        "electron configuration": "[Rn] 5f13 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "No": {
         "atomic number": 102,
@@ -716,6 +1494,12 @@ element_data = {
         "element": "nobelium",
         "atomic weight": 259.10,
         "source": "webelements  30 July 2020",
+        "density": 9.9,
+        "density_source": "https://en.wikipedia.org/wiki/Nobelium",
+        "electron configuration": "[Rn] 5f14 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Lr": {
         "atomic number": 103,
@@ -723,6 +1507,12 @@ element_data = {
         "element": "lawrencium",
         "atomic weight": 262.11,
         "source": "webelements  30 July 2020",
+        "density": 14.4,
+        "density_source": "https://en.wikipedia.org/wiki/Lawrencium",
+        "electron configuration": "[Rn] 5f14 7s2 7p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Rf": {
         "atomic number": 104,
@@ -730,6 +1520,12 @@ element_data = {
         "element": "rutherfordium",
         "atomic weight": 267.12,
         "source": "webelements  30 July 2020",
+        "density": 17.0,
+        "density_source": "https://en.wikipedia.org/wiki/Rutherfordium",
+        "electron configuration": "[Rn] 5f14 6d2 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Db": {
         "atomic number": 105,
@@ -737,6 +1533,12 @@ element_data = {
         "element": "dubnium",
         "atomic weight": 270.13,
         "source": "webelements  30 July 2020",
+        "density": 21.6,
+        "density_source": "https://en.wikipedia.org/wiki/Dubnium",
+        "electron configuration": "[Rn] 5f14 6d3 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Sg": {
         "atomic number": 106,
@@ -744,6 +1546,12 @@ element_data = {
         "element": "seaborgium",
         "atomic weight": 269.13,
         "source": "webelements  30 July 2020",
+        "density": 23.5,
+        "density_source": "https://en.wikipedia.org/wiki/Seaborgium",
+        "electron configuration": "[Rn] 5f14 6d4 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Bh": {
         "atomic number": 107,
@@ -751,6 +1559,12 @@ element_data = {
         "element": "bohrium",
         "atomic weight": 270.13,
         "source": "webelements  30 July 2020",
+        "density": 26.5,
+        "density_source": "https://en.wikipedia.org/wiki/Bohrium",
+        "electron configuration": "[Rn] 5f14 6d5 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Hs": {
         "atomic number": 108,
@@ -758,6 +1572,12 @@ element_data = {
         "element": "hassium",
         "atomic weight": 269.13,
         "source": "webelements  30 July 2020",
+        "density": 28.0,
+        "density_source": "https://en.wikipedia.org/wiki/Hassium",
+        "electron configuration": "[Rn] 5f14 6d6 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Mt": {
         "atomic number": 109,
@@ -765,6 +1585,12 @@ element_data = {
         "element": "meitnerium",
         "atomic weight": 278.16,
         "source": "webelements  30 July 2020",
+        "density": 27.5,
+        "density_source": "https://en.wikipedia.org/wiki/Meitnerium",
+        "electron configuration": "[Rn] 5f14 6d7 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ds": {
         "atomic number": 110,
@@ -772,6 +1598,12 @@ element_data = {
         "element": "darmstadtium",
         "atomic weight": 281.17,
         "source": "webelements  30 July 2020",
+        "density": 26.5,
+        "density_source": "https://en.wikipedia.org/wiki/Darmstadtium",
+        "electron configuration": "[Rn] 5f14 6d9 7s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Rg": {
         "atomic number": 111,
@@ -779,6 +1611,12 @@ element_data = {
         "element": "roentgenium",
         "atomic weight": 281.17,
         "source": "webelements  30 July 2020",
+        "density": 23.0,
+        "density_source": "https://en.wikipedia.org/wiki/Roentgenium",
+        "electron configuration": "[Rn] 5f14 6d10 7s1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Cn": {
         "atomic number": 112,
@@ -786,6 +1624,12 @@ element_data = {
         "element": "copernicium",
         "atomic weight": 285.18,
         "source": "webelements  30 July 2020",
+        "density": 14.0,
+        "density_source": "https://en.wikipedia.org/wiki/Copernicium",
+        "electron configuration": "[Rn] 5f14 6d10 7s2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Nh": {
         "atomic number": 113,
@@ -793,6 +1637,12 @@ element_data = {
         "element": "nihonium",
         "atomic weight": 286.18,
         "source": "webelements  30 July 2020",
+        "density": 16.0,
+        "density_source": "https://en.wikipedia.org/wiki/Nihonium",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p1",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Fl": {
         "atomic number": 114,
@@ -800,6 +1650,12 @@ element_data = {
         "element": "flerovium",
         "atomic weight": 289.19,
         "source": "webelements  30 July 2020",
+        "density": 9.928,
+        "density_source": "https://en.wikipedia.org/wiki/Flerovium",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p2",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Mc": {
         "atomic number": 115,
@@ -807,6 +1663,12 @@ element_data = {
         "element": "moscovium",
         "atomic weight": 289.20,
         "source": "webelements  30 July 2020",
+        "density": 13.5,
+        "density_source": "https://en.wikipedia.org/wiki/Moscovium",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p3",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Lv": {
         "atomic number": 116,
@@ -814,6 +1676,12 @@ element_data = {
         "element": "livermorium",
         "atomic weight": 293.20,
         "source": "webelements  30 July 2020",
+        "density": 12.9,
+        "density_source": "https://en.wikipedia.org/wiki/Livermorium",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p4",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Ts": {
         "atomic number": 117,
@@ -821,6 +1689,12 @@ element_data = {
         "element": "tennessine",
         "atomic weight": 293.21,
         "source": "webelements  30 July 2020",
+        "density": 7.2,
+        "density_source": "https://en.wikipedia.org/wiki/Tennessine",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p5",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
     "Og": {
         "atomic number": 118,
@@ -828,5 +1702,11 @@ element_data = {
         "element": "oganesson",
         "atomic weight": 294.21,
         "source": "webelements  30 July 2020",
+        "density": 7.0,
+        "density_source": "https://en.wikipedia.org/wiki/Oganesson",
+        "electron configuration": "[Rn] 5f14 6d10 7s2 7p6",
+        "electron configuration source": (
+            "https://sciencenotes.org/list-of-electron-configurations-of-elements/"
+        ),
     },
 }
