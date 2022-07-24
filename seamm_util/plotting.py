@@ -85,7 +85,7 @@ class Figure(Dictionary):
 
         return self._plots[name]
 
-    def grid_plots(self, *args, **kwargs):
+    def grid_plots(self, *args, padx=0.02, pady=0.02):
         """Define the layout of the plots.
 
         When there is more than one plot, they need to be laid out in a grid.
@@ -128,6 +128,8 @@ class Figure(Dictionary):
         """
 
         grid = self._grid
+        grid["padx"] = padx
+        grid["pady"] = pady
         plots = grid["plots"] = []
         # First, check that the layout is valid
         last = ""
@@ -262,14 +264,16 @@ class Figure(Dictionary):
                 plot.row = nrows
                 plot.column = 0
                 nrows += 1
+            padx = 0.02
+            pady = 0.02
         else:
             nrows = grid["nrows"]
             ncolumns = grid["ncolumns"]
             plots = grid["plots"]
+            padx = grid["padx"]
+            pady = grid["pady"]
 
         # Work out where the plots (or really their axes) go
-        padx = 0.1
-        pady = 0.1
         width = 1.0 / ncolumns
         height = 1.0 / nrows
 
