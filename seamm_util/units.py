@@ -6,6 +6,9 @@ import pint
 
 # Default units to use for a dimensionality
 _default_units = {
+    "[current] * [time]": [
+        "e",
+    ],
     "[current] * [length] * [time]": [
         "D",
         "e*Å",
