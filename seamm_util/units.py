@@ -148,7 +148,11 @@ factor = ureg.mol / ureg.avogadro_number
 _d.add_transformation("", "[substance]", lambda ureg, x: x * factor)
 _d.add_transformation("[substance]", "", lambda ureg, x: x / factor)
 
-_d.add_transformation("[mass]/[substance]", "[mass]", lambda ureg, x: x * factor)
+_d.add_transformation("1 / [substance]", "", lambda ureg, x: x * factor)
+_d.add_transformation("", "1 / [substance]", lambda ureg, x: x / factor)
+
+_d.add_transformation("[mass] / [substance]", "[mass]", lambda ureg, x: x * factor)
+_d.add_transformation("[mass]", "[mass] / [substance]", lambda ureg, x: x / factor)
 
 _d.add_transformation(
     "[length] * [mass] / [substance] / [time] ** 2",
@@ -169,6 +173,34 @@ _d.add_transformation(
 _d.add_transformation(
     "[length] ** 2 * [mass] / [time] ** 2",
     "[length] ** 2 * [mass] / [substance] / [time] ** 2",
+    lambda ureg, x: x / factor,
+)
+
+# kJ/mol/Å^2 --> eV/Å^2
+_d.add_transformation(
+    "[mass] / [substance] / [time] ** 2",
+    "[mass] / [time] ** 2",
+    lambda ureg, x: x * factor,
+)
+
+# eV/Å^2 --> kJ/mol/Å^2
+_d.add_transformation(
+    "[mass] / [time] ** 2",
+    "[mass] / [substance] / [time] ** 2",
+    lambda ureg, x: x / factor,
+)
+
+# kJ/mol/Å^3 --> eV/Å^3
+_d.add_transformation(
+    "[mass] / [length] / [substance] / [time] ** 2",
+    "[mass] / [length] / [time] ** 2",
+    lambda ureg, x: x * factor,
+)
+
+# eV/Å^3 --> kJ/mol/Å^3
+_d.add_transformation(
+    "[mass] / [length] / [time] ** 2",
+    "[mass] / [length] / [substance] / [time] ** 2",
     lambda ureg, x: x / factor,
 )
 
