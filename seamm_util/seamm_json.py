@@ -53,7 +53,6 @@ class JSONEncoder(json.JSONEncoder):
                 "microseconds": obj.microseconds,
             }
         elif isinstance(obj, seamm.Parameter) or isinstance(obj, seamm.Parameters):
-
             #  Populate the dictionary with object meta data
             obj_dict = {
                 "__class__": obj.__class__.__name__,
