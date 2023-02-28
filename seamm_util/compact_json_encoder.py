@@ -32,7 +32,7 @@ class CompactJSONEncoder(json.JSONEncoder):
         if isinstance(o, dict):
             return self._encode_object(o)
         if isinstance(o, float):  # Use scientific notation for floats
-            return format(o, "g")
+            return format(o, ".12g")
         return json.dumps(
             o,
             skipkeys=self.skipkeys,
