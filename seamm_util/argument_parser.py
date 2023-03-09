@@ -651,6 +651,15 @@ def seamm_parser(name="SEAMM"):
     )
     parser.add_argument(
         "SEAMM",
+        "--description",
+        group="job options",
+        dest="description",
+        default="",
+        action="store",
+        help="The longer description for this run.",
+    )
+    parser.add_argument(
+        "SEAMM",
         "--force",
         group="job options",
         dest="force",
