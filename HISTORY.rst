@@ -2,6 +2,9 @@
 History
 =======
 
+2023.4.6 -- Added more unit conversions to support Buckingham potentials
+  * added e.g. eV*Å^6 to kcal/mol*Å^6 to support Buckingham pontetials
+    
 2023.2.28 -- Added a compact JSON encoder
   * To make the schema-type JSON more human-readable.
     

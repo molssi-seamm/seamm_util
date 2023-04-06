@@ -204,6 +204,34 @@ _d.add_transformation(
     lambda ureg, x: x / factor,
 )
 
+# kJ/mol/Å^4 --> eV/Å^4
+_d.add_transformation(
+    "[mass] / [length] ** 2 / [substance] / [time] ** 2",
+    "[mass] / [length] ** 2 / [time] ** 2",
+    lambda ureg, x: x * factor,
+)
+
+# eV/Å^4 --> kJ/mol/Å^4
+_d.add_transformation(
+    "[mass] / [length] ** 2 / [time] ** 2",
+    "[mass] / [length] ** 2 / [substance] / [time] ** 2",
+    lambda ureg, x: x / factor,
+)
+
+# kJ/mol*Å^6 --> eV*Å^6
+_d.add_transformation(
+    "[length] ** 8 * [mass] / [substance] / [time] ** 2",
+    "[length] ** 8 * [mass] / [time] ** 2",
+    lambda ureg, x: x * factor,
+)
+
+# eV*Å^6 --> kJ/mol*Å^6
+_d.add_transformation(
+    "[length] ** 8 * [mass] / [time] ** 2",
+    "[length] ** 8 * [mass] / [substance] / [time] ** 2",
+    lambda ureg, x: x / factor,
+)
+
 ureg.add_context(_d)
 ureg.enable_contexts("chemistry")
 
