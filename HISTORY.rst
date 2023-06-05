@@ -2,6 +2,9 @@
 History
 =======
 
+2023.6.4 -- Added more unit conversions to support thermochemistry
+  * added E_h/K --> kJ/mol/K
+
 2023.4.6 -- Added more unit conversions to support Buckingham potentials
   * added e.g. eV*Å^6 to kcal/mol*Å^6 to support Buckingham pontetials
     

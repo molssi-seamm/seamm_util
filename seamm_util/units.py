@@ -154,6 +154,7 @@ _d.add_transformation("", "1 / [substance]", lambda ureg, x: x / factor)
 _d.add_transformation("[mass] / [substance]", "[mass]", lambda ureg, x: x * factor)
 _d.add_transformation("[mass]", "[mass] / [substance]", lambda ureg, x: x / factor)
 
+# kJ/mol/Å --> eV/Å
 _d.add_transformation(
     "[length] * [mass] / [substance] / [time] ** 2",
     "[length] * [mass] / [time] ** 2",
@@ -165,6 +166,7 @@ _d.add_transformation(
     lambda ureg, x: x / factor,
 )
 
+# kJ/mol --> eV
 _d.add_transformation(
     "[length] ** 2 * [mass] / [substance] / [time] ** 2",
     "[length] ** 2 * [mass] / [time] ** 2",
@@ -173,6 +175,18 @@ _d.add_transformation(
 _d.add_transformation(
     "[length] ** 2 * [mass] / [time] ** 2",
     "[length] ** 2 * [mass] / [substance] / [time] ** 2",
+    lambda ureg, x: x / factor,
+)
+
+# kJ/mol/K --> eV/K
+_d.add_transformation(
+    "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
+    "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
+    lambda ureg, x: x * factor,
+)
+_d.add_transformation(
+    "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
+    "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
     lambda ureg, x: x / factor,
 )
 
