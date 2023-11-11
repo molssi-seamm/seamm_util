@@ -1,6 +1,11 @@
 =======
 History
 =======
+2023.11.11 -- Updated for changes in Zenodo
+    * Zenodo updated and made small changes to their API, which required changes in
+      SEAMM.
+    * Consolidated all private information about the user and their keys for Zenodo in
+      ~/.seammrc
 
 2023.6.4 -- Added more unit conversions to support thermochemistry
   * added E_h/K --> kJ/mol/K
