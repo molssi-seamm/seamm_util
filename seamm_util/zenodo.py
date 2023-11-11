@@ -13,6 +13,7 @@ import pprint
 import requests
 
 logger = logging.getLogger(__name__)
+# logger.setLevel("DEBUG")
 
 upload_types = {
     "publication": "Publication",
@@ -248,7 +249,7 @@ class Record(collections.abc.Mapping):
         else:
             response = requests.put(url, data=contents, headers=headers)
 
-        if response.status_code != 200:
+        if response.status_code != 201:
             raise RuntimeError(
                 f"Error in add_file: code = {response.status_code}"
                 f"\n\n{pprint.pformat(response.json())}"
@@ -462,7 +463,7 @@ class Record(collections.abc.Mapping):
 
 
 class Zenodo(object):
-    def __init__(self, token=None, configfile="~/.zenodorc", use_sandbox=False):
+    def __init__(self, token=None, configfile="~/.seammrc", use_sandbox=False):
         if use_sandbox:
             self.base_url = "https://sandbox.zenodo.org/api"
         else:
@@ -517,7 +518,14 @@ class Zenodo(object):
         }
 
         url = self.base_url + f"/deposit/depositions/{_id}/actions/newversion"
+
+        logger.debug(f"add_version {url=}")
+        logger.debug(headers)
+
         response = requests.post(url, headers=headers)
+
+        logger.debug(f"{response.status_code=}")
+        logger.debug(f"\n{pprint.pformat(response.json())}")
 
         if response.status_code != 201:
             raise RuntimeError(
