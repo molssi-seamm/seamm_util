@@ -1,6 +1,9 @@
 =======
 History
 =======
+2023.11.12 -- Internal update
+    * Versioneer needed to be updated to account for changes in configparser.
+
 2023.11.11 -- Updated for changes in Zenodo
     * Zenodo updated and made small changes to their API, which required changes in
       SEAMM.
