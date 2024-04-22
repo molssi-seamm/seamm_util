@@ -13,6 +13,7 @@ import argparse
 import configparser
 import logging
 import os
+from pathlib import Path
 import sys
 
 # logging.basicConfig(level="WARNING")
@@ -40,8 +41,7 @@ class ArgumentParser(object):
         self,
         *args,
         ini_files=[
-            "etc/SEAMM/seamm.ini",
-            os.path.expanduser("~/SEAMM/seamm.ini"),
+            os.path.expanduser("~/.seamm.d/seamm.ini"),
             "seamm.ini",
         ],
         interpolation=configparser.ExtendedInterpolation(),
@@ -168,6 +168,29 @@ class ArgumentParser(object):
         arg_sections = self.split_args(args)
 
         # 2. Read the .ini files, if any.
+
+        # Moving from ~/SEAMM/seamm.ini to ~/.seamm.d/seamm.ini
+        # Make directory and move if it does not exist
+        path = Path("~/.seamm.d/seamm.ini").expanduser()
+        tmp = Path("~/SEAMM/seamm.ini").expanduser()
+        print(f"{path=}")
+        print(f"{path.exists()=}")
+        print(f" {tmp=}")
+        print(f"{tmp.exists()=}")
+        if not path.parent.exists():
+            path.parent.mkdir(parents=True)
+            print("made directory")
+        else:
+            print("directory existed")
+
+        if tmp.exists() and not path.exists():
+            print("/ntext:")
+            print(tmp.read_text())
+            print()
+            path.write_text(tmp.read_text())
+            tmp.unlink()
+
+        # Now read...
 
         config = configparser.ConfigParser(interpolation=None)
         self._ini_files_used = config.read(self._ini_files)

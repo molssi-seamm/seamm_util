@@ -463,7 +463,7 @@ class Record(collections.abc.Mapping):
 
 
 class Zenodo(object):
-    def __init__(self, token=None, configfile="~/.seammrc", use_sandbox=False):
+    def __init__(self, token=None, configfile="~/.seamm.d/seammrc", use_sandbox=False):
         if use_sandbox:
             self.base_url = "https://sandbox.zenodo.org/api"
         else:
