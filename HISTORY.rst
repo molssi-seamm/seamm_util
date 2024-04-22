@@ -3,6 +3,7 @@ History
 =======
 2024.4.22 -- Moving user preferences to ~/.seamm.d
     * To better support Docker, moving ~/.seammrc to ~/.seamm.d/seamrc
+    * Moved seamm.ini from ~/SEAMM to ~/seamm.d since it only contains personal preferences.
 
 2023.11.12 -- Internal update
     * Versioneer needed to be updated to account for changes in configparser.
