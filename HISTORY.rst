@@ -1,6 +1,9 @@
 =======
 History
 =======
+2024.4.26 -- Removed debug printing
+    * Some debug printing was accidentally left in the code.
+      
 2024.4.22 -- Moving user preferences to ~/.seamm.d
     * To better support Docker, moving ~/.seammrc to ~/.seamm.d/seamrc
     * Moved seamm.ini from ~/SEAMM to ~/seamm.d since it only contains personal preferences.
