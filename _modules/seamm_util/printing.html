@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.printing &mdash; SEAMM Util 2024.4.22 documentation</title>
+  <title>seamm_util.printing &mdash; SEAMM Util 2024.4.26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=7bd14f30"></script>
+        <script src="../../_static/documentation_options.js?v=87a05597"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             SEAMM Util
           </a>
               <div class="version">
-                2024.4.22
+                2024.4.26
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -64,7 +64,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">seamm_util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
@@ -165,7 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="getLevelName">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.getLevelName">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.getLevelName">[docs]</a>
 <span class="k">def</span> <span class="nf">getLevelName</span><span class="p">(</span><span class="n">lvl</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the textual representation of printing level &#39;lvl&#39;. If the level is</span>
@@ -179,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="addLevelName">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.addLevelName">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.addLevelName">[docs]</a>
 <span class="k">def</span> <span class="nf">addLevelName</span><span class="p">(</span><span class="n">lvl</span><span class="p">,</span> <span class="n">levelName</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Associate &#39;levelName&#39; with &#39;lvl&#39;. This is used when converting levels</span>
@@ -236,7 +235,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="PlaceHolder">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.PlaceHolder">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.PlaceHolder">[docs]</a>
 <span class="k">class</span> <span class="nc">PlaceHolder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    PlaceHolder instances are used in the Manager printer hierarchy to take</span>
@@ -252,7 +251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="bp">self</span><span class="o">.</span><span class="n">printers</span> <span class="o">=</span> <span class="p">[</span><span class="n">aprinter</span><span class="p">]</span>
 
 <div class="viewcode-block" id="PlaceHolder.append">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.PlaceHolder.append">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.PlaceHolder.append">[docs]</a>
     <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aprinter</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add the specified printer as a child of this placeholder.</span>
@@ -270,7 +269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="setPrinterClass">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.setPrinterClass">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.setPrinterClass">[docs]</a>
 <span class="k">def</span> <span class="nf">setPrinterClass</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set the class to be used when instantiating a printer. The class should</span>
@@ -290,7 +289,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Manager">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Manager">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Manager">[docs]</a>
 <span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    There is [under normal circumstances] just one Manager instance, which</span>
@@ -307,7 +306,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="Manager.getPrinter">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Manager.getPrinter">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Manager.getPrinter">[docs]</a>
     <span class="k">def</span> <span class="nf">getPrinter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a printer with the specified name (channel name), creating it</span>
@@ -375,7 +374,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer">[docs]</a>
 <span class="k">class</span> <span class="nc">Printer</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Filterer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide controlled printing for plugins for the MolSSI</span>
 <span class="sd">    Framework.</span>
@@ -433,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="Printer.setLevel">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.setLevel">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.setLevel">[docs]</a>
     <span class="k">def</span> <span class="nf">setLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the printing level of this printer.</span>
@@ -442,7 +441,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.verbose">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.verbose">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.verbose">[docs]</a>
     <span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level VERBOSE on this printer.</span>
 <span class="sd">        The msg is the message format string, and the args are the arguments</span>
@@ -454,7 +453,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.normal">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.normal">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.normal">[docs]</a>
     <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level NORMAL on this printer.</span>
 <span class="sd">        The msg is the message format string, and the args are the arguments</span>
@@ -466,7 +465,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.terse">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.terse">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.terse">[docs]</a>
     <span class="k">def</span> <span class="nf">terse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level TERSE on this printer.</span>
 <span class="sd">        The msg is the message format string, and the args are the arguments</span>
@@ -478,7 +477,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.important">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.important">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.important">[docs]</a>
     <span class="k">def</span> <span class="nf">important</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level IMPORTANT on this printer.</span>
 <span class="sd">        The msg is the message format string, and the args are the arguments</span>
@@ -490,7 +489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.job">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.job">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.job">[docs]</a>
     <span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level JOB on this printer.</span>
 <span class="sd">        The msg is the message format string, and the args are the arguments</span>
@@ -502,7 +501,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.print">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.print">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.print">[docs]</a>
     <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints a message with integer level lvl on this logger.</span>
 <span class="sd">        The other arguments are interpreted as for verbose().</span>
@@ -514,7 +513,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.findCaller">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.findCaller">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.findCaller">[docs]</a>
     <span class="k">def</span> <span class="nf">findCaller</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the stack frame of the caller so that we can note the source</span>
@@ -536,7 +535,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.makeRecord">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.makeRecord">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.makeRecord">[docs]</a>
     <span class="k">def</span> <span class="nf">makeRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">lno</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A factory method which can be overridden in subclasses to create</span>
@@ -553,7 +552,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Printer.handle">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.handle">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.handle">[docs]</a>
     <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call the handlers for the specified record. This method is used for</span>
@@ -564,7 +563,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.addHandler">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.addHandler">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.addHandler">[docs]</a>
     <span class="k">def</span> <span class="nf">addHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hdlr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add the specified handler to this printer.</span>
@@ -573,7 +572,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.removeHandler">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.removeHandler">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.removeHandler">[docs]</a>
     <span class="k">def</span> <span class="nf">removeHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hdlr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove the specified handler from this printer.</span>
@@ -582,7 +581,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.callHandlers">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.callHandlers">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.callHandlers">[docs]</a>
     <span class="k">def</span> <span class="nf">callHandlers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loop through all handlers for this printer and its parents in the</span>
@@ -595,7 +594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.getEffectiveLevel">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.getEffectiveLevel">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.getEffectiveLevel">[docs]</a>
     <span class="k">def</span> <span class="nf">getEffectiveLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loop through this printer and its parents in the printer hierarchy,</span>
@@ -605,7 +604,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="Printer.isEnabledFor">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.isEnabledFor">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.Printer.isEnabledFor">[docs]</a>
     <span class="k">def</span> <span class="nf">isEnabledFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Is this printer enabled for level lvl?</span>
@@ -616,7 +615,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="RootPrinter">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.RootPrinter">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.RootPrinter">[docs]</a>
 <span class="k">class</span> <span class="nc">RootPrinter</span><span class="p">(</span><span class="n">Printer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A root printer is not that different to any other printer, except that</span>
@@ -650,7 +649,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="basicConfig">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.basicConfig">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.basicConfig">[docs]</a>
 <span class="k">def</span> <span class="nf">basicConfig</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Do basic configuration for the printing system by creating a</span>
@@ -669,7 +668,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="fileConfig">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.fileConfig">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.fileConfig">[docs]</a>
 <span class="k">def</span> <span class="nf">fileConfig</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read the printing configuration from a ConfigParser-format file. This can</span>
@@ -842,7 +841,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="getPrinter">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.getPrinter">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.getPrinter">[docs]</a>
 <span class="k">def</span> <span class="nf">getPrinter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a printer with the specified name, creating it if necessary.</span>
@@ -856,7 +855,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="job">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.job">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.job">[docs]</a>
 <span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Log a message with severity &#39;JOB&#39; on the root printer.</span>
@@ -868,7 +867,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="important">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.important">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.important">[docs]</a>
 <span class="k">def</span> <span class="nf">important</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Log a message with severity &#39;IMPORTANT&#39; on the root printer.</span>
@@ -880,7 +879,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="terse">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.terse">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.terse">[docs]</a>
 <span class="k">def</span> <span class="nf">terse</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Log a message with severity &#39;TERSE&#39; on the root printer.</span>
@@ -892,7 +891,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="normal">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.normal">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.normal">[docs]</a>
 <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Log a message with severity &#39;NORMAL&#39; on the root printer.</span>
@@ -904,7 +903,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="verbose">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.verbose">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.verbose">[docs]</a>
 <span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Log a message with severity &#39;VERBOSE&#39; on the root printer.</span>
@@ -916,7 +915,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="disable">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.disable">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.disable">[docs]</a>
 <span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Disable all printing calls less severe than &#39;level&#39;.</span>
@@ -926,7 +925,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="shutdown">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.shutdown">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.shutdown">[docs]</a>
 <span class="k">def</span> <span class="nf">shutdown</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Perform any cleanup actions in the printing system (e.g. flushing</span>
@@ -945,7 +944,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <div class="viewcode-block" id="FormattedText">
-<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.FormattedText">[docs]</a>
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.printing.FormattedText">[docs]</a>
 <span class="k">class</span> <span class="nc">FormattedText</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for wrapping, formatting and indenting text to make textual output</span>
