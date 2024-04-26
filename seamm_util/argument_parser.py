@@ -173,15 +173,8 @@ class ArgumentParser(object):
         # Make directory and move if it does not exist
         path = Path("~/.seamm.d/seamm.ini").expanduser()
         tmp = Path("~/SEAMM/seamm.ini").expanduser()
-        print(f"{path=}")
-        print(f"{path.exists()=}")
-        print(f" {tmp=}")
-        print(f"{tmp.exists()=}")
         if not path.parent.exists():
             path.parent.mkdir(parents=True)
-            print("made directory")
-        else:
-            print("directory existed")
 
         if tmp.exists() and not path.exists():
             print("/ntext:")
