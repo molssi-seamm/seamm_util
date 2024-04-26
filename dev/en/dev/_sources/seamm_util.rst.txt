@@ -1,0 +1,149 @@
+seamm\_util package
+===================
+
+Submodules
+----------
+
+seamm\_util.argument\_parser module
+-----------------------------------
+
+.. automodule:: seamm_util.argument_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.check\_executable module
+------------------------------------
+
+.. automodule:: seamm_util.check_executable
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.compact\_json\_encoder module
+-----------------------------------------
+
+.. automodule:: seamm_util.compact_json_encoder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.dictionary module
+-----------------------------
+
+.. automodule:: seamm_util.dictionary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.elemental\_data module
+----------------------------------
+
+.. automodule:: seamm_util.elemental_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.include\_open module
+--------------------------------
+
+.. automodule:: seamm_util.include_open
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.md\_statistics module
+---------------------------------
+
+.. automodule:: seamm_util.md_statistics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.output module
+-------------------------
+
+.. automodule:: seamm_util.output
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.plotting module
+---------------------------
+
+.. automodule:: seamm_util.plotting
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.printing module
+---------------------------
+
+.. automodule:: seamm_util.printing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.seamm\_file module
+------------------------------
+
+.. automodule:: seamm_util.seamm_file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.seamm\_json module
+------------------------------
+
+.. automodule:: seamm_util.seamm_json
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.seamm\_util module
+------------------------------
+
+.. automodule:: seamm_util.seamm_util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.units module
+------------------------
+
+.. automodule:: seamm_util.units
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.variable\_names module
+----------------------------------
+
+.. automodule:: seamm_util.variable_names
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.water\_models module
+--------------------------------
+
+.. automodule:: seamm_util.water_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+seamm\_util.zenodo module
+-------------------------
+
+.. automodule:: seamm_util.zenodo
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: seamm_util
+   :members:
+   :undoc-members:
+   :show-inheritance:

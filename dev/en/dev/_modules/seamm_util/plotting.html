@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seamm_util.plotting &mdash; SEAMM Util 2024.4.22+1.gdae3868 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
+<!-- End Google Tag Manager -->
+
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=ee144bca"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQXXTJ2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SEAMM Util
+          </a>
+              <div class="version">
+                2024.4.22+1.gdae3868
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">seamm_util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SEAMM Util</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seamm_util.plotting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seamm_util.plotting</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A package for handling plotly plots in SEAMM.</span>
+
+<span class="sd">A figure comprises one or more plots (or graphs) laid out in a grid.</span>
+<span class="sd">The datasets within a plot are represetned by traces, lines, scatter</span>
+<span class="sd">plots, pie chart elements, etc.</span>
+
+<span class="sd">This package consists of a Figure class which is a container, a Plot</span>
+<span class="sd">class that handles the actual plotting, and a Trace class for the</span>
+<span class="sd">individual datasets and their graphical representations. The figure</span>
+<span class="sd">class uses a grid similar to the Tk grid to control the layout of the</span>
+<span class="sd">plots.</span>
+
+<span class="sd">This package does not directly interact with plotly. Rather, it uses templates</span>
+<span class="sd">and Jinja to create the JSON, HTML or other representation of a plotly figure.</span>
+<span class="sd">The various containers in this package contain dictionaries of Jinja keys and</span>
+<span class="sd">the associated values. The keys needed are defined by the template used.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.dictionary</span> <span class="kn">import</span> <span class="n">Dictionary</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<div class="viewcode-block" id="Figure">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure">[docs]</a>
+<span class="k">class</span> <span class="nc">Figure</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds one or more subplots and controls the layout.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">jinja_env</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a figure.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_jinja_env</span> <span class="o">=</span> <span class="n">jinja_env</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_template</span> <span class="o">=</span> <span class="n">template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span> <span class="o">=</span> <span class="n">Dictionary</span><span class="p">(</span><span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nrows&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ncolumns&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;plots&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;layout&quot;</span><span class="p">:</span> <span class="p">{}}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The template to use for this figure.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template</span>
+
+    <span class="nd">@template</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_template</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Figure.add_plot">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure.add_plot">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new plot and return it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the plot, which must be unique.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The plot object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Plot &#39;</span><span class="si">{}</span><span class="s2">&#39; already exists.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Figure.get_plot">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure.get_plot">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the named plot.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the plot, which must exist.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The plot object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Plot &#39;</span><span class="si">{}</span><span class="s2">&#39; does not exist.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Figure.grid_plots">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure.grid_plots">[docs]</a>
+    <span class="k">def</span> <span class="nf">grid_plots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the layout of the plots.</span>
+
+<span class="sd">        When there is more than one plot, they need to be laid out in a grid.</span>
+<span class="sd">        This method is called to define the layout, and will follow closely the</span>
+<span class="sd">        approach used in Tk grid.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Positional arguments specifying the layout of one or more rows.</span>
+<span class="sd">            each row is given as a string composed of the following:</span>
+
+<span class="sd">                &lt;plot&gt; :</span>
+<span class="sd">                     is the name of a plot.</span>
+
+<span class="sd">                x :</span>
+<span class="sd">                    leaves an empty column between the plot on the</span>
+<span class="sd">                    left and the plot on the right.</span>
+
+<span class="sd">                ^ :</span>
+<span class="sd">                    extends the row span of the plot above the ^&#39;s in the</span>
+<span class="sd">                    grid. The number of ^&#39;s in a row must match the number</span>
+<span class="sd">                    of columns spanned by the plot above it.</span>
+
+<span class="sd">                - :</span>
+<span class="sd">                    increases the column span of the plot to the</span>
+<span class="sd">                    left. Several -&#39;s in a row will successively increase</span>
+<span class="sd">                    the number of columns spanned. A - may not follow a ^</span>
+<span class="sd">                    or a x, nor may it be the first plot argument to</span>
+<span class="sd">                    grid configure.</span>
+
+<span class="sd">        **kwargs</span>
+<span class="sd">            Keyword arguments for options for the given rows:</span>
+<span class="sd">                padx : float, optional</span>
+<span class="sd">                    The fraction of space to leave between plots in a row.</span>
+<span class="sd">                    Defaults to 0.02.</span>
+<span class="sd">                pady : float, optional</span>
+<span class="sd">                    The fraction of space to leave between rows. Defaults to</span>
+<span class="sd">                    0.02.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid</span>
+        <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">padx</span>
+        <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pady</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;plots&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># First, check that the layout is valid</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">row_spec</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row_spec</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                            <span class="s2">&quot;&#39;-&#39; cannot be the first item in a row: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">row_spec</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">last</span> <span class="o">==</span> <span class="s2">&quot;^&quot;</span> <span class="ow">or</span> <span class="n">last</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                            <span class="s2">&quot;&#39;-&#39; cannot follow &#39;x&#39; or &#39;^&#39;: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row_spec</span><span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="s2">&quot;-^x&quot;</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                            <span class="sa">r</span><span class="s2">&quot;Plot &#39;</span><span class="si">{}</span><span class="s2">&#39; is already used: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">row_spec</span><span class="p">)</span>
+                        <span class="p">)</span>
+                    <span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Now process the entire specification</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">row_spec</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">]</span>
+            <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row_spec</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="n">layout</span><span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)]</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">&gt;</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;ncolumns&quot;</span><span class="p">]:</span>
+                <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;ncolumns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">column</span>
+
+        <span class="c1"># Get row and column spans for the plots, checking that the input</span>
+        <span class="c1"># is valid</span>
+
+        <span class="n">nrows</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">]</span>
+        <span class="n">ncolumns</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;ncolumns&quot;</span><span class="p">]</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;plots&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrows</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncolumns</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot;-^x&quot;</span><span class="p">:</span>
+                    <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">plot</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="n">row</span>
+                    <span class="n">plot</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="n">column</span>
+                    <span class="n">plot</span><span class="o">.</span><span class="n">column_span</span> <span class="o">=</span> <span class="mi">1</span>
+
+                    <span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+
+                    <span class="c1"># Walk to the right looking for cells with &#39;-&#39;</span>
+                    <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ncolumns</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">layout</span><span class="p">[(</span><span class="n">row</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+                            <span class="n">plot</span><span class="o">.</span><span class="n">column_span</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">break</span>
+                    <span class="n">plot</span><span class="o">.</span><span class="n">row_span</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+                        <span class="c1"># Walk down looking for cell with &#39;^&#39;</span>
+                        <span class="k">if</span> <span class="n">layout</span><span class="p">[(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">column</span><span class="p">)]</span> <span class="o">==</span> <span class="s2">&quot;^&quot;</span><span class="p">:</span>
+                            <span class="n">plot</span><span class="o">.</span><span class="n">row_span</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                            <span class="c1"># If the plot spans columns and rows, all the</span>
+                            <span class="c1"># cells in the extra rows must be &#39;^&#39;.</span>
+                            <span class="c1"># Check this!</span>
+                            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">column</span> <span class="o">+</span> <span class="n">plot</span><span class="o">.</span><span class="n">column_span</span><span class="p">):</span>
+                                <span class="k">if</span> <span class="n">layout</span><span class="p">[(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">col</span><span class="p">)]</span> <span class="o">!=</span> <span class="s2">&quot;^&quot;</span><span class="p">:</span>
+                                    <span class="n">val</span> <span class="o">=</span> <span class="n">layout</span><span class="p">[(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">col</span><span class="p">)]</span>
+                                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                                        <span class="p">(</span>
+                                            <span class="s2">&quot;The cell at </span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2"> should be a&quot;</span>
+                                            <span class="s2">&quot; &#39;^&#39;, not &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
+                                        <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+                                    <span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Figure.dump">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure.dump">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the filled in template to disk as &lt;filename&gt;.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str or filepath</span>
+<span class="sd">            The name or path to the file to write.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        nothing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dumps</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Figure.dumps">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Figure.dumps">[docs]</a>
+    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the filled in template document as a string.</span>
+
+<span class="sd">        Merge the layout data and the traces into the template document and</span>
+<span class="sd">        return a string version of the document.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The resulting document.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ensure that the jsonify filter is available in Jinja</span>
+
+        <span class="k">if</span> <span class="s2">&quot;jsonify&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jinja_env</span><span class="o">.</span><span class="n">filters</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_jinja_env</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s2">&quot;jsonify&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span>
+
+        <span class="c1"># Get the layout (or create a default if there isn&#39;t one)</span>
+        <span class="c1"># In the process get a list of the plots...</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grid</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;layout&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Set up the default layout of a vertical column of subplots</span>
+            <span class="n">nrows</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">ncolumns</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plots</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">plots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+                <span class="n">layout</span><span class="p">[(</span><span class="n">nrows</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="n">plot</span>
+                <span class="n">plot</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="n">nrows</span>
+                <span class="n">plot</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">nrows</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">padx</span> <span class="o">=</span> <span class="mf">0.02</span>
+            <span class="n">pady</span> <span class="o">=</span> <span class="mf">0.02</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nrows</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;nrows&quot;</span><span class="p">]</span>
+            <span class="n">ncolumns</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;ncolumns&quot;</span><span class="p">]</span>
+            <span class="n">plots</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;plots&quot;</span><span class="p">]</span>
+            <span class="n">padx</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;padx&quot;</span><span class="p">]</span>
+            <span class="n">pady</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;pady&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Work out where the plots (or really their axes) go</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">ncolumns</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">nrows</span>
+
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">row</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">column</span>
+            <span class="n">row_span</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">row_span</span>
+            <span class="n">column_span</span> <span class="o">=</span> <span class="n">plot</span><span class="o">.</span><span class="n">column_span</span>
+
+            <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">top</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">top</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">row</span> <span class="o">*</span> <span class="n">height</span> <span class="o">-</span> <span class="n">pady</span>
+
+            <span class="n">left</span> <span class="o">=</span> <span class="n">column</span> <span class="o">*</span> <span class="n">width</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">+</span> <span class="n">column_span</span> <span class="o">==</span> <span class="n">ncolumns</span><span class="p">:</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">column_span</span> <span class="o">*</span> <span class="n">width</span> <span class="o">-</span> <span class="n">padx</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">row</span> <span class="o">+</span> <span class="n">row_span</span><span class="p">)</span> <span class="o">*</span> <span class="n">height</span>
+
+            <span class="n">plot</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+            <span class="n">plot</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+            <span class="n">plot</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">top</span>
+            <span class="n">plot</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">bottom</span>
+
+        <span class="c1"># Number the axes sequentially and set their limits</span>
+        <span class="n">axis_number</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+                <span class="n">xyz</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="n">direction</span>
+                <span class="n">axis</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="n">axis_number</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">xyz</span> <span class="o">+</span> <span class="s2">&quot;axis&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">axis_number</span><span class="p">),</span>
+                        <span class="s2">&quot;short_name&quot;</span><span class="p">:</span> <span class="n">xyz</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">axis_number</span><span class="p">),</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">xyz</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
+                    <span class="n">axis</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">plot</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="n">plot</span><span class="o">.</span><span class="n">right</span><span class="p">})</span>
+                <span class="k">elif</span> <span class="n">xyz</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                    <span class="n">axis</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">plot</span><span class="o">.</span><span class="n">bottom</span><span class="p">,</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="n">plot</span><span class="o">.</span><span class="n">top</span><span class="p">})</span>
+                <span class="n">axis_number</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Sort out any anchors between axes and get the data</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">axis</span><span class="o">.</span><span class="n">anchor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">axis</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;free&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">axis</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">anchor</span><span class="o">=</span><span class="n">axis</span><span class="o">.</span><span class="n">anchor</span><span class="p">[</span><span class="s2">&quot;short_name&quot;</span><span class="p">])</span>
+
+                <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+        <span class="c1"># And, finally, set up the traces</span>
+        <span class="n">traces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="n">plots</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">plot</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">trace</span><span class="o">.</span><span class="n">x_axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">xaxis</span><span class="o">=</span><span class="n">trace</span><span class="o">.</span><span class="n">x_axis</span><span class="p">[</span><span class="s2">&quot;short_name&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">trace</span><span class="o">.</span><span class="n">y_axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">yaxis</span><span class="o">=</span><span class="n">trace</span><span class="o">.</span><span class="n">y_axis</span><span class="p">[</span><span class="s2">&quot;short_name&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">trace</span><span class="o">.</span><span class="n">z_axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">trace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">zaxis</span><span class="o">=</span><span class="n">trace</span><span class="o">.</span><span class="n">z_axis</span><span class="p">[</span><span class="s2">&quot;short_name&quot;</span><span class="p">])</span>
+
+                <span class="n">traces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trace</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+
+        <span class="c1"># Assemble all the data and pass to Jinja</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;traces&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">traces</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="s2">&quot;axes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">axes</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jinja_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Plot">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Plot">[docs]</a>
+<span class="k">class</span> <span class="nc">Plot</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to represent a plotly plot.</span>
+
+<span class="sd">    The Plot class contains Axes and Traces, which represent the</span>
+<span class="sd">    datasets being plotted.  This class is a dict-like object where</span>
+<span class="sd">    the elements of the dictionary are the traces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">right</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">top</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">column_span</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">row_span</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a plot, optionally with data.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="n">top</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="n">bottom</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="n">row</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_span</span> <span class="o">=</span> <span class="n">column_span</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_span</span> <span class="o">=</span> <span class="n">row_span</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">axes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The list of axes for this plot.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span>
+
+<div class="viewcode-block" id="Plot.add_axis">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Plot.add_axis">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new axis and return it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        direction : str (one of &#39;x&#39;, &#39;y&#39;, or &#39;z&#39;)</span>
+<span class="sd">            The direction of this axis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The axis object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">Axis</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">anchor</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">axis</span></div>
+
+
+<div class="viewcode-block" id="Plot.add_trace">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Plot.add_trace">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_trace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new trace and return it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the trace, which must be unique.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The trace object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Trace &#39;</span><span class="si">{}</span><span class="s2">&#39; already exists.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Trace</span><span class="p">(</span>
+            <span class="n">x_axis</span><span class="o">=</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">z_axis</span><span class="o">=</span><span class="n">z_axis</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Axis">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Axis">[docs]</a>
+<span class="k">class</span> <span class="nc">Axis</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to represent an axis in a plotly plot.</span>
+
+<span class="sd">    The Axis class defines an axis and the  associated graphical</span>
+<span class="sd">    control for how to display them. The class is a dict-like object</span>
+<span class="sd">    where the elements of the dictionary are the control parameters</span>
+<span class="sd">    for the axis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize an axis, optionally with data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        direction : str (one of &#39;x&#39;, &#39;y&#39;, or &#39;z&#39;)</span>
+<span class="sd">            The direction for this axis</span>
+
+<span class="sd">        args : dict</span>
+<span class="sd">            0+ dictionaries to update from, in order</span>
+
+<span class="sd">        kwargs : keyword - value pairs</span>
+<span class="sd">            0+ named arguments to update from</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">anchor</span> <span class="o">=</span> <span class="n">anchor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;stop&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Axis.to_dict">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Axis.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary representing the axis.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of the axis data, suitable for Jinja.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Trace">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Trace">[docs]</a>
+<span class="k">class</span> <span class="nc">Trace</span><span class="p">(</span><span class="n">Dictionary</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to represent a trace in a plotly plot.</span>
+
+<span class="sd">    The Trace class contains the datasets and associated graphical</span>
+<span class="sd">    control for how to display them. The class is a dict-like object</span>
+<span class="sd">    where the elements of the dictionary are the traces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a trace, optionally with data.</span>
+
+<span class="sd">        Keyword arguments:</span>
+<span class="sd">        args : dict</span>
+<span class="sd">            0+ dictionaries to update from, in order</span>
+<span class="sd">        kwargs : keyword - value pairs</span>
+<span class="sd">            0+ named arguments to update from</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_axis</span> <span class="o">=</span> <span class="n">x_axis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_axis</span> <span class="o">=</span> <span class="n">y_axis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">z_axis</span> <span class="o">=</span> <span class="n">z_axis</span>
+
+<div class="viewcode-block" id="Trace.to_dict">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.plotting.Trace.to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary representing the trace.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of the trace data, suitable for Jinja.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  
+
+<p>
+<div class="row">
+  <div class="column_left">
+    <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+      <img src="/_images/MolSSI.jpg" alt="The MolSSI" style="border:0;">
+    </a>
+  </div>
+  <div class="column">
+    &copy; Copyright 2019-2021, the Molecular Sciences Software Institute,
+    which receives funding from the National Science Foundation under awards OAC-1547580
+    and CHE-2136142.
+  </div>
+  <div class="column_right">
+    <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+      <img src="/_images/NSF_4-Color_bitmap_Logo.png" alt="The NSF" style="border:0;">
+    </a>
+  </div>
+</div>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

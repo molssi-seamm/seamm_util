@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seamm_util.printing &mdash; SEAMM Util 2024.4.22+1.gdae3868 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
+<!-- End Google Tag Manager -->
+
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=ee144bca"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQXXTJ2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SEAMM Util
+          </a>
+              <div class="version">
+                2024.4.22+1.gdae3868
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">seamm_util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SEAMM Util</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seamm_util.printing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seamm_util.printing</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Printer class provides control over printing output, based</span>
+<span class="sd">on the Python logging module. The levels a translated to more reasonable</span>
+<span class="sd">names for output, rather than debugging:</span>
+
+<span class="sd">        Level        Logger Level    Numeric value</span>
+<span class="sd">        --------     ------------    -------------</span>
+<span class="sd">        JOB          CRITICAL	           50</span>
+<span class="sd">        IMPORTANT    ERROR	           40</span>
+<span class="sd">        TERSE        WARNING	           30</span>
+<span class="sd">        NORMAL       INFO                  20</span>
+<span class="sd">        VERBOSE      DEBUG                 10</span>
+<span class="sd">        ALL          ALL                    0</span>
+
+<span class="sd">By default, JOB level output is mirrored in the main log for the job</span>
+<span class="sd">as well as the local log for the stage. All output from the cutoff level</span>
+<span class="sd">up, which is NORMAL by default, is placed in the local stage log. Optionally,</span>
+<span class="sd">output from a cutoff level and up is also written to the standard output.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">thread</span>
+    <span class="kn">import</span> <span class="nn">threading</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1">#   Level related stuff</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1">#</span>
+<span class="c1"># Default levels and level names, these can be replaced with any positive set</span>
+<span class="c1"># of values having corresponding names. There is a pseudo-level, ALL, which</span>
+<span class="c1"># is only really there as a lower limit for user-defined levels. Handlers and</span>
+<span class="c1"># loggers are initialized with ALL so that they will log all messages, even</span>
+<span class="c1"># at user-defined levels.</span>
+<span class="c1">#</span>
+
+<span class="n">JOB</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">IMPORTANT</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">TERSE</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">NORMAL</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">VERBOSE</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ALL</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">_levelNames</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">JOB</span><span class="p">:</span> <span class="s2">&quot;JOB&quot;</span><span class="p">,</span>
+    <span class="n">IMPORTANT</span><span class="p">:</span> <span class="s2">&quot;IMPORTANT&quot;</span><span class="p">,</span>
+    <span class="n">TERSE</span><span class="p">:</span> <span class="s2">&quot;TERSE&quot;</span><span class="p">,</span>
+    <span class="n">NORMAL</span><span class="p">:</span> <span class="s2">&quot;NORMAL&quot;</span><span class="p">,</span>
+    <span class="n">VERBOSE</span><span class="p">:</span> <span class="s2">&quot;VERBOSE&quot;</span><span class="p">,</span>
+    <span class="n">ALL</span><span class="p">:</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JOB&quot;</span><span class="p">:</span> <span class="n">JOB</span><span class="p">,</span>
+    <span class="s2">&quot;IMPORTANT&quot;</span><span class="p">:</span> <span class="n">IMPORTANT</span><span class="p">,</span>
+    <span class="s2">&quot;TERSE&quot;</span><span class="p">:</span> <span class="n">TERSE</span><span class="p">,</span>
+    <span class="s2">&quot;NORMAL&quot;</span><span class="p">:</span> <span class="n">NORMAL</span><span class="p">,</span>
+    <span class="s2">&quot;VERBOSE&quot;</span><span class="p">:</span> <span class="n">VERBOSE</span><span class="p">,</span>
+    <span class="s2">&quot;ALL&quot;</span><span class="p">:</span> <span class="n">ALL</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="getLevelName">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.getLevelName">[docs]</a>
+<span class="k">def</span> <span class="nf">getLevelName</span><span class="p">(</span><span class="n">lvl</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the textual representation of printing level &#39;lvl&#39;. If the level is</span>
+<span class="sd">    one of the predefined levels (JOB, IMPORTANT, TERSE, NORMAL, VERBOSE) then</span>
+<span class="sd">    you get the corresponding string. If you have associated levels with names</span>
+<span class="sd">    using addLevelName then the name you have associated with &#39;lvl&#39; is</span>
+<span class="sd">    returned. Otherwise, the string &quot;Level %s&quot; % lvl is returned.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_levelNames</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lvl</span><span class="p">,</span> <span class="s2">&quot;Level </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lvl</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="addLevelName">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.addLevelName">[docs]</a>
+<span class="k">def</span> <span class="nf">addLevelName</span><span class="p">(</span><span class="n">lvl</span><span class="p">,</span> <span class="n">levelName</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Associate &#39;levelName&#39; with &#39;lvl&#39;. This is used when converting levels</span>
+<span class="sd">    to text during message formatting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_acquireLock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>  <span class="c1"># unlikely to cause an exception, but you never know...</span>
+        <span class="n">_levelNames</span><span class="p">[</span><span class="n">lvl</span><span class="p">]</span> <span class="o">=</span> <span class="n">levelName</span>
+        <span class="n">_levelNames</span><span class="p">[</span><span class="n">levelName</span><span class="p">]</span> <span class="o">=</span> <span class="n">lvl</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_releaseLock</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1">#   Thread-related stuff</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="c1">#</span>
+<span class="c1"># _lock is used to serialize access to shared data structures in this module.</span>
+<span class="c1"># This needs to be an RLock because fileConfig() creates Handlers and so</span>
+<span class="c1"># might arbitrary user threads. Since Handler.__init__() updates the shared</span>
+<span class="c1"># dictionary _handlers, it needs to acquire the lock. But if configuring,</span>
+<span class="c1"># the lock would already have been acquired - so we need an RLock.</span>
+<span class="c1"># The same argument applies to Loggers and Manager.loggerDict.</span>
+<span class="c1">#</span>
+
+<span class="n">_lock</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_acquireLock</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Acquire the module-level lock for serializing access to shared data.</span>
+<span class="sd">    This should be released with _releaseLock().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_lock</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">_lock</span><span class="p">)</span> <span class="ow">and</span> <span class="n">thread</span><span class="p">:</span>
+        <span class="n">_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">_lock</span><span class="p">:</span>
+        <span class="n">_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_releaseLock</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Release the module-level lock acquired by calling _acquireLock().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_lock</span><span class="p">:</span>
+        <span class="n">_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1">#   Manager classes and functions</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="PlaceHolder">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.PlaceHolder">[docs]</a>
+<span class="k">class</span> <span class="nc">PlaceHolder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    PlaceHolder instances are used in the Manager printer hierarchy to take</span>
+<span class="sd">    the place of nodes for which no printers have been defined [FIXME add</span>
+<span class="sd">    example].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aprinter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize with the specified printer being a child of this</span>
+<span class="sd">        placeholder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printers</span> <span class="o">=</span> <span class="p">[</span><span class="n">aprinter</span><span class="p">]</span>
+
+<div class="viewcode-block" id="PlaceHolder.append">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.PlaceHolder.append">[docs]</a>
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aprinter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the specified printer as a child of this placeholder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">aprinter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">printers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">printers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aprinter</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1">#</span>
+<span class="c1">#   Determine which class to use when instantiating printers.</span>
+<span class="c1">#</span>
+<span class="n">_printerClass</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="setPrinterClass">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.setPrinterClass">[docs]</a>
+<span class="k">def</span> <span class="nf">setPrinterClass</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the class to be used when instantiating a printer. The class should</span>
+<span class="sd">    define __init__() such that only a name argument is required, and the</span>
+<span class="sd">    __init__() should call Printer.__init__()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">klass</span> <span class="o">!=</span> <span class="n">Printer</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="nb">object</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;setPrinterClass is expecting a class&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="n">Printer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;printer not derived from printer.Printer: &quot;</span> <span class="o">+</span> <span class="n">klass</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+    <span class="k">global</span> <span class="n">_printerClass</span>
+    <span class="n">_printerClass</span> <span class="o">=</span> <span class="n">klass</span></div>
+
+
+
+<div class="viewcode-block" id="Manager">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Manager">[docs]</a>
+<span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    There is [under normal circumstances] just one Manager instance, which</span>
+<span class="sd">    holds the hierarchy of printers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">print_root</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the manager with the root node of the printer hierarchy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_root</span> <span class="o">=</span> <span class="n">print_root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emittedNoHandlerWarning</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Manager.getPrinter">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Manager.getPrinter">[docs]</a>
+    <span class="k">def</span> <span class="nf">getPrinter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a printer with the specified name (channel name), creating it</span>
+<span class="sd">        if it doesn&#39;t yet exist. If a PlaceHolder existed for the specified</span>
+<span class="sd">        name [i.e. the printer didn&#39;t exist but a child of it did], replace</span>
+<span class="sd">        it with the created printer and fix up the parent/child references</span>
+<span class="sd">        which pointed to the placeholder to now point to the printer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">_acquireLock</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">:</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">PlaceHolder</span><span class="p">):</span>
+                    <span class="n">ph</span> <span class="o">=</span> <span class="n">rv</span>
+                    <span class="n">rv</span> <span class="o">=</span> <span class="n">_printerClass</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">rv</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="bp">self</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rv</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fixupChildren</span><span class="p">(</span><span class="n">ph</span><span class="p">,</span> <span class="n">rv</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_fixupParents</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="n">_printerClass</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">rv</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="bp">self</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rv</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fixupParents</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">_releaseLock</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rv</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_fixupParents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aprinter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensure that there are either printers or placeholders all the way</span>
+<span class="sd">        from the specified printer to the root of the printer hierarchy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">aprinter</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rv</span><span class="p">:</span>
+            <span class="n">substr</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">substr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">substr</span><span class="p">]</span> <span class="o">=</span> <span class="n">PlaceHolder</span><span class="p">(</span><span class="n">aprinter</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">substr</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Printer</span><span class="p">):</span>
+                    <span class="n">rv</span> <span class="o">=</span> <span class="n">obj</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">PlaceHolder</span><span class="p">)</span>
+                    <span class="n">obj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">aprinter</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rv</span><span class="p">:</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_root</span>
+        <span class="n">aprinter</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rv</span>
+
+    <span class="k">def</span> <span class="nf">_fixupChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ph</span><span class="p">,</span> <span class="n">aprinter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensure that children of the placeholder ph are connected to the</span>
+<span class="sd">        specified printer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ph</span><span class="o">.</span><span class="n">printers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">aprinter</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">aprinter</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">parent</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">aprinter</span></div>
+
+
+
+<div class="viewcode-block" id="Printer">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer">[docs]</a>
+<span class="k">class</span> <span class="nc">Printer</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Filterer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide controlled printing for plugins for the MolSSI</span>
+<span class="sd">    Framework.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">ALL</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the Printer object&quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;print_root&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;print_root.&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">level</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="nd">@parent</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">propagate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">propagate</span>
+
+    <span class="nd">@propagate</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">propagate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">handlers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">handlers</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">disabled</span>
+
+    <span class="nd">@disabled</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">disabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Printer.setLevel">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.setLevel">[docs]</a>
+    <span class="k">def</span> <span class="nf">setLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the printing level of this printer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">lvl</span></div>
+
+
+<div class="viewcode-block" id="Printer.verbose">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.verbose">[docs]</a>
+    <span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level VERBOSE on this printer.</span>
+<span class="sd">        The msg is the message format string, and the args are the arguments</span>
+<span class="sd">        which are merged into msg using the string formatting</span>
+<span class="sd">        operator. (Note that this means that you can use keywords in the</span>
+<span class="sd">        format string, together with a single dictionary argument.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.normal">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.normal">[docs]</a>
+    <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level NORMAL on this printer.</span>
+<span class="sd">        The msg is the message format string, and the args are the arguments</span>
+<span class="sd">        which are merged into msg using the string formatting</span>
+<span class="sd">        operator. (Note that this means that you can use keywords in the</span>
+<span class="sd">        format string, together with a single dictionary argument.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.terse">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.terse">[docs]</a>
+    <span class="k">def</span> <span class="nf">terse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level TERSE on this printer.</span>
+<span class="sd">        The msg is the message format string, and the args are the arguments</span>
+<span class="sd">        which are merged into msg using the string formatting</span>
+<span class="sd">        operator. (Note that this means that you can use keywords in the</span>
+<span class="sd">        format string, together with a single dictionary argument.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.important">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.important">[docs]</a>
+    <span class="k">def</span> <span class="nf">important</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level IMPORTANT on this printer.</span>
+<span class="sd">        The msg is the message format string, and the args are the arguments</span>
+<span class="sd">        which are merged into msg using the string formatting</span>
+<span class="sd">        operator. (Note that this means that you can use keywords in the</span>
+<span class="sd">        format string, together with a single dictionary argument.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.job">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.job">[docs]</a>
+    <span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logs a message with level JOB on this printer.</span>
+<span class="sd">        The msg is the message format string, and the args are the arguments</span>
+<span class="sd">        which are merged into msg using the string formatting</span>
+<span class="sd">        operator. (Note that this means that you can use keywords in the</span>
+<span class="sd">        format string, together with a single dictionary argument.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.print">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.print">[docs]</a>
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints a message with integer level lvl on this logger.</span>
+<span class="sd">        The other arguments are interpreted as for verbose().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># print(&#39;print: lvl={}, msg={}, args={}, kwargs={}&#39;.format(</span>
+        <span class="c1">#     lvl, msg, args, kwargs</span>
+        <span class="c1"># ))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.findCaller">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.findCaller">[docs]</a>
+    <span class="k">def</span> <span class="nf">findCaller</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the stack frame of the caller so that we can note the source</span>
+<span class="sd">        file name and line number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span>
+        <span class="k">while</span> <span class="n">frame</span><span class="p">:</span>
+            <span class="n">sfn</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsourcefile</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sfn</span><span class="p">:</span>
+                <span class="n">sfn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">sfn</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sfn</span> <span class="o">!=</span> <span class="n">_srcfile</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
+                <span class="c1"># print frame.f_code.co_code</span>
+                <span class="n">lineno</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getlineno</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+                <span class="n">rv</span> <span class="o">=</span> <span class="p">(</span><span class="n">sfn</span><span class="p">,</span> <span class="n">lineno</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
+        <span class="k">return</span> <span class="n">rv</span></div>
+
+
+<div class="viewcode-block" id="Printer.makeRecord">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.makeRecord">[docs]</a>
+    <span class="k">def</span> <span class="nf">makeRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">lno</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A factory method which can be overridden in subclasses to create</span>
+<span class="sd">        specialized LogRecords.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">makeRecord</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">lno</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Low-level logging routine which creates a LogRecord and then calls</span>
+<span class="sd">        all the handlers of this logger to handle the record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">exc_info</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Printer.handle">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.handle">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call the handlers for the specified record. This method is used for</span>
+<span class="sd">        unpickled records received from a socket, as well as those created</span>
+<span class="sd">        locally. Logger-level filtering is applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">record</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.addHandler">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.addHandler">[docs]</a>
+    <span class="k">def</span> <span class="nf">addHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hdlr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the specified handler to this printer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">hdlr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.removeHandler">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.removeHandler">[docs]</a>
+    <span class="k">def</span> <span class="nf">removeHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hdlr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove the specified handler from this printer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">hdlr</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.callHandlers">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.callHandlers">[docs]</a>
+    <span class="k">def</span> <span class="nf">callHandlers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loop through all handlers for this printer and its parents in the</span>
+<span class="sd">        printer hierarchy. If no handler was found, output a one-off error</span>
+<span class="sd">        message to sys.stderr. Stop searching up the hierarchy whenever a</span>
+<span class="sd">        printer with the &quot;propagate&quot; attribute set to zero is found - that</span>
+<span class="sd">        will be the last printer whose handlers are called.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">callHandlers</span><span class="p">(</span><span class="n">record</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Printer.getEffectiveLevel">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.getEffectiveLevel">[docs]</a>
+    <span class="k">def</span> <span class="nf">getEffectiveLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loop through this printer and its parents in the printer hierarchy,</span>
+<span class="sd">        looking for a non-zero logging level. Return the first one found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Printer.isEnabledFor">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.Printer.isEnabledFor">[docs]</a>
+    <span class="k">def</span> <span class="nf">isEnabledFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Is this printer enabled for level lvl?</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">isEnabledFor</span><span class="p">(</span><span class="n">lvl</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RootPrinter">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.RootPrinter">[docs]</a>
+<span class="k">class</span> <span class="nc">RootPrinter</span><span class="p">(</span><span class="n">Printer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A root printer is not that different to any other printer, except that</span>
+<span class="sd">    it must have a printing level and there is only one instance of it in</span>
+<span class="sd">    the hierarchy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lvl</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the printer with the name &quot;print_root&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;print_root&quot;</span><span class="p">,</span> <span class="n">lvl</span><span class="p">)</span>
+
+        <span class="c1"># Turn of propagation and set up handler</span>
+        <span class="c1"># so that we are separate from the loggers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+<span class="n">_printerClass</span> <span class="o">=</span> <span class="n">Printer</span>
+
+<span class="n">print_root</span> <span class="o">=</span> <span class="n">RootPrinter</span><span class="p">(</span><span class="n">NORMAL</span><span class="p">)</span>
+<span class="n">Printer</span><span class="o">.</span><span class="n">print_root</span> <span class="o">=</span> <span class="n">print_root</span>
+<span class="n">Printer</span><span class="o">.</span><span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="n">Printer</span><span class="o">.</span><span class="n">print_root</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Configuration classes and functions</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">BASIC_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{message:s}</span><span class="s2">&quot;</span>
+
+
+<div class="viewcode-block" id="basicConfig">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.basicConfig">[docs]</a>
+<span class="k">def</span> <span class="nf">basicConfig</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Do basic configuration for the printing system by creating a</span>
+<span class="sd">    StreamHandler with a default Formatter and adding it to the</span>
+<span class="sd">    root logger.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">hdlr</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">BASIC_FORMAT</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;{&quot;</span><span class="p">)</span>
+        <span class="n">hdlr</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+        <span class="n">print_root</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">hdlr</span><span class="p">)</span></div>
+
+
+
+<span class="n">_handlers</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># repository of handlers (for flushing when shutdown called)</span>
+
+
+<div class="viewcode-block" id="fileConfig">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.fileConfig">[docs]</a>
+<span class="k">def</span> <span class="nf">fileConfig</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the printing configuration from a ConfigParser-format file. This can</span>
+<span class="sd">    be called several times from an application, allowing an end user the</span>
+<span class="sd">    ability to select from various pre-canned configurations (if the</span>
+<span class="sd">    developer provides a mechanism to present the choices and load the chosen</span>
+<span class="sd">    configuration).</span>
+<span class="sd">    In versions of ConfigParser which have the readfp method [typically</span>
+<span class="sd">    shipped in 2.x versions of Python], you can pass in a file-like object</span>
+<span class="sd">    rather than a filename, in which case the file-like object will be read</span>
+<span class="sd">    using readfp.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">ConfigParser</span>
+
+    <span class="n">cp</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="s2">&quot;readfp&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;read&quot;</span><span class="p">):</span>
+        <span class="n">cp</span><span class="o">.</span><span class="n">readfp</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="c1"># first, do the formatters...</span>
+    <span class="n">flist</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;formatters&quot;</span><span class="p">,</span> <span class="s2">&quot;keys&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">flist</span><span class="p">):</span>
+        <span class="n">flist</span> <span class="o">=</span> <span class="n">flist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">formatters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">form</span> <span class="ow">in</span> <span class="n">flist</span><span class="p">:</span>
+            <span class="n">sectname</span> <span class="o">=</span> <span class="s2">&quot;formatter_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">form</span>
+            <span class="n">opts</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">sectname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;format&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                <span class="n">fs</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fs</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;datefmt&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                <span class="n">dfs</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;datefmt&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dfs</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">dfs</span><span class="p">)</span>
+            <span class="n">formatters</span><span class="p">[</span><span class="n">form</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="c1"># next, do the handlers...</span>
+    <span class="c1"># critical section...</span>
+    <span class="n">_acquireLock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># first, lose the existing handlers...</span>
+            <span class="n">_handlers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+            <span class="c1"># now set up the new ones...</span>
+            <span class="n">hlist</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;handlers&quot;</span><span class="p">,</span> <span class="s2">&quot;keys&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hlist</span><span class="p">):</span>
+                <span class="n">hlist</span> <span class="o">=</span> <span class="n">hlist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                <span class="n">handlers</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">fixups</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># for inter-handler references</span>
+                <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">hlist</span><span class="p">:</span>
+                    <span class="n">sectname</span> <span class="o">=</span> <span class="s2">&quot;handler_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">hand</span>
+                    <span class="n">klass</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">)</span>
+                    <span class="n">opts</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">sectname</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s2">&quot;formatter&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                        <span class="n">fmt</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;formatter&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="n">klass</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">)</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">klass</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s2">&quot;level&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                        <span class="n">lvl</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">)</span>
+                        <span class="n">h</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">_levelNames</span><span class="p">[</span><span class="n">lvl</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fmt</span><span class="p">):</span>
+                        <span class="n">h</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatters</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
+                    <span class="c1"># temporary hack for FileHandler and MemoryHandler.</span>
+                    <span class="k">if</span> <span class="n">klass</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">:</span>
+                        <span class="n">maxsize</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">if</span> <span class="s2">&quot;maxsize&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                            <span class="n">ms</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;maxsize&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">ms</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="n">maxsize</span> <span class="o">=</span> <span class="n">ms</span>
+                        <span class="k">if</span> <span class="n">maxsize</span><span class="p">:</span>
+                            <span class="n">backcount</span> <span class="o">=</span> <span class="mi">0</span>
+                            <span class="k">if</span> <span class="s2">&quot;backcount&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                                <span class="n">bc</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;backcount&quot;</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">bc</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">backcount</span> <span class="o">=</span> <span class="n">bc</span>
+                            <span class="n">h</span><span class="o">.</span><span class="n">setRollover</span><span class="p">(</span><span class="n">maxsize</span><span class="p">,</span> <span class="n">backcount</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">klass</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">MemoryHandler</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="s2">&quot;target&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                            <span class="n">target</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>  <span class="c1"># the target handler may not be loaded yet,</span>
+                            <span class="c1"># so keep for later...</span>
+                            <span class="n">fixups</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+                    <span class="n">handlers</span><span class="p">[</span><span class="n">hand</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span>
+                <span class="c1"># now all handlers are loaded, fixup inter-handler references..</span>
+                <span class="k">for</span> <span class="n">fixup</span> <span class="ow">in</span> <span class="n">fixups</span><span class="p">:</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">fixup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">fixup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">h</span><span class="o">.</span><span class="n">setTarget</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+            <span class="c1"># at last, the loggers...first the root...</span>
+            <span class="n">llist</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;loggers&quot;</span><span class="p">,</span> <span class="s2">&quot;keys&quot;</span><span class="p">)</span>
+            <span class="n">llist</span> <span class="o">=</span> <span class="n">llist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="n">llist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">)</span>
+            <span class="n">sectname</span> <span class="o">=</span> <span class="s2">&quot;printer_root&quot;</span>
+            <span class="n">log</span> <span class="o">=</span> <span class="n">print_root</span>
+            <span class="n">opts</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">sectname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;level&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                <span class="n">lvl</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">_levelNames</span><span class="p">[</span><span class="n">lvl</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+                <span class="n">print_root</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+            <span class="n">hlist</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;handlers&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hlist</span><span class="p">):</span>
+                <span class="n">hlist</span> <span class="o">=</span> <span class="n">hlist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">hlist</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">hand</span><span class="p">])</span>
+            <span class="c1"># and now the others...</span>
+            <span class="c1"># we don&#39;t want to lose the existing loggers,</span>
+            <span class="c1"># since other threads may have pointers to them.</span>
+            <span class="c1"># existing is set to contain all existing loggers,</span>
+            <span class="c1"># and as we go through the new configuration we</span>
+            <span class="c1"># remove any which are configured. At the end,</span>
+            <span class="c1"># what&#39;s left in existing is the set of loggers</span>
+            <span class="c1"># which were in the previous configuration but</span>
+            <span class="c1"># which are not in the new configuration.</span>
+
+            <span class="n">existing</span> <span class="o">=</span> <span class="n">print_root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">printDict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+            <span class="c1"># now set up the new ones...</span>
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">llist</span><span class="p">:</span>
+                <span class="n">sectname</span> <span class="o">=</span> <span class="s2">&quot;printer_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">log</span>
+                <span class="n">qn</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;qualname&quot;</span><span class="p">)</span>
+                <span class="n">opts</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">sectname</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;propagate&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                    <span class="n">propagate</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;propagate&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">propagate</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">printer</span> <span class="o">=</span> <span class="n">getPrinter</span><span class="p">(</span><span class="n">qn</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">qn</span> <span class="ow">in</span> <span class="n">existing</span><span class="p">:</span>
+                    <span class="n">existing</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">qn</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;level&quot;</span> <span class="ow">in</span> <span class="n">opts</span><span class="p">:</span>
+                    <span class="n">lvl</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">)</span>
+                    <span class="n">printer</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">_levelNames</span><span class="p">[</span><span class="n">lvl</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+                    <span class="n">printer</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+                <span class="n">printer</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="n">propagate</span>
+                <span class="n">printer</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">hlist</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectname</span><span class="p">,</span> <span class="s2">&quot;handlers&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hlist</span><span class="p">):</span>
+                    <span class="n">hlist</span> <span class="o">=</span> <span class="n">hlist</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">hlist</span><span class="p">:</span>
+                        <span class="n">printer</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">hand</span><span class="p">])</span>
+            <span class="c1"># Disable any old loggers. There&#39;s no point deleting</span>
+            <span class="c1"># them as other threads may continue to hold references</span>
+            <span class="c1"># and by disabling them, you stop them doing any printing.</span>
+
+            <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">existing</span><span class="p">:</span>
+                <span class="n">print_root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">printerDict</span><span class="p">[</span><span class="n">log</span><span class="p">]</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># noqa: E722</span>
+            <span class="kn">import</span> <span class="nn">traceback</span>
+
+            <span class="n">ei</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">ei</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ei</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ei</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">ei</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">_releaseLock</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Utility functions at module level.</span>
+<span class="c1"># Basically delegate everything to the root printer.</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="getPrinter">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.getPrinter">[docs]</a>
+<span class="k">def</span> <span class="nf">getPrinter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a printer with the specified name, creating it if necessary.</span>
+<span class="sd">    If no name is specified, return the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Printer</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">getPrinter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">print_root</span></div>
+
+
+
+<div class="viewcode-block" id="job">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.job">[docs]</a>
+<span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log a message with severity &#39;JOB&#39; on the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">job</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="important">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.important">[docs]</a>
+<span class="k">def</span> <span class="nf">important</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log a message with severity &#39;IMPORTANT&#39; on the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="terse">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.terse">[docs]</a>
+<span class="k">def</span> <span class="nf">terse</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log a message with severity &#39;TERSE&#39; on the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">terse</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="normal">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.normal">[docs]</a>
+<span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log a message with severity &#39;NORMAL&#39; on the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="verbose">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.verbose">[docs]</a>
+<span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log a message with severity &#39;VERBOSE&#39; on the root printer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">print_root</span><span class="o">.</span><span class="n">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">basicConfig</span><span class="p">()</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">verbose</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="disable">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.disable">[docs]</a>
+<span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Disable all printing calls less severe than &#39;level&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">print_root</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">disable</span> <span class="o">=</span> <span class="n">level</span></div>
+
+
+
+<div class="viewcode-block" id="shutdown">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.shutdown">[docs]</a>
+<span class="k">def</span> <span class="nf">shutdown</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform any cleanup actions in the printing system (e.g. flushing</span>
+<span class="sd">    buffers). Should be called at application exit.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">_handlers</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<span class="c1">#</span>
+<span class="c1"># Did not bring the socket listener code over yet</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+
+
+<div class="viewcode-block" id="FormattedText">
+<a class="viewcode-back" href="../../seamm_util.html#seamm_util.printing.FormattedText">[docs]</a>
+<span class="k">class</span> <span class="nc">FormattedText</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class for wrapping, formatting and indenting text to make textual output</span>
+<span class="sd">    from the MolSSI Framework and its plugins easier</span>
+
+<span class="sd">    The __str__ method returns the formatted text, so e.g. print(&lt;object&gt;)</span>
+<span class="sd">    formats the text and prints it as expected.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    -----------------------------------------------------------------------</span>
+<span class="sd">        ft = FormattedText(&#39;&#39;&#39;\</span>
+<span class="sd">        This is the first line.</span>
+<span class="sd">        And the second.</span>
+<span class="sd">        And a very, very, very, very, very, very, very, very, very, very, very, very long line.</span>
+<span class="sd">        And i = &#39;{i}&#39; and j = &#39;{j}&#39; followed by a line break</span>
+
+<span class="sd">        Ending with the last line. Which can of course also be wrapped</span>
+<span class="sd">        if we want it to be.</span>
+
+<span class="sd">            What about a list:     1</span>
+
+<span class="sd">            With a second item:    2</span>
+
+<span class="sd">        Does that work?&#39;&#39;&#39;, i=1, j=2, indent=&#39;---&gt;&#39;, line_length=70)</span>
+
+<span class="sd">        print(ft)</span>
+<span class="sd">    -----------------------------------------------------------------------</span>
+<span class="sd">    Will print the following:</span>
+
+<span class="sd">        ---&gt;This is the first line. And the second. And a very, very, very,</span>
+<span class="sd">        ---&gt;very, very, very, very, very, very, very, very, very long line.</span>
+<span class="sd">        ---&gt;And i = &#39;1&#39; and j = &#39;2&#39; followed by a line break</span>
+
+<span class="sd">        ---&gt;Ending with the last line. Which can of course also be wrapped if</span>
+<span class="sd">        ---&gt;we want it to be.</span>
+
+<span class="sd">        ---&gt;    What about a list:     1</span>
+
+<span class="sd">        ---&gt;    With a second item:    2</span>
+
+<span class="sd">        ---&gt;Does that work?</span>
+
+<span class="sd">    where the start of each arrow is aligned to the left (not indented as in</span>
+<span class="sd">    this string).</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">,</span>
+        <span class="n">dedent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">indent</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">indent_initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">indent_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">wrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">line_length</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle the text &lt;text&gt;, which usually from either a simple string</span>
+<span class="sd">        or a triple-quoted string.</span>
+
+<span class="sd">        The &lt;dedent&gt; option uses textwrap.dedent to remove consistent initial</span>
+<span class="sd">        spaces so that the string can be nicely lined up in the source code.</span>
+
+<span class="sd">        &lt;indent&gt; provides an optional string to prefix each line of output</span>
+
+<span class="sd">        &lt;indent_all&gt; indicates that empty line of those containing only white</span>
+<span class="sd">        space also be indented. By the default the are not.</span>
+
+<span class="sd">        &lt;indent_initial&gt; indicates that the first line shoud be indented.</span>
+<span class="sd">        defaults to True.</span>
+
+<span class="sd">        &lt;wrap&gt; asks that lines of text not starting with a blank be wrapped</span>
+<span class="sd">        at &lt;line_length&gt;.</span>
+
+<span class="sd">        &lt;*args&gt; and &lt;**kwargs&gt; are additional arguments for {}-type formatting</span>
+<span class="sd">        in the text. This is done after dedenting but before wrapping the text.</span>
+
+<span class="sd">        Empty lines separate &#39;paragraphs&#39;. Each paragraph is wrapped by itself,</span>
+<span class="sd">        which is the behavior that most people expect.</span>
+
+<span class="sd">        Since lines starting with blanks (after dedent&#39;ing) are not wrapped,</span>
+<span class="sd">        this can be used for e.g. tables and lists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dedent</span> <span class="o">=</span> <span class="n">dedent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indent</span> <span class="o">=</span> <span class="n">indent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indent_initial</span> <span class="o">=</span> <span class="n">indent_initial</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indent_all</span> <span class="o">=</span> <span class="n">indent_all</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrap</span> <span class="o">=</span> <span class="n">wrap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span> <span class="o">=</span> <span class="n">line_length</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Turn into a formatted, wrapped string as requested.</span>
+
+<span class="sd">        NB. If there are no extra args or kwargs, don&#39;t format the</span>
+<span class="sd">        string. This avoids problems with strings that have, e.g.</span>
+<span class="sd">        braces internally.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dedent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrap</span><span class="p">:</span>
+            <span class="n">wrapped_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent_initial</span><span class="p">:</span>
+                <span class="n">initial_indent</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">initial_indent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
+                            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span><span class="p">,</span>
+                            <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span>
+                            <span class="n">subsequent_indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">,</span>
+                        <span class="p">)</span>
+                        <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="n">buffer</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent_all</span><span class="p">:</span>
+                            <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                    <span class="n">buffer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+                    <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">wrapped_text</span> <span class="o">+=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">line_length</span><span class="p">,</span>
+                    <span class="n">initial_indent</span><span class="o">=</span><span class="n">initial_indent</span><span class="p">,</span>
+                    <span class="n">subsequent_indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">wrapped_text</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent_all</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  
+
+<p>
+<div class="row">
+  <div class="column_left">
+    <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+      <img src="/_images/MolSSI.jpg" alt="The MolSSI" style="border:0;">
+    </a>
+  </div>
+  <div class="column">
+    &copy; Copyright 2019-2021, the Molecular Sciences Software Institute,
+    which receives funding from the National Science Foundation under awards OAC-1547580
+    and CHE-2136142.
+  </div>
+  <div class="column_right">
+    <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+      <img src="/_images/NSF_4-Color_bitmap_Logo.png" alt="The NSF" style="border:0;">
+    </a>
+  </div>
+</div>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
