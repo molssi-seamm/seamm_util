@@ -1,6 +1,10 @@
 =======
 History
 =======
+2024.4.30 -- Added utility for handling list definitions
+    * Add list_definition.py with parse_list()
+    * Updated makefile for doctests.
+
 2024.4.26 -- Removed debug printing
     * Some debug printing was accidentally left in the code.
       

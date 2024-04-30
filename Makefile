@@ -1,5 +1,5 @@
 MODULE := seamm_util
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: clean clean-test clean-pyc clean-build docs help test coverage
 .DEFAULT_GOAL := help
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -56,7 +56,7 @@ format: ## reformat with with yapf and isort
 	black $(MODULE) tests
 
 test: ## run tests quickly with the default Python
-	py.test
+	pytest --doctest-modules tests $(MODULE)
 
 dependencies:
 	pur -r requirements_dev.txt
@@ -65,8 +65,12 @@ dependencies:
 test-all: ## run tests on every Python version with tox
 	tox
 
-coverage: ## check code coverage quickly with the default Python
-	coverage run --source $(MODULE) -m pytest
+coverage: clean-test ## check code coverage quickly with the default Python
+	pytest -v --doctest-modules --cov=$(MODULE) --cov-report=html tests/ $(MODULE)
+	$(BROWSER) htmlcov/index.html
+
+coverage-old:
+	coverage run --source $(MODULE) -m pytest --doctest-modules tests $(MODULE)
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html

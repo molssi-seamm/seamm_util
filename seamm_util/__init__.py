@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""
-seamm_util
+"""seamm_util
 Utility functions for the SEAMM environment.
 """
 
@@ -14,6 +13,7 @@ from .compact_json_encoder import CompactJSONEncoder  # noqa: F401
 from .elemental_data import element_data  # noqa: F401
 from .check_executable import check_executable  # noqa: F401
 from .dictionary import Dictionary  # noqa: F401
+from .list_definition import parse_list  # noqa: F401
 from .units import ureg, Q_, units_class, default_units  # noqa: F401
 from .include_open import Open  # noqa: F401
 from .include_open import splitext  # noqa: F401
