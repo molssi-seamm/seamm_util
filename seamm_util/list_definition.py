@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+"""Tools for handling the shorthand definitions of lists in SEAMM.
+"""
+
+
 def parse_list(input, duplicates=True, sort=False, **kwargs):
     """Parse a SEAMM-style list of values, including ranges.
 
