@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seamm_util.list_definition &mdash; SEAMM Util 2024.4.30 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
+<!-- End Google Tag Manager -->
+
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8c9e9107"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQXXTJ2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SEAMM Util
+          </a>
+              <div class="version">
+                2024.4.30
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SEAMM Util</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seamm_util.list_definition</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seamm_util.list_definition</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Tools for handling the shorthand definitions of lists in SEAMM.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="parse_list">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.list_definition.parse_list">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_list</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a SEAMM-style list of values, including ranges.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    input : str</span>
+<span class="sd">        The list definition (see below).</span>
+<span class="sd">    duplicates : bool = True</span>
+<span class="sd">        Allows duplicate values in the list by default.</span>
+<span class="sd">    sort : bool = False</span>
+<span class="sd">        If False, the list is not sorted. True or &quot;ascending&quot; sorts into ascending order</span>
+<span class="sd">        while &quot;descending&quot; into reverse order. Only the first letter is tested, so any</span>
+<span class="sd">        abbreviation works.</span>
+<span class="sd">    kwargs : {str: any}</span>
+<span class="sd">        Optional dictionary of values of variables used in the list.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list : [int or float]</span>
+<span class="sd">        The expanded list of values</span>
+
+<span class="sd">    The input list definition consists of any number of individual values or ranges,</span>
+<span class="sd">    separated by commas (&#39;,&#39;). Ranges are similar to those in Python *except* that the</span>
+<span class="sd">    &#39;stop&#39; value is included in the list if stop = start + n*step. Ranges are defined as</span>
+<span class="sd">    start:stop[:step]. If step is ommitted, it defaults to 1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    A simple, commma delimited list is transformed into a python list:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2, 4, 5&quot;)</span>
+<span class="sd">    [1, 2, 4, 5]</span>
+
+<span class="sd">    If any of the values is a float, the result is also a float</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2.0, 4, 5&quot;)</span>
+<span class="sd">    [1, 2.0, 4, 5]</span>
+
+<span class="sd">    This is a simple range:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1:6&quot;)</span>
+<span class="sd">    [1, 2, 3, 4, 5, 6]</span>
+
+<span class="sd">    Note that the stop value is include in the result. This is different than a python</span>
+<span class="sd">    range where the termination is &lt;, not &lt;=. This is more natural for users of SEAMM.</span>
+<span class="sd">    For example, scanning a dihedral angle from 0 to 180 degrees, most people will</span>
+<span class="sd">    expect 180 to be in the list.</span>
+
+<span class="sd">    Now using a step of 2:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1:6:2&quot;)</span>
+<span class="sd">    [1, 3, 5]</span>
+
+<span class="sd">    Note that the stop value is not included in the output in this case.</span>
+
+<span class="sd">    The step can be negative as long as stop &lt; start:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;6:1:-2&quot;)</span>
+<span class="sd">    [6, 4, 2]</span>
+
+<span class="sd">    Now we can put it all together:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;)</span>
+<span class="sd">    [1, 2.0, 4, 5, 1, 2, 3, 4, 5, 6, 1, 3, 5]</span>
+
+<span class="sd">    Note that a value can appear multiple times in a simple list. This can be controlled</span>
+<span class="sd">    by setting duplicates = False:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;, duplicates=False)</span>
+<span class="sd">    [1, 2.0, 4, 5, 3, 6]</span>
+
+<span class="sd">    You can also sort the results into ascending or descending order:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;, sort=&quot;ascending&quot;)</span>
+<span class="sd">    [1, 1, 1, 2.0, 2, 3, 3, 4, 4, 5, 5, 5, 6]</span>
+
+<span class="sd">    and if you want to remove the duplicates too:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;, duplicates=False, sort=&quot;descending&quot;)</span>
+<span class="sd">    [6, 5, 4, 3, 2.0, 1]</span>
+
+<span class="sd">    Where do variable fit? Any of the values in the input string can be variables as</span>
+<span class="sd">    as long as values are are given as keyword arguments:</span>
+
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;first:last:incr&quot;, first=1, last=6, incr=0.5)</span>
+<span class="sd">    [1, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0]</span>
+
+<span class="sd">    It is often convenient if the variables are in a dictionary:</span>
+
+<span class="sd">    &gt;&gt;&gt; values = {&quot;first&quot;: 6, &quot;last&quot;: 1, &quot;incr&quot;:-0.5}</span>
+<span class="sd">    &gt;&gt;&gt; parse_list(&quot;first:last:incr&quot;, **values)</span>
+<span class="sd">    [6, 5.5, 5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_globals</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;__builtins__&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">input</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+            <span class="c1"># A range...</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">tmp</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">tmp</span>
+                <span class="n">step</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Badly formed range &#39;</span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s2">&#39; in parse_list&quot;</span><span class="p">)</span>
+
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">_globals</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">stop</span><span class="p">,</span> <span class="n">_globals</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">_globals</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Sanity checks!</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A step of zero is not allow in ranges!&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">stop</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;If start &lt; stop, the step must be positive: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">stop</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;If stop &lt; start, the step must be negative: </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Flip the sign of the test if counting down</span>
+            <span class="n">sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">start</span>
+
+            <span class="c1"># Add a very small number for roundoff in floats</span>
+            <span class="k">while</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span><span class="n">stop</span> <span class="o">-</span> <span class="n">value</span> <span class="o">+</span> <span class="n">stop</span> <span class="o">/</span> <span class="mf">1.0e8</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">duplicates</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">+=</span> <span class="n">step</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">_globals</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sort</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sort</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;sort&#39; must be &#39;a...&#39; or &#39;d...&#39; or a bool&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">sort</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  
+
+<p>
+<div class="row">
+  <div class="column_left">
+    <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+      <img src="/_images/MolSSI.jpg" alt="The MolSSI" style="border:0;">
+    </a>
+  </div>
+  <div class="column">
+    &copy; Copyright 2019-2021, the Molecular Sciences Software Institute,
+    which receives funding from the National Science Foundation under awards OAC-1547580
+    and CHE-2136142.
+  </div>
+  <div class="column_right">
+    <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+      <img src="/_images/NSF_4-Color_bitmap_Logo.png" alt="The NSF" style="border:0;">
+    </a>
+  </div>
+</div>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

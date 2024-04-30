@@ -52,6 +52,14 @@ seamm\_util.include\_open module
    :undoc-members:
    :show-inheritance:
 
+seamm\_util.list\_definition module
+-----------------------------------
+
+.. automodule:: seamm_util.list_definition
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 seamm\_util.md\_statistics module
 ---------------------------------
 
