@@ -1,6 +1,10 @@
 =======
 History
 =======
+2024.6.5 -- Bugfix: Handling of duplicates in lists
+    * Roundoff in floating point numbers caused some duplicates to be missed. The code
+      now checks for duplicates in a more robust way.
+      
 2024.4.30 -- Added utility for handling list definitions
     * Add list_definition.py with parse_list()
     * Updated makefile for doctests.

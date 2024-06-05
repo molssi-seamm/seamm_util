@@ -131,8 +131,12 @@ def parse_list(input, duplicates=True, sort=False, **kwargs):
 
             # Add a very small number for roundoff in floats
             while sign * (stop - value + stop / 1.0e8) >= 0:
-                if not duplicates and value in result:
-                    pass
+                if not duplicates:
+                    for tmp in result:
+                        if abs(value - tmp) < 1.0e-8:
+                            break
+                    else:
+                        result.append(value)
                 else:
                     result.append(value)
                 value += step
