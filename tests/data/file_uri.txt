@@ -1,0 +1,4 @@
+file_uri line 1
+file_uri line 2
+include data:file1.txt
+file_uri line 3
