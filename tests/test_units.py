@@ -38,11 +38,11 @@ def test_force():
     """Testing that we can convert amounts of substance."""
     E = Q_(1, "kcal/mol/angstrom")
     E2 = E.to("eV/angstrom")
-    assert f"{E:~} = {E2:~.4}" == "1 kcal / mol / Å = 0.04336 eV / Å"
+    assert f"{E:~} = {E2:~.4}" == "1 kcal / Å / mol = 0.04336 eV / Å"
 
 
 def test_inverse_force():
     """Testing that we can convert amounts of substance."""
     E = Q_(1, "eV/angstrom")
     E2 = E.to("kcal/mol/angstrom")
-    assert f"{E:~} = {E2:~.4}" == "1 eV / Å = 23.06 kcal / mol / Å"
+    assert f"{E:~} = {E2:~.4}" == "1 eV / Å = 23.06 kcal / Å / mol"

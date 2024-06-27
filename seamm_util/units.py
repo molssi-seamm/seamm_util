@@ -136,7 +136,7 @@ _default_units = {
 
 # Unit handling!
 ureg = pint.UnitRegistry(auto_reduce_dimensions=True)
-ureg.default_format = "~P"
+ureg.formatter.default_format = "~P"
 pint.set_application_registry(ureg)
 Q_ = ureg.Quantity
 units_class = ureg("1 km").__class__
