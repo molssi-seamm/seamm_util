@@ -1,6 +1,10 @@
 =======
 History
 =======
+2024.6.27 -- Added support for URI's
+    * Now recognize URI's in the form local:path/to/file
+    * An optional URI handler can be passed in to resolve such URI's.
+      
 2024.6.5 -- Bugfix: Handling of duplicates in lists
     * Roundoff in floating point numbers caused some duplicates to be missed. The code
       now checks for duplicates in a more robust way.
