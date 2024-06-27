@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; SEAMM Util 2024.6.5 documentation</title>
+  <title>Index &mdash; SEAMM Util 2024.6.27 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=4ed587f2"></script>
+        <script src="_static/documentation_options.js?v=0654a9ba"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -50,7 +50,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             SEAMM Util
           </a>
               <div class="version">
-                2024.6.5
+                2024.6.27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -229,6 +229,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.units.default_units">default_units() (in module seamm_util.units)</a>
 </li>
+      <li><a href="developer/seamm_util.html#seamm_util.include_open.default_uri_handler">default_uri_handler() (in module seamm_util.include_open)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.include_open.Open.depth">depth (seamm_util.include_open.Open property)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.zenodo.Record.description">description (seamm_util.zenodo.Record property)</a>
@@ -275,16 +277,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.printing.fileConfig">fileConfig() (in module seamm_util.printing)</a>
 </li>
-      <li><a href="developer/seamm_util.html#seamm_util.include_open.Open.filename">filename (seamm_util.include_open.Open property)</a>
-
-      <ul>
-        <li><a href="developer/seamm_util.html#seamm_util.output.Output.filename">(seamm_util.output.Output property)</a>
+      <li><a href="developer/seamm_util.html#seamm_util.output.Output.filename">filename (seamm_util.output.Output property)</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer/seamm_util.html#seamm_util.zenodo.Record.files">files() (seamm_util.zenodo.Record method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer/seamm_util.html#seamm_util.water_models.Water.find_waters">find_waters() (seamm_util.water_models.Water static method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.findCaller">findCaller() (seamm_util.printing.Printer method)</a>
@@ -518,14 +516,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.include_open.Open.path">path (seamm_util.include_open.Open property)</a>
 </li>
+      <li><a href="developer/seamm_util.html#seamm_util.include_open.Open.paths">paths (seamm_util.include_open.Open property)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.water_models.Water.pdb">pdb() (seamm_util.water_models.Water method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.printing.PlaceHolder">PlaceHolder (class in seamm_util.printing)</a>
 </li>
-      <li><a href="developer/seamm_util.html#seamm_util.plotting.Plot">Plot (class in seamm_util.plotting)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.plotting.Plot">Plot (class in seamm_util.plotting)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.print">print() (seamm_util.printing.Printer method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.print_help">print_help() (seamm_util.argument_parser.ArgumentParser method)</a>
@@ -787,6 +787,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.verbose">(seamm_util.printing.Printer method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.include_open.Open.visited">visited (seamm_util.include_open.Open property)</a>
+</li>
   </ul></td>
 </tr></table>
 

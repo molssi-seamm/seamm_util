@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2024.6.5 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2024.6.27 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=4ed587f2"></script>
+        <script src="../_static/documentation_options.js?v=0654a9ba"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -51,7 +51,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             SEAMM Util
           </a>
               <div class="version">
-                2024.6.5
+                2024.6.27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -449,32 +449,36 @@ value.</p>
 <p>Context manager for extending file reading to handle include’s</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">Open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#Open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.Open" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">Open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode='r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger=&lt;Logger</span> <span class="pre">seamm_util.include_open</span> <span class="pre">(WARNING)&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include='#include'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri_handler=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#Open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.Open" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.depth">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depth</span></span><a class="headerlink" href="#seamm_util.include_open.Open.depth" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="seamm_util.include_open.Open.filename">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#seamm_util.include_open.Open.filename" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The depth of the current line stack</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.lineno">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lineno</span></span><a class="headerlink" href="#seamm_util.include_open.Open.lineno" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>THe line number in the current file.</p>
+</dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.include_open.Open.path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The path of the current working file</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="seamm_util.include_open.Open.paths">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">paths</span></span><a class="headerlink" href="#seamm_util.include_open.Open.paths" title="Link to this definition"></a></dt>
+<dd><p>The paths of all the opened files.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.push">
 <span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#Open.push"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.Open.push" title="Link to this definition"></a></dt>
-<dd><p>push the n last lines back onto the device (virtually)</p>
+<dd><p>Push the n last lines back onto the device (virtually)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -488,15 +492,27 @@ value.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">total_lines</span></span><a class="headerlink" href="#seamm_util.include_open.Open.total_lines" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="seamm_util.include_open.Open.visited">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">visited</span></span><a class="headerlink" href="#seamm_util.include_open.Open.visited" title="Link to this definition"></a></dt>
+<dd><p>The set of files used</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.include_open.default_uri_handler">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">default_uri_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#default_uri_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.default_uri_handler" title="Link to this definition"></a></dt>
+<dd><p>Do nothing! Just return the path</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="seamm_util.include_open.splitext">
-<span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">splitext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#splitext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.splitext" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">splitext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#splitext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.splitext" title="Link to this definition"></a></dt>
 <dd><p>Get the extension of a file, ignoring .gz or .bz2 on the end</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>'str'</em>) – the name, including any path, of the file</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> or </em><em>pathlib.Path</em>) – The name or path of the file</p>
 </dd>
 </dl>
 </dd></dl>
