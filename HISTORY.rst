@@ -1,6 +1,11 @@
 =======
 History
 =======
+2024.7.15 -- Added temperature-energy conversions
+    * Added conversions from temeprature units, like K, to energy, like kJ/mol and vice
+      versa.
+    * Used more of the Pint contexts, which should allow wavenumbers to frequency, etc.
+      
 2024.6.27 -- Added support for URI's
     * Now recognize URI's in the form local:path/to/file
     * An optional URI handler can be passed in to resolve such URI's.
