@@ -141,113 +141,115 @@ pint.set_application_registry(ureg)
 Q_ = ureg.Quantity
 units_class = ureg("1 km").__class__
 
-_d = pint.Context("chemistry")
+if True:
+    _d = pint.Context("chemistry")
 
-factor = ureg.mol / ureg.avogadro_number
+    factor = ureg.mol / ureg.avogadro_number
 
-_d.add_transformation("", "[substance]", lambda ureg, x: x * factor)
-_d.add_transformation("[substance]", "", lambda ureg, x: x / factor)
+    _d.add_transformation("", "[substance]", lambda ureg, x: x * factor)
+    _d.add_transformation("[substance]", "", lambda ureg, x: x / factor)
 
-_d.add_transformation("1 / [substance]", "", lambda ureg, x: x * factor)
-_d.add_transformation("", "1 / [substance]", lambda ureg, x: x / factor)
+    _d.add_transformation("1 / [substance]", "", lambda ureg, x: x * factor)
+    _d.add_transformation("", "1 / [substance]", lambda ureg, x: x / factor)
 
-_d.add_transformation("[mass] / [substance]", "[mass]", lambda ureg, x: x * factor)
-_d.add_transformation("[mass]", "[mass] / [substance]", lambda ureg, x: x / factor)
+    _d.add_transformation("[mass] / [substance]", "[mass]", lambda ureg, x: x * factor)
+    _d.add_transformation("[mass]", "[mass] / [substance]", lambda ureg, x: x / factor)
 
-# kJ/mol/Å --> eV/Å
-_d.add_transformation(
-    "[length] * [mass] / [substance] / [time] ** 2",
-    "[length] * [mass] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
-_d.add_transformation(
-    "[length] * [mass] / [time] ** 2",
-    "[length] * [mass] / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # kJ/mol/Å --> eV/Å
+    _d.add_transformation(
+        "[length] * [mass] / [substance] / [time] ** 2",
+        "[length] * [mass] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
+    _d.add_transformation(
+        "[length] * [mass] / [time] ** 2",
+        "[length] * [mass] / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol --> eV
-_d.add_transformation(
-    "[length] ** 2 * [mass] / [substance] / [time] ** 2",
-    "[length] ** 2 * [mass] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
-_d.add_transformation(
-    "[length] ** 2 * [mass] / [time] ** 2",
-    "[length] ** 2 * [mass] / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # kJ/mol --> eV
+    _d.add_transformation(
+        "[length] ** 2 * [mass] / [substance] / [time] ** 2",
+        "[length] ** 2 * [mass] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
+    _d.add_transformation(
+        "[length] ** 2 * [mass] / [time] ** 2",
+        "[length] ** 2 * [mass] / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol/K --> eV/K
-_d.add_transformation(
-    "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
-    "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
-_d.add_transformation(
-    "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
-    "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # kJ/mol/K --> eV/K
+    _d.add_transformation(
+        "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
+        "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
+    _d.add_transformation(
+        "[length] ** 2 * [mass] / [temperature] / [time] ** 2",
+        "[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol/Å^2 --> eV/Å^2
-_d.add_transformation(
-    "[mass] / [substance] / [time] ** 2",
-    "[mass] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
+    # kJ/mol/Å^2 --> eV/Å^2
+    _d.add_transformation(
+        "[mass] / [substance] / [time] ** 2",
+        "[mass] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
 
-# eV/Å^2 --> kJ/mol/Å^2
-_d.add_transformation(
-    "[mass] / [time] ** 2",
-    "[mass] / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # eV/Å^2 --> kJ/mol/Å^2
+    _d.add_transformation(
+        "[mass] / [time] ** 2",
+        "[mass] / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol/Å^3 --> eV/Å^3
-_d.add_transformation(
-    "[mass] / [length] / [substance] / [time] ** 2",
-    "[mass] / [length] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
+    # kJ/mol/Å^3 --> eV/Å^3
+    _d.add_transformation(
+        "[mass] / [length] / [substance] / [time] ** 2",
+        "[mass] / [length] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
 
-# eV/Å^3 --> kJ/mol/Å^3
-_d.add_transformation(
-    "[mass] / [length] / [time] ** 2",
-    "[mass] / [length] / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # eV/Å^3 --> kJ/mol/Å^3
+    _d.add_transformation(
+        "[mass] / [length] / [time] ** 2",
+        "[mass] / [length] / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol/Å^4 --> eV/Å^4
-_d.add_transformation(
-    "[mass] / [length] ** 2 / [substance] / [time] ** 2",
-    "[mass] / [length] ** 2 / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
+    # kJ/mol/Å^4 --> eV/Å^4
+    _d.add_transformation(
+        "[mass] / [length] ** 2 / [substance] / [time] ** 2",
+        "[mass] / [length] ** 2 / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
 
-# eV/Å^4 --> kJ/mol/Å^4
-_d.add_transformation(
-    "[mass] / [length] ** 2 / [time] ** 2",
-    "[mass] / [length] ** 2 / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # eV/Å^4 --> kJ/mol/Å^4
+    _d.add_transformation(
+        "[mass] / [length] ** 2 / [time] ** 2",
+        "[mass] / [length] ** 2 / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-# kJ/mol*Å^6 --> eV*Å^6
-_d.add_transformation(
-    "[length] ** 8 * [mass] / [substance] / [time] ** 2",
-    "[length] ** 8 * [mass] / [time] ** 2",
-    lambda ureg, x: x * factor,
-)
+    # kJ/mol*Å^6 --> eV*Å^6
+    _d.add_transformation(
+        "[length] ** 8 * [mass] / [substance] / [time] ** 2",
+        "[length] ** 8 * [mass] / [time] ** 2",
+        lambda ureg, x: x * factor,
+    )
 
-# eV*Å^6 --> kJ/mol*Å^6
-_d.add_transformation(
-    "[length] ** 8 * [mass] / [time] ** 2",
-    "[length] ** 8 * [mass] / [substance] / [time] ** 2",
-    lambda ureg, x: x / factor,
-)
+    # eV*Å^6 --> kJ/mol*Å^6
+    _d.add_transformation(
+        "[length] ** 8 * [mass] / [time] ** 2",
+        "[length] ** 8 * [mass] / [substance] / [time] ** 2",
+        lambda ureg, x: x / factor,
+    )
 
-ureg.add_context(_d)
-ureg.enable_contexts("chemistry")
+    ureg.add_context(_d)
+
+ureg.enable_contexts("spectroscopy", "boltzmann", "energy", "chemistry")
 
 
 def default_units(units_or_dimensions):
