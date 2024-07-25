@@ -1,6 +1,10 @@
 =======
 History
 =======
+2024.7.25 -- Added configuration file handler
+    * Added a configuration file handler that preserves comments in the file so that
+      documentation is not stripped.
+      
 2024.7.15 -- Added temperature-energy conversions
     * Added conversions from temeprature units, like K, to energy, like kJ/mol and vice
       versa.
