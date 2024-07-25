@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seamm_util.configuration &mdash; SEAMM Util 2024.7.25 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
+<!-- End Google Tag Manager -->
+
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=87129bd3"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQXXTJ2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SEAMM Util
+          </a>
+              <div class="version">
+                2024.7.25
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SEAMM Util</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seamm_util.configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seamm_util.configuration</h1><div class="highlight"><pre>
+<span></span><span class="c1"># !/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;A class for reading, updating and writing the configuration file.</span>
+
+<span class="sd">This class handles the configuration (.ini) file as text, so that comments</span>
+<span class="sd">in the file are preserved.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<div class="viewcode-block" id="Configuration">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration">[docs]</a>
+<span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="s2">&quot;A dictionary to save the text of the configuration file.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Set the path, which reads the file if it exsists</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="s2">&quot;Test if this configuration is equal to another in the sense of text.&quot;</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the text of the configuration file.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The path to the configuration file.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>
+
+    <span class="nd">@path</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">new_path</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">new_path</span>
+                <span class="k">if</span> <span class="n">new_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_read</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Configuration.add_prolog">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.add_prolog">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_prolog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add the prolog to the configuration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str = &#39;&#39;</span>
+<span class="sd">            The body of the prolog, which should be just comments.</span>
+<span class="sd">        force : bool = True</span>
+<span class="sd">            Whether to overwrite an existing prolog.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;PROLOG&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The prolog already exists.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;PROLOG&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Configuration.add_section">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.add_section">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new section to the configuration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            The name of the section.</span>
+<span class="sd">        text : str = &#39;&#39;</span>
+<span class="sd">            The body of the section, which must be properly formatted.</span>
+<span class="sd">        force : bool = True</span>
+<span class="sd">            Whether to overwrite an existing section of the same name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section_exists</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Section &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; already exists.&quot;</span><span class="p">)</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">]</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;[&quot;</span> <span class="ow">and</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;]&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">name</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;Section name doesn&#39;t match: &#39;</span><span class="si">{tmp[1:-1]}</span><span class="s2">&#39; vs &#39;</span><span class="si">{name}</span><span class="s2">&#39;&quot;</span>
+                    <span class="p">)</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Configuration.file_exists">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.file_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">file_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether the configuration file exists.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Configuration.from_string">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.from_string">[docs]</a>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Replace the contents of the configuration with those from `text`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str</span>
+<span class="sd">            The configuration data as text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="s2">&quot;PROLOG&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Look for a section name, like [&lt;name&gt;]</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;[&quot;</span> <span class="ow">and</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;]&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="n">lines</span>
+                    <span class="n">section</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="c1"># Put the last section into the data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="n">lines</span></div>
+
+
+<div class="viewcode-block" id="Configuration.get_prolog">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.get_prolog">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_prolog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the prolog of the file, if any.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The prolog of the configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;PROLOG&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;PROLOG&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="Configuration.get_values">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.get_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the values in a section as a dictionary.</span>
+
+<span class="sd">        Returns an empty dictionary if the section does not exist, or if it</span>
+<span class="sd">        does not contain any keyword definitions. Use `section_exists` to</span>
+<span class="sd">        differentiate.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section : str</span>
+<span class="sd">            The name of the section to retrieve.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of keyword-value pairs, as strings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section_exists</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="o">.</span><span class="n">lower</span><span class="p">()]:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                        <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the configuration file and split into sections.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+
+<div class="viewcode-block" id="Configuration.save">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.save">[docs]</a>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the current configuration to disk.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Configuration.sections">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.sections">[docs]</a>
+    <span class="k">def</span> <span class="nf">sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of sections in the configuration.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        [str]</span>
+<span class="sd">            The list of sections.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="s2">&quot;PROLOG&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;PROLOG&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;seamm&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;seamm&quot;</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;seamm&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;default&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="Configuration.section_exists">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.section_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">section_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether a section exits in the configuration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section : str</span>
+<span class="sd">            The name of the section.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if the section exists; False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">section</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">section</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span></div>
+
+
+<div class="viewcode-block" id="Configuration.set_value">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.set_value">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the key in a section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section : str</span>
+<span class="sd">            The section to work with.</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The key to set in the section.</span>
+<span class="sd">        value : str</span>
+<span class="sd">            The value to set the key to.</span>
+<span class="sd">        strict : bool = False</span>
+<span class="sd">            Raise an error is the key does not already exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                    <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">break</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; not in section </span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Maybe it is there but commented...</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                            <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
+                            <span class="k">break</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> = &quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Configuration.to_string">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.configuration.Configuration.to_string">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the text of a section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        section : str</span>
+<span class="sd">            The name of the section. Defaults to the entire file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="s2">&quot;PROLOG&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;PROLOG&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">():</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">section</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  
+
+<p>
+<div class="row">
+  <div class="column_left">
+    <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+      <img src="/_images/MolSSI.jpg" alt="The MolSSI" style="border:0;">
+    </a>
+  </div>
+  <div class="column">
+    &copy; Copyright 2019-2021, the Molecular Sciences Software Institute,
+    which receives funding from the National Science Foundation under awards OAC-1547580
+    and CHE-2136142.
+  </div>
+  <div class="column_right">
+    <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+      <img src="/_images/NSF_4-Color_bitmap_Logo.png" alt="The NSF" style="border:0;">
+    </a>
+  </div>
+</div>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

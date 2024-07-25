@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2024.7.15 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2024.7.25 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -24,7 +24,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=2a42eb1f"></script>
+        <script src="../_static/documentation_options.js?v=87129bd3"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -51,7 +51,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             SEAMM Util
           </a>
               <div class="version">
-                2024.7.15
+                2024.7.25
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -408,6 +408,168 @@ file or the default.</p>
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder.iterencode">
 <span class="sig-name descname"><span class="pre">iterencode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/compact_json_encoder.html#CompactJSONEncoder.iterencode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.iterencode" title="Link to this definition"></a></dt>
 <dd><p>Required to also work with <cite>json.dump</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-seamm_util.configuration">
+<span id="seamm-util-configuration-module"></span><h2>seamm_util.configuration module<a class="headerlink" href="#module-seamm_util.configuration" title="Link to this heading"></a></h2>
+<p>A class for reading, updating and writing the configuration file.</p>
+<p>This class handles the configuration (.ini) file as text, so that comments
+in the file are preserved.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.add_prolog">
+<span class="sig-name descname"><span class="pre">add_prolog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.add_prolog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.add_prolog" title="Link to this definition"></a></dt>
+<dd><p>Add the prolog to the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str = ''</em>) – The body of the prolog, which should be just comments.</p></li>
+<li><p><strong>force</strong> (<em>bool = True</em>) – Whether to overwrite an existing prolog.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.add_section">
+<span class="sig-name descname"><span class="pre">add_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.add_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.add_section" title="Link to this definition"></a></dt>
+<dd><p>Add a new section to the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the section.</p></li>
+<li><p><strong>text</strong> (<em>str = ''</em>) – The body of the section, which must be properly formatted.</p></li>
+<li><p><strong>force</strong> (<em>bool = True</em>) – Whether to overwrite an existing section of the same name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.file_exists">
+<span class="sig-name descname"><span class="pre">file_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.file_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.file_exists" title="Link to this definition"></a></dt>
+<dd><p>Whether the configuration file exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.from_string">
+<span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.from_string" title="Link to this definition"></a></dt>
+<dd><p>Replace the contents of the configuration with those from <cite>text</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The configuration data as text.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.get_prolog">
+<span class="sig-name descname"><span class="pre">get_prolog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.get_prolog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.get_prolog" title="Link to this definition"></a></dt>
+<dd><p>Return the prolog of the file, if any.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The prolog of the configuration.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.get_values">
+<span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.get_values" title="Link to this definition"></a></dt>
+<dd><p>Return the values in a section as a dictionary.</p>
+<p>Returns an empty dictionary if the section does not exist, or if it
+does not contain any keyword definitions. Use <cite>section_exists</cite> to
+differentiate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section</strong> (<em>str</em>) – The name of the section to retrieve.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary of keyword-value pairs, as strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.configuration.Configuration.path" title="Link to this definition"></a></dt>
+<dd><p>The path to the configuration file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.save" title="Link to this definition"></a></dt>
+<dd><p>Save the current configuration to disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.section_exists">
+<span class="sig-name descname"><span class="pre">section_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.section_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.section_exists" title="Link to this definition"></a></dt>
+<dd><p>Return whether a section exits in the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section</strong> (<em>str</em>) – The name of the section.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the section exists; False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.sections">
+<span class="sig-name descname"><span class="pre">sections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.sections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.sections" title="Link to this definition"></a></dt>
+<dd><p>Return a list of sections in the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The list of sections.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.set_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.set_value" title="Link to this definition"></a></dt>
+<dd><p>Set the key in a section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> (<em>str</em>) – The section to work with.</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – The key to set in the section.</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – The value to set the key to.</p></li>
+<li><p><strong>strict</strong> (<em>bool = False</em>) – Raise an error is the key does not already exist.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.configuration.Configuration.to_string">
+<span class="sig-name descname"><span class="pre">to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration.to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration.to_string" title="Link to this definition"></a></dt>
+<dd><p>Create the text of a section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section</strong> (<em>str</em>) – The name of the section. Defaults to the entire file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -28,6 +28,14 @@ seamm\_util.compact\_json\_encoder module
    :undoc-members:
    :show-inheritance:
 
+seamm\_util.configuration module
+--------------------------------
+
+.. automodule:: seamm_util.configuration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 seamm\_util.dictionary module
 -----------------------------
 
