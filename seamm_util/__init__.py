@@ -10,6 +10,7 @@ Utility functions for the SEAMM environment.
 from .argument_parser import getParser  # noqa: F401
 from .argument_parser import seamm_parser  # noqa: F401
 from .compact_json_encoder import CompactJSONEncoder  # noqa: F401
+from .configuration import Configuration  # noqa: F401
 from .elemental_data import element_data  # noqa: F401
 from .check_executable import check_executable  # noqa: F401
 from .dictionary import Dictionary  # noqa: F401
