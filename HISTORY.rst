@@ -1,6 +1,12 @@
 =======
 History
 =======
+2024.8.1 -- Added default units for viscosity and fixed a bug in handling dimensions
+    * Added more default units: dynamic viscosity (cP, etc) and kinematic viscosity
+      (cSt, etc)
+    * Fixed a bug handling unit dimensions since the order changed in Pint. Now they are
+      put in a standard alphabetical order.
+
 2024.7.25 -- Added configuration file handler
     * Added a configuration file handler that preserves comments in the file so that
       documentation is not stripped.
