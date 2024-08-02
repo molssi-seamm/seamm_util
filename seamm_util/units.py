@@ -46,6 +46,12 @@ _default_units = {
         "1/um",
         "1/a_0",
     ],
+    "[length] ** 2 / [time]": [
+        "cSt",
+        "St",
+        "m^2/s",
+        "Å^2/fs",
+    ],
     "[length] ** 2 * [mass]": [
         "10^-40*g*cm^2",
         "Da*Å^2",
@@ -69,6 +75,10 @@ _default_units = {
         "kcal/mol/Å",
         "kJ/mol/Å",
         "eV/Å",
+        "E_h/Å",
+        "Ry/Å",
+        "E_h/a_0",
+        "Ry/a_0",
     ],
     "[length] * [mass] / [time] ** 2": [
         "kcal/mol/Å",
@@ -99,6 +109,12 @@ _default_units = {
         "kg/m^3",
         "g/mol/Å^3",
         "g/mol/A_0^3",
+    ],
+    "[mass] / [length] / [time]": [
+        "cP",
+        "P",
+        "mPa*s",
+        "Pa*s",
     ],
     "[mass] / [length] / [time] ** 2": [
         "Pa",
@@ -133,6 +149,30 @@ _default_units = {
         "s",
     ],
 }
+
+
+def sort_dimensions(dimensions):
+    """Sort the dimensions.
+
+    Parameters
+    ----------
+    dimensions : str
+        The dimensions.
+
+    Returns
+    -------
+    str
+        The sorted dimensions.
+    """
+    tmp = dimensions.split(" / ")
+    numerator = " * ".join(sorted(tmp[0].split(" * ")))
+    if len(tmp) > 1:
+        denominator = " / ".join(sorted(tmp[1:]))
+        return f"{numerator} / {denominator}"
+    return numerator
+
+
+_default_units = {sort_dimensions(k): v for k, v in _default_units.items()}
 
 # Unit handling!
 ureg = pint.UnitRegistry(auto_reduce_dimensions=True)
@@ -272,31 +312,38 @@ def default_units(units_or_dimensions):
         return result
 
     if "[" in units_or_dimensions or units_or_dimensions == "dimensionless":
-        dimensionality = units_or_dimensions
+        dimensions = units_or_dimensions
     else:
-        dimensionality = str(Q_(units_or_dimensions).dimensionality)
+        dimensions = str(Q_(units_or_dimensions).dimensionality)
 
-    if dimensionality in _default_units:
-        return _default_units[dimensionality]
+    dimensions = sort_dimensions(dimensions)
+
+    if dimensions in _default_units:
+        return _default_units[dimensions]
     else:
         result = []
         try:
-            for units in ureg.get_compatible_units(dimensionality):
+            for units in ureg.get_compatible_units(dimensions):
                 result.append(f"{units:~P}")
             tmp = "\n\t".join(result)
             print(
-                f"Automatic defaults for '{units_or_dimensions}' ({dimensionality}) "
+                f"Automatic defaults for '{units_or_dimensions}' ({dimensions}) "
                 f"\n\t{tmp}"
             )
         except Exception:
             print(
                 f"Warning: can't handle units '{units_or_dimensions}' --> "
-                f"{dimensionality} for default units."
+                f"{dimensions} for default units."
             )
         return result
 
 
 if __name__ == "__main__":  # pragma: no cover
+    for key in _default_units:
+        if key != sort_dimensions(key):
+            print(f"{key} -> {sort_dimensions(key)}")
+    print()
+
     E = Q_(1.0, "kcal/mol")
     E2 = E.to("eV")
     print(f"{E:~} = {E2:~.4}")
