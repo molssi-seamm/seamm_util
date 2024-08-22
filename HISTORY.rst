@@ -1,6 +1,10 @@
 =======
 History
 =======
+2024.8.22 -- Bugfix: charts with multiple exes, plus units for force constants
+    * Add units for force constants (kJ/mol/Å^2,...)
+    * Fixed an issue naming axes in plots with multiple axes
+      
 2024.8.1 -- Added default units for viscosity and fixed a bug in handling dimensions
     * Added more default units: dynamic viscosity (cP, etc) and kinematic viscosity
       (cSt, etc)
