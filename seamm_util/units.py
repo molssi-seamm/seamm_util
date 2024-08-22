@@ -80,6 +80,15 @@ _default_units = {
         "E_h/a_0",
         "Ry/a_0",
     ],
+    "[mass] / [substance] / [time] ** 2": [
+        "kcal/mol/Å^2",
+        "kJ/mol/Å^2",
+        "eV/Å^2",
+        "E_h/Å^2",
+        "Ry/Å^2",
+        "E_h/a_0^2",
+        "Ry/a_0^2",
+    ],
     "[length] * [mass] / [time] ** 2": [
         "kcal/mol/Å",
         "kJ/mol/Å",

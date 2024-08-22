@@ -301,22 +301,29 @@ class Figure(Dictionary):
             plot.bottom = bottom
 
         # Number the axes sequentially and set their limits
-        axis_number = 1
+        axis_number = {"x": 0, "y": 0, "z": 0}
         for plot in plots:
             for axis in plot.axes:
                 xyz = axis.direction
+                axis_number[xyz] += 1
+                anum = axis_number[xyz]
                 axis.update(
                     {
-                        "number": axis_number,
-                        "name": xyz + "axis" + str(axis_number),
-                        "short_name": xyz + str(axis_number),
+                        "number": axis_number[xyz],
+                        "name": xyz + "axis" + ("" if anum == 1 else str(anum)),
+                        "short_name": xyz + ("" if anum == 1 else str(anum)),
                     }
                 )
                 if xyz == "x":
-                    axis.update({"start": plot.left, "stop": plot.right})
+                    length = plot.right - plot.left
+                    left = plot.left + length * axis.start
+                    right = plot.left + length * axis.stop
+                    axis.update({"start": left, "stop": right})
                 elif xyz == "y":
-                    axis.update({"start": plot.bottom, "stop": plot.top})
-                axis_number += 1
+                    length = plot.top - plot.bottom
+                    bottom = plot.bottom + length * axis.start
+                    top = plot.bottom + length * axis.stop
+                    axis.update({"start": bottom, "stop": top})
 
         # Sort out any anchors between axes and get the data
         axes = []
@@ -326,7 +333,6 @@ class Figure(Dictionary):
                     axis.update(anchor="free")
                 else:
                     axis.update(anchor=axis.anchor["short_name"])
-
                 axes.append(axis.to_dict())
 
         # And, finally, set up the traces
@@ -441,7 +447,7 @@ class Axis(Dictionary):
     for the axis.
     """
 
-    def __init__(self, direction, *args, anchor=None, **kwargs):
+    def __init__(self, direction, *args, anchor=None, start=0.0, stop=1.0, **kwargs):
         """Initialize an axis, optionally with data.
 
         Parameters
@@ -459,10 +465,10 @@ class Axis(Dictionary):
 
         self.anchor = anchor
         self.direction = direction
+        self.start = start
+        self.stop = stop
         self["label"] = ""
         self["number"] = None
-        self["start"] = 0.0
-        self["stop"] = 1.0
 
         self.update(*args, **kwargs)
 
