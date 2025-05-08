@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Interact with Zenodo via its REST API
-
-"""
+"""Interact with Zenodo via its REST API"""
 
 import collections.abc
 import copy
