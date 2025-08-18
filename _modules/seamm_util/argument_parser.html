@@ -1,11 +1,13 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.argument_parser &mdash; SEAMM Util 2024.8.22 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+  <title>seamm_util.argument_parser &mdash; SEAMM Util 2025.8.18 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
 
   
@@ -17,15 +19,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
 <!-- End Google Tag Manager -->
 
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=a6f85f88"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=24f986a2"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -49,9 +47,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="../../index.html" class="icon icon-home">
             SEAMM Util
           </a>
-              <div class="version">
-                2024.8.22
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -108,12 +103,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">or in the ini file, labeled by the type of section.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">argparse</span>
-<span class="kn">import</span> <span class="nn">configparser</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">configparser</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="c1"># logging.basicConfig(level=&quot;WARNING&quot;)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -126,7 +121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser">[docs]</a>
-<span class="k">class</span> <span class="nc">ArgumentParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ArgumentParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Replacement and extension for argparse.ArgumentParser that adds</span>
 <span class="sd">    support for .ini files plus something like the subcommands in</span>
 <span class="sd">    argparse but with multiple ones active at the same time.</span>
@@ -138,7 +133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">    test.flow lammps-step --log-level debug psi4-step --np 32</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
         <span class="n">ini_files</span><span class="o">=</span><span class="p">[</span>
@@ -161,7 +156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.add_parser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.add_parser">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_parser</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_parser</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">section</span><span class="p">,</span>
         <span class="n">prog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -229,13 +224,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.exists">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.exists">[docs]</a>
-    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span></div>
 
 
 <div class="viewcode-block" id="ArgumentParser.add_argument">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.add_argument">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser &#39;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">&#39; does not exist.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">&quot;arguments&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
@@ -243,7 +238,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.add_argument_group">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.add_argument_group">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_argument_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_argument_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser &#39;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">&#39; does not exist.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">&quot;groups&quot;</span><span class="p">][</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">}</span></div>
@@ -251,7 +246,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.parse_args">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.parse_args">[docs]</a>
-    <span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the .ini file and command-line arguments.</span>
 
 <span class="sd">        There are three distinct steps to the process:</span>
@@ -392,7 +387,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.get">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get">[docs]</a>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an option value for a given section.</span>
 
 <span class="sd">        If `vars&#39; is provided, it must be a dictionary. The option is looked up</span>
@@ -431,7 +426,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.get_options">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_options">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the options for the given section.</span>
 
 <span class="sd">        Parameters</span>
@@ -452,7 +447,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.get_origins">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_origins">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_origins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_origins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the origins of the options for the given section.</span>
 
 <span class="sd">        Parameters</span>
@@ -473,7 +468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.get_ini_files">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_ini_files">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_ini_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ini_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of the .ini files actually used.</span>
 
 <span class="sd">        Returns</span>
@@ -486,19 +481,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.optionxform">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.optionxform">[docs]</a>
-    <span class="k">def</span> <span class="nf">optionxform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optionstr</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optionxform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optionstr</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">optionstr</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ArgumentParser.print_help">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.print_help">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fd</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fd</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">):</span>
         <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_help</span><span class="p">(</span><span class="n">args</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ArgumentParser.format_help">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.format_help">[docs]</a>
-    <span class="k">def</span> <span class="nf">format_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Prepare the help message.</span>
 
 <span class="sd">        Parameters</span>
@@ -593,7 +588,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.items">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.items">[docs]</a>
-    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of (name, value) tuples for each option in a section.</span>
 
 <span class="sd">        All % interpolations are expanded in the return values, based on the</span>
@@ -618,12 +613,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">optionxform</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">if</span> <span class="n">raw</span><span class="p">:</span>
 
-            <span class="k">def</span> <span class="nf">value_getter</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">value_getter</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="k">def</span> <span class="nf">value_getter</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">value_getter</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolation</span><span class="o">.</span><span class="n">before_get</span><span class="p">(</span>
                     <span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">option</span><span class="p">],</span> <span class="n">d</span>
                 <span class="p">)</span>
@@ -633,7 +628,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="ArgumentParser.split_args">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.split_args">[docs]</a>
-    <span class="k">def</span> <span class="nf">split_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">split_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Break the argument line into sections for each plug-in.</span>
 
 <span class="sd">        Parameters</span>
@@ -670,7 +665,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="getParser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.getParser">[docs]</a>
-<span class="k">def</span> <span class="nf">getParser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getParser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the named command-line argument parser.</span>
 
 <span class="sd">    Returns</span>
@@ -680,7 +675,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">        config-file parsing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">global</span> <span class="n">_parsers</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_parsers</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating parser &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
         <span class="n">_parsers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -692,7 +686,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="seamm_parser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.seamm_parser">[docs]</a>
-<span class="k">def</span> <span class="nf">seamm_parser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seamm_parser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup the command-line argument parser for SEAMM.</span>
 
 <span class="sd">    Returns</span>

@@ -1,11 +1,13 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.water_models &mdash; SEAMM Util 2024.8.22 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+  <title>seamm_util.water_models &mdash; SEAMM Util 2025.8.18 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
 
   
@@ -17,15 +19,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
 <!-- End Google Tag Manager -->
 
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=a6f85f88"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=24f986a2"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -49,9 +47,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="../../index.html" class="icon icon-home">
             SEAMM Util
           </a>
-              <div class="version">
-                2024.8.22
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -101,17 +96,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <span class="sd">&quot;&quot;&quot;Various water models.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
-<span class="kn">import</span> <span class="nn">seamm_util</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seamm_util</span>
 
 
 <div class="viewcode-block" id="Water">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water">[docs]</a>
-<span class="k">class</span> <span class="nc">Water</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Water</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic water model&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">qO</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qH</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lj_a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lj_b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">qO</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qH</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lj_a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lj_b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the basic water model</span>
 
 <span class="sd">        Parameters</span>
@@ -135,7 +130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="Water.create_model">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water.create_model">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Static method to simplify constructing models for string names.&quot;&quot;&quot;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">model_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;spc&quot;</span><span class="p">:</span>
@@ -153,7 +148,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="Water.find_waters">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water.find_waters">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">find_waters</span><span class="p">(</span><span class="n">system</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_waters</span><span class="p">(</span><span class="n">system</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the water molecules in the given system.</span>
 
 <span class="sd">        At the moment, the atoms are 0-based, but the bonds are given using</span>
@@ -212,7 +207,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">mass_oxygen</span> <span class="o">=</span> <span class="n">seamm_util</span><span class="o">.</span><span class="n">element_data</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">][</span><span class="s2">&quot;atomic weight&quot;</span><span class="p">]</span>
         <span class="n">mass_hydrogen</span> <span class="o">=</span> <span class="n">seamm_util</span><span class="o">.</span><span class="n">element_data</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">][</span><span class="s2">&quot;atomic weight&quot;</span><span class="p">]</span>
 
@@ -220,7 +215,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="Water.coordinates">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water.coordinates">[docs]</a>
-    <span class="k">def</span> <span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A standard set of coordinates in Angstrom</span>
 
 <span class="sd">        The oxygen is at the origin, with the hydrogens in the x-z plane.</span>
@@ -239,7 +234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="Water.pdb">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water.pdb">[docs]</a>
-    <span class="k">def</span> <span class="nf">pdb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The contents of a PDB file for this model.</span>
 
 <span class="sd">        Returns</span>
@@ -265,7 +260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="Water.system">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.Water.system">[docs]</a>
-    <span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the model as a SEAMM system.</span>
 
 <span class="sd">        Returns</span>
@@ -292,13 +287,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="SPC">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.SPC">[docs]</a>
-<span class="k">class</span> <span class="nc">SPC</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SPC</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">109.47</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.82</span><span class="p">,</span> <span class="mf">0.41</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SPC.atom_types">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.SPC.atom_types">[docs]</a>
-    <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The atom types for this model.</span>
 
 <span class="sd">        Returns</span>
@@ -313,13 +308,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="SPC_E">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.SPC_E">[docs]</a>
-<span class="k">class</span> <span class="nc">SPC_E</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SPC_E</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">109.47</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8476</span><span class="p">,</span> <span class="mf">0.4238</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SPC_E.atom_types">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.SPC_E.atom_types">[docs]</a>
-    <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The atom types for this model.</span>
 
 <span class="sd">        Returns</span>
@@ -332,7 +327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="SPC_E.reference">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.SPC_E.reference">[docs]</a>
-    <span class="k">def</span> <span class="nf">reference</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reference</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ris</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">            TY  - JOUR</span>
 <span class="s2">            T1  - The missing term in effective pair potentials</span>
@@ -364,13 +359,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="TIP3P">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.TIP3P">[docs]</a>
-<span class="k">class</span> <span class="nc">TIP3P</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TIP3P</span><span class="p">(</span><span class="n">Water</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mf">0.9572</span><span class="p">,</span> <span class="mf">104.52</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.834</span><span class="p">,</span> <span class="mf">0.417</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TIP3P.atom_types">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.water_models.TIP3P.atom_types">[docs]</a>
-    <span class="k">def</span> <span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">atom_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The atom types for this model.</span>
 
 <span class="sd">        Returns</span>
