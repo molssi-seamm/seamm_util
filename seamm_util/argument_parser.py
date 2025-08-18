@@ -534,7 +534,6 @@ def getParser(name="SEAMM", **kwargs):
         config-file parsing.
     """
 
-    global _parsers
     if name not in _parsers:
         logger.info(f"Creating parser '{name}'.")
         _parsers[name] = ArgumentParser(**kwargs)
