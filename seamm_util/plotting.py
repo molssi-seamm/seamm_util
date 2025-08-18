@@ -19,11 +19,30 @@ The various containers in this package contain dictionaries of Jinja keys and
 the associated values. The keys needed are defined by the template used.
 """
 
-from .dictionary import Dictionary
+import logging
 import json
 from pathlib import Path
 
-import plotly
+from .dictionary import Dictionary
+
+logger = logging.getLogger(__name__)
+
+have_plotly = False
+try:
+    import plotly
+except ModuleNotFoundError:
+    print(
+        "To write graphs to e.g. PDF files, please install plotly and kaleido:\n"
+        "     conda install -c conda-forge plotly\n"
+        "     pip install -U kaleido"
+    )
+    logger.warning(
+        "To write graphs to e.g. PDF files, please install plotly and kaleido:\n"
+        "     conda install -c conda-forge plotly\n"
+        "     pip install -U kaleido"
+    )
+else:
+    have_plotly = True
 
 
 class Figure(Dictionary):
@@ -476,6 +495,13 @@ class Figure(Dictionary):
         if _type == "graph":
             path.write_text(text)
         else:
+            if not have_plotly:
+                raise RuntimeError(
+                    "To write graphs to e.g. PDF files, please install plotly and "
+                    "kaleido:\n"
+                    "     conda install -c conda-forge plotly\n"
+                    "     pip install -U kaleido"
+                )
             tmp = json.loads(text)
             fig = plotly.graph_objects.Figure(tmp["data"], tmp["layout"])
 
