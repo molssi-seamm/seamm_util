@@ -21,6 +21,9 @@ the associated values. The keys needed are defined by the template used.
 
 from .dictionary import Dictionary
 import json
+from pathlib import Path
+
+import plotly
 
 
 class Figure(Dictionary):
@@ -357,6 +360,129 @@ class Figure(Dictionary):
         result = template.render(tmp)
 
         return result
+
+    def write_file(self, path, _type=None, width=1024, height=1024):
+        """Write the graph to a file given by the path.
+
+        The type may be given explicitly but by default is taken from the extension of
+        the path.
+
+        Parameters
+        ----------
+        path : str or pathlib.Path
+            The file to write.
+        _type : str, optional
+            The type of file. The default (=None) is to use the file extension. An
+            initial '.' on the type is ignored, so file extensions can be used as-is.
+        width : int, default=1024
+            The width in pixels, if appropriate
+        height : int, default=1024
+            The width in pixels, if appropriate
+
+        Returns
+        -------
+        None
+
+        Notes
+        -----
+        The following formats are supported
+
+            graph
+                The native graph format for the SEAMM Dashboard.
+
+            html or htm
+                A standalone HTML web page
+
+            png
+                A lossy, compressed format for images
+
+            jpeg or jpg
+                A lossy, compressed format for images
+
+            webp
+                A newer format from Google, smaller than png or jpg
+
+            svg
+                Scalable Vector Graphics (SVG)
+
+            pdf
+                Portable Document Format (PDF)
+
+        To set up an option for this in a SEAMM plug-in use code similar to
+
+        .. code-block:: python
+
+            parser.add_argument(
+                parser_name,
+                "--graph-formats",
+                default=tuple(),
+                choices=("html", "png", "jpeg", "webp", "svg", "pdf"),
+                nargs="+",
+                help="extra formats to write for graphs",
+            )
+
+        In the code, after creating a graph figure, write it to files like this:
+
+        .. code-block:: python
+
+            figure.write_file(self.wd / "EnergyScan.graph")
+
+            # Other requested formats
+            if "graph_formats" in self.options:
+                formats = self.options["graph_formats"]
+                # If from seamm.ini, is a single string so parse.
+                if isinstance(formats, str):
+                    formats = shlex.split(formats)
+                for _format in formats:
+                    figure.write_file(self.wd / f"EnergyScan.{_format}")
+
+        where the first line handles the standard graph format for the Dashboard.
+
+        When running SEAMM, you can either request extra formats on the command line::
+
+            ... energy-scan-step --graph-formats pdf svg html webp png jpeg
+
+        or can add a line like the following to either specific section of seamm.ini or
+        to the DEFAULT section::
+
+            graph-formats = pdf svg html webp png jpeg
+
+        """
+        if _type is None:
+            if isinstance(path, str):
+                path = Path(path)
+            _type = path.suffix
+
+        # Remove the initial dot if given as a suffix
+        if _type.startswith("."):
+            _type = _type[1:]
+
+        _type = _type.lower()
+        if _type not in (
+            "graph",
+            "html",
+            "htm",
+            "png",
+            "jpeg",
+            "jpg",
+            "webp",
+            "svg",
+            "pdf",
+        ):
+            raise ValueError(f"write_graph does not support files of type '{_type}'")
+
+        text = self.dumps()
+
+        if _type == "graph":
+            path.write_text(text)
+        else:
+            tmp = json.loads(text)
+            fig = plotly.graph_objects.Figure(tmp["data"], tmp["layout"])
+
+            if _type in ("html", "htm"):
+                plotly.io.write_html(fig, path)
+            else:
+                plotly.io.write_image(fig, path, format=_type, width=1024, height=1024)
 
 
 class Plot(Dictionary):

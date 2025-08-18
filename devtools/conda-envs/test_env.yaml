@@ -6,8 +6,10 @@ channels:
 
 dependencies:
   # Base depends
+  - molsystem
   - python
   - pip
+  - plotly
   - statsmodels
   - pint
 
@@ -27,7 +29,7 @@ dependencies:
 
   # Pip-only installs
   - pip:
-    - molsystem>=2020.9.23
+    - kaleido
 
     # Documentation
     - rinohtype

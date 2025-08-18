@@ -1,6 +1,9 @@
 =======
 History
 =======
+2025.8.18 -- Added ability to output graphs to several formats
+    * Added graph output to HTML, PNG, JPEG, webp, SVG, and PDF
+
 2024.8.22 -- Bugfix: charts with multiple exes, plus units for force constants
     * Add units for force constants (kJ/mol/Å^2,...)
     * Fixed an issue naming axes in plots with multiple axes
