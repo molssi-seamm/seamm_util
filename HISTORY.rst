@@ -1,6 +1,10 @@
 =======
 History
 =======
+2025.8.27 -- Added more pressure units
+    * Added MPa, GPa, and TPa to the default pressure units.
+    * Added units for 1/pressure and 1/temperature to support the thermomechanical step.
+      
 2025.8.18 -- Added ability to output graphs to several formats
     * Added graph output to HTML, PNG, JPEG, webp, SVG, and PDF
 

@@ -126,11 +126,24 @@ _default_units = {
         "Pa*s",
     ],
     "[mass] / [length] / [time] ** 2": [
+        "TPa",
+        "GPa",
+        "MPa",
         "Pa",
         "atm",
         "bar",
         "psi",
         "ksi",
+    ],
+    "[length] * [time] ** 2 / [mass]": [
+        "1/TPa",
+        "1/GPa",
+        "1/MPa",
+        "1/Pa",
+        "1/atm",
+        "1/bar",
+        "1/psi",
+        "1/ksi",
     ],
     "[mass] / [time] ** 2": [
         "mdyne/Å",
@@ -148,6 +161,12 @@ _default_units = {
         "°C",
         "°F",
         "°R",
+    ],
+    "1 / [temperature]": [
+        "1/K",
+        "1/°C",
+        "1/°F",
+        "1/°R",
     ],
     "[time]": [
         "fs",
