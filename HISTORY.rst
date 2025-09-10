@@ -1,6 +1,8 @@
 =======
 History
 =======
+2025.9.10 -- Added velocity units for speed of sound
+
 2025.8.27 -- Added more pressure units
     * Added MPa, GPa, and TPa to the default pressure units.
     * Added units for 1/pressure and 1/temperature to support the thermomechanical step.

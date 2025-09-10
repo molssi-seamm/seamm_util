@@ -94,6 +94,13 @@ _default_units = {
         "kJ/mol/Å",
         "eV/Å",
     ],
+    "[length] / [time]": [
+        "km/s",
+        "m/s",
+        "mph",
+        "ft/s",
+        "Å/fs",
+    ],
     "[length] / [time] ** 2": [
         "m/s^2",
         "ft/s^2",
