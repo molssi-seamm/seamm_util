@@ -230,6 +230,18 @@ if True:
     _d.add_transformation("[mass] / [substance]", "[mass]", lambda ureg, x: x * factor)
     _d.add_transformation("[mass]", "[mass] / [substance]", lambda ureg, x: x / factor)
 
+    # g/mol/Å^3 --> g/Å^3
+    _d.add_transformation(
+        "[mass] / [length] ** 3 / [substance]",
+        "[mass] / [length] ** 3",
+        lambda ureg, x: x * factor,
+    )
+    _d.add_transformation(
+        "[mass] / [length] ** 3",
+        "[mass] / [length] ** 3 / [substance]",
+        lambda ureg, x: x / factor,
+    )
+
     # kJ/mol/Å --> eV/Å
     _d.add_transformation(
         "[length] * [mass] / [substance] / [time] ** 2",
