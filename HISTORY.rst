@@ -1,6 +1,12 @@
 =======
 History
 =======
+2026.7.15 -- Added a database-timeout option
+    * Added the "database-timeout" option (default 20 seconds) that controls how
+      long SEAMM waits for the job database when it is locked by another job
+      before giving up. This helps when many jobs start at the same time, for
+      example a batch of jobs on a cluster.
+
 2025.12.9 -- Added transformation for density using g/mol/Å^3
 
 2025.9.10 -- Added velocity units for speed of sound
