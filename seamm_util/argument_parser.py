@@ -642,6 +642,18 @@ def seamm_parser(name="SEAMM"):
     )
     parser.add_argument(
         "SEAMM",
+        "--database-timeout",
+        group="job options",
+        dest="database_timeout",
+        default=20.0,
+        type=float,
+        help=(
+            "Seconds to wait for the database when it is locked by another "
+            "job before giving up, default: %(default)s"
+        ),
+    )
+    parser.add_argument(
+        "SEAMM",
         "--standalone",
         group="job options",
         action="store_true",

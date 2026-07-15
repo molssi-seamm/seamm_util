@@ -2,6 +2,7 @@
 """From a gist by Jannis Mainczyk
 https://gist.github.com/jannismain/e96666ca4f059c3e5bc28abb711b5c92
 """
+
 from __future__ import annotations
 import json
 
