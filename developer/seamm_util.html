@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2025.12.9 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.7.15 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
 
   
@@ -22,9 +22,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=df40b1b0"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/documentation_options.js?v=cfb6c46a"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
 
     <link rel="index" title="Index" href="../genindex.html" />
@@ -107,7 +107,7 @@ each type of step (plug-in) is in its own section on the command line
 or in the ini file, labeled by the type of section.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.argument_parser.ArgumentParser">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.argument_parser.</span></span><span class="sig-name descname"><span class="pre">ArgumentParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*args,</span> <span class="pre">ini_files=['/home/runner/.seamm.d/seamm.ini',</span> <span class="pre">'seamm.ini'],</span> <span class="pre">interpolation=&lt;configparser.ExtendedInterpolation</span> <span class="pre">object&gt;,</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.argument_parser.</span></span><span class="sig-name descname"><span class="pre">ArgumentParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*args,</span> <span class="pre">ini_files=['/home/runner/.seamm.d/seamm.ini',</span> <span class="pre">'seamm.ini'],</span> <span class="pre">interpolation=&lt;configparser.ExtendedInterpolation</span> <span class="pre">object&gt;,</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Replacement and extension for argparse.ArgumentParser that adds
 support for .ini files plus something like the subcommands in
@@ -128,7 +128,7 @@ argparse but with multiple ones active at the same time.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.argument_parser.ArgumentParser.add_parser">
-<span class="sig-name descname"><span class="pre">add_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epilog=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter_class=&lt;class</span> <span class="pre">'argparse.HelpFormatter'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_chars='-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fromfile_prefix_chars=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argument_default=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conflict_handler='error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_help=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_abbrev=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.add_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.add_parser" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epilog</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'argparse.HelpFormatter'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fromfile_prefix_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argument_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conflict_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'error'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_help</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_abbrev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.add_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.add_parser" title="Link to this definition"></a></dt>
 <dd><p>Capture the information needed to create a subparser.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -169,7 +169,7 @@ argparse but with multiple ones active at the same time.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.argument_parser.ArgumentParser.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback=&lt;object</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.get" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;object</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.get" title="Link to this definition"></a></dt>
 <dd><p>Get an option value for a given section.</p>
 <p>If <a href="#id1"><span class="problematic" id="id2">`</span></a>vars’ is provided, it must be a dictionary. The option is looked up
 in <a href="#id3"><span class="problematic" id="id4">`</span></a>vars’ (if provided), <a href="#id5"><span class="problematic" id="id6">`</span></a>section’, and in <a href="#id7"><span class="problematic" id="id8">`</span></a>DEFAULTSECT’ in that order.
@@ -231,7 +231,7 @@ all interpolations are expanded in the return values.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.argument_parser.ArgumentParser.items">
-<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section=&lt;object</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.items" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;object</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.items" title="Link to this definition"></a></dt>
 <dd><p>Return a list of (name, value) tuples for each option in a section.</p>
 <p>All % interpolations are expanded in the return values, based on the
 defaults passed into the constructor, unless the optional argument
@@ -271,7 +271,7 @@ replacing or adding defaults for any values found in the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.argument_parser.ArgumentParser.print_help">
-<span class="sig-name descname"><span class="pre">print_help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fd=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.print_help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.print_help" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">print_help</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/argument_parser.html#ArgumentParser.print_help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.argument_parser.ArgumentParser.print_help" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -367,24 +367,24 @@ file or the default.</p>
 <a class="reference external" href="https://gist.github.com/jannismain/e96666ca4f059c3e5bc28abb711b5c92">https://gist.github.com/jannismain/e96666ca4f059c3e5bc28abb711b5c92</a></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.compact_json_encoder.</span></span><span class="sig-name descname"><span class="pre">CompactJSONEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/compact_json_encoder.html#CompactJSONEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.compact_json_encoder.</span></span><span class="sig-name descname"><span class="pre">CompactJSONEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/compact_json_encoder.html#CompactJSONEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code></p>
 <p>A JSON Encoder that puts small containers on single lines.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder.CONTAINER_TYPES">
-<span class="sig-name descname"><span class="pre">CONTAINER_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'list'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'tuple'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'dict'&gt;)</span></em><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.CONTAINER_TYPES" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">CONTAINER_TYPES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'list'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'tuple'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'dict'&gt;)</span></span><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.CONTAINER_TYPES" title="Link to this definition"></a></dt>
 <dd><p>Container datatypes include primitives or other containers.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_ITEMS">
-<span class="sig-name descname"><span class="pre">MAX_ITEMS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_ITEMS" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">MAX_ITEMS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></span><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_ITEMS" title="Link to this definition"></a></dt>
 <dd><p>Maximum number of items in container that might be put on single line.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_WIDTH">
-<span class="sig-name descname"><span class="pre">MAX_WIDTH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">80</span></em><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_WIDTH" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">MAX_WIDTH</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">80</span></span><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.MAX_WIDTH" title="Link to this definition"></a></dt>
 <dd><p>Maximum width of a container that might be put on a single line.</p>
 </dd></dl>
 
@@ -396,7 +396,7 @@ file or the default.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.compact_json_encoder.CompactJSONEncoder.indent_str">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">indent_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.indent_str" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">indent_str</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#seamm_util.compact_json_encoder.CompactJSONEncoder.indent_str" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -415,7 +415,7 @@ file or the default.</p>
 in the file are preserved.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.configuration.Configuration">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.configuration.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/configuration.html#Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.configuration.Configuration" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.configuration.Configuration.add_prolog">
@@ -499,7 +499,7 @@ differentiate.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.configuration.Configuration.path">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.configuration.Configuration.path" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.configuration.Configuration.path" title="Link to this definition"></a></dt>
 <dd><p>The path to the configuration file.</p>
 </dd></dl>
 
@@ -575,7 +575,7 @@ differentiate.</p>
 <p>Provides a Dictionary, identical to a dict, but which can be subclassed safely.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.dictionary.Dictionary">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.dictionary.</span></span><span class="sig-name descname"><span class="pre">Dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/dictionary.html#Dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.dictionary.Dictionary" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.dictionary.</span></span><span class="sig-name descname"><span class="pre">Dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/dictionary.html#Dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.dictionary.Dictionary" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></p>
 <p>Class that acts like a dictionary, but can safely be subclassed.</p>
 <p>The Dictionary class implements a dictionary-like class that other
@@ -589,7 +589,7 @@ classes can inherit from. In addition, __init__ accepts a keyword
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.dictionary.Dictionary.fromkeys">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromkeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/dictionary.html#Dictionary.fromkeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.dictionary.Dictionary.fromkeys" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">fromkeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/dictionary.html#Dictionary.fromkeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.dictionary.Dictionary.fromkeys" title="Link to this definition"></a></dt>
 <dd><p>Create a new Dictionary with keys from iterable and values set to
 value.</p>
 </dd></dl>
@@ -606,29 +606,29 @@ value.</p>
 <p>Context manager for extending file reading to handle include’s</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">Open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode='r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger=&lt;Logger</span> <span class="pre">seamm_util.include_open</span> <span class="pre">(WARNING)&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include='#include'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri_handler=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#Open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.Open" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.include_open.</span></span><span class="sig-name descname"><span class="pre">Open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;Logger</span> <span class="pre">seamm_util.include_open</span> <span class="pre">(WARNING)&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#include'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri_handler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/include_open.html#Open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.include_open.Open" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.depth">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">depth</span></span><a class="headerlink" href="#seamm_util.include_open.Open.depth" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">depth</span></span><a class="headerlink" href="#seamm_util.include_open.Open.depth" title="Link to this definition"></a></dt>
 <dd><p>The depth of the current line stack</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.lineno">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lineno</span></span><a class="headerlink" href="#seamm_util.include_open.Open.lineno" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">lineno</span></span><a class="headerlink" href="#seamm_util.include_open.Open.lineno" title="Link to this definition"></a></dt>
 <dd><p>THe line number in the current file.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.path">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.include_open.Open.path" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#seamm_util.include_open.Open.path" title="Link to this definition"></a></dt>
 <dd><p>The path of the current working file</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.paths">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">paths</span></span><a class="headerlink" href="#seamm_util.include_open.Open.paths" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">paths</span></span><a class="headerlink" href="#seamm_util.include_open.Open.paths" title="Link to this definition"></a></dt>
 <dd><p>The paths of all the opened files.</p>
 </dd></dl>
 
@@ -646,12 +646,12 @@ value.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.total_lines">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">total_lines</span></span><a class="headerlink" href="#seamm_util.include_open.Open.total_lines" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">total_lines</span></span><a class="headerlink" href="#seamm_util.include_open.Open.total_lines" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.include_open.Open.visited">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">visited</span></span><a class="headerlink" href="#seamm_util.include_open.Open.visited" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">visited</span></span><a class="headerlink" href="#seamm_util.include_open.Open.visited" title="Link to this definition"></a></dt>
 <dd><p>The set of files used</p>
 </dd></dl>
 
@@ -838,7 +838,7 @@ using JSON to serialize and deserialize the data.</p>
 deserialize the contents.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.output.Output">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.output.</span></span><span class="sig-name descname"><span class="pre">Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/output.html#Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.output.Output" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.output.</span></span><span class="sig-name descname"><span class="pre">Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/output.html#Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.output.Output" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.output.Output.copy">
@@ -848,7 +848,7 @@ deserialize the contents.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.output.Output.filename">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#seamm_util.output.Output.filename" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#seamm_util.output.Output.filename" title="Link to this definition"></a></dt>
 <dd><p>The filename for the serialized data</p>
 </dd></dl>
 
@@ -872,7 +872,7 @@ The various containers in this package contain dictionaries of Jinja keys and
 the associated values. The keys needed are defined by the template used.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.plotting.Axis">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Axis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Axis" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anchor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Axis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Axis" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.dictionary.Dictionary" title="seamm_util.dictionary.Dictionary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dictionary</span></code></a></p>
 <p>Class to represent an axis in a plotly plot.</p>
 <p>The Axis class defines an axis and the  associated graphical
@@ -897,7 +897,7 @@ for the axis.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.plotting.Figure">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Figure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jinja_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Figure" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Figure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jinja_env</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Figure" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.dictionary.Dictionary" title="seamm_util.dictionary.Dictionary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dictionary</span></code></a></p>
 <p>Holds one or more subplots and controls the layout.</p>
 <dl class="py method">
@@ -1014,7 +1014,7 @@ Defaults to 0.02.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.plotting.Figure.template">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">template</span></span><a class="headerlink" href="#seamm_util.plotting.Figure.template" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">template</span></span><a class="headerlink" href="#seamm_util.plotting.Figure.template" title="Link to this definition"></a></dt>
 <dd><p>The template to use for this figure.</p>
 </dd></dl>
 
@@ -1098,7 +1098,7 @@ to the DEFAULT section:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.plotting.Plot">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Plot" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row_span</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Plot" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.dictionary.Dictionary" title="seamm_util.dictionary.Dictionary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dictionary</span></code></a></p>
 <p>Class to represent a plotly plot.</p>
 <p>The Plot class contains Axes and Traces, which represent the
@@ -1134,7 +1134,7 @@ the elements of the dictionary are the traces.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.plotting.Plot.axes">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">axes</span></span><a class="headerlink" href="#seamm_util.plotting.Plot.axes" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">axes</span></span><a class="headerlink" href="#seamm_util.plotting.Plot.axes" title="Link to this definition"></a></dt>
 <dd><p>The list of axes for this plot.</p>
 </dd></dl>
 
@@ -1142,7 +1142,7 @@ the elements of the dictionary are the traces.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.plotting.Trace">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Trace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Trace" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.plotting.</span></span><span class="sig-name descname"><span class="pre">Trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/plotting.html#Trace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.plotting.Trace" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.dictionary.Dictionary" title="seamm_util.dictionary.Dictionary"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dictionary</span></code></a></p>
 <p>Class to represent a trace in a plotly plot.</p>
 <p>The Trace class contains the datasets and associated graphical
@@ -1186,7 +1186,7 @@ up, which is NORMAL by default, is placed in the local stage log. Optionally,
 output from a cutoff level and up is also written to the standard output.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.printing.FormattedText">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">FormattedText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#FormattedText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.FormattedText" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">FormattedText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dedent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#FormattedText"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.FormattedText" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class for wrapping, formatting and indenting text to make textual output
 from the MolSSI Framework and its plugins easier</p>
@@ -1229,7 +1229,7 @@ this string).</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.printing.Manager">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.Manager" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.Manager" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>There is [under normal circumstances] just one Manager instance, which
 holds the hierarchy of printers.</p>
@@ -1247,7 +1247,7 @@ which pointed to the placeholder to now point to the printer.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.printing.PlaceHolder">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">PlaceHolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aprinter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#PlaceHolder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.PlaceHolder" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">PlaceHolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aprinter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#PlaceHolder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.PlaceHolder" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>PlaceHolder instances are used in the Manager printer hierarchy to take
 the place of nodes for which no printers have been defined [FIXME add
@@ -1262,7 +1262,7 @@ example].</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">Printer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#Printer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.Printer" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">Printer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#Printer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.Printer" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Filterer</span></code></p>
 <p>Provide controlled printing for plugins for the MolSSI
 Framework.</p>
@@ -1284,7 +1284,7 @@ will be the last printer whose handlers are called.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.disabled">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disabled</span></span><a class="headerlink" href="#seamm_util.printing.Printer.disabled" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">disabled</span></span><a class="headerlink" href="#seamm_util.printing.Printer.disabled" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1311,7 +1311,7 @@ locally. Logger-level filtering is applied.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.handlers">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handlers</span></span><a class="headerlink" href="#seamm_util.printing.Printer.handlers" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">handlers</span></span><a class="headerlink" href="#seamm_util.printing.Printer.handlers" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1342,7 +1342,7 @@ format string, together with a single dictionary argument.)</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.level">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">level</span></span><a class="headerlink" href="#seamm_util.printing.Printer.level" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">level</span></span><a class="headerlink" href="#seamm_util.printing.Printer.level" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1354,12 +1354,12 @@ specialized LogRecords.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.manager">
-<span class="sig-name descname"><span class="pre">manager</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;seamm_util.printing.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#seamm_util.printing.Printer.manager" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">manager</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;seamm_util.printing.Manager</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#seamm_util.printing.Printer.manager" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.name">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#seamm_util.printing.Printer.name" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#seamm_util.printing.Printer.name" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1374,7 +1374,7 @@ format string, together with a single dictionary argument.)</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.parent">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#seamm_util.printing.Printer.parent" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parent</span></span><a class="headerlink" href="#seamm_util.printing.Printer.parent" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1386,12 +1386,12 @@ The other arguments are interpreted as for verbose().</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.print_root">
-<span class="sig-name descname"><span class="pre">print_root</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;seamm_util.printing.RootPrinter</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#seamm_util.printing.Printer.print_root" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">print_root</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;seamm_util.printing.RootPrinter</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#seamm_util.printing.Printer.print_root" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.printing.Printer.propagate">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">propagate</span></span><a class="headerlink" href="#seamm_util.printing.Printer.propagate" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">propagate</span></span><a class="headerlink" href="#seamm_util.printing.Printer.propagate" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1430,7 +1430,7 @@ format string, together with a single dictionary argument.)</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.printing.RootPrinter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">RootPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lvl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#RootPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.RootPrinter" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">RootPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lvl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#RootPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.RootPrinter" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.printing.Printer" title="seamm_util.printing.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <p>A root printer is not that different to any other printer, except that
 it must have a printing level and there is only one instance of it in
@@ -1544,7 +1544,7 @@ using JSON to serialize and deserialize the data.</p>
 deserialize the contents.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.seamm_file.File">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_file.</span></span><span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MolSSI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/seamm_file.html#File"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_file.File" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_file.</span></span><span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">organization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MolSSI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filetype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/seamm_file.html#File"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_file.File" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.seamm_file.File.read_header">
@@ -1571,7 +1571,7 @@ decoder = seamm_util.JSONDecoder()
 <a class="reference external" href="http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode">http://taketwoprogramming.blogspot.com/2009/06/subclassing-jsonencoder-and-jsondecode</a></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.seamm_json.JSONDecoder">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_json.</span></span><span class="sig-name descname"><span class="pre">JSONDecoder</span></span><a class="reference internal" href="../_modules/seamm_util/seamm_json.html#JSONDecoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_json.JSONDecoder" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_json.</span></span><span class="sig-name descname"><span class="pre">JSONDecoder</span></span><a class="reference internal" href="../_modules/seamm_util/seamm_json.html#JSONDecoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_json.JSONDecoder" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">JSONDecoder</span></code></p>
 <p>Decodes a json string, where pint Quantities, datetime and
 timedelta objects were converted into objects using the
@@ -1585,7 +1585,7 @@ seamm_util.JSONEncoder, back into a python object.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.seamm_json.JSONEncoder">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_json.</span></span><span class="sig-name descname"><span class="pre">JSONEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/seamm_json.html#JSONEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_json.JSONEncoder" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.seamm_json.</span></span><span class="sig-name descname"><span class="pre">JSONEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/seamm_json.html#JSONEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.seamm_json.JSONEncoder" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code></p>
 <p>Encodes a python object, where pint Quantities, datetime and
 timedelta objects are converted into objects that can be decoded
@@ -1685,7 +1685,7 @@ implement default like this:</p>
 <p>Various water models.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.water_models.SPC">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">SPC</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#SPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.SPC" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">SPC</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#SPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.SPC" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.water_models.Water" title="seamm_util.water_models.Water"><code class="xref py py-class docutils literal notranslate"><span class="pre">Water</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.water_models.SPC.atom_types">
@@ -1705,7 +1705,7 @@ implement default like this:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.water_models.SPC_E">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">SPC_E</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#SPC_E"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.SPC_E" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">SPC_E</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#SPC_E"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.SPC_E" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.water_models.Water" title="seamm_util.water_models.Water"><code class="xref py py-class docutils literal notranslate"><span class="pre">Water</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.water_models.SPC_E.atom_types">
@@ -1730,7 +1730,7 @@ implement default like this:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.water_models.TIP3P">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">TIP3P</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#TIP3P"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.TIP3P" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">TIP3P</span></span><a class="reference internal" href="../_modules/seamm_util/water_models.html#TIP3P"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.TIP3P" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#seamm_util.water_models.Water" title="seamm_util.water_models.Water"><code class="xref py py-class docutils literal notranslate"><span class="pre">Water</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.water_models.TIP3P.atom_types">
@@ -1750,7 +1750,7 @@ implement default like this:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.water_models.Water">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">Water</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lj_a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lj_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.water_models.</span></span><span class="sig-name descname"><span class="pre">Water</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lj_a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lj_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Generic water model</p>
 <dl class="py method">
@@ -1768,13 +1768,13 @@ Z is the two-fold axis of symmetry.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.water_models.Water.create_model">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water.create_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water.create_model" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water.create_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water.create_model" title="Link to this definition"></a></dt>
 <dd><p>Static method to simplify constructing models for string names.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.water_models.Water.find_waters">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_waters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water.find_waters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water.find_waters" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">find_waters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">system</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/water_models.html#Water.find_waters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.water_models.Water.find_waters" title="Link to this definition"></a></dt>
 <dd><p>Find the water molecules in the given system.</p>
 <p>At the moment, the atoms are 0-based, but the bonds are given using
 1-based atom numbers!</p>
@@ -1787,7 +1787,7 @@ Z is the two-fold axis of symmetry.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.water_models.Water.mass">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mass</span></span><a class="headerlink" href="#seamm_util.water_models.Water.mass" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mass</span></span><a class="headerlink" href="#seamm_util.water_models.Water.mass" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1826,7 +1826,7 @@ Z is the two-fold axis of symmetry.</p>
 <p>Interact with Zenodo via its REST API</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.zenodo.</span></span><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Record" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.zenodo.</span></span><span class="sig-name descname"><span class="pre">Record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Record" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></p>
 <p>A class for handling uploading a record to Zenodo.</p>
 <dl class="py attribute">
@@ -1905,31 +1905,31 @@ Z is the two-fold axis of symmetry.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.authors">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authors</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.authors" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">authors</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.authors" title="Link to this definition"></a></dt>
 <dd><p>Synonym for creators</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.conceptdoi">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conceptdoi</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.conceptdoi" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">conceptdoi</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.conceptdoi" title="Link to this definition"></a></dt>
 <dd><p>The generic concept DOI.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.creators">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">creators</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.creators" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">creators</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.creators" title="Link to this definition"></a></dt>
 <dd><p>The creators for the record.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.description">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.description" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.description" title="Link to this definition"></a></dt>
 <dd><p>The description for the record.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.doi">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doi</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.doi" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">doi</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.doi" title="Link to this definition"></a></dt>
 <dd><p>The (prereserved) DOI.</p>
 </dd></dl>
 
@@ -1981,7 +1981,7 @@ the filename is used in that directory.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.in_progress">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_progress</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.in_progress" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">in_progress</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.in_progress" title="Link to this definition"></a></dt>
 <dd><p>Whether the deposition is still in progress, i.e. editable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1992,7 +1992,7 @@ the filename is used in that directory.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.keywords">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keywords</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.keywords" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">keywords</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.keywords" title="Link to this definition"></a></dt>
 <dd><p>The keywords for the record.</p>
 </dd></dl>
 
@@ -2028,7 +2028,7 @@ Any new metadata is uploaded before publishing.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.submitted">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">submitted</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.submitted" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">submitted</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.submitted" title="Link to this definition"></a></dt>
 <dd><p>Whether the record has been submitted.</p>
 <p>If so the files can’t be changed, but it may be possible to edit the metadata.</p>
 <dl class="field-list simple">
@@ -2040,7 +2040,7 @@ Any new metadata is uploaded before publishing.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.title">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.title" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.title" title="Link to this definition"></a></dt>
 <dd><p>The title for the record.</p>
 </dd></dl>
 
@@ -2052,7 +2052,7 @@ Any new metadata is uploaded before publishing.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Record.upload_type">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">upload_type</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.upload_type" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">upload_type</span></span><a class="headerlink" href="#seamm_util.zenodo.Record.upload_type" title="Link to this definition"></a></dt>
 <dd><p>The type of record in Zenodo.</p>
 </dd></dl>
 
@@ -2060,7 +2060,7 @@ Any new metadata is uploaded before publishing.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Zenodo">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">seamm_util.zenodo.</span></span><span class="sig-name descname"><span class="pre">Zenodo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'~/.seamm.d/seammrc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sandbox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Zenodo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Zenodo" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">seamm_util.zenodo.</span></span><span class="sig-name descname"><span class="pre">Zenodo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'~/.seamm.d/seammrc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sandbox</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Zenodo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Zenodo" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Zenodo.add_version">
@@ -2094,7 +2094,7 @@ Any new metadata is uploaded before publishing.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="seamm_util.zenodo.Zenodo.token">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">token</span></span><a class="headerlink" href="#seamm_util.zenodo.Zenodo.token" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">token</span></span><a class="headerlink" href="#seamm_util.zenodo.Zenodo.token" title="Link to this definition"></a></dt>
 <dd><p>The appropriate token for Zenodo.</p>
 </dd></dl>
 
