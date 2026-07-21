@@ -49,11 +49,11 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 lint: ## check style with black and flake8
-	black --check --diff $(MODULE) tests
+	black --extend-exclude '_version.py' --check --diff $(MODULE) tests
 	flake8 $(MODULE) tests
 
 format: ## reformat with with yapf and isort
-	black $(MODULE) tests
+	black --extend-exclude '_version.py' $(MODULE) tests
 
 test: ## run tests quickly with the default Python
 	pytest --doctest-modules tests $(MODULE)
