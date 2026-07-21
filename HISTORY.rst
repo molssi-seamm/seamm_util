@@ -1,6 +1,11 @@
 =======
 History
 =======
+2026.7.20 -- Internal: exclude _version.py from black
+    * Excluded the generated ``_version.py`` from the ``black`` lint/format
+      targets in the Makefile, matching the other SEAMM packages, so ``make
+      lint`` no longer flags it. No effect on the installed package.
+
 2026.7.15 -- Added a database-timeout option
     * Added the "database-timeout" option (default 20 seconds) that controls how
       long SEAMM waits for the job database when it is locked by another job
