@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.7.20 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.7.26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=3aef2a18"></script>
+      <script src="../_static/documentation_options.js?v=551e3ecc"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -2078,6 +2078,35 @@ Any new metadata is uploaded before publishing.</p>
 <dt class="sig sig-object py" id="seamm_util.zenodo.Zenodo.get_deposit_record">
 <span class="sig-name descname"><span class="pre">get_deposit_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Zenodo.get_deposit_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Zenodo.get_deposit_record" title="Link to this definition"></a></dt>
 <dd><p>Get an existing deposit record object from Zenodo.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="seamm_util.zenodo.Zenodo.get_latest_public_record">
+<span class="sig-name descname"><span class="pre">get_latest_public_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concept_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/zenodo.html#Zenodo.get_latest_public_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.zenodo.Zenodo.get_latest_public_record" title="Link to this definition"></a></dt>
+<dd><p>Get the latest published version of a public record from Zenodo.</p>
+<p>Resolves a stable “concept” record id – shared by every version of
+a deposit – to whichever version is currently newest. Unlike
+<cite>get_record</cite>, which needs the id of one specific, already-known
+version, this is the right call for “always fetch the current
+data” without hardcoding a version number to update by hand at
+every release. A specific version’s record id resolves the same
+way (Zenodo maps it to its concept internally), so an existing
+hardcoded version id keeps working if passed here too.</p>
+<p>No authentication is used or required – for anonymous, read-only
+access to public records. The returned <cite>Record</cite>’s files use the
+public API’s “key”/<cite>links.self</cite> shape; <cite>Record.get_file</cite>,
+<cite>.download_file</cite>, and <cite>.files</cite> all handle that shape (see
+<cite>_file_name</cite>/<cite>_file_url</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>concept_id</strong> (<em>int</em><em> or </em><em>str</em>) – A concept record id, or any specific version’s record id in
+the same family (the “conceptrecid” on any version’s record
+data).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#seamm_util.zenodo.Record" title="seamm_util.zenodo.Record">Record</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
