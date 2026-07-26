@@ -13,6 +13,34 @@ import requests
 logger = logging.getLogger(__name__)
 # logger.setLevel("DEBUG")
 
+
+def _file_name(file_data):
+    """The filename of a file entry, from either Zenodo API shape.
+
+    The deposit/edit API (`/deposit/depositions/...`, used to create and
+    upload to your own records) keys a file's name as "filename". The
+    public records API (`/api/records/...`, used for anonymous, read-only
+    access to published records -- e.g. via `Zenodo.get_latest_public_
+    record`) keys it as "key" instead, and has no "filename" key at all.
+    Verified against a live response from both APIs; without this, code
+    written against one API's `Record` silently KeyErrors against the
+    other's.
+    """
+    return file_data.get("key", file_data.get("filename"))
+
+
+def _file_url(file_data):
+    """The download URL of a file entry, from either Zenodo API shape.
+
+    The deposit/edit API gives a `links.download` URL. The public records
+    API has no "download" link -- only `links.self`, which serves the raw
+    file content directly. See `_file_name` for why both shapes need
+    handling here.
+    """
+    links = file_data["links"]
+    return links.get("download", links.get("self"))
+
+
 upload_types = {
     "publication": "Publication",
     "poster": "Poster",
@@ -302,8 +330,8 @@ class Record(collections.abc.Mapping):
             headers["Authorization"] = f"Bearer {self.token}"
 
         for data in self.data["files"]:
-            if data["filename"] == filename:
-                url = data["links"]["download"]
+            if _file_name(data) == filename:
+                url = _file_url(data)
                 response = requests.get(url, headers=headers, stream=True)
 
                 if response.status_code != 200:
@@ -328,7 +356,7 @@ class Record(collections.abc.Mapping):
         [str]
         """
         if "files" in self.data:
-            return [x["filename"] for x in self.data["files"]]
+            return [_file_name(x) for x in self.data["files"]]
         else:
             return []
 
@@ -354,8 +382,8 @@ class Record(collections.abc.Mapping):
             headers["Authorization"] = f"Bearer {self.token}"
 
         for data in self.data["files"]:
-            if data["key"] == filename:
-                url = data["links"]["self"]
+            if _file_name(data) == filename:
+                url = _file_url(data)
                 response = requests.get(url, headers=headers)
 
                 if response.status_code != 200:
@@ -614,6 +642,46 @@ class Zenodo(object):
         result = response.json()
 
         return Record(result, None)
+
+    def get_latest_public_record(self, concept_id):
+        """Get the latest published version of a public record from Zenodo.
+
+        Resolves a stable "concept" record id -- shared by every version of
+        a deposit -- to whichever version is currently newest. Unlike
+        `get_record`, which needs the id of one specific, already-known
+        version, this is the right call for "always fetch the current
+        data" without hardcoding a version number to update by hand at
+        every release. A specific version's record id resolves the same
+        way (Zenodo maps it to its concept internally), so an existing
+        hardcoded version id keeps working if passed here too.
+
+        No authentication is used or required -- for anonymous, read-only
+        access to public records. The returned `Record`'s files use the
+        public API's "key"/`links.self` shape; `Record.get_file`,
+        `.download_file`, and `.files` all handle that shape (see
+        `_file_name`/`_file_url`).
+
+        Parameters
+        ----------
+        concept_id : int or str
+            A concept record id, or any specific version's record id in
+            the same family (the "conceptrecid" on any version's record
+            data).
+
+        Returns
+        -------
+        Record
+        """
+        url = self.base_url + f"/records/{concept_id}/versions/latest"
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            raise RuntimeError(
+                f"Error in get_latest_public_record: code = {response.status_code}"
+                f"\n\n{pprint.pformat(response.json())}"
+            )
+
+        return Record(response.json(), None)
 
     def search(
         self,

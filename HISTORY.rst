@@ -1,6 +1,17 @@
 =======
 History
 =======
+2026.7.26 -- Support anonymous access to public Zenodo records
+    * Added ``Zenodo.get_latest_public_record()``, which resolves a stable
+      "concept" record id to whichever version of a public record is
+      currently newest, with no authentication -- for "always fetch the
+      current data" without hardcoding a version number.
+    * Fixed ``Record.download_file()``, ``.get_file()``, and ``.files()``,
+      which only recognized the authenticated deposit/edit API's file-entry
+      shape (``filename``/``links.download``). The public records API uses
+      ``key``/``links.self`` instead; these methods now accept either, so a
+      ``Record`` from ``get_latest_public_record()`` works correctly.
+
 2026.7.20 -- Internal: exclude _version.py from black
     * Excluded the generated ``_version.py`` from the ``black`` lint/format
       targets in the Makefile, matching the other SEAMM packages, so ``make
