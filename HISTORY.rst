@@ -1,6 +1,11 @@
 =======
 History
 =======
+2026.9.17 -- Bugfix: pip metadata lacked requests
+    * ``pip install seamm-util`` did not install ``requests``, which the Zenodo
+      client imports, so seamm-util failed to import outside a conda-forge environment
+      (whose recipe already listed it). It is now an install requirement.
+
 2026.7.26 -- Support anonymous access to public Zenodo records
     * Added ``Zenodo.get_latest_public_record()``, which resolves a stable
       "concept" record id to whichever version of a public record is
