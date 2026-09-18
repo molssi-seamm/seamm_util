@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.7.26 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.9.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=551e3ecc"></script>
+      <script src="../_static/documentation_options.js?v=4c890157"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -706,17 +706,17 @@ abbreviation works.</p></li>
 </dl>
 <p class="rubric">Examples</p>
 <p>A simple, commma delimited list is transformed into a python list:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2, 4, 5&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2, 4, 5"</span><span class="p">)</span>
 <span class="go">[1, 2, 4, 5]</span>
 </pre></div>
 </div>
 <p>If any of the values is a float, the result is also a float</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2.0, 4, 5&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2.0, 4, 5"</span><span class="p">)</span>
 <span class="go">[1, 2.0, 4, 5]</span>
 </pre></div>
 </div>
 <p>This is a simple range:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1:6&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1:6"</span><span class="p">)</span>
 <span class="go">[1, 2, 3, 4, 5, 6]</span>
 </pre></div>
 </div>
@@ -725,46 +725,46 @@ range where the termination is &lt;, not &lt;=. This is more natural for users o
 For example, scanning a dihedral angle from 0 to 180 degrees, most people will
 expect 180 to be in the list.</p>
 <p>Now using a step of 2:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1:6:2&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1:6:2"</span><span class="p">)</span>
 <span class="go">[1, 3, 5]</span>
 </pre></div>
 </div>
 <p>Note that the stop value is not included in the output in this case.</p>
 <p>The step can be negative as long as stop &lt; start:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;6:1:-2&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"6:1:-2"</span><span class="p">)</span>
 <span class="go">[6, 4, 2]</span>
 </pre></div>
 </div>
 <p>Now we can put it all together:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2.0, 4, 5, 1:6, 1:6:2"</span><span class="p">)</span>
 <span class="go">[1, 2.0, 4, 5, 1, 2, 3, 4, 5, 6, 1, 3, 5]</span>
 </pre></div>
 </div>
 <p>Note that a value can appear multiple times in a simple list. This can be controlled
 by setting duplicates = False:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2.0, 4, 5, 1:6, 1:6:2"</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">[1, 2.0, 4, 5, 3, 6]</span>
 </pre></div>
 </div>
 <p>You can also sort the results into ascending or descending order:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;ascending&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2.0, 4, 5, 1:6, 1:6:2"</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s2">"ascending"</span><span class="p">)</span>
 <span class="go">[1, 1, 1, 2.0, 2, 3, 3, 4, 4, 5, 5, 5, 6]</span>
 </pre></div>
 </div>
 <p>and if you want to remove the duplicates too:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;1, 2.0, 4, 5, 1:6, 1:6:2&quot;</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s2">&quot;descending&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"1, 2.0, 4, 5, 1:6, 1:6:2"</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s2">"descending"</span><span class="p">)</span>
 <span class="go">[6, 5, 4, 3, 2.0, 1]</span>
 </pre></div>
 </div>
 <p>Where do variable fit? Any of the values in the input string can be variables as
 as long as values are are given as keyword arguments:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;first:last:incr&quot;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">incr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"first:last:incr"</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">incr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="go">[1, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0]</span>
 </pre></div>
 </div>
 <p>It is often convenient if the variables are in a dictionary:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;first&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;incr&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">0.5</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">&quot;first:last:incr&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"first"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">"last"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"incr"</span><span class="p">:</span><span class="o">-</span><span class="mf">0.5</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_list</span><span class="p">(</span><span class="s2">"first:last:incr"</span><span class="p">,</span> <span class="o">**</span><span class="n">values</span><span class="p">)</span>
 <span class="go">[6, 5.5, 5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5]</span>
 </pre></div>
 </div>
@@ -1061,25 +1061,25 @@ initial ‘.’ on the type is ignored, so file extensions can be used as-is.</p
 <p>To set up an option for this in a SEAMM plug-in use code similar to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
     <span class="n">parser_name</span><span class="p">,</span>
-    <span class="s2">&quot;--graph-formats&quot;</span><span class="p">,</span>
+    <span class="s2">"--graph-formats"</span><span class="p">,</span>
     <span class="n">default</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(),</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="s2">&quot;jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;webp&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="s2">&quot;pdf&quot;</span><span class="p">),</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;extra formats to write for graphs&quot;</span><span class="p">,</span>
+    <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s2">"html"</span><span class="p">,</span> <span class="s2">"png"</span><span class="p">,</span> <span class="s2">"jpeg"</span><span class="p">,</span> <span class="s2">"webp"</span><span class="p">,</span> <span class="s2">"svg"</span><span class="p">,</span> <span class="s2">"pdf"</span><span class="p">),</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="s2">"+"</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">"extra formats to write for graphs"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>In the code, after creating a graph figure, write it to files like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd</span> <span class="o">/</span> <span class="s2">&quot;EnergyScan.graph&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd</span> <span class="o">/</span> <span class="s2">"EnergyScan.graph"</span><span class="p">)</span>
 
 <span class="c1"># Other requested formats</span>
-<span class="k">if</span> <span class="s2">&quot;graph_formats&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
-    <span class="n">formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;graph_formats&quot;</span><span class="p">]</span>
+<span class="k">if</span> <span class="s2">"graph_formats"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">:</span>
+    <span class="n">formats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">"graph_formats"</span><span class="p">]</span>
     <span class="c1"># If from seamm.ini, is a single string so parse.</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formats</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">formats</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">formats</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">_format</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
-        <span class="n">figure</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;EnergyScan.</span><span class="si">{</span><span class="n">_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">figure</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wd</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"EnergyScan.</span><span class="si">{</span><span class="n">_format</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where the first line handles the standard graph format for the Dashboard.</p>

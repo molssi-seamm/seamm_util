@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.argument_parser &mdash; SEAMM Util 2026.7.26 documentation</title>
+  <title>seamm_util.argument_parser &mdash; SEAMM Util 2026.9.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=551e3ecc"></script>
+      <script src="../../_static/documentation_options.js?v=4c890157"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -94,14 +94,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Source code for seamm_util.argument_parser</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="sd">&quot;&quot;&quot;A configuration and argument parser tailored to SEAMM.</span>
+<span class="sd">"""A configuration and argument parser tailored to SEAMM.</span>
 
 <span class="sd">The goal of this is to allow options to be specified both on the</span>
 <span class="sd">command line and in ini files, with command line having</span>
 <span class="sd">precedence. This is tailored to SEAMM flowcharts so that options for</span>
 <span class="sd">each type of step (plug-in) is in its own section on the command line</span>
 <span class="sd">or in the ini file, labeled by the type of section.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">configparser</span>
@@ -110,11 +110,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="c1"># logging.basicConfig(level=&quot;WARNING&quot;)</span>
+<span class="c1"># logging.basicConfig(level="WARNING")</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># Used in parser getters to indicate the default behaviour when a specific</span>
-<span class="c1"># option is not found it to raise an exception. Created to enable `None&#39; as</span>
+<span class="c1"># option is not found it to raise an exception. Created to enable `None' as</span>
 <span class="c1"># a valid fallback value.</span>
 <span class="n">_UNSET</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
 
@@ -122,28 +122,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ArgumentParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replacement and extension for argparse.ArgumentParser that adds</span>
+<span class="w">    </span><span class="sd">"""Replacement and extension for argparse.ArgumentParser that adds</span>
 <span class="sd">    support for .ini files plus something like the subcommands in</span>
 <span class="sd">    argparse but with multiple ones active at the same time.</span>
 
 <span class="sd">    This is accomplished by separating sections with</span>
-<span class="sd">    &#39;&lt;section name&gt;&#39; on the commandline, and using</span>
-<span class="sd">    &#39;[&lt;section name&gt;] in the .ini files. e.g.</span>
+<span class="sd">    '&lt;section name&gt;' on the commandline, and using</span>
+<span class="sd">    '[&lt;section name&gt;] in the .ini files. e.g.</span>
 
 <span class="sd">    test.flow lammps-step --log-level debug psi4-step --np 32</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
         <span class="n">ini_files</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.seamm.d/seamm.ini&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;seamm.ini&quot;</span><span class="p">,</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">"~/.seamm.d/seamm.ini"</span><span class="p">),</span>
+            <span class="s2">"seamm.ini"</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="n">interpolation</span><span class="o">=</span><span class="n">configparser</span><span class="o">.</span><span class="n">ExtendedInterpolation</span><span class="p">(),</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Command-line and .ini parser for SEAMM&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Command-line and .ini parser for SEAMM"""</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ini_files</span> <span class="o">=</span> <span class="n">ini_files</span>
@@ -165,14 +165,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="n">epilog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">parents</span><span class="o">=</span><span class="p">[],</span>
         <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">HelpFormatter</span><span class="p">,</span>
-        <span class="n">prefix_chars</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+        <span class="n">prefix_chars</span><span class="o">=</span><span class="s2">"-"</span><span class="p">,</span>
         <span class="n">fromfile_prefix_chars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">argument_default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">conflict_handler</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+        <span class="n">conflict_handler</span><span class="o">=</span><span class="s2">"error"</span><span class="p">,</span>
         <span class="n">add_help</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">allow_abbrev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Capture the information needed to create a subparser.</span>
+<span class="w">        </span><span class="sd">"""Capture the information needed to create a subparser.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -190,35 +190,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">            Parsers whose arguments should be copied into this one</span>
 <span class="sd">        formatter_class : argparse.HelpFormatter</span>
 <span class="sd">            HelpFormatter class for printing help messages</span>
-<span class="sd">        prefix_chars : str = &#39;-&#39;</span>
+<span class="sd">        prefix_chars : str = '-'</span>
 <span class="sd">            Characters that prefix optional arguments</span>
 <span class="sd">        fromfile_prefix_chars : str = None</span>
 <span class="sd">            Characters that prefix files containing additional arguments</span>
 <span class="sd">        argument_default : str = None</span>
 <span class="sd">            The default value for all arguments</span>
-<span class="sd">        conflict_handler : str = &#39;error&#39;</span>
+<span class="sd">        conflict_handler : str = 'error'</span>
 <span class="sd">            String indicating how to handle conflicts</span>
 <span class="sd">        add_help : bool = True</span>
 <span class="sd">            Add a -h/-help option</span>
 <span class="sd">        allow_abbrev : bool = True</span>
 <span class="sd">            Allow long options to be abbreviated unambiguously</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser &#39;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">&#39; already exists&quot;</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="p">{}}</span>
-        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;prog&quot;</span><span class="p">:</span> <span class="n">prog</span><span class="p">,</span>
-            <span class="s2">&quot;usage&quot;</span><span class="p">:</span> <span class="n">usage</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
-            <span class="s2">&quot;epilog&quot;</span><span class="p">:</span> <span class="n">epilog</span><span class="p">,</span>
-            <span class="s2">&quot;parents&quot;</span><span class="p">:</span> <span class="n">parents</span><span class="p">,</span>
-            <span class="s2">&quot;formatter_class&quot;</span><span class="p">:</span> <span class="n">formatter_class</span><span class="p">,</span>
-            <span class="s2">&quot;prefix_chars&quot;</span><span class="p">:</span> <span class="n">prefix_chars</span><span class="p">,</span>
-            <span class="s2">&quot;fromfile_prefix_chars&quot;</span><span class="p">:</span> <span class="n">fromfile_prefix_chars</span><span class="p">,</span>
-            <span class="s2">&quot;argument_default&quot;</span><span class="p">:</span> <span class="n">argument_default</span><span class="p">,</span>
-            <span class="s2">&quot;conflict_handler&quot;</span><span class="p">:</span> <span class="n">conflict_handler</span><span class="p">,</span>
-            <span class="s2">&quot;add_help&quot;</span><span class="p">:</span> <span class="n">add_help</span><span class="p">,</span>
-            <span class="s2">&quot;allow_abbrev&quot;</span><span class="p">:</span> <span class="n">allow_abbrev</span><span class="p">,</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parser '</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">' already exists"</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">"groups"</span><span class="p">:</span> <span class="p">{}}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">"init_args"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"prog"</span><span class="p">:</span> <span class="n">prog</span><span class="p">,</span>
+            <span class="s2">"usage"</span><span class="p">:</span> <span class="n">usage</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="s2">"epilog"</span><span class="p">:</span> <span class="n">epilog</span><span class="p">,</span>
+            <span class="s2">"parents"</span><span class="p">:</span> <span class="n">parents</span><span class="p">,</span>
+            <span class="s2">"formatter_class"</span><span class="p">:</span> <span class="n">formatter_class</span><span class="p">,</span>
+            <span class="s2">"prefix_chars"</span><span class="p">:</span> <span class="n">prefix_chars</span><span class="p">,</span>
+            <span class="s2">"fromfile_prefix_chars"</span><span class="p">:</span> <span class="n">fromfile_prefix_chars</span><span class="p">,</span>
+            <span class="s2">"argument_default"</span><span class="p">:</span> <span class="n">argument_default</span><span class="p">,</span>
+            <span class="s2">"conflict_handler"</span><span class="p">:</span> <span class="n">conflict_handler</span><span class="p">,</span>
+            <span class="s2">"add_help"</span><span class="p">:</span> <span class="n">add_help</span><span class="p">,</span>
+            <span class="s2">"allow_abbrev"</span><span class="p">:</span> <span class="n">allow_abbrev</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 
@@ -232,22 +232,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.add_argument">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser &#39;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">&#39; does not exist.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">&quot;arguments&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parser '</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">' does not exist."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">"arguments"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="ArgumentParser.add_argument_group">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.add_argument_group">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_argument_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser &#39;</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">&#39; does not exist.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">&quot;groups&quot;</span><span class="p">][</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">}</span></div>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parser '</span><span class="si">{</span><span class="n">section</span><span class="si">}</span><span class="s2">' does not exist."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="n">section</span><span class="p">][</span><span class="s2">"groups"</span><span class="p">][</span><span class="n">title</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"description"</span><span class="p">:</span> <span class="n">description</span><span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="ArgumentParser.parse_args">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.parse_args">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse the .ini file and command-line arguments.</span>
+<span class="w">        </span><span class="sd">"""Parse the .ini file and command-line arguments.</span>
 
 <span class="sd">        There are three distinct steps to the process:</span>
 
@@ -263,12 +263,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">        ----------</span>
 <span class="sd">        args : [str] = sys.argv[1:]</span>
 <span class="sd">            The arguments to parse. Defaults to the command-line arguments.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
         <span class="c1"># Check for help!</span>
-        <span class="k">if</span> <span class="s2">&quot;-h&quot;</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="s2">&quot;--help&quot;</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"-h"</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="s2">"--help"</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">print_help</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
             <span class="n">exit</span><span class="p">()</span>
 
@@ -281,13 +281,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <span class="c1"># Moving from ~/SEAMM/seamm.ini to ~/.seamm.d/seamm.ini</span>
         <span class="c1"># Make directory and move if it does not exist</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;~/.seamm.d/seamm.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;~/SEAMM/seamm.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"~/.seamm.d/seamm.ini"</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"~/SEAMM/seamm.ini"</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">tmp</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;/ntext:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"/ntext:"</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
             <span class="nb">print</span><span class="p">()</span>
             <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
@@ -308,51 +308,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">section</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># The parser</span>
-            <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span>
+            <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">"init_args"</span><span class="p">])</span>
 
             <span class="c1"># Any groups</span>
-            <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;groups&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"groups"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="c1"># Need to add or replace default if the variable was in a .ini</span>
             <span class="c1"># file. This next code is straight for argparse to make sure we</span>
-            <span class="c1"># have the variable&#39;s name in &#39;dest&#39;.</span>
-            <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;arguments&quot;</span><span class="p">]:</span>
+            <span class="c1"># have the variable's name in 'dest'.</span>
+            <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"arguments"</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">prefix_chars</span><span class="p">:</span>
                     <span class="n">variable</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">kwargs</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">_get_optional_kwargs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-                    <span class="n">variable</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;dest&quot;</span><span class="p">]</span>
-                    <span class="n">args</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;option_strings&quot;</span><span class="p">]</span>
-                    <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;option_strings&quot;</span><span class="p">]</span>
+                    <span class="n">variable</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"dest"</span><span class="p">]</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"option_strings"</span><span class="p">]</span>
+                    <span class="k">del</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"option_strings"</span><span class="p">]</span>
                 <span class="c1"># See if it was in the .ini files</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
                         <span class="n">default</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">default</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">configparser</span><span class="o">.</span><span class="n">DEFAULTSECT</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-                    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"default"</span><span class="p">]</span> <span class="o">=</span> <span class="n">default</span>
                     <span class="c1"># Track what the default is and where it comes from</span>
-                    <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;configfile&quot;</span><span class="p">}</span>
+                    <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"origin"</span><span class="p">:</span> <span class="s2">"configfile"</span><span class="p">}</span>
                     <span class="c1"># May need to convert the type of the default</span>
-                    <span class="k">if</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-                        <span class="n">default</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">](</span><span class="n">default</span><span class="p">)</span>
-                    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default</span>
+                    <span class="k">if</span> <span class="s2">"type"</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                        <span class="n">default</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">"type"</span><span class="p">](</span><span class="n">default</span><span class="p">)</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"default"</span><span class="p">]</span> <span class="o">=</span> <span class="n">default</span>
                 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                     <span class="c1"># Track what the default is and where it comes from</span>
-                    <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">}</span>
+                    <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"origin"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">}</span>
 
                 <span class="c1"># and finally add the argument to the parser.</span>
-                <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"group"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;argument group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; is not defined&quot;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"argument group '</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">' is not defined"</span><span class="p">)</span>
                     <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-                <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+                <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">"value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
 
             <span class="c1"># 4. Parse each section of the command-line with the correct parser</span>
             <span class="n">tmp</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">arg_sections</span><span class="p">[</span><span class="n">section</span><span class="p">])</span>
@@ -361,12 +361,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="n">origin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_origins</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">section</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">defaults</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
-                        <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">&quot;origin&quot;</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">"value"</span><span class="p">]:</span>
+                        <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="n">variable</span><span class="p">][</span><span class="s2">"origin"</span><span class="p">]</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;commandline&quot;</span>
+                        <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"commandline"</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;commandline&quot;</span>
+                    <span class="n">origin</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"commandline"</span>
 
         <span class="c1"># Handle any interpolations, putting the results in a temporary mirror</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="p">{}</span>
@@ -388,20 +388,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.get">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an option value for a given section.</span>
+<span class="w">        </span><span class="sd">"""Get an option value for a given section.</span>
 
-<span class="sd">        If `vars&#39; is provided, it must be a dictionary. The option is looked up</span>
-<span class="sd">        in `vars&#39; (if provided), `section&#39;, and in `DEFAULTSECT&#39; in that order.</span>
-<span class="sd">        If the key is not found and `fallback&#39; is provided, it is used as</span>
-<span class="sd">        a fallback value. `None&#39; can be provided as a `fallback&#39; value.</span>
+<span class="sd">        If `vars' is provided, it must be a dictionary. The option is looked up</span>
+<span class="sd">        in `vars' (if provided), `section', and in `DEFAULTSECT' in that order.</span>
+<span class="sd">        If the key is not found and `fallback' is provided, it is used as</span>
+<span class="sd">        a fallback value. `None' can be provided as a `fallback' value.</span>
 
-<span class="sd">        If interpolation is enabled and the optional argument `raw&#39; is False,</span>
+<span class="sd">        If interpolation is enabled and the optional argument `raw' is False,</span>
 <span class="sd">        all interpolations are expanded in the return values.</span>
 
-<span class="sd">        Arguments `raw&#39;, `vars&#39;, and `fallback&#39; are keyword only.</span>
+<span class="sd">        Arguments `raw', `vars', and `fallback' are keyword only.</span>
 
 <span class="sd">        The section DEFAULT is special.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">[</span><span class="n">section</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
@@ -427,7 +427,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.get_options">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_options">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the options for the given section.</span>
+<span class="w">        </span><span class="sd">"""Return the options for the given section.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -438,7 +438,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">        -------</span>
 <span class="sd">        {str: int, float, str or bool}</span>
 <span class="sd">            The dictionary of options for the section, or all sections.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_options</span><span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
@@ -448,7 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.get_origins">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_origins">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_origins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the origins of the options for the given section.</span>
+<span class="w">        </span><span class="sd">"""Return the origins of the options for the given section.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -459,7 +459,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">        -------</span>
 <span class="sd">        {str: str}</span>
 <span class="sd">            The dictionary of origins for the section, or all sections.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_origins</span><span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
@@ -469,13 +469,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.get_ini_files">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get_ini_files">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ini_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of the .ini files actually used.</span>
+<span class="w">        </span><span class="sd">"""Return a list of the .ini files actually used.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        [str] :</span>
 <span class="sd">            The list of .ini files found</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini_files_used</span><span class="p">]</span></div>
 
 
@@ -494,23 +494,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.format_help">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.format_help">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">format_help</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prepare the help message.</span>
+<span class="w">        </span><span class="sd">"""Prepare the help message.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        args : [str] = sys.argv[1:]</span>
 <span class="sd">            The arguments to pass the parsers, defaults to sys.argv[1:]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
         <span class="c1"># 1. Process the command-line arguments, breaking them into</span>
         <span class="c1">#    sections corresponding to the subparsers.</span>
 
-        <span class="c1"># parser = argparse.ArgumentParser(prefix_chars=&#39;+&#39;)</span>
-        <span class="c1"># parser.add_argument(&#39;SEAMM&#39;, nargs=&#39;*&#39;, default=&#39;&#39;)</span>
+        <span class="c1"># parser = argparse.ArgumentParser(prefix_chars='+')</span>
+        <span class="c1"># parser.add_argument('SEAMM', nargs='*', default='')</span>
         <span class="c1"># for section in self._parsers:</span>
-        <span class="c1">#     parser.add_argument(f&#39;++{section}&#39;, nargs=&#39;*&#39;, default=&#39;&#39;)</span>
+        <span class="c1">#     parser.add_argument(f'++{section}', nargs='*', default='')</span>
         <span class="c1"># arg_sections = vars(parser.parse_args(args))</span>
         <span class="c1"># del parser</span>
 
@@ -520,26 +520,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="c1"># the SEAMM section, print its help plus the plug-ins. Otherwise,</span>
         <span class="c1"># print the help for that plug-in.</span>
 
-        <span class="n">section_args</span> <span class="o">=</span> <span class="n">arg_sections</span><span class="p">[</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s2">&quot;--help&quot;</span> <span class="ow">in</span> <span class="n">section_args</span> <span class="ow">or</span> <span class="s2">&quot;-h&quot;</span> <span class="ow">in</span> <span class="n">section_args</span><span class="p">:</span>
+        <span class="n">section_args</span> <span class="o">=</span> <span class="n">arg_sections</span><span class="p">[</span><span class="s2">"SEAMM"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">"--help"</span> <span class="ow">in</span> <span class="n">section_args</span> <span class="ow">or</span> <span class="s2">"-h"</span> <span class="ow">in</span> <span class="n">section_args</span><span class="p">:</span>
             <span class="c1"># set up any SEAMM options</span>
             <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">if</span> <span class="s2">&quot;SEAMM&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
-                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">"SEAMM"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="p">[</span><span class="s2">"SEAMM"</span><span class="p">]</span>
 
                 <span class="c1"># The parser</span>
-                <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span>
+                <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">"init_args"</span><span class="p">])</span>
 
                 <span class="c1"># Any groups</span>
-                <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;groups&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"groups"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
                 <span class="c1"># and the arguments</span>
-                <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;arguments&quot;</span><span class="p">]:</span>
-                    <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"arguments"</span><span class="p">]:</span>
+                    <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"group"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;argument group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; is not defined&quot;</span><span class="p">)</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"argument group '</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">' is not defined"</span><span class="p">)</span>
                         <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -548,38 +548,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <span class="c1"># and then the plug-ins</span>
             <span class="n">plugins</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span>
-                <span class="s2">&quot;plug-ins&quot;</span><span class="p">,</span>
+                <span class="s2">"plug-ins"</span><span class="p">,</span>
                 <span class="n">description</span><span class="o">=</span><span class="p">(</span>
-                    <span class="s2">&quot;The plug-ins in this flowchart, which have their own &quot;</span> <span class="s2">&quot;options.&quot;</span>
+                    <span class="s2">"The plug-ins in this flowchart, which have their own "</span> <span class="s2">"options."</span>
                 <span class="p">),</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">section</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;SEAMM&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">section</span> <span class="o">==</span> <span class="s2">"SEAMM"</span><span class="p">:</span>
                     <span class="k">continue</span>
-                <span class="n">init_args</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">]</span>
-                <span class="k">if</span> <span class="s2">&quot;description&quot;</span> <span class="ow">in</span> <span class="n">init_args</span><span class="p">:</span>
-                    <span class="n">plugins</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">init_args</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
+                <span class="n">init_args</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"init_args"</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s2">"description"</span> <span class="ow">in</span> <span class="n">init_args</span><span class="p">:</span>
+                    <span class="n">plugins</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">init_args</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">plugins</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">format_help</span><span class="p">()</span>
 
-        <span class="c1"># Find the first section what contains &#39;--help&#39;, and return its help.</span>
+        <span class="c1"># Find the first section what contains '--help', and return its help.</span>
         <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">section</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">section_args</span> <span class="o">=</span> <span class="n">arg_sections</span><span class="p">[</span><span class="n">section</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s2">&quot;--help&quot;</span> <span class="ow">in</span> <span class="n">section_args</span> <span class="ow">or</span> <span class="s2">&quot;-h&quot;</span> <span class="ow">in</span> <span class="n">section_args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"--help"</span> <span class="ow">in</span> <span class="n">section_args</span> <span class="ow">or</span> <span class="s2">"-h"</span> <span class="ow">in</span> <span class="n">section_args</span><span class="p">:</span>
                 <span class="c1"># The parser</span>
-                <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;init_args&quot;</span><span class="p">])</span>
+                <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">[</span><span class="s2">"init_args"</span><span class="p">])</span>
 
                 <span class="c1"># Any groups</span>
-                <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;groups&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"groups"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-                <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;arguments&quot;</span><span class="p">]:</span>
-                    <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"arguments"</span><span class="p">]:</span>
+                    <span class="n">group</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"group"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;argument group &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; is not defined&quot;</span><span class="p">)</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"argument group '</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">' is not defined"</span><span class="p">)</span>
                         <span class="n">groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -589,16 +589,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.items">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.items">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="o">=</span><span class="n">_UNSET</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of (name, value) tuples for each option in a section.</span>
+<span class="w">        </span><span class="sd">"""Return a list of (name, value) tuples for each option in a section.</span>
 
 <span class="sd">        All % interpolations are expanded in the return values, based on the</span>
 <span class="sd">        defaults passed into the constructor, unless the optional argument</span>
-<span class="sd">        `raw&#39; is true.  Additional substitutions may be provided using the</span>
-<span class="sd">        `vars&#39; argument, which must be a dictionary whose contents overrides</span>
+<span class="sd">        `raw' is true.  Additional substitutions may be provided using the</span>
+<span class="sd">        `vars' argument, which must be a dictionary whose contents overrides</span>
 <span class="sd">        any pre-existing defaults.</span>
 
 <span class="sd">        The section DEFAULT is special.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">section</span> <span class="ow">is</span> <span class="n">_UNSET</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
@@ -629,7 +629,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="ArgumentParser.split_args">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.split_args">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">split_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Break the argument line into sections for each plug-in.</span>
+<span class="w">        </span><span class="sd">"""Break the argument line into sections for each plug-in.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -639,13 +639,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">        -------</span>
 <span class="sd">        dict[str: [str]]</span>
 <span class="sd">            A dictionary with entries of an array of strings for all plug-ins</span>
-<span class="sd">            plus &#39;SEAMM&#39;</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            plus 'SEAMM'</span>
+<span class="sd">        """</span>
         <span class="n">sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">}</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">"SEAMM"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">section</span> <span class="o">=</span> <span class="s2">&quot;SEAMM&quot;</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="s2">"SEAMM"</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">:</span>
                 <span class="n">section</span> <span class="o">=</span> <span class="n">arg</span>
@@ -665,218 +665,218 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="viewcode-block" id="getParser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.getParser">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">getParser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the named command-line argument parser.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">getParser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"SEAMM"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Get the named command-line argument parser.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ArgumentParser</span>
 <span class="sd">        The seamm.ArgumentParser for handling commandline and</span>
 <span class="sd">        config-file parsing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_parsers</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating parser &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Creating parser '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
         <span class="n">_parsers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Returning parser &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; (</span><span class="si">{</span><span class="n">_parsers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Returning parser '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' (</span><span class="si">{</span><span class="n">_parsers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_parsers</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
 
 
 
 <div class="viewcode-block" id="seamm_parser">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.argument_parser.seamm_parser">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">seamm_parser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup the command-line argument parser for SEAMM.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seamm_parser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"SEAMM"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Setup the command-line argument parser for SEAMM.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ArgumentParser</span>
 <span class="sd">        The seamm.ArgumentParser for handling commandline and</span>
 <span class="sd">        config-file parsing.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">getParser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">parser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">parser</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"SEAMM"</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">parser</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
         <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
         <span class="n">prog</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
     <span class="p">)</span>
 
     <span class="c1"># Main options</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;main options&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;The main options for SEAMM&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"main options"</span><span class="p">,</span>
+        <span class="s2">"The main options for SEAMM"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--root&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;main options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;~/SEAMM&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The root directory for SEAMM data, default: </span><span class="si">%(default)s</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--root"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"main options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"root"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"~/SEAMM"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The root directory for SEAMM data, default: </span><span class="si">%(default)s</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--datastore&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;main options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;datastore&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{root}</span><span class="s2">/Jobs&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The datastore (directory) for this run, default: </span><span class="si">%(default)s</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--datastore"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"main options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"datastore"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"$</span><span class="si">{root}</span><span class="s2">/Jobs"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The datastore (directory) for this run, default: </span><span class="si">%(default)s</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--job-id-file&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;main options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;job_id_file&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--job-id-file"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"main options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"job_id_file"</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The job_id file to use.&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The job_id file to use."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--dashboards&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;main options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;dashboards&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{root}</span><span class="s2">/dashboards.ini&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The configuration file for accessible dashboards: </span><span class="si">%(default)s</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--dashboards"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"main options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"dashboards"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"$</span><span class="si">{root}</span><span class="s2">/dashboards.ini"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The configuration file for accessible dashboards: </span><span class="si">%(default)s</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Debugging options</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;debugging options&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Options for turning on debugging output and tools&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"debugging options"</span><span class="p">,</span>
+        <span class="s2">"Options for turning on debugging output and tools"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--log-level&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;debugging options&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--log-level"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"debugging options"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"WARNING"</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NOTSET&quot;</span><span class="p">,</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">],</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The level of informational output, default: &#39;</span><span class="si">%(default)s</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"NOTSET"</span><span class="p">,</span> <span class="s2">"DEBUG"</span><span class="p">,</span> <span class="s2">"INFO"</span><span class="p">,</span> <span class="s2">"WARNING"</span><span class="p">,</span> <span class="s2">"ERROR"</span><span class="p">,</span> <span class="s2">"CRITICAL"</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The level of informational output, default: '</span><span class="si">%(default)s</span><span class="s2">'"</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># add options for the job</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span> <span class="s2">&quot;job options&quot;</span><span class="p">,</span> <span class="s2">&quot;Options for jobs&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">"SEAMM"</span><span class="p">,</span> <span class="s2">"job options"</span><span class="p">,</span> <span class="s2">"Options for jobs"</span><span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--database&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;seamm.db&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The database for this job.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--database"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"seamm.db"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The database for this job."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--read-only&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to open the database as read-only.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--read-only"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Whether to open the database as read-only."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--database-timeout&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;database_timeout&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--database-timeout"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"database_timeout"</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Seconds to wait for the database when it is locked by another &quot;</span>
-            <span class="s2">&quot;job before giving up, default: </span><span class="si">%(default)s</span><span class="s2">&quot;</span>
+            <span class="s2">"Seconds to wait for the database when it is locked by another "</span>
+            <span class="s2">"job before giving up, default: </span><span class="si">%(default)s</span><span class="s2">"</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--standalone&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run this workflow as-is without using the job, etc.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--standalone"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Run this workflow as-is without using the job, etc."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--project&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The project(s) for this job.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--project"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"projects"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"append"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The project(s) for this job."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--title&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The title for this run.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--title"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"title"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The title for this run."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--description&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;description&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The longer description for this run.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--description"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"description"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"The longer description for this run."</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--force&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;job options&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;force&quot;</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite the job output if it exists.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--force"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"job options"</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">"force"</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Overwrite the job output if it exists."</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Hardware options</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hardware options&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"hardware options"</span><span class="p">,</span>
         <span class="p">(</span>
-            <span class="s2">&quot;Options about memory limits, parallelism and other details &quot;</span>
-            <span class="s2">&quot;connected with hardware.&quot;</span>
+            <span class="s2">"Options about memory limits, parallelism and other details "</span>
+            <span class="s2">"connected with hardware."</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--parallelism&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;hardware options&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;mpi&quot;</span><span class="p">,</span> <span class="s2">&quot;openmp&quot;</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">],</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Whether to limit parallel usage to certain types.&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--parallelism"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"hardware options"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"any"</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">"none"</span><span class="p">,</span> <span class="s2">"mpi"</span><span class="p">,</span> <span class="s2">"openmp"</span><span class="p">,</span> <span class="s2">"any"</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">"Whether to limit parallel usage to certain types."</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--ncores&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;hardware options&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;available&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--ncores"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"hardware options"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"available"</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;The maximum number of cores/threads to use in any step. &quot;</span>
-            <span class="s2">&quot;Default: all available cores.&quot;</span>
+            <span class="s2">"The maximum number of cores/threads to use in any step. "</span>
+            <span class="s2">"Default: all available cores."</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;SEAMM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;--memory&quot;</span><span class="p">,</span>
-        <span class="n">group</span><span class="o">=</span><span class="s2">&quot;hardware options&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;available&quot;</span><span class="p">,</span>
+        <span class="s2">"SEAMM"</span><span class="p">,</span>
+        <span class="s2">"--memory"</span><span class="p">,</span>
+        <span class="n">group</span><span class="o">=</span><span class="s2">"hardware options"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"available"</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;The maximum amount of memory to use in any step, which can be &quot;</span>
-            <span class="s2">&quot;&#39;all&#39; or &#39;available&#39;, or a number, which may use k, Ki, &quot;</span>
-            <span class="s2">&quot;M, Mi, etc. suffixes. Default: available.&quot;</span>
+            <span class="s2">"The maximum amount of memory to use in any step, which can be "</span>
+            <span class="s2">"'all' or 'available', or a number, which may use k, Ki, "</span>
+            <span class="s2">"M, Mi, etc. suffixes. Default: available."</span>
         <span class="p">),</span>
     <span class="p">)</span>
 

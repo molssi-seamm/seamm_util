@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.check_executable &mdash; SEAMM Util 2026.7.26 documentation</title>
+  <title>seamm_util.check_executable &mdash; SEAMM Util 2026.9.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=551e3ecc"></script>
+      <script src="../../_static/documentation_options.js?v=4c890157"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -94,7 +94,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Source code for seamm_util.check_executable</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="sd">&quot;&quot;&quot;Functions for handling executables&quot;&quot;&quot;</span>
+<span class="sd">"""Functions for handling executables"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -106,7 +106,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="check_executable">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.check_executable.check_executable">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_executable</span><span class="p">(</span><span class="n">executable</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that an executable exists.</span>
+<span class="w">    </span><span class="sd">"""Check that an executable exists.</span>
 
 <span class="sd">    Check that an executable exists and is executable. If no path is</span>
 <span class="sd">    given, but just the executable name, then the current path is</span>
@@ -130,9 +130,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">            The message contains information about where the option came from,</span>
 <span class="sd">            either the command-line, an environment variable, configuration</span>
 <span class="sd">            file or the default.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
         <span class="c1"># A simple name without a directory part was given, so see if the</span>
         <span class="c1"># executable exists in the path.</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_exec_path</span><span class="p">()</span>
@@ -144,27 +144,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="k">return</span> <span class="n">exe</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">exes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exe</span><span class="p">)</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The executable &#39;</span><span class="si">{}</span><span class="s2">&#39; was not found in the path:</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">"The executable '</span><span class="si">{}</span><span class="s2">' was not found in the path:</span><span class="se">\n\t</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">"</span><span class="se">\n\t</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">+=</span> <span class="p">(</span>
-                <span class="s2">&quot;However, the following files were found, but were not &quot;</span>
-                <span class="s2">&quot;executable:</span><span class="se">\n\t</span><span class="s2">&quot;</span>
+                <span class="s2">"However, the following files were found, but were not "</span>
+                <span class="s2">"executable:</span><span class="se">\n\t</span><span class="s2">"</span>
             <span class="p">)</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">exes</span><span class="p">)</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">"</span><span class="se">\n\t</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">exes</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1">#  A path before the executable name was given, so try as is</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">executable</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">executable</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">executable</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The executable &#39;</span><span class="si">{}</span><span class="s2">&#39; exists, but is not executable!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s2">"The executable '</span><span class="si">{}</span><span class="s2">' exists, but is not executable!</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">executable</span>
                 <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The executable &#39;</span><span class="si">{}</span><span class="s2">&#39; does not exist!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">"The executable '</span><span class="si">{}</span><span class="s2">' does not exist!</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">executable</span><span class="p">)</span>
 
     <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 

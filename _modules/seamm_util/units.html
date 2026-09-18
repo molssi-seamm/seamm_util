@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.units &mdash; SEAMM Util 2026.7.26 documentation</title>
+  <title>seamm_util.units &mdash; SEAMM Util 2026.9.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=551e3ecc"></script>
+      <script src="../../_static/documentation_options.js?v=4c890157"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -94,188 +94,188 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Source code for seamm_util.units</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="sd">&quot;&quot;&quot;Localize the unit handling.&quot;&quot;&quot;</span>
+<span class="sd">"""Localize the unit handling."""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pint</span>
 
 <span class="c1"># Default units to use for a dimensionality</span>
 <span class="n">_default_units</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;[current] * [time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;e&quot;</span><span class="p">,</span>
+    <span class="s2">"[current] * [time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"e"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[current] * [length] * [time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;D&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;e*Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;e*a_0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;e*nm&quot;</span><span class="p">,</span>
+    <span class="s2">"[current] * [length] * [time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"D"</span><span class="p">,</span>
+        <span class="s2">"e*Å"</span><span class="p">,</span>
+        <span class="s2">"e*a_0"</span><span class="p">,</span>
+        <span class="s2">"e*nm"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;dimensionless&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;degree&quot;</span><span class="p">,</span>
+    <span class="s2">"dimensionless"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"degree"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;pm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;um&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a_0&quot;</span><span class="p">,</span>
+    <span class="s2">"[length]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Å"</span><span class="p">,</span>
+        <span class="s2">"pm"</span><span class="p">,</span>
+        <span class="s2">"nm"</span><span class="p">,</span>
+        <span class="s2">"um"</span><span class="p">,</span>
+        <span class="s2">"a_0"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;pm^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nm^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;um^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a_0^2&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Å^2"</span><span class="p">,</span>
+        <span class="s2">"pm^2"</span><span class="p">,</span>
+        <span class="s2">"nm^2"</span><span class="p">,</span>
+        <span class="s2">"um^2"</span><span class="p">,</span>
+        <span class="s2">"a_0^2"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 3&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Å^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;pm^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nm^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;um^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a_0^2&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 3"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Å^3"</span><span class="p">,</span>
+        <span class="s2">"pm^3"</span><span class="p">,</span>
+        <span class="s2">"nm^3"</span><span class="p">,</span>
+        <span class="s2">"um^3"</span><span class="p">,</span>
+        <span class="s2">"a_0^2"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;1 / [length]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;1/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/pm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/nm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/um&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/a_0&quot;</span><span class="p">,</span>
+    <span class="s2">"1 / [length]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"1/Å"</span><span class="p">,</span>
+        <span class="s2">"1/pm"</span><span class="p">,</span>
+        <span class="s2">"1/nm"</span><span class="p">,</span>
+        <span class="s2">"1/um"</span><span class="p">,</span>
+        <span class="s2">"1/a_0"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2 / [time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;cSt&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;St&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;m^2/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Å^2/fs&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2 / [time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"cSt"</span><span class="p">,</span>
+        <span class="s2">"St"</span><span class="p">,</span>
+        <span class="s2">"m^2/s"</span><span class="p">,</span>
+        <span class="s2">"Å^2/fs"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2 * [mass]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;10^-40*g*cm^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Da*Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Da*a_0^2&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2 * [mass]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"10^-40*g*cm^2"</span><span class="p">,</span>
+        <span class="s2">"Da*Å^2"</span><span class="p">,</span>
+        <span class="s2">"Da*a_0^2"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;kJ/mol&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kcal/mol&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eV&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2 * [mass] / [substance] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"kJ/mol"</span><span class="p">,</span>
+        <span class="s2">"kcal/mol"</span><span class="p">,</span>
+        <span class="s2">"eV"</span><span class="p">,</span>
+        <span class="s2">"E_h"</span><span class="p">,</span>
+        <span class="s2">"Ry"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2 * [mass] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;kJ/mol&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kcal/mol&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eV&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2 * [mass] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"kJ/mol"</span><span class="p">,</span>
+        <span class="s2">"kcal/mol"</span><span class="p">,</span>
+        <span class="s2">"eV"</span><span class="p">,</span>
+        <span class="s2">"E_h"</span><span class="p">,</span>
+        <span class="s2">"Ry"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;kcal/mol/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kJ/mol/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eV/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h/a_0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry/a_0&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] * [mass] / [substance] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"kcal/mol/Å"</span><span class="p">,</span>
+        <span class="s2">"kJ/mol/Å"</span><span class="p">,</span>
+        <span class="s2">"eV/Å"</span><span class="p">,</span>
+        <span class="s2">"E_h/Å"</span><span class="p">,</span>
+        <span class="s2">"Ry/Å"</span><span class="p">,</span>
+        <span class="s2">"E_h/a_0"</span><span class="p">,</span>
+        <span class="s2">"Ry/a_0"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass] / [substance] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;kcal/mol/Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kJ/mol/Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eV/Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h/Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry/Å^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;E_h/a_0^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ry/a_0^2&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass] / [substance] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"kcal/mol/Å^2"</span><span class="p">,</span>
+        <span class="s2">"kJ/mol/Å^2"</span><span class="p">,</span>
+        <span class="s2">"eV/Å^2"</span><span class="p">,</span>
+        <span class="s2">"E_h/Å^2"</span><span class="p">,</span>
+        <span class="s2">"Ry/Å^2"</span><span class="p">,</span>
+        <span class="s2">"E_h/a_0^2"</span><span class="p">,</span>
+        <span class="s2">"Ry/a_0^2"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] * [mass] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;kcal/mol/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kJ/mol/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eV/Å&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] * [mass] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"kcal/mol/Å"</span><span class="p">,</span>
+        <span class="s2">"kJ/mol/Å"</span><span class="p">,</span>
+        <span class="s2">"eV/Å"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] / [time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;km/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;m/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mph&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ft/s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Å/fs&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] / [time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"km/s"</span><span class="p">,</span>
+        <span class="s2">"m/s"</span><span class="p">,</span>
+        <span class="s2">"mph"</span><span class="p">,</span>
+        <span class="s2">"ft/s"</span><span class="p">,</span>
+        <span class="s2">"Å/fs"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;m/s^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ft/s^2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Å/fs^2&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"m/s^2"</span><span class="p">,</span>
+        <span class="s2">"ft/s^2"</span><span class="p">,</span>
+        <span class="s2">"Å/fs^2"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;J/K/mol&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cal/K/mol&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"J/K/mol"</span><span class="p">,</span>
+        <span class="s2">"cal/K/mol"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Da&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;amu&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;g&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tonne&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ton&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Da"</span><span class="p">,</span>
+        <span class="s2">"amu"</span><span class="p">,</span>
+        <span class="s2">"g"</span><span class="p">,</span>
+        <span class="s2">"kg"</span><span class="p">,</span>
+        <span class="s2">"tonne"</span><span class="p">,</span>
+        <span class="s2">"lb"</span><span class="p">,</span>
+        <span class="s2">"ton"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass] / [length] ** 3&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;g/mL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kg/L&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kg/m^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;g/mol/Å^3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;g/mol/A_0^3&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass] / [length] ** 3"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"g/mL"</span><span class="p">,</span>
+        <span class="s2">"kg/L"</span><span class="p">,</span>
+        <span class="s2">"kg/m^3"</span><span class="p">,</span>
+        <span class="s2">"g/mol/Å^3"</span><span class="p">,</span>
+        <span class="s2">"g/mol/A_0^3"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass] / [length] / [time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;cP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;P&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mPa*s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Pa*s&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass] / [length] / [time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"cP"</span><span class="p">,</span>
+        <span class="s2">"P"</span><span class="p">,</span>
+        <span class="s2">"mPa*s"</span><span class="p">,</span>
+        <span class="s2">"Pa*s"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass] / [length] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;TPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;GPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;MPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Pa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;atm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;psi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ksi&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass] / [length] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"TPa"</span><span class="p">,</span>
+        <span class="s2">"GPa"</span><span class="p">,</span>
+        <span class="s2">"MPa"</span><span class="p">,</span>
+        <span class="s2">"Pa"</span><span class="p">,</span>
+        <span class="s2">"atm"</span><span class="p">,</span>
+        <span class="s2">"bar"</span><span class="p">,</span>
+        <span class="s2">"psi"</span><span class="p">,</span>
+        <span class="s2">"ksi"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[length] * [time] ** 2 / [mass]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;1/TPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/GPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/MPa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/Pa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/atm&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/bar&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/psi&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/ksi&quot;</span><span class="p">,</span>
+    <span class="s2">"[length] * [time] ** 2 / [mass]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"1/TPa"</span><span class="p">,</span>
+        <span class="s2">"1/GPa"</span><span class="p">,</span>
+        <span class="s2">"1/MPa"</span><span class="p">,</span>
+        <span class="s2">"1/Pa"</span><span class="p">,</span>
+        <span class="s2">"1/atm"</span><span class="p">,</span>
+        <span class="s2">"1/bar"</span><span class="p">,</span>
+        <span class="s2">"1/psi"</span><span class="p">,</span>
+        <span class="s2">"1/ksi"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[mass] / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;mdyne/Å&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;N/m&quot;</span><span class="p">,</span>
+    <span class="s2">"[mass] / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"mdyne/Å"</span><span class="p">,</span>
+        <span class="s2">"N/m"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;1 / [time] ** 2&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;mdyne/Å/Da&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;N/m/Da&quot;</span><span class="p">,</span>
+    <span class="s2">"1 / [time] ** 2"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"mdyne/Å/Da"</span><span class="p">,</span>
+        <span class="s2">"N/m/Da"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[substance]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
+    <span class="s2">"[substance]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"mol"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[temperature]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;K&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;°F&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;°R&quot;</span><span class="p">,</span>
+    <span class="s2">"[temperature]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"K"</span><span class="p">,</span>
+        <span class="s2">"°C"</span><span class="p">,</span>
+        <span class="s2">"°F"</span><span class="p">,</span>
+        <span class="s2">"°R"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;1 / [temperature]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;1/K&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/°C&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/°F&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;1/°R&quot;</span><span class="p">,</span>
+    <span class="s2">"1 / [temperature]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"1/K"</span><span class="p">,</span>
+        <span class="s2">"1/°C"</span><span class="p">,</span>
+        <span class="s2">"1/°F"</span><span class="p">,</span>
+        <span class="s2">"1/°R"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;[time]&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;fs&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ps&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ns&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;us&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ms&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+    <span class="s2">"[time]"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"fs"</span><span class="p">,</span>
+        <span class="s2">"ps"</span><span class="p">,</span>
+        <span class="s2">"ns"</span><span class="p">,</span>
+        <span class="s2">"us"</span><span class="p">,</span>
+        <span class="s2">"ms"</span><span class="p">,</span>
+        <span class="s2">"s"</span><span class="p">,</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
@@ -283,7 +283,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="viewcode-block" id="sort_dimensions">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.units.sort_dimensions">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sort_dimensions</span><span class="p">(</span><span class="n">dimensions</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort the dimensions.</span>
+<span class="w">    </span><span class="sd">"""Sort the dimensions.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -294,12 +294,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
 <span class="sd">        The sorted dimensions.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tmp</span> <span class="o">=</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; / &quot;</span><span class="p">)</span>
-    <span class="n">numerator</span> <span class="o">=</span> <span class="s2">&quot; * &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; * &quot;</span><span class="p">)))</span>
+<span class="sd">    """</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">dimensions</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" / "</span><span class="p">)</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="s2">" * "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" * "</span><span class="p">)))</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">denominator</span> <span class="o">=</span> <span class="s2">&quot; / &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">numerator</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="s2">" / "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">numerator</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">denominator</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">return</span> <span class="n">numerator</span></div>
 
 
@@ -308,138 +308,138 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <span class="c1"># Unit handling!</span>
 <span class="n">ureg</span> <span class="o">=</span> <span class="n">pint</span><span class="o">.</span><span class="n">UnitRegistry</span><span class="p">(</span><span class="n">auto_reduce_dimensions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ureg</span><span class="o">.</span><span class="n">formatter</span><span class="o">.</span><span class="n">default_format</span> <span class="o">=</span> <span class="s2">&quot;~P&quot;</span>
+<span class="n">ureg</span><span class="o">.</span><span class="n">formatter</span><span class="o">.</span><span class="n">default_format</span> <span class="o">=</span> <span class="s2">"~P"</span>
 <span class="n">pint</span><span class="o">.</span><span class="n">set_application_registry</span><span class="p">(</span><span class="n">ureg</span><span class="p">)</span>
 <span class="n">Q_</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span>
-<span class="n">units_class</span> <span class="o">=</span> <span class="n">ureg</span><span class="p">(</span><span class="s2">&quot;1 km&quot;</span><span class="p">)</span><span class="o">.</span><span class="vm">__class__</span>
+<span class="n">units_class</span> <span class="o">=</span> <span class="n">ureg</span><span class="p">(</span><span class="s2">"1 km"</span><span class="p">)</span><span class="o">.</span><span class="vm">__class__</span>
 
 <span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">_d</span> <span class="o">=</span> <span class="n">pint</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="s2">&quot;chemistry&quot;</span><span class="p">)</span>
+    <span class="n">_d</span> <span class="o">=</span> <span class="n">pint</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="s2">"chemistry"</span><span class="p">)</span>
 
     <span class="n">factor</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">mol</span> <span class="o">/</span> <span class="n">ureg</span><span class="o">.</span><span class="n">avogadro_number</span>
 
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;[substance]&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;[substance]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"[substance]"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">"[substance]"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
 
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;1 / [substance]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;1 / [substance]&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">"1 / [substance]"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"1 / [substance]"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
 
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;[mass] / [substance]&quot;</span><span class="p">,</span> <span class="s2">&quot;[mass]&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
-    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">&quot;[mass]&quot;</span><span class="p">,</span> <span class="s2">&quot;[mass] / [substance]&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">"[mass] / [substance]"</span><span class="p">,</span> <span class="s2">"[mass]"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+    <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span><span class="s2">"[mass]"</span><span class="p">,</span> <span class="s2">"[mass] / [substance]"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">)</span>
 
     <span class="c1"># g/mol/Å^3 --&gt; g/Å^3</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] ** 3 / [substance]&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] ** 3&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 3 / [substance]"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 3"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] ** 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] ** 3 / [substance]&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 3"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 3 / [substance]"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol/Å --&gt; eV/Å</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] * [mass] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] * [mass] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol --&gt; eV</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol/K --&gt; eV/K</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [temperature] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [temperature] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [temperature] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [temperature] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 2 * [mass] / [substance] / [temperature] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol/Å^2 --&gt; eV/Å^2</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># eV/Å^2 --&gt; kJ/mol/Å^2</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol/Å^3 --&gt; eV/Å^3</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># eV/Å^3 --&gt; kJ/mol/Å^3</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol/Å^4 --&gt; eV/Å^4</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] ** 2 / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] ** 2 / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 2 / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 2 / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># eV/Å^4 --&gt; kJ/mol/Å^4</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[mass] / [length] ** 2 / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[mass] / [length] ** 2 / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 2 / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[mass] / [length] ** 2 / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># kJ/mol*Å^6 --&gt; eV*Å^6</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 8 * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 8 * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 8 * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 8 * [mass] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># eV*Å^6 --&gt; kJ/mol*Å^6</span>
     <span class="n">_d</span><span class="o">.</span><span class="n">add_transformation</span><span class="p">(</span>
-        <span class="s2">&quot;[length] ** 8 * [mass] / [time] ** 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;[length] ** 8 * [mass] / [substance] / [time] ** 2&quot;</span><span class="p">,</span>
+        <span class="s2">"[length] ** 8 * [mass] / [time] ** 2"</span><span class="p">,</span>
+        <span class="s2">"[length] ** 8 * [mass] / [substance] / [time] ** 2"</span><span class="p">,</span>
         <span class="k">lambda</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">ureg</span><span class="o">.</span><span class="n">add_context</span><span class="p">(</span><span class="n">_d</span><span class="p">)</span>
 
-<span class="n">ureg</span><span class="o">.</span><span class="n">enable_contexts</span><span class="p">(</span><span class="s2">&quot;spectroscopy&quot;</span><span class="p">,</span> <span class="s2">&quot;boltzmann&quot;</span><span class="p">,</span> <span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;chemistry&quot;</span><span class="p">)</span>
+<span class="n">ureg</span><span class="o">.</span><span class="n">enable_contexts</span><span class="p">(</span><span class="s2">"spectroscopy"</span><span class="p">,</span> <span class="s2">"boltzmann"</span><span class="p">,</span> <span class="s2">"energy"</span><span class="p">,</span> <span class="s2">"chemistry"</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="default_units">
 <a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.units.default_units">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">default_units</span><span class="p">(</span><span class="n">units_or_dimensions</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the default units.</span>
+<span class="w">    </span><span class="sd">"""Return the default units.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -450,14 +450,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">    -------</span>
 <span class="sd">    [str]</span>
 <span class="sd">        The list of unit strings.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">units_or_dimensions</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">units_or_dimensions</span> <span class="o">==</span> <span class="s2">"all"</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">_default_units</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="k">if</span> <span class="s2">&quot;[&quot;</span> <span class="ow">in</span> <span class="n">units_or_dimensions</span> <span class="ow">or</span> <span class="n">units_or_dimensions</span> <span class="o">==</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">"["</span> <span class="ow">in</span> <span class="n">units_or_dimensions</span> <span class="ow">or</span> <span class="n">units_or_dimensions</span> <span class="o">==</span> <span class="s2">"dimensionless"</span><span class="p">:</span>
         <span class="n">dimensions</span> <span class="o">=</span> <span class="n">units_or_dimensions</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">dimensions</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Q_</span><span class="p">(</span><span class="n">units_or_dimensions</span><span class="p">)</span><span class="o">.</span><span class="n">dimensionality</span><span class="p">)</span>
@@ -470,63 +470,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">units</span> <span class="ow">in</span> <span class="n">ureg</span><span class="o">.</span><span class="n">get_compatible_units</span><span class="p">(</span><span class="n">dimensions</span><span class="p">):</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">units</span><span class="si">:</span><span class="s2">~P</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">units</span><span class="si">:</span><span class="s2">~P</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n\t</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Automatic defaults for &#39;</span><span class="si">{</span><span class="n">units_or_dimensions</span><span class="si">}</span><span class="s2">&#39; (</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">) &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="si">{</span><span class="n">tmp</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Automatic defaults for '</span><span class="si">{</span><span class="n">units_or_dimensions</span><span class="si">}</span><span class="s2">' (</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2">) "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="se">\n\t</span><span class="si">{</span><span class="n">tmp</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Warning: can&#39;t handle units &#39;</span><span class="si">{</span><span class="n">units_or_dimensions</span><span class="si">}</span><span class="s2">&#39; --&gt; &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2"> for default units.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Warning: can't handle units '</span><span class="si">{</span><span class="n">units_or_dimensions</span><span class="si">}</span><span class="s2">' --&gt; "</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dimensions</span><span class="si">}</span><span class="s2"> for default units."</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div>
 
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">_default_units</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="n">sort_dimensions</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">sort_dimensions</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">sort_dimensions</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;kcal/mol&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">"kcal/mol"</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"eV"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;kJ/mol&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"kJ/mol"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;eV&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;kcal/mol&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">"eV"</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"kcal/mol"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;kJ/mol&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"kJ/mol"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;mol&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">"mol"</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">6.022e23</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;mol&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mf">6.022e23</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"mol"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;kcal/mol/angstrom&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;eV/angstrom&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"kcal/mol/angstrom"</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"eV/angstrom"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;eV/angstrom&quot;</span><span class="p">)</span>
-    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;kcal/mol/angstrom&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">Q_</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"eV/angstrom"</span><span class="p">)</span>
+    <span class="n">E2</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"kcal/mol/angstrom"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">E</span><span class="si">:</span><span class="s2">~</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">E2</span><span class="si">:</span><span class="s2">~.4</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 </pre></div>
 
