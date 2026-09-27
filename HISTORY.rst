@@ -1,6 +1,19 @@
 =======
 History
 =======
+2026.9.27 -- The default root follows the installation
+    * The default for ``--root`` was always ``~/SEAMM``, so a second installation such
+      as ``~/SEAMM_DEV`` read ``~/SEAMM``'s configuration and data unless every command
+      was given ``--root``. The default is now the ``SEAMM_ROOT`` environment variable if
+      set, otherwise the installation the running Python belongs to (a seamm-manager
+      environment ``<root>/venv`` whose root holds ``Jobs`` or ``.ini`` files), and
+      otherwise ``~/SEAMM`` as before. Existing single installations behave exactly as
+      they did.
+    * ``root`` in the ``[SEAMM]`` section of ``~/.seamm.d/seamm.ini`` still works but
+      logs a deprecation warning, since that file is shared by every installation of a
+      user; ``SEAMM_ROOT`` takes precedence over it.
+    * New functions ``seamm_util.default_root()`` and ``seamm_util.installation_root()``.
+
 2026.9.18 -- Bugfix: pip metadata lacked requests
     * ``pip install seamm-util`` did not install ``requests``, which the Zenodo
       client imports, so seamm-util failed to import outside a conda-forge environment

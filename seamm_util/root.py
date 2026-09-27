@@ -1,0 +1,68 @@
+# -*- coding: utf-8 -*-
+
+"""Where the SEAMM installation in use lives: its *root*.
+
+The root holds an installation's configuration (``seamm.ini`` beside the codes'
+``<code>.ini`` files), its data and its jobs. Several installations can live on one
+machine (``~/SEAMM``, ``~/SEAMM_DEV``, ...), so the default root is taken from the
+installation the running Python belongs to rather than fixed at ``~/SEAMM``.
+"""
+
+import os
+from pathlib import Path
+import sys
+
+DEFAULT_ROOT = "~/SEAMM"
+
+
+def installation_root(prefix=None):
+    """The root of the SEAMM installation this Python belongs to, or None.
+
+    An installation made by seamm-manager keeps its Python environments inside its
+    root (``<root>/venv``, ``<root>/venv-webui``). If this interpreter's environment
+    is such a directory, and the directory above it holds a ``Jobs`` directory or
+    ``.ini`` files, that directory is the root. Any other environment (a conda
+    environment, a developer's scratch venv) gives None.
+
+    Parameters
+    ----------
+    prefix : str or pathlib.Path = sys.prefix
+        The environment to examine.
+
+    Returns
+    -------
+    pathlib.Path or None
+    """
+    prefix = Path(sys.prefix if prefix is None else prefix)
+    if not prefix.name.startswith("venv"):
+        return None
+    root = prefix.parent
+    try:
+        if (root / "Jobs").is_dir() or any(root.glob("*.ini")):
+            return root
+    except OSError:
+        pass
+    return None
+
+
+def default_root():
+    """The root to use when none is given on the command line.
+
+    In order: the ``SEAMM_ROOT`` environment variable; the root of the installation
+    this Python belongs to (see `installation_root`); ``~/SEAMM``. A root under the
+    home directory is returned as ``~/...``.
+
+    Returns
+    -------
+    str
+    """
+    value = os.environ.get("SEAMM_ROOT", "").strip()
+    if value != "":
+        return value
+    root = installation_root()
+    if root is None:
+        return DEFAULT_ROOT
+    try:
+        return "~/" + str(root.relative_to(Path.home()))
+    except ValueError:
+        return str(root)
