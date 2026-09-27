@@ -1,6 +1,14 @@
 =======
 History
 =======
+2026.9.27.1 -- Helpers for finding an installation's files
+    * ``seamm_util.current_root()`` gives the root of the installation in use: the
+      ``--root`` parsed for this run if there is one, otherwise the default root.
+    * ``seamm_util.installation_path(*parts)`` gives a path under that root, falling
+      back to the default installation's copy in ``~/SEAMM`` when the installation has
+      none. Plug-ins use it for reference data such as the VASP potentials, so a second
+      installation works without copying them but can still have its own.
+
 2026.9.27 -- The default root follows the installation
     * The default for ``--root`` was always ``~/SEAMM``, so a second installation such
       as ``~/SEAMM_DEV`` read ``~/SEAMM``'s configuration and data unless every command
