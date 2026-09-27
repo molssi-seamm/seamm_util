@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.9.27 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.9.27.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=09c3d259"></script>
+      <script src="../_static/documentation_options.js?v=2246f11d"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1543,6 +1543,14 @@ buffers). Should be called at application exit.</p>
 machine (<code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>, <code class="docutils literal notranslate"><span class="pre">~/SEAMM_DEV</span></code>, …), so the default root is taken from the
 installation the running Python belongs to rather than fixed at <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.root.current_root">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">current_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#current_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.current_root" title="Link to this definition"></a></dt>
+<dd><p>The root of the installation in use, as an absolute Path.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--root</span></code> parsed for this run, when the SEAMM options have been parsed
+(a running flowchart, the JobServer, the editor); otherwise <cite>default_root</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="seamm_util.root.default_root">
 <span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">default_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#default_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.default_root" title="Link to this definition"></a></dt>
 <dd><p>The root to use when none is given on the command line.</p>
@@ -1552,6 +1560,27 @@ home directory is returned as <code class="docutils literal notranslate"><span c
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.root.installation_path">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">installation_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">parts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#installation_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.installation_path" title="Link to this definition"></a></dt>
+<dd><p>A path under the installation’s root, falling back to ~/SEAMM’s copy.</p>
+<p>Reference data (VASP potentials, forcefield files, …) can live in each
+installation’s root, but usually only the default installation <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code> has
+it. This returns <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/&lt;parts&gt;</span></code> if it exists, else <code class="docutils literal notranslate"><span class="pre">~/SEAMM/&lt;parts&gt;</span></code> if
+that exists, else <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/&lt;parts&gt;</span></code> (where it would be created).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parts</strong> (<em>str</em>) – Path components under the root, e.g. “Parameters”, “VASP”.</p></li>
+<li><p><strong>root</strong> (<em>str</em><em> or </em><em>pathlib.Path = current_root</em><em>(</em><em>)</em>) – The installation’s root.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pathlib.Path</p>
 </dd>
 </dl>
 </dd></dl>

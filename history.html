@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; SEAMM Util 2026.9.27 documentation</title>
+  <title>History &mdash; SEAMM Util 2026.9.27.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=09c3d259"></script>
+      <script src="_static/documentation_options.js?v=2246f11d"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,6 +96,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading"></a></h1>
 <dl class="simple">
+<dt>2026.9.27.1 – Helpers for finding an installation’s files</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">seamm_util.current_root()</span></code> gives the root of the installation in use: the
+<code class="docutils literal notranslate"><span class="pre">--root</span></code> parsed for this run if there is one, otherwise the default root.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seamm_util.installation_path(*parts)</span></code> gives a path under that root, falling
+back to the default installation’s copy in <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code> when the installation has
+none. Plug-ins use it for reference data such as the VASP potentials, so a second
+installation works without copying them but can still have its own.</p></li>
+</ul>
+</dd>
 <dt>2026.9.27 – The default root follows the installation</dt><dd><ul class="simple">
 <li><p>The default for <code class="docutils literal notranslate"><span class="pre">--root</span></code> was always <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>, so a second installation such
 as <code class="docutils literal notranslate"><span class="pre">~/SEAMM_DEV</span></code> read <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>’s configuration and data unless every command
