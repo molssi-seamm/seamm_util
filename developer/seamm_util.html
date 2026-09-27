@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.9.18 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.9.27 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=4c890157"></script>
+      <script src="../_static/documentation_options.js?v=09c3d259"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1532,6 +1532,47 @@ buffers). Should be called at application exit.</p>
 <dt class="sig sig-object py" id="seamm_util.printing.verbose">
 <span class="sig-prename descclassname"><span class="pre">seamm_util.printing.</span></span><span class="sig-name descname"><span class="pre">verbose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/printing.html#verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.printing.verbose" title="Link to this definition"></a></dt>
 <dd><p>Log a message with severity ‘VERBOSE’ on the root printer.</p>
+</dd></dl>
+
+</section>
+<section id="module-seamm_util.root">
+<span id="seamm-util-root-module"></span><h2>seamm_util.root module<a class="headerlink" href="#module-seamm_util.root" title="Link to this heading"></a></h2>
+<p>Where the SEAMM installation in use lives: its <em>root</em>.</p>
+<p>The root holds an installation’s configuration (<code class="docutils literal notranslate"><span class="pre">seamm.ini</span></code> beside the codes’
+<code class="docutils literal notranslate"><span class="pre">&lt;code&gt;.ini</span></code> files), its data and its jobs. Several installations can live on one
+machine (<code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>, <code class="docutils literal notranslate"><span class="pre">~/SEAMM_DEV</span></code>, …), so the default root is taken from the
+installation the running Python belongs to rather than fixed at <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.root.default_root">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">default_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#default_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.default_root" title="Link to this definition"></a></dt>
+<dd><p>The root to use when none is given on the command line.</p>
+<p>In order: the <code class="docutils literal notranslate"><span class="pre">SEAMM_ROOT</span></code> environment variable; the root of the installation
+this Python belongs to (see <cite>installation_root</cite>); <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>. A root under the
+home directory is returned as <code class="docutils literal notranslate"><span class="pre">~/...</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.root.installation_root">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">installation_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#installation_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.installation_root" title="Link to this definition"></a></dt>
+<dd><p>The root of the SEAMM installation this Python belongs to, or None.</p>
+<p>An installation made by seamm-manager keeps its Python environments inside its
+root (<code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv-webui</span></code>). If this interpreter’s environment
+is such a directory, and the directory above it holds a <code class="docutils literal notranslate"><span class="pre">Jobs</span></code> directory or
+<code class="docutils literal notranslate"><span class="pre">.ini</span></code> files, that directory is the root. Any other environment (a conda
+environment, a developer’s scratch venv) gives None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<em>str</em><em> or </em><em>pathlib.Path = sys.prefix</em>) – The environment to examine.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pathlib.Path or None</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

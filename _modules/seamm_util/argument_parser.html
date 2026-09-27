@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.argument_parser &mdash; SEAMM Util 2026.9.18 documentation</title>
+  <title>seamm_util.argument_parser &mdash; SEAMM Util 2026.9.27 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=4c890157"></script>
+      <script src="../../_static/documentation_options.js?v=09c3d259"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -111,6 +111,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="c1"># logging.basicConfig(level="WARNING")</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.root</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_root</span>
+
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="c1"># Used in parser getters to indicate the default behaviour when a specific</span>
@@ -328,6 +330,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="c1"># See if it was in the .ini files</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">tmp</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">section</span> <span class="o">==</span> <span class="s2">"SEAMM"</span> <span class="ow">and</span> <span class="n">tmp</span> <span class="o">==</span> <span class="s2">"root"</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"SEAMM_ROOT"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
+                            <span class="c1"># The installation's own setting wins over the</span>
+                            <span class="c1"># per-user seamm.ini, which all installations share.</span>
+                            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                                <span class="s2">"'root' in the [SEAMM] section of seamm.ini is "</span>
+                                <span class="s2">"deprecated: the file is shared by every SEAMM "</span>
+                                <span class="s2">"installation of this user. Use --root or the "</span>
+                                <span class="s2">"SEAMM_ROOT environment variable instead."</span>
+                            <span class="p">)</span>
                     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
                         <span class="n">default</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -718,7 +732,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="s2">"--root"</span><span class="p">,</span>
         <span class="n">group</span><span class="o">=</span><span class="s2">"main options"</span><span class="p">,</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">"root"</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">"~/SEAMM"</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">default_root</span><span class="p">(),</span>
         <span class="n">action</span><span class="o">=</span><span class="s2">"store"</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">"The root directory for SEAMM data, default: </span><span class="si">%(default)s</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span>

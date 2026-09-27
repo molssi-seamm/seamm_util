@@ -100,6 +100,14 @@ seamm\_util.printing module
    :show-inheritance:
    :undoc-members:
 
+seamm\_util.root module
+-----------------------
+
+.. automodule:: seamm_util.root
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 seamm\_util.seamm\_file module
 ------------------------------
 

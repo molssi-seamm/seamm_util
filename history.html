@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; SEAMM Util 2026.9.18 documentation</title>
+  <title>History &mdash; SEAMM Util 2026.9.27 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=4c890157"></script>
+      <script src="_static/documentation_options.js?v=09c3d259"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,6 +96,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading"></a></h1>
 <dl class="simple">
+<dt>2026.9.27 – The default root follows the installation</dt><dd><ul class="simple">
+<li><p>The default for <code class="docutils literal notranslate"><span class="pre">--root</span></code> was always <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>, so a second installation such
+as <code class="docutils literal notranslate"><span class="pre">~/SEAMM_DEV</span></code> read <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code>’s configuration and data unless every command
+was given <code class="docutils literal notranslate"><span class="pre">--root</span></code>. The default is now the <code class="docutils literal notranslate"><span class="pre">SEAMM_ROOT</span></code> environment variable if
+set, otherwise the installation the running Python belongs to (a seamm-manager
+environment <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code> whose root holds <code class="docutils literal notranslate"><span class="pre">Jobs</span></code> or <code class="docutils literal notranslate"><span class="pre">.ini</span></code> files), and
+otherwise <code class="docutils literal notranslate"><span class="pre">~/SEAMM</span></code> as before. Existing single installations behave exactly as
+they did.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code> in the <code class="docutils literal notranslate"><span class="pre">[SEAMM]</span></code> section of <code class="docutils literal notranslate"><span class="pre">~/.seamm.d/seamm.ini</span></code> still works but
+logs a deprecation warning, since that file is shared by every installation of a
+user; <code class="docutils literal notranslate"><span class="pre">SEAMM_ROOT</span></code> takes precedence over it.</p></li>
+<li><p>New functions <code class="docutils literal notranslate"><span class="pre">seamm_util.default_root()</span></code> and <code class="docutils literal notranslate"><span class="pre">seamm_util.installation_root()</span></code>.</p></li>
+</ul>
+</dd>
 <dt>2026.9.18 – Bugfix: pip metadata lacked requests</dt><dd><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">seamm-util</span></code> did not install <code class="docutils literal notranslate"><span class="pre">requests</span></code>, which the Zenodo
 client imports, so seamm-util failed to import outside a conda-forge environment
