@@ -17,6 +17,8 @@ from pathlib import Path
 import sys
 
 # logging.basicConfig(level="WARNING")
+from .root import default_root
+
 logger = logging.getLogger(__name__)
 
 # Used in parser getters to indicate the default behaviour when a specific
@@ -218,6 +220,18 @@ class ArgumentParser(object):
                 # See if it was in the .ini files
                 try:
                     tmp = variable.replace("_", "-")
+                    if section == "SEAMM" and tmp == "root":
+                        if os.environ.get("SEAMM_ROOT", "").strip() != "":
+                            # The installation's own setting wins over the
+                            # per-user seamm.ini, which all installations share.
+                            raise KeyError("root")
+                        if config.has_option(section, tmp):
+                            logger.warning(
+                                "'root' in the [SEAMM] section of seamm.ini is "
+                                "deprecated: the file is shared by every SEAMM "
+                                "installation of this user. Use --root or the "
+                                "SEAMM_ROOT environment variable instead."
+                            )
                     if config.has_section(section):
                         default = config.get(section, tmp)
                     else:
@@ -574,7 +588,7 @@ def seamm_parser(name="SEAMM"):
         "--root",
         group="main options",
         dest="root",
-        default="~/SEAMM",
+        default=default_root(),
         action="store",
         help="The root directory for SEAMM data, default: %(default)s",
     )
