@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.9.27.1 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.10.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=2246f11d"></script>
+      <script src="../_static/documentation_options.js?v=52372788"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1590,8 +1590,9 @@ that exists, else <code class="docutils literal notranslate"><span class="pre">&
 <span class="sig-prename descclassname"><span class="pre">seamm_util.root.</span></span><span class="sig-name descname"><span class="pre">installation_root</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/root.html#installation_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.root.installation_root" title="Link to this definition"></a></dt>
 <dd><p>The root of the SEAMM installation this Python belongs to, or None.</p>
 <p>An installation made by seamm-manager keeps its Python environments inside its
-root (<code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv-webui</span></code>). If this interpreter’s environment
-is such a directory, and the directory above it holds a <code class="docutils literal notranslate"><span class="pre">Jobs</span></code> directory or
+root (<code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv-webui</span></code>, or the versioned
+<code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venvs/&lt;stamp&gt;</span></code> that <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code> links to). If this interpreter’s
+environment is such a directory, and the root holds a <code class="docutils literal notranslate"><span class="pre">Jobs</span></code> directory or
 <code class="docutils literal notranslate"><span class="pre">.ini</span></code> files, that directory is the root. Any other environment (a conda
 environment, a developer’s scratch venv) gives None.</p>
 <dl class="field-list simple">

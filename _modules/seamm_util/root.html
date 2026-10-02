@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util.root &mdash; SEAMM Util 2026.9.27.1 documentation</title>
+  <title>seamm_util.root &mdash; SEAMM Util 2026.10.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=2246f11d"></script>
+      <script src="../../_static/documentation_options.js?v=52372788"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -115,8 +115,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="w">    </span><span class="sd">"""The root of the SEAMM installation this Python belongs to, or None.</span>
 
 <span class="sd">    An installation made by seamm-manager keeps its Python environments inside its</span>
-<span class="sd">    root (``&lt;root&gt;/venv``, ``&lt;root&gt;/venv-webui``). If this interpreter's environment</span>
-<span class="sd">    is such a directory, and the directory above it holds a ``Jobs`` directory or</span>
+<span class="sd">    root (``&lt;root&gt;/venv``, ``&lt;root&gt;/venv-webui``, or the versioned</span>
+<span class="sd">    ``&lt;root&gt;/venvs/&lt;stamp&gt;`` that ``&lt;root&gt;/venv`` links to). If this interpreter's</span>
+<span class="sd">    environment is such a directory, and the root holds a ``Jobs`` directory or</span>
 <span class="sd">    ``.ini`` files, that directory is the root. Any other environment (a conda</span>
 <span class="sd">    environment, a developer's scratch venv) gives None.</span>
 
@@ -130,9 +131,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="sd">    pathlib.Path or None</span>
 <span class="sd">    """</span>
     <span class="n">prefix</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">prefix</span> <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">prefix</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">prefix</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"venv"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">prefix</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"venvs"</span><span class="p">:</span>
+        <span class="c1"># A versioned environment, &lt;root&gt;/venvs/&lt;stamp&gt; (seamm-manager keeps</span>
+        <span class="c1"># &lt;root&gt;/venv as a link to the current one)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">elif</span> <span class="n">prefix</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"venv"</span><span class="p">):</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">parent</span>
+    <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">root</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">parent</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">"Jobs"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.ini"</span><span class="p">)):</span>
             <span class="k">return</span> <span class="n">root</span>
