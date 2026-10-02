@@ -24,6 +24,8 @@ def _installation(tmp_path, name="SEAMM_NEW", venv="venv", marker="Jobs"):
 def test_installation_root(tmp_path):
     root = _installation(tmp_path)
     assert root_module.installation_root(root / "venv") == root
+    # A versioned environment made by seamm-manager
+    assert root_module.installation_root(root / "venvs" / "2026-10-02T14-22-43") == root
     webui = _installation(tmp_path, "B", venv="venv-webui", marker="ini")
     assert root_module.installation_root(webui / "venv-webui") == webui
     bare = _installation(tmp_path, "C", marker=None)  # no Jobs, no .ini

@@ -19,8 +19,9 @@ def installation_root(prefix=None):
     """The root of the SEAMM installation this Python belongs to, or None.
 
     An installation made by seamm-manager keeps its Python environments inside its
-    root (``<root>/venv``, ``<root>/venv-webui``). If this interpreter's environment
-    is such a directory, and the directory above it holds a ``Jobs`` directory or
+    root (``<root>/venv``, ``<root>/venv-webui``, or the versioned
+    ``<root>/venvs/<stamp>`` that ``<root>/venv`` links to). If this interpreter's
+    environment is such a directory, and the root holds a ``Jobs`` directory or
     ``.ini`` files, that directory is the root. Any other environment (a conda
     environment, a developer's scratch venv) gives None.
 
@@ -34,9 +35,14 @@ def installation_root(prefix=None):
     pathlib.Path or None
     """
     prefix = Path(sys.prefix if prefix is None else prefix)
-    if not prefix.name.startswith("venv"):
+    if prefix.parent.name == "venvs":
+        # A versioned environment, <root>/venvs/<stamp> (seamm-manager keeps
+        # <root>/venv as a link to the current one)
+        root = prefix.parent.parent
+    elif prefix.name.startswith("venv"):
+        root = prefix.parent
+    else:
         return None
-    root = prefix.parent
     try:
         if (root / "Jobs").is_dir() or any(root.glob("*.ini")):
             return root
