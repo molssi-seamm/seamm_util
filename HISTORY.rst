@@ -1,6 +1,13 @@
 =======
 History
 =======
+2026.10.2 -- Bugfix: the default root for a versioned environment
+    * seamm-manager now keeps an installation's Python environment in
+      ``<root>/venvs/<date and time>``, with ``<root>/venv`` a link to the current one, and
+      runs everything from the real path. A Python in such an environment now belongs to
+      that installation, so ``run_flowchart`` and the apps run by hand from it use its
+      root rather than ``~/SEAMM``.
+
 2026.9.27.1 -- Helpers for finding an installation's files
     * ``seamm_util.current_root()`` gives the root of the installation in use: the
       ``--root`` parsed for this run if there is one, otherwise the default root.
