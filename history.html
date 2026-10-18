@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; SEAMM Util 2026.10.2 documentation</title>
+  <title>History &mdash; SEAMM Util 2026.10.18 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=52372788"></script>
+      <script src="_static/documentation_options.js?v=16cc37ab"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,6 +96,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading"></a></h1>
 <dl class="simple">
+<dt>2026.10.18 – Bugfix: atomic weights from mendeleev</dt><dd><ul class="simple">
+<li><p>For the elements whose weight varies in nature, the atomic weights were the
+midpoints of CIAAW’s intervals rather than the conventional values: Li 6.9675
+instead of 6.94 (+0.4%), Ar 39.8775 instead of 39.948 (-0.18%), and B, S, C, O,
+Mg, Cl and Tl by 0.03% or less. The atomic weights now come from mendeleev: the
+standard atomic weights at full precision (F 18.998403163 rather than 18.998), the
+conventional values for those elements, and for elements with no standard atomic
+weight the mass of the representative isotope (Ra-226 226.025408186). Masses and
+densities change slightly, by up to 0.01% for most elements; 1000 argon atoms in
+47597 Å^3 now have a density of 1.3937 g/mL, not 1.3912.</p></li>
+<li><p>This is the one table of element data: molsystem uses it too.
+devtools/elemental_weights_from_mendeleev.py regenerates the atomic weights and a
+test checks them against mendeleev.</p></li>
+<li><p>LAMMPS takes its masses from this table when the forcefield has none, as for a
+machine-learned potential, so such MD with lithium ran with Li 0.4% too heavy.</p></li>
+</ul>
+</dd>
 <dt>2026.10.2 – Bugfix: the default root for a versioned environment</dt><dd><ul class="simple">
 <li><p>seamm-manager now keeps an installation’s Python environment in
 <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venvs/&lt;date</span> <span class="pre">and</span> <span class="pre">time&gt;</span></code>, with <code class="docutils literal notranslate"><span class="pre">&lt;root&gt;/venv</span></code> a link to the current one, and
