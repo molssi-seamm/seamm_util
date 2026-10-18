@@ -1,6 +1,17 @@
 =======
 History
 =======
+2026.10.18 -- Bugfix: conventional atomic weights
+    * The atomic weights of the elements whose weight varies in nature, and which CIAAW
+      gives as an interval, were the midpoints of the intervals rather than CIAAW's
+      conventional values: Li 6.9675 instead of 6.94 (+0.4%), Ar 39.8775 instead of
+      39.95 (-0.18%), and B, S, C, O, Mg, Cl and Tl by 0.03% or less. They are now the
+      conventional values. Densities and masses of systems with these elements change
+      slightly; for 1000 argon atoms in 47597 Å^3 the density is now 1.3938 g/mL rather
+      than 1.3912.
+    * LAMMPS takes its masses from this table when the forcefield has none, as for a
+      machine-learned potential, so such MD with lithium ran with Li 0.4% too heavy.
+
 2026.10.2 -- Bugfix: the default root for a versioned environment
     * seamm-manager now keeps an installation's Python environment in
       ``<root>/venvs/<date and time>``, with ``<root>/venv`` a link to the current one, and

@@ -2,6 +2,10 @@
 
 # From https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020
 # With missing masses from WebElements
+# For the elements whose atomic weight is given as an interval (H, Li, B, C, N, O,
+# Mg, Si, S, Cl, Ar, Br, Tl, Pb) this is CIAAW's conventional value, e.g. Li 6.94
+# and Ar 39.95 -- not the midpoint of the interval, which for Li and Ar is off by
+# 0.4% and 0.2% from ordinary material.
 element_data = {
     "H": {
         "atomic number": 1,
@@ -33,7 +37,7 @@ element_data = {
         "atomic number": 3,
         "atomic symbol": "Li",
         "element": "lithium",
-        "atomic weight": 6.967499999999999,
+        "atomic weight": 6.94,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 0.534,
         "density_source": (
@@ -63,7 +67,7 @@ element_data = {
         "atomic number": 5,
         "atomic symbol": "B",
         "element": "boron",
-        "atomic weight": 10.8135,
+        "atomic weight": 10.81,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 2.34,
         "density_source": (
@@ -78,7 +82,7 @@ element_data = {
         "atomic number": 6,
         "atomic symbol": "C",
         "element": "carbon",
-        "atomic weight": 12.0105,
+        "atomic weight": 12.011,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 3.513,
         "density_source": (
@@ -106,7 +110,7 @@ element_data = {
         "atomic number": 8,
         "atomic symbol": "O",
         "element": "oxygen",
-        "atomic weight": 15.999500000000001,
+        "atomic weight": 15.999,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 1.0,
         "density_source": "Guess",
@@ -160,7 +164,7 @@ element_data = {
         "atomic number": 12,
         "atomic symbol": "Mg",
         "element": "magnesium",
-        "atomic weight": 24.3055,
+        "atomic weight": 24.305,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 1.738,
         "density_source": (
@@ -220,7 +224,7 @@ element_data = {
         "atomic number": 16,
         "atomic symbol": "S",
         "element": "sulfur",
-        "atomic weight": 32.067499999999995,
+        "atomic weight": 32.06,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 2.08,
         "density_source": (
@@ -235,7 +239,7 @@ element_data = {
         "atomic number": 17,
         "atomic symbol": "Cl",
         "element": "chlorine",
-        "atomic weight": 35.451499999999996,
+        "atomic weight": 35.45,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 2.0,
         "density_source": "Guess",
@@ -248,7 +252,7 @@ element_data = {
         "atomic number": 18,
         "atomic symbol": "Ar",
         "element": "argon",
-        "atomic weight": 39.8775,
+        "atomic weight": 39.95,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 2.0,
         "density_source": "Guess",
@@ -1185,7 +1189,7 @@ element_data = {
         "atomic number": 81,
         "atomic symbol": "Tl",
         "element": "thallium",
-        "atomic weight": 204.385,
+        "atomic weight": 204.38,
         "source": "https://ciaaw.org/abridged-atomic-weights.htm  30 July 2020",
         "density": 11.85,
         "density_source": (
