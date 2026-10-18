@@ -1,14 +1,19 @@
 =======
 History
 =======
-2026.10.18 -- Bugfix: conventional atomic weights
-    * The atomic weights of the elements whose weight varies in nature, and which CIAAW
-      gives as an interval, were the midpoints of the intervals rather than CIAAW's
-      conventional values: Li 6.9675 instead of 6.94 (+0.4%), Ar 39.8775 instead of
-      39.95 (-0.18%), and B, S, C, O, Mg, Cl and Tl by 0.03% or less. They are now the
-      conventional values. Densities and masses of systems with these elements change
-      slightly; for 1000 argon atoms in 47597 Å^3 the density is now 1.3938 g/mL rather
-      than 1.3912.
+2026.10.18 -- Bugfix: atomic weights from mendeleev
+    * For the elements whose weight varies in nature, the atomic weights were the
+      midpoints of CIAAW's intervals rather than the conventional values: Li 6.9675
+      instead of 6.94 (+0.4%), Ar 39.8775 instead of 39.948 (-0.18%), and B, S, C, O,
+      Mg, Cl and Tl by 0.03% or less. The atomic weights now come from mendeleev: the
+      standard atomic weights at full precision (F 18.998403163 rather than 18.998), the
+      conventional values for those elements, and for elements with no standard atomic
+      weight the mass of the representative isotope (Ra-226 226.025408186). Masses and
+      densities change slightly, by up to 0.01% for most elements; 1000 argon atoms in
+      47597 Å^3 now have a density of 1.3937 g/mL, not 1.3912.
+    * This is the one table of element data: molsystem uses it too.
+      devtools/elemental_weights_from_mendeleev.py regenerates the atomic weights and a
+      test checks them against mendeleev.
     * LAMMPS takes its masses from this table when the forcefield has none, as for a
       machine-learned potential, so such MD with lithium ran with Li 0.4% too heavy.
 
