@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; SEAMM Util 2026.10.18 documentation</title>
+  <title>History &mdash; SEAMM Util 2026.10.28 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=16cc37ab"></script>
+      <script src="_static/documentation_options.js?v=bb9c4767"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,6 +96,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading"></a></h1>
 <dl class="simple">
+<dt>2026.10.28 – Bugfix: pint 0.26 broke the chemistry unit conversions</dt><dd><ul class="simple">
+<li><p>With pint 0.26 (released 2026-10-19) every conversion between per-molecule and
+per-mole quantities through SEAMM’s “chemistry” context – eV and kcal/mol or
+kJ/mol, eV/Å and kcal/mol/Å, molecules and mol – failed with a RecursionError.
+seamm_util now requires pint &lt; 0.26 until the context is made to work with it.</p></li>
+</ul>
+</dd>
 <dt>2026.10.18 – Bugfix: atomic weights from mendeleev</dt><dd><ul class="simple">
 <li><p>For the elements whose weight varies in nature, the atomic weights were the
 midpoints of CIAAW’s intervals rather than the conventional values: Li 6.9675
