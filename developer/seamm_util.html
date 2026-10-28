@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>seamm_util package &mdash; SEAMM Util 2026.10.28 documentation</title>
+  <title>seamm_util package &mdash; SEAMM Util 2026.10.28.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=bb9c4767"></script>
+      <script src="../_static/documentation_options.js?v=e3e63ff4"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
@@ -600,6 +600,127 @@ value.</p>
 <section id="module-seamm_util.elemental_data">
 <span id="seamm-util-elemental-data-module"></span><h2>seamm_util.elemental_data module<a class="headerlink" href="#module-seamm_util.elemental_data" title="Link to this heading"></a></h2>
 <p>Tabulated data about the elements.</p>
+</section>
+<section id="module-seamm_util.fingerprint">
+<span id="seamm-util-fingerprint-module"></span><h2>seamm_util.fingerprint module<a class="headerlink" href="#module-seamm_util.fingerprint" title="Link to this heading"></a></h2>
+<p>Fingerprints of the settings of a calculation.</p>
+<p>A fingerprint says whether two stored results, e.g. the energies of the species
+of a reaction, come from the same kind of calculation. It is a hash of the input
+that a code was given, after the code’s step has removed everything that does
+not change the result – the cores and memory, file names, printing – and
+everything that belongs to the species rather than to the calculation – the
+geometry, charge and multiplicity, and choices derived from them such as RHF or
+UHF. What remains are the settings, including defaults the step resolved, so a
+changed default changes the fingerprint.</p>
+<p>Basis sets, auxiliary basis sets and ECPs written out per element are hashed
+per element instead, since two species have different elements: ethane and
+methanol at the same level must match. A reaction is consistent when its species
+agree on the main fingerprint and on the element fingerprints of the elements
+they share.</p>
+<p>The step of each code knows its input, so it does the removing; the functions
+here do the rest, so that every code hashes the same way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">record</span> <span class="o">=</span> <span class="n">calculation_record</span><span class="p">(</span>
+    <span class="s2">"ORCA"</span><span class="p">,</span> <span class="s2">"6.1.1"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"orca.inp"</span><span class="p">:</span> <span class="n">cleaned_text</span><span class="p">},</span> <span class="n">element_blocks</span><span class="o">=</span><span class="p">{</span><span class="s2">"H"</span><span class="p">:</span> <span class="o">...</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">record</span><span class="p">[</span><span class="s2">"fingerprint"</span><span class="p">]</span>   <span class="c1"># 'sha256:...'</span>
+</pre></div>
+</div>
+<p>Only the major and minor version are hashed: a patch release should not make
+every stored result incompatible. The full version is kept in the record.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.fingerprint.calculation_record">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.fingerprint.</span></span><span class="sig-name descname"><span class="pre">calculation_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">element_blocks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomic_numbers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashed_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/fingerprint.html#calculation_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.fingerprint.calculation_record" title="Link to this definition"></a></dt>
+<dd><p>The record of a calculation’s settings, with its fingerprints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>program</strong> (<em>str</em>) – The program, e.g. “ORCA”.</p></li>
+<li><p><strong>version</strong> (<em>str</em>) – Its full version, e.g. “6.1.1”.</p></li>
+<li><p><strong>files</strong> (<em>{str: str</em><em> or </em><em>[</em><em>str</em><em>]</em><em>}</em>) – The input files, by name, as text or lines, with what does not belong to
+the settings already removed by the code’s step.</p></li>
+<li><p><strong>element_blocks</strong> (<em>{str: str</em><em> or </em><em>[</em><em>str</em><em>]</em><em>}</em><em>, </em><em>optional</em>) – The basis set, auxiliary basis or ECP data written out per element, by
+element symbol, removed from <code class="docutils literal notranslate"><span class="pre">files</span></code>.</p></li>
+<li><p><strong>atomic_numbers</strong> (<em>optional</em>) – The geometry, for its fingerprint; see <a class="reference internal" href="#seamm_util.fingerprint.geometry_fingerprint" title="seamm_util.fingerprint.geometry_fingerprint"><code class="xref py py-func docutils literal notranslate"><span class="pre">geometry_fingerprint()</span></code></a>.</p></li>
+<li><p><strong>coordinates</strong> (<em>optional</em>) – The geometry, for its fingerprint; see <a class="reference internal" href="#seamm_util.fingerprint.geometry_fingerprint" title="seamm_util.fingerprint.geometry_fingerprint"><code class="xref py py-func docutils literal notranslate"><span class="pre">geometry_fingerprint()</span></code></a>.</p></li>
+<li><p><strong>hashed_version</strong> (<em>str</em><em>, </em><em>optional</em>) – The part of the version to hash, if not major.minor of a dotted version.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>“program”, “version” (full), “hashed version”, “fingerprint” (the
+settings), “element fingerprints” ({symbol: fingerprint}), “geometry
+fingerprint” (or None), “files” and “element blocks” (the hashed text,
+for finding the cause of a mismatch).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.fingerprint.geometry_fingerprint">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.fingerprint.</span></span><span class="sig-name descname"><span class="pre">geometry_fingerprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/fingerprint.html#geometry_fingerprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.fingerprint.geometry_fingerprint" title="Link to this definition"></a></dt>
+<dd><p>A fingerprint of a geometry: the atomic numbers and the Cartesian
+coordinates (Å) rounded to <code class="docutils literal notranslate"><span class="pre">decimals</span></code> places, in the given order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atomic_numbers</strong> (<em>[</em><em>int</em><em>]</em>) – The atomic numbers.</p></li>
+<li><p><strong>coordinates</strong> (<em>[</em><em>[</em><em>float</em><em>]</em><em>]</em>) – The Cartesian coordinates in Å.</p></li>
+<li><p><strong>decimals</strong> (<em>int = 4</em>) – The decimal places kept.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘sha256:…’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.fingerprint.hashed_version">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.fingerprint.</span></span><span class="sig-name descname"><span class="pre">hashed_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/fingerprint.html#hashed_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.fingerprint.hashed_version" title="Link to this definition"></a></dt>
+<dd><p>The part of a program’s version that is hashed: major.minor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>version</strong> (<em>str</em>) – The full version, e.g. “6.1.1”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>E.g. “6.1”. A version that is not dotted numbers, such as Gaussian’s
+“16 C.02”, is returned stripped: its step should say what to hash, with
+the <code class="docutils literal notranslate"><span class="pre">hashed_version</span></code> argument of <a class="reference internal" href="#seamm_util.fingerprint.calculation_record" title="seamm_util.fingerprint.calculation_record"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculation_record()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="seamm_util.fingerprint.normalize_lines">
+<span class="sig-prename descclassname"><span class="pre">seamm_util.fingerprint.</span></span><span class="sig-name descname"><span class="pre">normalize_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/seamm_util/fingerprint.html#normalize_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#seamm_util.fingerprint.normalize_lines" title="Link to this definition"></a></dt>
+<dd><p>Input text normalized for hashing: lines stripped, runs of white space
+made single spaces, blank lines and comments removed, and optionally upper
+case for codes whose input is case-insensitive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text.</p></li>
+<li><p><strong>comment</strong> (<em>str</em><em> or </em><em>None</em>) – The character starting a comment, e.g. “#”; None if there are none.</p></li>
+<li><p><strong>upper</strong> (<em>bool</em>) – Whether to convert to upper case.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The normalized lines.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-seamm_util.include_open">
 <span id="seamm-util-include-open-module"></span><h2>seamm_util.include_open module<a class="headerlink" href="#module-seamm_util.include_open" title="Link to this heading"></a></h2>

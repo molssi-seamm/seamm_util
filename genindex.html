@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; SEAMM Util 2026.10.28 documentation</title>
+  <title>Index &mdash; SEAMM Util 2026.10.28.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -21,7 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bb9c4767"></script>
+      <script src="_static/documentation_options.js?v=e3e63ff4"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -188,6 +188,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.fingerprint.calculation_record">calculation_record() (in module seamm_util.fingerprint)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.callHandlers">callHandlers() (seamm_util.printing.Printer method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.check_executable.check_executable">check_executable() (in module seamm_util.check_executable)</a>
@@ -200,10 +202,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.configuration.Configuration">Configuration (class in seamm_util.configuration)</a>
 </li>
-      <li><a href="developer/seamm_util.html#seamm_util.compact_json_encoder.CompactJSONEncoder.CONTAINER_TYPES">CONTAINER_TYPES (seamm_util.compact_json_encoder.CompactJSONEncoder attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.compact_json_encoder.CompactJSONEncoder.CONTAINER_TYPES">CONTAINER_TYPES (seamm_util.compact_json_encoder.CompactJSONEncoder attribute)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.water_models.Water.coordinates">coordinates() (seamm_util.water_models.Water method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.dictionary.Dictionary.copy">copy() (seamm_util.dictionary.Dictionary method)</a>
@@ -308,6 +310,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.fingerprint.geometry_fingerprint">geometry_fingerprint() (in module seamm_util.fingerprint)</a>
+</li>
       <li><a href="developer/seamm_util.html#seamm_util.argument_parser.ArgumentParser.get">get() (seamm_util.argument_parser.ArgumentParser method)</a>
 </li>
       <li><a href="developer/seamm_util.html#seamm_util.zenodo.Zenodo.get_deposit_record">get_deposit_record() (seamm_util.zenodo.Zenodo method)</a>
@@ -357,6 +361,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.handlers">handlers (seamm_util.printing.Printer property)</a>
+</li>
+      <li><a href="developer/seamm_util.html#seamm_util.fingerprint.hashed_version">hashed_version() (in module seamm_util.fingerprint)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -466,6 +472,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
         <li><a href="developer/seamm_util.html#module-seamm_util.elemental_data">seamm_util.elemental_data</a>
 </li>
+        <li><a href="developer/seamm_util.html#module-seamm_util.fingerprint">seamm_util.fingerprint</a>
+</li>
         <li><a href="developer/seamm_util.html#module-seamm_util.include_open">seamm_util.include_open</a>
 </li>
         <li><a href="developer/seamm_util.html#module-seamm_util.list_definition">seamm_util.list_definition</a>
@@ -503,14 +511,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.name">name (seamm_util.printing.Printer property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="developer/seamm_util.html#seamm_util.printing.normal">normal() (in module seamm_util.printing)</a>
 
       <ul>
         <li><a href="developer/seamm_util.html#seamm_util.printing.Printer.normal">(seamm_util.printing.Printer method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer/seamm_util.html#seamm_util.fingerprint.normalize_lines">normalize_lines() (in module seamm_util.fingerprint)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -649,6 +659,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
       </ul></li>
       <li>
+    seamm_util.fingerprint
+
+      <ul>
+        <li><a href="developer/seamm_util.html#module-seamm_util.fingerprint">module</a>
+</li>
+      </ul></li>
+      <li>
     seamm_util.include_open
 
       <ul>
@@ -690,6 +707,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="developer/seamm_util.html#module-seamm_util.printing">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     seamm_util.root
 
@@ -697,8 +716,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="developer/seamm_util.html#module-seamm_util.root">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     seamm_util.seamm_file
 

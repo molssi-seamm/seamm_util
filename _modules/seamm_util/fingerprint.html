@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seamm_util.fingerprint &mdash; SEAMM Util 2026.10.28.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PQXXTJ2');</script>
+<!-- End Google Tag Manager -->
+
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e3e63ff4"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQXXTJ2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ 
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SEAMM Util
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">SEAMM Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molssi-seamm.github.io">Main SEAMM documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SEAMM Util</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">seamm_util.fingerprint</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for seamm_util.fingerprint</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">"""Fingerprints of the settings of a calculation.</span>
+
+<span class="sd">A fingerprint says whether two stored results, e.g. the energies of the species</span>
+<span class="sd">of a reaction, come from the same kind of calculation. It is a hash of the input</span>
+<span class="sd">that a code was given, after the code's step has removed everything that does</span>
+<span class="sd">not change the result -- the cores and memory, file names, printing -- and</span>
+<span class="sd">everything that belongs to the species rather than to the calculation -- the</span>
+<span class="sd">geometry, charge and multiplicity, and choices derived from them such as RHF or</span>
+<span class="sd">UHF. What remains are the settings, including defaults the step resolved, so a</span>
+<span class="sd">changed default changes the fingerprint.</span>
+
+<span class="sd">Basis sets, auxiliary basis sets and ECPs written out per element are hashed</span>
+<span class="sd">per element instead, since two species have different elements: ethane and</span>
+<span class="sd">methanol at the same level must match. A reaction is consistent when its species</span>
+<span class="sd">agree on the main fingerprint and on the element fingerprints of the elements</span>
+<span class="sd">they share.</span>
+
+<span class="sd">The step of each code knows its input, so it does the removing; the functions</span>
+<span class="sd">here do the rest, so that every code hashes the same way::</span>
+
+<span class="sd">    record = calculation_record(</span>
+<span class="sd">        "ORCA", "6.1.1", {"orca.inp": cleaned_text}, element_blocks={"H": ...}</span>
+<span class="sd">    )</span>
+<span class="sd">    record["fingerprint"]   # 'sha256:...'</span>
+
+<span class="sd">Only the major and minor version are hashed: a patch release should not make</span>
+<span class="sd">every stored result incompatible. The full version is kept in the record.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"calculation_record"</span><span class="p">,</span>
+    <span class="s2">"geometry_fingerprint"</span><span class="p">,</span>
+    <span class="s2">"hashed_version"</span><span class="p">,</span>
+    <span class="s2">"normalize_lines"</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sha256</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">"sha256:"</span> <span class="o">+</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="hashed_version">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.fingerprint.hashed_version">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hashed_version</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""The part of a program's version that is hashed: major.minor.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    version : str</span>
+<span class="sd">        The full version, e.g. "6.1.1".</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        E.g. "6.1". A version that is not dotted numbers, such as Gaussian's</span>
+<span class="sd">        "16 C.02", is returned stripped: its step should say what to hash, with</span>
+<span class="sd">        the ``hashed_version`` argument of :func:`calculation_record`.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">""</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">version</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\d+(\.\d+)*"</span><span class="p">,</span> <span class="n">version</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">version</span>
+    <span class="k">return</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span></div>
+
+
+
+<span class="c1"># calculation_record() has an argument of the same name</span>
+<span class="n">_hashed_version</span> <span class="o">=</span> <span class="n">hashed_version</span>
+
+
+<div class="viewcode-block" id="normalize_lines">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.fingerprint.normalize_lines">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize_lines</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Input text normalized for hashing: lines stripped, runs of white space</span>
+<span class="sd">    made single spaces, blank lines and comments removed, and optionally upper</span>
+<span class="sd">    case for codes whose input is case-insensitive.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    text : str</span>
+<span class="sd">        The text.</span>
+<span class="sd">    comment : str or None</span>
+<span class="sd">        The character starting a comment, e.g. "#"; None if there are none.</span>
+<span class="sd">    upper : bool</span>
+<span class="sd">        Whether to convert to upper case.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    [str]</span>
+<span class="sd">        The normalized lines.</span>
+<span class="sd">    """</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span> <span class="n">line</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">comment</span><span class="p">)]</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">upper</span> <span class="k">else</span> <span class="n">line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lines</span></div>
+
+
+
+<div class="viewcode-block" id="geometry_fingerprint">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.fingerprint.geometry_fingerprint">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">geometry_fingerprint</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""A fingerprint of a geometry: the atomic numbers and the Cartesian</span>
+<span class="sd">    coordinates (Å) rounded to ``decimals`` places, in the given order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    atomic_numbers : [int]</span>
+<span class="sd">        The atomic numbers.</span>
+<span class="sd">    coordinates : [[float]]</span>
+<span class="sd">        The Cartesian coordinates in Å.</span>
+<span class="sd">    decimals : int = 4</span>
+<span class="sd">        The decimal places kept.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        'sha256:...'</span>
+<span class="sd">    """</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">xyz</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">decimals</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># no -0.0</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.</span><span class="si">{</span><span class="n">decimals</span><span class="si">}</span><span class="s2">f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span> <span class="o">+</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_sha256</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="calculation_record">
+<a class="viewcode-back" href="../../developer/seamm_util.html#seamm_util.fingerprint.calculation_record">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculation_record</span><span class="p">(</span>
+    <span class="n">program</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">,</span>
+    <span class="n">files</span><span class="p">,</span>
+    <span class="n">element_blocks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">atomic_numbers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">coordinates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">hashed_version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""The record of a calculation's settings, with its fingerprints.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    program : str</span>
+<span class="sd">        The program, e.g. "ORCA".</span>
+<span class="sd">    version : str</span>
+<span class="sd">        Its full version, e.g. "6.1.1".</span>
+<span class="sd">    files : {str: str or [str]}</span>
+<span class="sd">        The input files, by name, as text or lines, with what does not belong to</span>
+<span class="sd">        the settings already removed by the code's step.</span>
+<span class="sd">    element_blocks : {str: str or [str]}, optional</span>
+<span class="sd">        The basis set, auxiliary basis or ECP data written out per element, by</span>
+<span class="sd">        element symbol, removed from ``files``.</span>
+<span class="sd">    atomic_numbers, coordinates : optional</span>
+<span class="sd">        The geometry, for its fingerprint; see :func:`geometry_fingerprint`.</span>
+<span class="sd">    hashed_version : str, optional</span>
+<span class="sd">        The part of the version to hash, if not major.minor of a dotted version.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        "program", "version" (full), "hashed version", "fingerprint" (the</span>
+<span class="sd">        settings), "element fingerprints" ({symbol: fingerprint}), "geometry</span>
+<span class="sd">        fingerprint" (or None), "files" and "element blocks" (the hashed text,</span>
+<span class="sd">        for finding the cause of a mismatch).</span>
+<span class="sd">    """</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">version</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">short</span> <span class="o">=</span> <span class="n">_hashed_version</span><span class="p">(</span><span class="n">version</span><span class="p">)</span> <span class="k">if</span> <span class="n">hashed_version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">hashed_version</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_text</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">as_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"program"</span><span class="p">:</span> <span class="n">program</span><span class="p">,</span> <span class="s2">"version"</span><span class="p">:</span> <span class="n">short</span><span class="p">,</span> <span class="s2">"files"</span><span class="p">:</span> <span class="n">texts</span><span class="p">}</span>
+    <span class="n">fingerprint</span> <span class="o">=</span> <span class="n">_sha256</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">as_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">element_blocks</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">element_fingerprints</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">_sha256</span><span class="p">(</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">"program"</span><span class="p">:</span> <span class="n">program</span><span class="p">,</span> <span class="s2">"version"</span><span class="p">:</span> <span class="n">short</span><span class="p">,</span> <span class="s2">"element"</span><span class="p">:</span> <span class="n">symbol</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">:</span> <span class="n">text</span><span class="p">},</span>
+                <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">blocks</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">atomic_numbers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">coordinates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geometry_fingerprint</span><span class="p">(</span><span class="n">atomic_numbers</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"program"</span><span class="p">:</span> <span class="n">program</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+        <span class="s2">"hashed version"</span><span class="p">:</span> <span class="n">short</span><span class="p">,</span>
+        <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="n">fingerprint</span><span class="p">,</span>
+        <span class="s2">"element fingerprints"</span><span class="p">:</span> <span class="n">element_fingerprints</span><span class="p">,</span>
+        <span class="s2">"geometry fingerprint"</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span>
+        <span class="s2">"files"</span><span class="p">:</span> <span class="n">texts</span><span class="p">,</span>
+        <span class="s2">"element blocks"</span><span class="p">:</span> <span class="n">blocks</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  
+
+<p>
+<div class="row">
+  <div class="column_left">
+    <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+      <img src="/_images/MolSSI.jpg" alt="The MolSSI" style="border:0;">
+    </a>
+  </div>
+  <div class="column">
+    &copy; Copyright 2019-2021, the Molecular Sciences Software Institute,
+    which receives funding from the National Science Foundation under awards OAC-1547580
+    and CHE-2136142.
+  </div>
+  <div class="column_right">
+    <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+      <img src="/_images/NSF_4-Color_bitmap_Logo.png" alt="The NSF" style="border:0;">
+    </a>
+  </div>
+</div>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

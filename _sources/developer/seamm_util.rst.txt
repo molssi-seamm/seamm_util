@@ -52,6 +52,14 @@ seamm\_util.elemental\_data module
    :show-inheritance:
    :undoc-members:
 
+seamm\_util.fingerprint module
+------------------------------
+
+.. automodule:: seamm_util.fingerprint
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 seamm\_util.include\_open module
 --------------------------------
 
