@@ -1,6 +1,12 @@
 =======
 History
 =======
+2026.10.28 -- Bugfix: pint 0.26 broke the chemistry unit conversions
+    * With pint 0.26 (released 2026-10-19) every conversion between per-molecule and
+      per-mole quantities through SEAMM's "chemistry" context -- eV and kcal/mol or
+      kJ/mol, eV/Å and kcal/mol/Å, molecules and mol -- failed with a RecursionError.
+      seamm_util now requires pint < 0.26 until the context is made to work with it.
+
 2026.10.18 -- Bugfix: atomic weights from mendeleev
     * For the elements whose weight varies in nature, the atomic weights were the
       midpoints of CIAAW's intervals rather than the conventional values: Li 6.9675

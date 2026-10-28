@@ -1,4 +1,4 @@
-pint
+pint<0.26
 plotly
 requests
 statsmodels
