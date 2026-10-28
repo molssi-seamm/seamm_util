@@ -1,6 +1,17 @@
 =======
 History
 =======
+2026.10.28.1 -- Fingerprints of the settings of calculations
+    * New module ``seamm_util.fingerprint`` for telling whether two stored results,
+      such as the energies of the species of a reaction, come from the same kind of
+      calculation. ``calculation_record()`` hashes the input a code was given, after
+      the code's step has removed what does not change the result and what belongs
+      to the species (geometry, charge, multiplicity); basis sets and ECPs written
+      per element are hashed per element, so that species with different elements
+      can be compared. Only the major and minor version of the program are hashed.
+      ``geometry_fingerprint()`` identifies a geometry. The steps of the codes use
+      these to store their fingerprints with their results.
+
 2026.10.28 -- Bugfix: pint 0.26 broke the chemistry unit conversions
     * With pint 0.26 (released 2026-10-19) every conversion between per-molecule and
       per-mole quantities through SEAMM's "chemistry" context -- eV and kcal/mol or
