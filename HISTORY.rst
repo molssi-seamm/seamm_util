@@ -1,6 +1,14 @@
 =======
 History
 =======
+2026.10.30 -- split_values: split a list of values, keeping backslashes
+    * New ``split_values()`` splits a string of values typed by a user at whitespace,
+      honouring single and double quotes like ``shlex.split``, but keeps backslashes
+      and does not treat '#' as a comment. ``shlex.split`` treats a backslash as an
+      escape and drops it, so Z double bonds in SMILES such as ``C/C=C\\C`` were
+      silently lost wherever a list of values was split. The steps and the dashboard
+      client use it for lists of values.
+
 2026.10.28.1 -- Fingerprints of the settings of calculations
     * New module ``seamm_util.fingerprint`` for telling whether two stored results,
       such as the energies of the species of a reaction, come from the same kind of
