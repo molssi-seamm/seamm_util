@@ -5,7 +5,7 @@ History
     * New ``split_values()`` splits a string of values typed by a user at whitespace,
       honouring single and double quotes like ``shlex.split``, but keeps backslashes
       and does not treat '#' as a comment. ``shlex.split`` treats a backslash as an
-      escape and drops it, so Z double bonds in SMILES such as ``C/C=C\\C`` were
+      escape and drops it, so Z double bonds in SMILES such as ``C/C=C\C`` were
       silently lost wherever a list of values was split. The steps and the dashboard
       client use it for lists of values.
 
