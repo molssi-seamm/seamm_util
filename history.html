@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History &mdash; SEAMM Util 2026.10.28.1 documentation</title>
+  <title>History &mdash; SEAMM Util 2026.10.30 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e3e63ff4"></script>
+      <script src="_static/documentation_options.js?v=fcc0a42c"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,6 +96,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="history">
 <h1>History<a class="headerlink" href="#history" title="Link to this heading"></a></h1>
 <dl class="simple">
+<dt>2026.10.30 – split_values: split a list of values, keeping backslashes</dt><dd><ul class="simple">
+<li><p>New <code class="docutils literal notranslate"><span class="pre">split_values()</span></code> splits a string of values typed by a user at whitespace,
+honouring single and double quotes like <code class="docutils literal notranslate"><span class="pre">shlex.split</span></code>, but keeps backslashes
+and does not treat ‘#’ as a comment. <code class="docutils literal notranslate"><span class="pre">shlex.split</span></code> treats a backslash as an
+escape and drops it, so Z double bonds in SMILES such as <code class="docutils literal notranslate"><span class="pre">C/C=C\C</span></code> were
+silently lost wherever a list of values was split. The steps and the dashboard
+client use it for lists of values.</p></li>
+</ul>
+</dd>
 <dt>2026.10.28.1 – Fingerprints of the settings of calculations</dt><dd><ul class="simple">
 <li><p>New module <code class="docutils literal notranslate"><span class="pre">seamm_util.fingerprint</span></code> for telling whether two stored results,
 such as the energies of the species of a reaction, come from the same kind of

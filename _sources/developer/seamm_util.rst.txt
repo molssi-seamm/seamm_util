@@ -140,6 +140,14 @@ seamm\_util.seamm\_util module
    :show-inheritance:
    :undoc-members:
 
+seamm\_util.split\_values module
+--------------------------------
+
+.. automodule:: seamm_util.split_values
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 seamm\_util.units module
 ------------------------
 
